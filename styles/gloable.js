@@ -24,8 +24,7 @@ export default {
         textAlign:'center',
         borderStyle:'solid',
         fontSize:20,
-        borderBottomWidth : 1.0,
-        paddingBottom:15,
+        
         
     },
     switchContainer:{
