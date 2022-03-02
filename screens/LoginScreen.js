@@ -1,9 +1,15 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity  ,ScrollView} from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity ,Keyboard  ,ScrollView} from 'react-native';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
+
+
+
 export const Login = ({navigation}) => {
+    const onClickFunction = () => {
+        Keyboard.dismiss()
+    };
     return (
         <View style={styles.container}>
           <TouchableOpacity 
@@ -21,7 +27,9 @@ export const Login = ({navigation}) => {
             <Text style={styles.Lowertext}>Email</Text>
             <CutomeTextInput placeholder="youremail@mail.com" round />
             <Text style={styles.Lowertext}>Password</Text>
+            
             <CutomeTextInput placeholder="Enter password" round />
+            
 
             <CutomeButton style={styles.btn} text="Log in" round />
             <Text style={styles.HintText}>Or Continue with Social Account</Text>

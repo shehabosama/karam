@@ -18,10 +18,10 @@ export const SignupPreferences = ({ navigation }) => {
             />
             </TouchableOpacity>
 
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={styles.Uppertext}>Donation Preference</Text>
                 <Text style={styles.Lowertext}>Select all of causes you want</Text>
-                <View style={{flexDirection:'row',flex:1}}>
+                <View style={{flexDirection:'row', marginTop:50}}>
                     <View style={{flex:1 ,paddingLeft:20}}>
                     <Image
             source={require("../assets/water.png")}

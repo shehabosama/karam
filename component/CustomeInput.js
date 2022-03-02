@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text,TextInput, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, TextInput} from 'react-native';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 import gloableStyles from '../styles/gloable'
@@ -16,7 +17,8 @@ const CutomeTextInput = ({placeholder , text , round , icon , iconColor , danger
         <View activeOpacity={0.2} style={round ? styles.round : {}} underlayColor="transparent">
         <View style={btnStyle}>
           {icon && <Icon name={icon} size={24} color={iconColor} style={styles.icon} />}
-          <TextInput style={gloableStyles.input} onChangeText={text}
+          
+          <TextInput  style={gloableStyles.input} onChangeText={text}
                 placeholder={placeholder} placeholderTextColor={Colors.placeHolder}/> 
           
         </View>
