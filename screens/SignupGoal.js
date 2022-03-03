@@ -7,7 +7,8 @@ import { Colors } from "../constants";
 import gloable from "../styles/gloable";
 
 export const SignupGoal = ({ navigation }) => {
-    const [isSelected, setSelection] = useState(false);
+    const [donationGoal, setDonationGoal] = useState('');
+    
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -24,7 +25,7 @@ export const SignupGoal = ({ navigation }) => {
                 <Text style={styles.Lowertext}>We’re going to help you reach your goal</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <TextInput style={styles.input}
-                        placeholder="8,000" placeholderTextColor={Colors.placeHolder} />
+                        placeholder="8,000" keyboardType="numeric" value={donationGoal} placeholderTextColor={Colors.placeHolder} onChangeText={(donationGoal)=>setDonationGoal(donationGoal)} />
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}>
                         <Image
@@ -38,7 +39,7 @@ export const SignupGoal = ({ navigation }) => {
 
                 <Text style={styles.HintText}>Studies shows that committing to donating money ahead of time, can increase the amount you give by 32%</Text>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => navigation.navigate('SignupGoal')} />
+            <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => navigation.navigate('SignupFrequency')} />
 
 
         </View>
