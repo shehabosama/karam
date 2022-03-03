@@ -8,6 +8,6 @@ export const Colors ={
     importanText:'#bc8363'
 };
 export const STORAGE_KEYS = {
-    lists : 'myapp_lists',
+    auth : 'auth_key',
     tasks : 'myapp_tasks',
 }

@@ -1,60 +1,118 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView , TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import ObjectiveCard from "../component/ObjectiveCard";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export const SignupPreferences = ({ navigation }) => {
-    const [isSelected, setSelection] = useState(false);
+    const [isSelected1, setSelection1] = useState(false);
+    const [isSelected2, setSelection2] = useState(false);
+    const [isSelected3, setSelection3] = useState(false);
+    const [isSelected4, setSelection4] = useState(false);
+    const [isSelected5, setSelection5] = useState(false);
+    const [isSelected6, setSelection6] = useState(false);
     return (
         <View style={styles.container}>
-         <TouchableOpacity 
-                onPress={()=>navigation.goBack()}>
-            <Image
-                source={require("../assets/backButton.png")}
-                style={styles.image}
-                onPress={()=>navigation.goBack()}
-            />
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}>
+                <Image
+                    source={require("../assets/backButton.png")}
+                    style={styles.image}
+                    onPress={() => navigation.goBack()}
+                />
             </TouchableOpacity>
 
             <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={styles.Uppertext}>Donation Preference</Text>
+                <Text style={styles.Uppertext}>Donation Preference</Text>
                 <Text style={styles.Lowertext}>Select all of causes you want</Text>
-                <View style={{flexDirection:'row', marginTop:50}}>
-                    <View style={{flex:1 ,paddingLeft:20}}>
-                    <Image
-            source={require("../assets/water.png")}
-            style={styles.selectionImage}
-          />
-                 <Image
-            source={require("../assets/roofs.png")}
-            style={styles.selectionImage}
-          />
-                 <Image
-            source={require("../assets/spacial_needs.png")}
-            style={styles.selectionImage}
-          />
+                <View style={{ flexDirection: 'row', marginTop: 50 }}>
+                    <View style={{ flex: 1, paddingLeft: 20 }}>
+                      
+
+                        <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setSelection1(isSelected1 ? false: true)}}  >
+                            <Image
+                                source={require("../assets/water.png")}
+                                resizeMode="cover"
+                                style={styles.selectionImage}
+                            />
+                            {isSelected1 && <CheckBox style={{
+                               position:'absolute',
+                               alignSelf:'center',
+                            }} value={isSelected1} />}
+                        </TouchableWithoutFeedback>
+
+                        <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setSelection2(isSelected2 ? false: true)}}  >
+                            <Image
+                                source={require("../assets/roofs.png")}
+                                resizeMode="cover"
+                                style={styles.selectionImage}
+                            />
+                            {isSelected2 && <CheckBox style={{
+                               position:'absolute',
+                               alignSelf:'center',
+                            }} value={isSelected2} />}
+                        </TouchableWithoutFeedback>
+
+                        <TouchableWithoutFeedback onPress={()=>{setSelection3(isSelected3 ? false: true)}}  >
+                            <Image
+                                source={require("../assets/spacial_needs.png")}
+                                resizeMode="cover"
+                                style={styles.selectionImage}
+                            />
+                            {isSelected3 && <CheckBox style={{
+                               position:'absolute',
+                               alignSelf:'center',
+                            }} value={isSelected3} />}
+                        </TouchableWithoutFeedback>
+                     
                     </View>
 
-                    <View style={{flex:1,paddingRight:20}}>
-                    <Image
-            source={require("../assets/education.png")}
-            style={styles.selectionImage}
-          />
-                 <Image
-            source={require("../assets/prison.png")}
-            style={styles.selectionImage}
-          />
-                 <Image
-            source={require("../assets/orphans.png")}
-            style={styles.selectionImage}
-          />
-                    </View>
+                    <View style={{ flex: 1, paddingRight: 20 }}>
+                    <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setSelection4(isSelected4 ? false: true)}}  >
+                            <Image
+                                source={require("../assets/education.png")}
+                                resizeMode="cover"
+                                style={styles.selectionImage}
+                            />
+                            {isSelected4 && <CheckBox style={{
+                               position:'absolute',
+                               alignSelf:'center',
+                            }} value={isSelected4} />}
+                        </TouchableWithoutFeedback>
+                       
+                     
+                        
+                        <TouchableWithoutFeedback  onPress={()=>{setSelection5(isSelected5 ? false: true)}}  >
+                            <Image
+                                source={require("../assets/prison.png")}
+                                resizeMode="cover"
+                                style={styles.selectionImage}
+                            />
+                            {isSelected5 && <CheckBox style={{
+                               position:'absolute',
+                               alignSelf:'center',
+                            }} value={isSelected5} />}
+                        </TouchableWithoutFeedback>
+         
+<TouchableWithoutFeedback onPress={()=>{setSelection6(isSelected6 ? false: true)}}  >
+                            <Image
+                                source={require("../assets/orphans.png")}
+                                resizeMode="cover"
+                                style={styles.selectionImage}
+                            />
+                            {isSelected6 && <CheckBox  style={{
+                               position:'absolute',
+                               alignSelf:'center',
                     
+                            }}  value={isSelected6} />}
+                        </TouchableWithoutFeedback>
+                    </View>
+
                 </View>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Continue" round  onPress={()=>navigation.navigate('SignupGoal')} />
+            <CutomeButton style={styles.btn} text="Continue" round onPress={() => navigation.navigate('SignupGoal')} />
 
 
         </View>
@@ -74,10 +132,10 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
 
     },
-    selectionImage:{
+    selectionImage: {
         alignSelf: "center",
-        marginVertical:5,
-        
+        marginVertical: 5,
+
     },
     Uppertext: {
         fontSize: 34,
@@ -141,11 +199,11 @@ const styles = StyleSheet.create({
     label: {
         margin: 8,
     },
-    ObjectiveCard:{
-       marginTop:10 ,
-       borderRadius:10,
-       borderWidth:2,
-       borderColor:Colors.primary
+    ObjectiveCard: {
+        marginTop: 10,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colors.primary
     }
 });
 

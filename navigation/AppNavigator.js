@@ -14,6 +14,7 @@ import SignupVerifyAccount from '../screens/SignupVerifyAccountScreen';
 import SignupObjectives from '../screens/SignupObjectiveScreen';
 import SignupPreferences from '../screens/SignupPreferences';
 import SignupGoal from '../screens/SignupGoal';
+import SignupFrequency from '../screens/SignupFrequency';
 
 
 
@@ -40,8 +41,14 @@ const TasksNavigator = () => {
 
     return (
         <TasksStackNavigator.Navigator>
+              {/* <TasksStackNavigator.Screen
+                name="SignupVerifyAccount"
+                component={SignupVerifyAccount}
+                options={{ headerShown: false }}
+
+            /> */}
             <TasksStackNavigator.Screen
-                name="Home"
+                name="Splash"
                 component={Splash}
                 options={{ headerShown: false }}
 
@@ -86,6 +93,16 @@ const TasksNavigator = () => {
             <TasksStackNavigator.Screen
                 name="SignupPreferences"
                 component={SignupPreferences}
+                options={{headerShown:false}}
+            />
+            <TasksStackNavigator.Screen
+                name="SignupFrequency"
+                component={SignupFrequency}
+                options={{headerShown:false}}
+            />
+              <TasksStackNavigator.Screen
+                name="Home"
+                component={SignupFrequency}
                 options={{headerShown:false}}
             />
         </TasksStackNavigator.Navigator>

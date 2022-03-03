@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 import gloableStyles from '../styles/gloable'
-const CutomeTextInput = ({placeholder , text , round , icon , iconColor , danger , style})=>{
+const CutomeTextInput = ({placeholder ,onTextInputChange, text , round  ,secure, icon , iconColor , danger , style})=>{
+    
     let btnStyle = {...styles.container , ...style};
     if(round){
         btnStyle={...btnStyle , ...styles.round}
@@ -18,7 +19,7 @@ const CutomeTextInput = ({placeholder , text , round , icon , iconColor , danger
         <View style={btnStyle}>
           {icon && <Icon name={icon} size={24} color={iconColor} style={styles.icon} />}
           
-          <TextInput  style={gloableStyles.input} onChangeText={text}
+          <TextInput secureTextEntry={secure ? true:false}  style={gloableStyles.input} value={text} onChangeText={onTextInputChange}
                 placeholder={placeholder} placeholderTextColor={Colors.placeHolder}/> 
           
         </View>

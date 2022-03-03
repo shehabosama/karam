@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView ,TouchableOpacity} from 'react-native';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
+import { showMessage  , validate} from "../utils/HelperFunctions";
 export const Signup = ({navigation}) => {
+    const [email, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+
+    const submitHandler = () => {
+        if (email.trim() == '') {
+            showMessage('email is required');
+        } else if (!validate(email)) {
+            showMessage( 'Email incorrect try another email');
+        } else if (password.length < 8) {
+            showMessage('Password must be more than 8 character or number');
+        } else {
+            navigation.navigate('SignupProfileDetails');
+        }
+    };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity 
@@ -19,11 +35,10 @@ export const Signup = ({navigation}) => {
                 <Text style={styles.Uppertext}>Hey there,</Text>
                 <Text style={styles.Lowertext}>Signup to karam</Text>
                 <Text style={styles.Lowertext}>Email</Text>
-                <CutomeTextInput placeholder="youremail@mail.com" round />
+                <CutomeTextInput placeholder="youremail@mail.com" secure={false} text={email} onTextInputChange={(username) => setUserName(username)} round />
                 <Text style={styles.Lowertext}>Password</Text>
-                <CutomeTextInput placeholder="Enter password" round />
-
-                <CutomeButton style={styles.btn} text="Signup" round  onPress={()=>navigation.navigate('SignupProfileDetails')}/>
+                <CutomeTextInput placeholder="Enter password" secure={true} text={password} onTextInputChange={(password) => setPassword(password)} round />
+                <CutomeButton style={styles.btn} text="Signup" onPress={submitHandler} round />
                 <Text style={styles.HintText}>Or Continue with Social Account</Text>
 
                 <View style={styles.HorizontalContainer}>

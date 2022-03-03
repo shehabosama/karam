@@ -21,10 +21,10 @@ export default {
     },
     input:{
         borderBottomColor:Colors.primary,
-        textAlign:'center',
+        textAlign:'flext-start',
         borderStyle:'solid',
         fontSize:20,
-        
+        textAlign:'left',
         
     },
     switchContainer:{

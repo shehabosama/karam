@@ -3,7 +3,7 @@ import { View, Text,TextInput, StyleSheet, TouchableHighlight } from 'react-nati
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 import gloableStyles from '../styles/gloable'
-const CutomeVerifyInput = ({placeholder , text , round , icon , iconColor , danger , style})=>{
+const CutomeVerifyInput = ({placeholder , text,onTextInputChange , ref,round ,focus , icon , iconColor , danger , style})=>{
     let btnStyle = {...styles.container , ...style};
     if(round){
         btnStyle={...btnStyle , ...styles.round}
@@ -12,18 +12,16 @@ const CutomeVerifyInput = ({placeholder , text , round , icon , iconColor , dang
         btnStyle= {...btnStyle , ...styles.danger}
     }
 
+
     return(
-        <View activeOpacity={0.2} style={round ? styles.round : {}} underlayColor="transparent">
+        <View activeOpacity={0.2} style={round ? Customstyles.round : {}} underlayColor="transparent">
         <View style={btnStyle}>
-          {icon && <Icon name={icon} size={24} color={iconColor} style={styles.icon} />}
-          <TextInput style={gloableStyles.input} onChangeText={text}
-                placeholder={placeholder} placeholderTextColor={Colors.placeHolder}/> 
-          
+         
         </View>
       </View>
     );
 };
-    const styles = StyleSheet.create({
+    const Customstyles = StyleSheet.create({
         container:{
             
             alignItems:'center',

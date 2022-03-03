@@ -1,63 +1,78 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity ,Keyboard  ,ScrollView} from 'react-native';
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity, Keyboard, ScrollView, Alert } from 'react-native';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
+import { validate , showMessage } from "../utils/HelperFunctions";
 
 
 
-export const Login = ({navigation}) => {
-    const onClickFunction = () => {
-        Keyboard.dismiss()
+export const Login = ({ navigation }) => {
+
+    const [email, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+
+    const submitHandler = () => {
+        if (email.trim() == '') {
+            showMessage('email is required');
+        } else if (!validate(email)) {
+            showMessage( 'Email incorrect try another email');
+        } else if (password.length < 8) {
+            showMessage('Password must be more than 8 character or number');
+        } else {
+            
+        }
     };
+    
+
     return (
         <View style={styles.container}>
-          <TouchableOpacity 
-                onPress={()=>navigation.goBack()}>
-            <Image
-                source={require("../assets/backButton.png")}
-                style={styles.image}
-                onPress={()=>navigation.goBack()}
-            />
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}>
+                <Image
+                    source={require("../assets/backButton.png")}
+                    style={styles.image}
+                    onPress={() => navigation.goBack()}
+                />
             </TouchableOpacity>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            
-            <Text style={styles.Uppertext}>Hey there,</Text>
-            <Text style={styles.Lowertext}>Log in to karam</Text>
-            <Text style={styles.Lowertext}>Email</Text>
-            <CutomeTextInput placeholder="youremail@mail.com" round />
-            <Text style={styles.Lowertext}>Password</Text>
-            
-            <CutomeTextInput placeholder="Enter password" round />
-            
 
-            <CutomeButton style={styles.btn} text="Log in" round />
-            <Text style={styles.HintText}>Or Continue with Social Account</Text>
+                <Text style={styles.Uppertext}>Hey there,</Text>
+                <Text style={styles.Lowertext}>Log in to karam</Text>
+                <Text style={styles.Lowertext}>Email</Text>
+                <CutomeTextInput placeholder="youremail@mail.com" secure={false} text={email} onTextInputChange={(username) => setUserName(username)} round />
+                <Text style={styles.Lowertext}>Password</Text>
 
-            <View style={styles.HorizontalContainer}>
-            <Image
-            source={require("../assets/google.png")}
-            style={styles.socialImage}
-          />
-          <Image
-            source={require("../assets/facebook.png")}
-            style={styles.socialImage}
-          />
-          <Image
-            source={require("../assets/apple.png")}
-            style={styles.socialImage}
-          />
-          <Image
-            source={require("../assets/twitter.png")}
-            style={styles.socialImage}
-          />
-            </View>
-            <View style={styles.HorizontalContainer}>
-            <Text style={styles.HintText}>Don't have an account?</Text>
-            <Text style={styles.ImportanText} onPress={()=>navigation.navigate('Signup')}> Create Now</Text>
-            </View>
+                <CutomeTextInput placeholder="Enter password" secure={true} text={password} onTextInputChange={(password) => setPassword(password)} round />
+
+
+                <CutomeButton style={styles.btn} text="Log in" onPress={submitHandler} round />
+                <Text style={styles.HintText}>Or Continue with Social Account</Text>
+
+                <View style={styles.HorizontalContainer}>
+                    <Image
+                        source={require("../assets/google.png")}
+                        style={styles.socialImage}
+                    />
+                    <Image
+                        source={require("../assets/facebook.png")}
+                        style={styles.socialImage}
+                    />
+                    <Image
+                        source={require("../assets/apple.png")}
+                        style={styles.socialImage}
+                    />
+                    <Image
+                        source={require("../assets/twitter.png")}
+                        style={styles.socialImage}
+                    />
+                </View>
+                <View style={styles.HorizontalContainer}>
+                    <Text style={styles.HintText}>Don't have an account?</Text>
+                    <Text style={styles.ImportanText} onPress={() => navigation.navigate('Signup')}> Create Now</Text>
+                </View>
             </ScrollView>
-            
+
         </View>
     );
 };
@@ -116,17 +131,17 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    HorizontalContainer:{
-        flexDirection:'row',
-        justifyContent:'center',
-        
+    HorizontalContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+
     },
     socialImage: {
         width: 100,
         height: 100,
         alignSelf: 'center',
-        flex:1,
-      },
+        flex: 1,
+    },
 });
 
 export default Login;

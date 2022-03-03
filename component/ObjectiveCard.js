@@ -5,8 +5,8 @@ import { Colors } from '../constants';
 import gloableStyles from '../styles/gloable'
 import CheckBox from '@react-native-community/checkbox';
 
-const CutomeTextInput = ({placeholder , text , round , icon , iconColor , danger , style})=>{
-    const [isSelected , setSelection] = useState(false);
+const CutomeTextInput = ({placeholder,isSelected , setSelection , round , icon , iconColor , danger , style})=>{
+   
     let btnStyle = {...styles.container , ...style};
     if(round){
         btnStyle={...btnStyle , ...styles.round}

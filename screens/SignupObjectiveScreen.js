@@ -6,7 +6,11 @@ import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 
 export const SignupObjectives = ({ navigation }) => {
-    const [isSelected, setSelection] = useState(false);
+    const [isSelected1, setSelection1] = useState(false);
+    const [isSelected2, setSelection2] = useState(false);
+    const [isSelected3, setSelection3] = useState(false);
+    const [isSelected4, setSelection4] = useState(false);
+
     return (
         <View style={styles.container}>
          <TouchableOpacity 
@@ -22,10 +26,10 @@ export const SignupObjectives = ({ navigation }) => {
                 <Text style={styles.Uppertext}>Select Objectives</Text>
                 <Text style={styles.Lowertext}>Select as many, or as few, as you’d like</Text>
                 
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Automate your giving" round  />
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Discover cases to support" round  />
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Organize donations in one place" round  />
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Get updates on your donations" round  />
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Automate your giving" round isSelected={isSelected1}  setSelection={setSelection1}/>
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Discover cases to support" round isSelected={isSelected2}   setSelection={setSelection2}/>
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Organize donations in one place" round isSelected={isSelected3}  setSelection={setSelection3} />
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Get updates on your donations" round isSelected={isSelected4}  setSelection={setSelection4} />
 
             </ScrollView>
             <CutomeButton style={styles.btn} text="Continue" round  onPress={()=>navigation.navigate('SignupPreferences')} />
