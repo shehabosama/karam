@@ -7,6 +7,7 @@ import { Colors } from "../constants";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import gloable from "../styles/gloable";
+import { showMessage } from "../utils/HelperFunctions";
 export const SignupVerifyAccount = ({ navigation }) => {
     
     const inputRef2 = useRef();
@@ -16,7 +17,18 @@ export const SignupVerifyAccount = ({ navigation }) => {
     const [input2 , setInput2] = useState('');
     const [input3 , setInput3] = useState('');
     const [input4 , setInput4] = useState('');
+
+    const submitHandler=()=>{
+        if(input1.trim() == '' || input2.trim() == '' || input3.trim() == '' || input4.trim() == ''){
+
+                showMessage('Please fill all verification fields');
+            }else{
+                navigation.navigate('SignupObjectives') 
+            }
+    };
+   
     return (
+        
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => navigation.goBack()}>
@@ -113,34 +125,12 @@ export const SignupVerifyAccount = ({ navigation }) => {
                     </View>
                 </View>
                     
-
-
-
-
-
-                    {/* <View activeOpacity={0.2} style={ Customstyles.round } underlayColor="transparent">
-                    <View style={btnStyle}>
-
-                    </View>
-                </View>
-
-                <View activeOpacity={0.2} style={round ? Customstyles.round : {}} underlayColor="transparent">
-                    <View style={btnStyle}>
-
-                    </View>
-                </View>
-
-                <View activeOpacity={0.2} style={round ? Customstyles.round : {}} underlayColor="transparent">
-                    <View style={btnStyle}>
-
-                    </View>
-                </View> */}
                     <View style={styles.HorizontalContainer}>
                         <Icon name="reload" size={15} color={Colors.primary} style={{ marginTop: 19 }} />
                         <Text style={styles.HintText}>Resend Code</Text>
                     </View>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Verify" round onPress={() => { navigation.navigate('SignupObjectives') }} />
+            <CutomeButton style={styles.btn} text="Verify" round onPress={() => {submitHandler}} />
         </View>
     );
 };
