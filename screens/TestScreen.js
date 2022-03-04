@@ -1,13 +1,15 @@
 import React from "react";
 import { useDispatch ,useSelector } from "react-redux";
 import { Button, Text, ToastAndroid, View } from "react-native";
-import { setData  , getData,deleteData} from "../store/actions/AuthActions";
+import { setData  , getData,deleteData ,getCitiesData} from "../store/actions/AuthActions";
 
 const TestScreen =  ()=>{
 
     const dispatch = useDispatch();
     const person  = useSelector(state=> state.data);
+    const CitiesData = useSelector(state=>state.auth)
    
+    
 
     // dispatch(setData( ()=>{
     //     ToastAndroid.show(`List created!` , ToastAndroid.LONG);
@@ -24,6 +26,10 @@ const TestScreen =  ()=>{
     const deleteDataHandler=()=>{
         dispatch(deleteData());
     }
+    const getCitiesDataHandler=()=>{
+        dispatch(getCitiesData());
+        console.log(CitiesData);
+    }
    const submiHandler =()=>{
       
         dispatch(setData( ()=>{
@@ -39,6 +45,7 @@ const TestScreen =  ()=>{
             <Button title="press" onPress={()=>{submiHandler();}}/>
             <Button title="getData" onPress={()=>{submgetDataHandler();}}/>
             <Button title="getData" onPress={()=>{deleteDataHandler();}}/>
+            <Button title="getData" onPress={()=>{getCitiesDataHandler();}}/>
             {/* <Text>{person}</Text> */}
         </View>
     );

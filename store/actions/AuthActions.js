@@ -1,32 +1,32 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { STORAGE_KEYS } from "../../constants";
 import {SET_DATA } from "../types";
-export const saveData =(id , email , password ,nationality , mobileNumber, {donationPrefrences} , {objectivesSelection}  , onSuccess=()=>{} , onError=()=>{})=>{
-    return async dispatch=>{
-        // try{
-        //     const newList={
-        //         name , 
-        //         id:`list-${new Date().getTime()}`,
-        //     };
 
-        //     const {lists} = store.getState().list;
-        //     const listsCopy = [...lists];
-        //     listsCopy.push(newList);
-        //     await AsyncStorage.setItem(STORAGE_KEYS.lists , JSON.stringify(listsCopy));
+const API_URL = 'https://mocki.io/v1/48419bdb-1d76-45a1-89cb-3ac3fcc7f6ca';
+export const getCitiesData = ()=>{
+    try{
+        return async dispatch=>{
+            const result = await fetch(API_URL , {
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+            });
 
-        //     dispatch({
-        //         type:SET_LISTS,
-        //         payload : listsCopy,
-        //     }); 
-        //     onSuccess();
-        // }catch(err){
-        //     console.log(err);
-        //     onError();
-        // }
-
-       
-    };
-};
+            const json = await result.json();
+            if(json){
+                dispatch({
+                    type:SET_DATA,
+                    payload:json
+                });
+            }else{
+                console.log('Unable to fetch!');
+            }
+        }
+    }catch(err){
+        console.log(err);
+    }
+}
 
 export const setData = (onSuccess=()=>{} , onError=()=>{})=>{
     return async dispatch=>{try{

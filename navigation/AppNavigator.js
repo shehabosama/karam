@@ -25,6 +25,7 @@ import NavigationBottomHome from "../screens/bottomNavigationScreens/NavigationB
 import Causes from "../screens/bottomNavigationScreens/Causes";
 // import Cases from "./bottomNavigationScreens/cases";
 import Cases from '../screens/bottomNavigationScreens/Cases'
+import PersonalInformation from '../screens/PersonalInformation';
 
 
 
@@ -89,6 +90,24 @@ const TasksNavigator = () => {
     return (
         <TasksStackNavigator.Navigator>
            
+           {/* <TasksStackNavigator.Screen
+                name="Test"
+                component={TestScreen}
+                options={{ headerShown: false }}
+
+            /> */}
+
+{/* <TasksStackNavigator.Screen
+                    name="PersonalInformation"
+                    component={PersonalInformation}
+                    options={{ headerShown: false }}
+                /> */}
+<TasksStackNavigator.Screen
+                    name="HomeTabs"
+                    component={HomeTabs}
+                    options={{ headerShown: false }}
+                />
+
             <TasksStackNavigator.Screen
                 name="Splash"
                 component={Splash}
@@ -144,11 +163,11 @@ const TasksNavigator = () => {
             />
              
 
-            <TasksStackNavigator.Screen
+            {/* <TasksStackNavigator.Screen
                     name="HomeTabs"
                     component={HomeTabs}
                     options={{ headerShown: false }}
-                />
+                /> */}
         </TasksStackNavigator.Navigator>
 
     );
