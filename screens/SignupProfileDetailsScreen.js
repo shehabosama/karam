@@ -12,7 +12,7 @@ export const SignupProfileDetails = ({ route, navigation }) => {
     const [mobileNumber, setMobileNumber] = useState('');
     const [nationality, setNationality] = useState('');
     const [isSelected, setSelection] = useState(false);
-
+    let isNumber = !isNaN(+mobileNumber);
     const submitHandler = () => {
         if (fullName.trim() == '') {
             showMessage('Full Name is required!');
@@ -24,6 +24,8 @@ export const SignupProfileDetails = ({ route, navigation }) => {
             showMessage('You have to Agree Terms and Conditions');
         } else if (mobileNumber.length < 11) {
             showMessage('No phone number less than eleven numbers');
+        }else if(!isNumber){
+            showMessage('Please write only numbers in phone number');
         } else {
             navigation.navigate('SignupVerifyAccount',
                 {

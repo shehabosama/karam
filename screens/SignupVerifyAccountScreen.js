@@ -18,11 +18,15 @@ export const SignupVerifyAccount = ({ route,navigation }) => {
     const [input3 , setInput3] = useState('');
     const [input4 , setInput4] = useState('');
 
+    let isNumber = !isNaN(+input1+input2+input3+input4);
+   
     const submitHandler=()=>{
     
         if(input1.trim() == '' || input2.trim() == '' || input3.trim() == '' || input4.trim() == ''){
 
                 showMessage('Please fill all verification fields');
+            }else if(!isNumber){
+                showMessage('Please write only numbers');
             }else{
                 navigation.navigate('SignupObjectives' , route.params) ;
             }
