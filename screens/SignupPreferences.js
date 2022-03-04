@@ -6,13 +6,27 @@ import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-export const SignupPreferences = ({ navigation }) => {
-    const [isSelected1, setSelection1] = useState(false);
-    const [isSelected2, setSelection2] = useState(false);
-    const [isSelected3, setSelection3] = useState(false);
-    const [isSelected4, setSelection4] = useState(false);
-    const [isSelected5, setSelection5] = useState(false);
-    const [isSelected6, setSelection6] = useState(false);
+export const SignupPreferences = ({ route , navigation }) => {
+    const [waterCheck, setWaterCheck] = useState(false);
+    const [roofsCheck, setRoofsCheck] = useState(false);
+    const [specialNeedsCheck, setSpecialNeedsCheck] = useState(false);
+    const [educationCheck, setEducationCheck] = useState(false);
+    const [prisonCheck, setPrisonCheck] = useState(false);
+    const [orphansCheck, setOrphansCheck] = useState(false);
+
+    let userPrefrences = {
+        userData:route.params.userData,
+        userObjective:route.params.userObjecive,
+         userPrefrences:{
+            waterCheck:waterCheck,
+            roofsCheck:roofsCheck,
+            specialNeedsCheck:specialNeedsCheck,
+            educationCheck,educationCheck,
+            prisonCheck:prisonCheck,
+            orphansCheck:orphansCheck
+        }
+    };
+   
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -31,88 +45,92 @@ export const SignupPreferences = ({ navigation }) => {
                     <View style={{ flex: 1, paddingLeft: 20 }}>
                       
 
-                        <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setSelection1(isSelected1 ? false: true)}}  >
+                        <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setWaterCheck(waterCheck ? false: true)}}  >
                             <Image
                                 source={require("../assets/water.png")}
                                 resizeMode="cover"
                                 style={styles.selectionImage}
                             />
-                            {isSelected1 && <CheckBox style={{
+                            {waterCheck && <CheckBox style={{
                                position:'absolute',
                                alignSelf:'center',
-                            }} value={isSelected1} />}
+                            }} value={waterCheck} />}
                         </TouchableWithoutFeedback>
 
-                        <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setSelection2(isSelected2 ? false: true)}}  >
+                        <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setRoofsCheck(roofsCheck ? false: true)}}  >
                             <Image
                                 source={require("../assets/roofs.png")}
                                 resizeMode="cover"
                                 style={styles.selectionImage}
                             />
-                            {isSelected2 && <CheckBox style={{
+                            {roofsCheck && <CheckBox style={{
                                position:'absolute',
                                alignSelf:'center',
-                            }} value={isSelected2} />}
+                            }} value={roofsCheck} />}
                         </TouchableWithoutFeedback>
 
-                        <TouchableWithoutFeedback onPress={()=>{setSelection3(isSelected3 ? false: true)}}  >
+                        <TouchableWithoutFeedback onPress={()=>{setSpecialNeedsCheck(specialNeedsCheck ? false: true)}}  >
                             <Image
                                 source={require("../assets/spacial_needs.png")}
                                 resizeMode="cover"
                                 style={styles.selectionImage}
                             />
-                            {isSelected3 && <CheckBox style={{
+                            {specialNeedsCheck && <CheckBox style={{
                                position:'absolute',
                                alignSelf:'center',
-                            }} value={isSelected3} />}
+                            }} value={specialNeedsCheck} />}
                         </TouchableWithoutFeedback>
                      
                     </View>
 
                     <View style={{ flex: 1, paddingRight: 20 }}>
-                    <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setSelection4(isSelected4 ? false: true)}}  >
+                    <TouchableWithoutFeedback style={styles.selectionImage} onPress={()=>{setEducationCheck(educationCheck ? false: true)}}  >
                             <Image
                                 source={require("../assets/education.png")}
                                 resizeMode="cover"
                                 style={styles.selectionImage}
                             />
-                            {isSelected4 && <CheckBox style={{
+                            {educationCheck && <CheckBox style={{
                                position:'absolute',
                                alignSelf:'center',
-                            }} value={isSelected4} />}
+                            }} value={educationCheck} />}
                         </TouchableWithoutFeedback>
                        
                      
                         
-                        <TouchableWithoutFeedback  onPress={()=>{setSelection5(isSelected5 ? false: true)}}  >
+                        <TouchableWithoutFeedback  onPress={()=>{setPrisonCheck(prisonCheck ? false: true)}}  >
                             <Image
                                 source={require("../assets/prison.png")}
                                 resizeMode="cover"
                                 style={styles.selectionImage}
                             />
-                            {isSelected5 && <CheckBox style={{
+                            {prisonCheck && <CheckBox style={{
                                position:'absolute',
                                alignSelf:'center',
-                            }} value={isSelected5} />}
+                            }} value={prisonCheck} />}
                         </TouchableWithoutFeedback>
          
-<TouchableWithoutFeedback onPress={()=>{setSelection6(isSelected6 ? false: true)}}  >
+<TouchableWithoutFeedback onPress={()=>{setOrphansCheck(orphansCheck ? false: true)}}  >
                             <Image
                                 source={require("../assets/orphans.png")}
                                 resizeMode="cover"
                                 style={styles.selectionImage}
                             />
-                            {isSelected6 && <CheckBox  style={{
+                            {orphansCheck && <CheckBox  style={{
                                position:'absolute',
                                alignSelf:'center',
                     
-                            }}  value={isSelected6} />}
+                            }}  value={orphansCheck} />}
                         </TouchableWithoutFeedback>
                     </View>
 
                 </View>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Continue" round onPress={() => navigation.navigate('SignupGoal')} />
+            <CutomeButton style={styles.btn} text="Continue" round onPress={() => navigation.navigate('SignupGoal',
+               
+                   userPrefrences
+               
+            )} />
 
 
         </View>

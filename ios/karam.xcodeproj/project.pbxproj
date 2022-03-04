@@ -30,6 +30,7 @@
 		F766CB8CC525405DA0116D13 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC0BF11EECB048138F0CF735 /* Zocial.ttf */; };
 		9D90D5544BCD4547A8D32A12 /* FontsFree-Net-Mortina-DEMO-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A150402DFF3A44CAA549FB4A /* FontsFree-Net-Mortina-DEMO-1.ttf */; };
 		F460FD9A2AE64BBA832E0BC3 /* SF-Pro-Rounded-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FED7CDF4AF0141F3B8ACF6B2 /* SF-Pro-Rounded-Regular.ttf */; };
+		3D95B5957BAD42899FB0B7DA /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B6C777568584E7FAC91700B /* SFProDisplay-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		EC0BF11EECB048138F0CF735 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A150402DFF3A44CAA549FB4A /* FontsFree-Net-Mortina-DEMO-1.ttf */ = {isa = PBXFileReference; name = "FontsFree-Net-Mortina-DEMO-1.ttf"; path = "../assets/fonts/FontsFree-Net-Mortina-DEMO-1.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FED7CDF4AF0141F3B8ACF6B2 /* SF-Pro-Rounded-Regular.ttf */ = {isa = PBXFileReference; name = "SF-Pro-Rounded-Regular.ttf"; path = "../assets/fonts/SF-Pro-Rounded-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5B6C777568584E7FAC91700B /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; name = "SFProDisplay-Regular.ttf"; path = "../assets/fonts/SFProDisplay-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				EC0BF11EECB048138F0CF735 /* Zocial.ttf */,
 				A150402DFF3A44CAA549FB4A /* FontsFree-Net-Mortina-DEMO-1.ttf */,
 				FED7CDF4AF0141F3B8ACF6B2 /* SF-Pro-Rounded-Regular.ttf */,
+				5B6C777568584E7FAC91700B /* SFProDisplay-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				F766CB8CC525405DA0116D13 /* Zocial.ttf in Resources */,
 				9D90D5544BCD4547A8D32A12 /* FontsFree-Net-Mortina-DEMO-1.ttf in Resources */,
 				F460FD9A2AE64BBA832E0BC3 /* SF-Pro-Rounded-Regular.ttf in Resources */,
+				3D95B5957BAD42899FB0B7DA /* SFProDisplay-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,9 +6,19 @@ import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import gloable from "../styles/gloable";
 
-export const SignupGoal = ({ navigation }) => {
+export const SignupGoal = ({ route , navigation }) => {
     const [donationGoal, setDonationGoal] = useState('');
     
+   //d console.log(route.params);
+
+    const submiHandler=()=>{
+        navigation.navigate('SignupFrequency' , {
+            userData:route.params.userData,
+            userObjective:route.params.userObjective,
+            userPrefrences:route.params.userPrefrences,
+            donationGoal:donationGoal,
+        })
+    };
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -39,7 +49,7 @@ export const SignupGoal = ({ navigation }) => {
 
                 <Text style={styles.HintText}>Studies shows that committing to donating money ahead of time, can increase the amount you give by 32%</Text>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => navigation.navigate('SignupFrequency')} />
+            <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => submiHandler()} />
 
 
         </View>

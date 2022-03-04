@@ -16,7 +16,7 @@ export const Signup = ({navigation}) => {
         } else if (password.length < 8) {
             showMessage('Password must be more than 8 character or number');
         } else {
-            navigation.navigate('SignupProfileDetails');
+            navigation.navigate('SignupProfileDetails' , {email:email , password : password});
         }
     };
 
@@ -35,7 +35,7 @@ export const Signup = ({navigation}) => {
                 <Text style={styles.Uppertext}>Hey there,</Text>
                 <Text style={styles.Lowertext}>Signup to karam</Text>
                 <Text style={styles.Lowertext}>Email</Text>
-                <CutomeTextInput placeholder="youremail@mail.com" secure={false} text={email} onTextInputChange={(username) => setUserName(username)} round />
+                <CutomeTextInput type="email-address" placeholder="youremail@mail.com" secure={false} text={email} onTextInputChange={(username) => setUserName(username)} round />
                 <Text style={styles.Lowertext}>Password</Text>
                 <CutomeTextInput placeholder="Enter password" secure={true} text={password} onTextInputChange={(password) => setPassword(password)} round />
                 <CutomeButton style={styles.btn} text="Signup" onPress={submitHandler} round />

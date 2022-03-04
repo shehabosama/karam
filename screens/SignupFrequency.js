@@ -6,8 +6,8 @@ import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import gloable from "../styles/gloable";
 import SwitchSelector from 'react-native-switch-selector';
-export const SignupFrequency = ({ navigation }) => {
-    const [isSelected, setSelection] = useState(false);
+export const SignupFrequency = ({ route , navigation }) => {
+    
     const options = [
         { label: 'Weekly', value: '1' },
         { label: 'Monthly', value: '1.5' },
@@ -56,7 +56,7 @@ export const SignupFrequency = ({ navigation }) => {
                 <Text style={styles.HintText}>Make donations case by case and keep track of your target achievement. You’ll get access to all the cases on the platform and updates.</Text>
 
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Confirm" round onPress={() => navigation.navigate('SignupGoal')} />
+            <CutomeButton style={styles.btn} text="Confirm" round onPress={() => navigation.navigate('HomeTabs')} />
 
 
         </View>

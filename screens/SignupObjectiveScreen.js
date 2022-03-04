@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView , TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import ObjectiveCard from "../component/ObjectiveCard";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 
-export const SignupObjectives = ({ navigation }) => {
+export const SignupObjectives = ({ route, navigation }) => {
     const [isSelected1, setSelection1] = useState(false);
     const [isSelected2, setSelection2] = useState(false);
     const [isSelected3, setSelection3] = useState(false);
@@ -13,26 +13,36 @@ export const SignupObjectives = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-         <TouchableOpacity 
-                onPress={()=>navigation.goBack()}>
-            <Image
-                source={require("../assets/backButton.png")}
-                style={styles.image}
-                onPress={()=>navigation.goBack()}
-            />
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}>
+                <Image
+                    source={require("../assets/backButton.png")}
+                    style={styles.image}
+                    onPress={() => navigation.goBack()}
+                />
             </TouchableOpacity>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
                 <Text style={styles.Uppertext}>Select Objectives</Text>
                 <Text style={styles.Lowertext}>Select as many, or as few, as you’d like</Text>
-                
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Automate your giving" round isSelected={isSelected1}  setSelection={setSelection1}/>
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Discover cases to support" round isSelected={isSelected2}   setSelection={setSelection2}/>
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Organize donations in one place" round isSelected={isSelected3}  setSelection={setSelection3} />
-                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Get updates on your donations" round isSelected={isSelected4}  setSelection={setSelection4} />
+
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Automate your giving" round isSelected={isSelected1} setSelection={setSelection1} />
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Discover cases to support" round isSelected={isSelected2} setSelection={setSelection2} />
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Organize donations in one place" round isSelected={isSelected3} setSelection={setSelection3} />
+                <ObjectiveCard style={styles.ObjectiveCard} placeholder="Get updates on your donations" round isSelected={isSelected4} setSelection={setSelection4} />
 
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Continue" round  onPress={()=>navigation.navigate('SignupPreferences')} />
+            <CutomeButton style={styles.btn} text="Continue" round onPress={() => navigation.navigate('SignupPreferences',
+                {
+                    userData: route.params,
+                    userObjecive: {
+                        isSelected1: isSelected1,
+                        isSelected2: isSelected2,
+                        isSelected3: isSelected3,
+                        isSelected4: isSelected4,
+                    }
+
+                })} />
 
 
         </View>
@@ -114,11 +124,11 @@ const styles = StyleSheet.create({
     label: {
         margin: 8,
     },
-    ObjectiveCard:{
-       marginTop:10 ,
-       borderRadius:10,
-       borderWidth:2,
-       borderColor:Colors.primary
+    ObjectiveCard: {
+        marginTop: 10,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colors.primary
     }
 });
 

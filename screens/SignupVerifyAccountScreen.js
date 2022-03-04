@@ -8,7 +8,7 @@ import { Colors } from "../constants";
 import Icon from 'react-native-vector-icons/Ionicons';
 import gloable from "../styles/gloable";
 import { showMessage } from "../utils/HelperFunctions";
-export const SignupVerifyAccount = ({ navigation }) => {
+export const SignupVerifyAccount = ({ route,navigation }) => {
     
     const inputRef2 = useRef();
     const inputRef3 = useRef();
@@ -19,11 +19,12 @@ export const SignupVerifyAccount = ({ navigation }) => {
     const [input4 , setInput4] = useState('');
 
     const submitHandler=()=>{
+    
         if(input1.trim() == '' || input2.trim() == '' || input3.trim() == '' || input4.trim() == ''){
 
                 showMessage('Please fill all verification fields');
             }else{
-                navigation.navigate('SignupObjectives') 
+                navigation.navigate('SignupObjectives' , route.params) ;
             }
     };
    
@@ -130,7 +131,7 @@ export const SignupVerifyAccount = ({ navigation }) => {
                         <Text style={styles.HintText}>Resend Code</Text>
                     </View>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Verify" round onPress={() => {submitHandler}} />
+            <CutomeButton style={styles.btn} text="Verify" round onPress={() => {submitHandler()}} />
         </View>
     );
 };

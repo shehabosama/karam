@@ -15,8 +15,16 @@ import SignupObjectives from '../screens/SignupObjectiveScreen';
 import SignupPreferences from '../screens/SignupPreferences';
 import SignupGoal from '../screens/SignupGoal';
 import SignupFrequency from '../screens/SignupFrequency';
+import TestScreen from '../screens/TestScreen';
 
 
+
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import NavigationBottomHome from "../screens/bottomNavigationScreens/NavigationBottomHome";
+import Causes from "../screens/bottomNavigationScreens/Causes";
+// import Cases from "./bottomNavigationScreens/cases";
+import Cases from '../screens/bottomNavigationScreens/Cases'
 
 
 
@@ -37,16 +45,50 @@ const defaultStyles = {
 //         marginRight:5,
 //     },
 // });
+
+const Tab = createBottomTabNavigator();
+
+function HomeTabs() {
+    return (
+        <Tab.Navigator
+            screenOptions={
+                ({ route }) => ({
+                    tabBarIcon: ({ focused, size, color }) => {
+                        let iconName;
+                        if (route.name === 'Home') {
+                            iconName = 'home';
+                            size = focused ? 25 : 20;
+                        } else if (route.name === 'Cases') {
+                            iconName = 'add';
+                            size = focused ? 25 : 20;
+                        } else if (route.name === 'Causes') {
+                            iconName = 'person-outline';
+                            size = focused ? 25 : 20;
+                        }
+                        return (
+                            <Icon  name={iconName} size={size} color={color} />
+                        );
+                    }
+                })
+            }
+            tabBarOptions={{
+                activeTintColor: '#0080ff',
+                inactiveTintColor: '#777777',
+                labelStyle: { fontSize: 15, fontWeight: 'bold' }
+            }}
+        >
+            <Tab.Screen name={'Home'} component={NavigationBottomHome} />
+            <Tab.Screen name={'Cases'} component={Cases} />
+            <Tab.Screen name={'Causes'} component={Causes} />
+        </Tab.Navigator>
+    );
+}
+
 const TasksNavigator = () => {
 
     return (
         <TasksStackNavigator.Navigator>
-              {/* <TasksStackNavigator.Screen
-                name="SignupVerifyAccount"
-                component={SignupVerifyAccount}
-                options={{ headerShown: false }}
-
-            /> */}
+           
             <TasksStackNavigator.Screen
                 name="Splash"
                 component={Splash}
@@ -100,11 +142,13 @@ const TasksNavigator = () => {
                 component={SignupFrequency}
                 options={{headerShown:false}}
             />
-              <TasksStackNavigator.Screen
-                name="Home"
-                component={SignupFrequency}
-                options={{headerShown:false}}
-            />
+             
+
+            <TasksStackNavigator.Screen
+                    name="HomeTabs"
+                    component={HomeTabs}
+                    options={{ headerShown: false }}
+                />
         </TasksStackNavigator.Navigator>
 
     );

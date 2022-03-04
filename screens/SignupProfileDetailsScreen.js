@@ -1,41 +1,50 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView , TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import { showMessage } from "../utils/HelperFunctions";
 
-export const SignupProfileDetails = ({ navigation }) => {
-    const[fullName , setFullName] = useState('');
-    const[mobileNumber , setMobileNumber] = useState('');
-    const[nationality , setNationality] = useState(''); 
+export const SignupProfileDetails = ({ route, navigation }) => {
+
+    const [fullName, setFullName] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [nationality, setNationality] = useState('');
     const [isSelected, setSelection] = useState(false);
 
-    const submitHandler =()=>{
-        if(fullName.trim() == ''){
+    const submitHandler = () => {
+        if (fullName.trim() == '') {
             showMessage('Full Name is required!');
-        }else if (mobileNumber.trim() == ''){
+        } else if (mobileNumber.trim() == '') {
             showMessage('Mobile number is required!');
-        }else if (nationality.trim() == ''){
+        } else if (nationality.trim() == '') {
             showMessage('Nationality is required!');
-        }else if (!isSelected){
+        } else if (!isSelected) {
             showMessage('You have to Agree Terms and Conditions');
-        }else if (mobileNumber.length < 11){
+        } else if (mobileNumber.length < 11) {
             showMessage('No phone number less than eleven numbers');
-        }else{
-            navigation.navigate('SignupVerifyAccount')
+        } else {
+            navigation.navigate('SignupVerifyAccount',
+                {
+                    email: route.params.email,
+                    password: route.params.password,
+                    fullName: fullName,
+                    mobileNumber: mobileNumber,
+                    nationality: nationality,
+                    isSelected: isSelected
+                });
         }
     };
     return (
         <View style={styles.container}>
-         <TouchableOpacity 
-                onPress={()=>navigation.goBack()}>
-            <Image
-                source={require("../assets/backButton.png")}
-                style={styles.image}
-                onPress={()=>navigation.goBack()}
-            />
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}>
+                <Image
+                    source={require("../assets/backButton.png")}
+                    style={styles.image}
+                    onPress={() => navigation.goBack()}
+                />
             </TouchableOpacity>
 
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -43,11 +52,11 @@ export const SignupProfileDetails = ({ navigation }) => {
                 <Text style={styles.Uppertext}>Complete Profile</Text>
                 <Text style={styles.Lowertext}>Lets start by creating your profile!</Text>
                 <Text style={styles.Lowertext}>Full Name</Text>
-                <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName)=>setFullName(fullName)}  />
+                <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => setFullName(fullName)} />
                 <Text style={styles.Lowertext}>Mobile</Text>
-                <CutomeTextInput placeholder="Your mobile number" round onTextInputChange={(mobileNumber)=>setMobileNumber(mobileNumber)}  />
+                <CutomeTextInput  type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => setMobileNumber(mobileNumber)} />
                 <Text style={styles.Lowertext}>Nationality</Text>
-                <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality)=>setNationality(nationality)} />
+                <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => setNationality(nationality)} />
                 <View style={styles.checkboxContainer}>
                     <CheckBox
                         value={isSelected}
@@ -57,8 +66,8 @@ export const SignupProfileDetails = ({ navigation }) => {
                     <Text style={styles.HintText}>Agree to Terms and Conditions</Text>
                 </View>
                 <Text style={styles.HintText}>Once you Click on verify email , you will receive an email to activate your account</Text>
-                <CutomeButton style={styles.btn} text="Continue" round  onPress={submitHandler} />
-                
+                <CutomeButton style={styles.btn} text="Continue" round onPress={submitHandler} />
+
             </ScrollView>
         </View>
     );
