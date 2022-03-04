@@ -36,16 +36,12 @@ export const Login = ({ navigation }) => {
                 />
             </TouchableOpacity>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
                 <Text style={styles.Uppertext}>Hey there,</Text>
                 <Text style={styles.Lowertext}>Log in to karam</Text>
                 <Text style={styles.Lowertext}>Email</Text>
                 <CutomeTextInput placeholder="youremail@mail.com" secure={false} text={email} onTextInputChange={(username) => setUserName(username)} round />
                 <Text style={styles.Lowertext}>Password</Text>
-
                 <CutomeTextInput placeholder="Enter password" secure={true} text={password} onTextInputChange={(password) => setPassword(password)} round />
-
-
                 <CutomeButton style={styles.btn} text="Log in" onPress={submitHandler} round />
                 <Text style={styles.HintText}>Or Continue with Social Account</Text>
 
@@ -83,12 +79,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
     },
     image: {
-
         marginTop: 20,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
-
     },
     Uppertext: {
         fontSize: 34,
@@ -97,7 +91,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#23596a',
         marginTop: 15,
-
     },
     Lowertext: {
         width: 275,

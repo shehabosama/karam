@@ -41,7 +41,6 @@ export const SignupObjectives = ({ route, navigation }) => {
                         isSelected3: isSelected3,
                         isSelected4: isSelected4,
                     }
-
                 })} />
 
 

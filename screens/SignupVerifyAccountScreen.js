@@ -1,56 +1,48 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, Dimensions, TouchableOpacity, TextInput } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import CutomeVerifyInput from "../component/CustomeVerifyInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import gloable from "../styles/gloable";
 import { showMessage } from "../utils/HelperFunctions";
-export const SignupVerifyAccount = ({ route,navigation }) => {
-    
+export const SignupVerifyAccount = ({ route, navigation }) => {
+
     const inputRef2 = useRef();
     const inputRef3 = useRef();
     const inputRef4 = useRef();
-    const [input1 , setInput1] = useState('');
-    const [input2 , setInput2] = useState('');
-    const [input3 , setInput3] = useState('');
-    const [input4 , setInput4] = useState('');
+    const [input1, setInput1] = useState('');
+    const [input2, setInput2] = useState('');
+    const [input3, setInput3] = useState('');
+    const [input4, setInput4] = useState('');
 
-    let isNumber = !isNaN(+input1+input2+input3+input4);
-   
-    const submitHandler=()=>{
-    
-        if(input1.trim() == '' || input2.trim() == '' || input3.trim() == '' || input4.trim() == ''){
+    let isNumber = !isNaN(+input1 + input2 + input3 + input4);
 
-                showMessage('Please fill all verification fields');
-            }else if(!isNumber){
-                showMessage('Please write only numbers');
-            }else{
-                navigation.navigate('SignupObjectives' , route.params) ;
-            }
+    const submitHandler = () => {
+        if (input1.trim() == '' || input2.trim() == '' || input3.trim() == '' || input4.trim() == '') {
+            showMessage('Please fill all verification fields');
+        } else if (!isNumber) {
+            showMessage('Please write only numbers');
+        } else {
+            navigation.navigate('SignupObjectives', route.params);
+        }
     };
-   
+
     return (
-        
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => navigation.goBack()}>
                 <Image
                     source={require("../assets/backButton.png")}
                     style={styles.image}
-                    onPress={() => navigation.goBack()}
-                />
+                    onPress={() => navigation.goBack()} />
             </TouchableOpacity>
 
             <ScrollView contentContainerStyle={styles.container}>
-
                 <Text style={styles.Uppertext}>Verify Account</Text>
                 <Text style={styles.Lowertext}>Enter 4 digits code received on your email</Text>
-
                 <View style={styles.verifyFiledContainer}>
-                <View activeOpacity={0.2} style={Customstyles.round} underlayColor="transparent">
+                    <View activeOpacity={0.2} style={styles.round} underlayColor="transparent">
                         <View >
                             <TextInput
                                 autoFocus={true}
@@ -62,7 +54,7 @@ export const SignupVerifyAccount = ({ route,navigation }) => {
                                 numberOfLines={1}
                                 //returnKeyType="next"
                                 onChangeText={(input1) => {
-                                    inputRef2.current.focus();   
+                                    inputRef2.current.focus();
                                     setInput1(input1);
                                 }}
                             />
@@ -70,13 +62,12 @@ export const SignupVerifyAccount = ({ route,navigation }) => {
                     </View>
 
                     <Text style={styles.spreatedDash}>_</Text>
-                    <View activeOpacity={0.2} style={Customstyles.round} underlayColor="transparent">
+                    <View activeOpacity={0.2} style={styles.round} underlayColor="transparent">
                         <View >
                             <TextInput
                                 keyboardType={'numeric'}
                                 style={gloable.input}
                                 maxLength={1}
-                                // value={}
                                 underlineColorAndroid='rgba(0,0,0,0)'
                                 numberOfLines={1}
                                 // returnKeyType="next"
@@ -89,14 +80,12 @@ export const SignupVerifyAccount = ({ route,navigation }) => {
                         </View>
                     </View>
                     <Text style={styles.spreatedDash}>_</Text>
-                    <View activeOpacity={0.2} style={Customstyles.round} underlayColor="transparent">
+                    <View activeOpacity={0.2} style={styles.round} underlayColor="transparent">
                         <View >
                             <TextInput
-
                                 keyboardType={'numeric'}
                                 style={gloable.input}
                                 maxLength={1}
-                                // value={}
                                 underlineColorAndroid='rgba(0,0,0,0)'
                                 numberOfLines={1}
                                 // returnKeyType="next"
@@ -109,33 +98,30 @@ export const SignupVerifyAccount = ({ route,navigation }) => {
                         </View>
                     </View>
                     <Text style={styles.spreatedDash}>_</Text>
-                    <View activeOpacity={0.2} style={Customstyles.round} underlayColor="transparent">
+                    <View activeOpacity={0.2} style={styles.round} underlayColor="transparent">
                         <View >
                             <TextInput
                                 keyboardType={'numeric'}
                                 style={gloable.input}
                                 maxLength={1}
-                                // value={}
                                 underlineColorAndroid='rgba(0,0,0,0)'
                                 numberOfLines={1}
                                 // returnKeyType="next"
-                              onChangeText={(input4)=>{
-                                  setInput4(input4);
-                              }}
+                                onChangeText={(input4) => {
+                                    setInput4(input4);
+                                }}
                                 ref={inputRef4}
                             />
                         </View>
-
-
                     </View>
                 </View>
-                    
-                    <View style={styles.HorizontalContainer}>
-                        <Icon name="reload" size={15} color={Colors.primary} style={{ marginTop: 19 }} />
-                        <Text style={styles.HintText}>Resend Code</Text>
-                    </View>
+
+                <View style={styles.HorizontalContainer}>
+                    <Icon name="reload" size={15} color={Colors.primary} style={{ marginTop: 19 }} />
+                    <Text style={styles.HintText}>Resend Code</Text>
+                </View>
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Verify" round onPress={() => {submitHandler()}} />
+            <CutomeButton style={styles.btn} text="Verify" round onPress={() => { submitHandler() }} />
         </View>
     );
 };
@@ -173,7 +159,7 @@ const styles = StyleSheet.create({
         color: '#23596a',
         marginTop: 5,
         marginHorizontal: 1,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
     Lowertext: {
 
@@ -206,36 +192,19 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    customIntput: {
-
-        width: 50
-    },
+   
     HorizontalContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginHorizontal: 25,
     },
-});
-const Customstyles = StyleSheet.create({
-    container: {
-
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
-    },
-    text: {
-        fontSize: 18,
-        fontFamily: 'Poppins-Light',
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-
     round: {
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#23596A',
         marginHorizontal: 10,
         paddingHorizontal: 10
-    },
+    }
 });
+
 export default SignupVerifyAccount;

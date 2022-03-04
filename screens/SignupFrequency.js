@@ -28,7 +28,7 @@ export const SignupFrequency = ({ route , navigation }) => {
                 onPress={() => navigation.goBack()}>
                 <Image
                     source={require("../assets/backButton.png")}
-                    style={styles.image}
+                    style={styles.backIcon}
                     onPress={() => navigation.goBack()}
                 />
             </TouchableOpacity>
@@ -38,22 +38,16 @@ export const SignupFrequency = ({ route , navigation }) => {
                 <Text style={styles.Lowertext}>We’re going to help you reach your goal</Text>
                 <SwitchSelector style={{marginTop:30}} options={options} initial={1}  selectedColor='#fff' buttonColor={Colors.primary}
                 onPress={value => console.log(`Call onPress with value: ${value}`)} />
-
-
-                
-                <View style={{ flexDirection: 'row' }}>
-                    
-                    <TextInput style={styles.input}
+                <View style={{ flexDirection: 'row' }}> 
+                    <TextInput style={styles.textInput}
                         placeholder="8,000" placeholderTextColor={Colors.placeHolder} onChangeText={(subscribeAmount)=>setSubscribeAmount(subscribeAmount)}/>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}>
                         <Image
                             source={require("../assets/edit.png")}
-                            style={styles.editImage}
-
+                            style={styles.editIcon}
                         />
                     </TouchableOpacity>
-
                 </View>
                 <View style={{ flexDirection: 'row' ,alignSelf:'center' , marginVertical:10 }}>
                 <Text style={styles.BoldHintText}>800 EGP </Text>
@@ -63,9 +57,8 @@ export const SignupFrequency = ({ route , navigation }) => {
                 <Text style={styles.BoldHintText}>OR </Text>
                 <CutomeButton style={styles.btnManualDonation} text="Manual Donation" round onPress={() => navigation.navigate('HomeTabs')} />
                 <Text style={styles.HintText}>Make donations case by case and keep track of your target achievement. You’ll get access to all the cases on the platform and updates.</Text>
-
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Confirm" round onPress={() => submiHandler()} />
+            <CutomeButton style={styles.customeButton} text="Confirm" round onPress={() => submiHandler()} />
 
 
         </View>
@@ -77,16 +70,13 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 15,
     },
-    image: {
-
+    backIcon: {
         marginTop: 20,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
-
     },
-    editImage: {
-
+    editIcon: {
         marginTop: 20,
         width: 25,
         height: 28,
@@ -97,12 +87,8 @@ const styles = StyleSheet.create({
         end: 0
 
     },
-    selectionImage: {
-        alignSelf: "center",
-        marginVertical: 5,
-
-    },
-    input: {
+    
+    textInput: {
         borderBottomColor: Colors.primary,
         textAlign: 'center',
         borderStyle: 'solid',
@@ -122,7 +108,6 @@ const styles = StyleSheet.create({
 
     },
     Lowertext: {
-        
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'flex-start',
@@ -145,13 +130,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight:'bold'
     },
-    ImportanText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.importanText,
-    },
-    btn: {
+    customeButton: {
         marginVertical: 40,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
         paddingVertical: 15,
@@ -172,33 +151,6 @@ const styles = StyleSheet.create({
         elevation: 10, 
         padding:5
     },
-    HorizontalContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-
-    },
-    socialImage: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        flex: 1,
-    },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-    label: {
-        margin: 8,
-    },
-    ObjectiveCard: {
-        marginTop: 10,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: Colors.primary
-    }
 });
 
 export default SignupFrequency;

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import ObjectiveCard from "../component/ObjectiveCard";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import gloable from "../styles/gloable";
@@ -14,7 +12,7 @@ export const SignupGoal = ({ route, navigation }) => {
     const submiHandler = () => {
         if (donationGoal.trim() == '') {
             showMessage('Please Select goal first');
-        }else if(!isNumber){
+        } else if (!isNumber) {
             showMessage('Please Write numbers only');
         } else {
             navigation.navigate('SignupFrequency', {
@@ -45,17 +43,12 @@ export const SignupGoal = ({ route, navigation }) => {
                         placeholder="8,000" keyboardType="numeric" value={donationGoal} placeholderTextColor={Colors.placeHolder} onChangeText={(donationGoal) => setDonationGoal(donationGoal)} />
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}>
-                        <Image
-                            source={require("../assets/edit.png")}
-                            style={styles.editImage}
-
-                        />
+                        <Image source={require("../assets/edit.png")} style={styles.editImage} />
                     </TouchableOpacity>
-
                 </View>
-
                 <Text style={styles.HintText}>Studies shows that committing to donating money ahead of time, can increase the amount you give by 32%</Text>
             </ScrollView>
+
             <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => submiHandler()} />
 
 
@@ -69,12 +62,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
     },
     image: {
-
         marginTop: 20,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
-
     },
     editImage: {
 
@@ -85,13 +76,7 @@ const styles = StyleSheet.create({
         marginEnd: 10,
         marginTop: 50,
         position: 'absolute',
-        end: 0
-
-    },
-    selectionImage: {
-        alignSelf: "center",
-        marginVertical: 5,
-
+        end: 0,
     },
     input: {
         borderBottomColor: Colors.primary,
@@ -128,12 +113,7 @@ const styles = StyleSheet.create({
         color: '#23596A',
         textAlign: 'center',
     },
-    ImportanText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.importanText,
-    },
+
     btn: {
         marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -145,33 +125,7 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    HorizontalContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
 
-    },
-    socialImage: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        flex: 1,
-    },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-    label: {
-        margin: 8,
-    },
-    ObjectiveCard: {
-        marginTop: 10,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: Colors.primary
-    }
 });
 
 export default SignupGoal;
