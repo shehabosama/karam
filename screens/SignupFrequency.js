@@ -6,13 +6,22 @@ import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import gloable from "../styles/gloable";
 import SwitchSelector from 'react-native-switch-selector';
+import { showMessage } from "../utils/HelperFunctions";
 export const SignupFrequency = ({ route , navigation }) => {
-    
+    const [subscribeAmount , setSubscribeAmount] = useState(''); 
+    let isNumber = !isNaN(+subscribeAmount);
     const options = [
         { label: 'Weekly', value: '1' },
         { label: 'Monthly', value: '1.5' },
         { label: 'Yearly', value: '2' }
     ];
+    const submiHandler=()=>{
+        if(!isNumber){
+            showMessage('Please write only numbers');
+        }else{
+            navigation.navigate('HomeTabs')
+        }
+    };
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -35,7 +44,7 @@ export const SignupFrequency = ({ route , navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
                     
                     <TextInput style={styles.input}
-                        placeholder="8,000" placeholderTextColor={Colors.placeHolder} />
+                        placeholder="8,000" placeholderTextColor={Colors.placeHolder} onChangeText={(subscribeAmount)=>setSubscribeAmount(subscribeAmount)}/>
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}>
                         <Image
@@ -52,11 +61,11 @@ export const SignupFrequency = ({ route , navigation }) => {
                 </View>
                 <Text style={styles.HintText}>We will not charge you anything untill you subscribe to cases, causes or providers, or make a one time donations</Text>
                 <Text style={styles.BoldHintText}>OR </Text>
-                <CutomeButton style={styles.btnManualDonation} text="Manual Donation" round onPress={() => navigation.navigate('SignupGoal')} />
+                <CutomeButton style={styles.btnManualDonation} text="Manual Donation" round onPress={() => navigation.navigate('HomeTabs')} />
                 <Text style={styles.HintText}>Make donations case by case and keep track of your target achievement. You’ll get access to all the cases on the platform and updates.</Text>
 
             </ScrollView>
-            <CutomeButton style={styles.btn} text="Confirm" round onPress={() => navigation.navigate('HomeTabs')} />
+            <CutomeButton style={styles.btn} text="Confirm" round onPress={() => submiHandler()} />
 
 
         </View>

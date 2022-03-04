@@ -5,19 +5,26 @@ import ObjectiveCard from "../component/ObjectiveCard";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import gloable from "../styles/gloable";
+import { showMessage } from "../utils/HelperFunctions";
 
-export const SignupGoal = ({ route , navigation }) => {
+export const SignupGoal = ({ route, navigation }) => {
     const [donationGoal, setDonationGoal] = useState('');
-    
-   //d console.log(route.params);
 
-    const submiHandler=()=>{
-        navigation.navigate('SignupFrequency' , {
-            userData:route.params.userData,
-            userObjective:route.params.userObjective,
-            userPrefrences:route.params.userPrefrences,
-            donationGoal:donationGoal,
-        })
+    let isNumber = !isNaN(+donationGoal);
+    const submiHandler = () => {
+        if (donationGoal.trim() == '') {
+            showMessage('Please Select goal first');
+        }else if(!isNumber){
+            showMessage('Please Write numbers only');
+        } else {
+            navigation.navigate('SignupFrequency', {
+                userData: route.params.userData,
+                userObjective: route.params.userObjective,
+                userPrefrences: route.params.userPrefrences,
+                donationGoal: donationGoal,
+            })
+        }
+
     };
     return (
         <View style={styles.container}>
@@ -35,7 +42,7 @@ export const SignupGoal = ({ route , navigation }) => {
                 <Text style={styles.Lowertext}>We’re going to help you reach your goal</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <TextInput style={styles.input}
-                        placeholder="8,000" keyboardType="numeric" value={donationGoal} placeholderTextColor={Colors.placeHolder} onChangeText={(donationGoal)=>setDonationGoal(donationGoal)} />
+                        placeholder="8,000" keyboardType="numeric" value={donationGoal} placeholderTextColor={Colors.placeHolder} onChangeText={(donationGoal) => setDonationGoal(donationGoal)} />
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}>
                         <Image
