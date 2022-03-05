@@ -54,7 +54,9 @@ function HomeTabs() {
         <Tab.Navigator
             screenOptions={
                 ({ route }) => ({
+                  
                     tabBarIcon: ({ focused, size, color }) => {
+                        
                         let iconName;
                         if (route.name === 'Home') {
                             iconName = 'home';
@@ -70,17 +72,21 @@ function HomeTabs() {
                             <Icon  name={iconName} size={size} color={color} />
                         );
                     }
+                     
                 })
             }
             tabBarOptions={{
+                keyboardHidesTabBar: true,
                 activeTintColor: '#0080ff',
                 inactiveTintColor: '#777777',
-                labelStyle: { fontSize: 15, fontWeight: 'bold' }
+                labelStyle: { fontSize: 15, fontWeight: 'bold' },
+                showLabel: false,
             }}
         >
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
             <Tab.Screen name={'Cases'} component={Cases} />
             <Tab.Screen name={'Causes'} component={Causes} />
+            
         </Tab.Navigator>
     );
 }

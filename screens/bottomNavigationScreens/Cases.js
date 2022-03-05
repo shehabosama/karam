@@ -6,6 +6,7 @@ import { Colors } from "../../constants";
 import gloable from "../../styles/gloable";
 import CasesCard from "../../component/CasesCard";
 import Icon from 'react-native-vector-icons/Ionicons';
+import CardView from 'react-native-cardview'
 export const Cases = ({ route, navigation }) => {
     const [donationGoal, setDonationGoal] = useState('');
 
@@ -14,16 +15,27 @@ export const Cases = ({ route, navigation }) => {
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <Text style={styles.Uppertext}>Cases</Text>
                 <View style={{ flexDirection: 'row' }}>
-              
-                  <TextInput placeholder="Search cases , causes & providers" style={
+                <CardView
+                style={{flex:1 ,flexDirection:'row' , borderWidth:2}}
+                cardElevation={10}
+                cardMaxElevation={10}
+                cornerRadius={5}
+               
+                
+              >
+                   <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  onPress={()=>{navigation.navigate('Login')}}/>
+                     <TextInput placeholder="Search cases , causes & providers" style={
                         {
                             flex:1,
                            // borderBottomColor:Colors.placeHolder,
                           
                         }
                     } />
+                     <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+                  </CardView>
+               
                  
-                    <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} />
+                   
                     
                 </View>
 
