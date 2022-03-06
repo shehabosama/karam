@@ -17,11 +17,9 @@ export const Cases = ({ route, navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
                 <CardView
                 style={{flex:1 ,flexDirection:'row' , borderWidth:2}}
-                cardElevation={10}
-                cardMaxElevation={10}
-                cornerRadius={5}
-               
-                
+                cardElevation={6}
+                cardMaxElevation={6}
+                cornerRadius={50}
               >
                    <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  onPress={()=>{navigation.navigate('Login')}}/>
                      <TextInput placeholder="Search cases , causes & providers" style={

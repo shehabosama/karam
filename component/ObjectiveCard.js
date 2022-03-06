@@ -16,7 +16,7 @@ const CutomeTextInput = ({placeholder,isSelected , setSelection , round , icon ,
     }
 
     return(
-        <View style={styles.container} activeOpacity={0.2} style={round ? styles.round : {}} underlayColor="transparent">
+        <View  activeOpacity={0.2} style={round ? styles.round : {}} underlayColor="transparent">
         <View style={btnStyle}>
         <View style={styles.checkboxContainer}>
                    

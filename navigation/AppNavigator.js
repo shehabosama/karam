@@ -26,6 +26,8 @@ import Causes from "../screens/bottomNavigationScreens/Causes";
 // import Cases from "./bottomNavigationScreens/cases";
 import Cases from '../screens/bottomNavigationScreens/Cases'
 import PersonalInformation from '../screens/PersonalInformation';
+import ProfileScreen from '../screens/ProfileScreen';
+import Donation from '../screens/bottomNavigationScreens/DonationScreen';
 
 
 
@@ -54,25 +56,25 @@ function HomeTabs() {
         <Tab.Navigator
             screenOptions={
                 ({ route }) => ({
-                  
+
                     tabBarIcon: ({ focused, size, color }) => {
-                        
+
                         let iconName;
                         if (route.name === 'Home') {
-                            iconName = 'home';
+                            iconName = 'home-outline';
                             size = focused ? 25 : 20;
-                        } else if (route.name === 'Cases') {
-                            iconName = 'add';
+                        } else if (route.name === 'Donation') {
+                            iconName = 'wallet-outline';
                             size = focused ? 25 : 20;
-                        } else if (route.name === 'Causes') {
+                        } else if (route.name === 'ProfileScreen') {
                             iconName = 'person-outline';
                             size = focused ? 25 : 20;
                         }
                         return (
-                            <Icon  name={iconName} size={size} color={color} />
+                            <Icon name={iconName} size={size} color={color} />
                         );
                     }
-                     
+
                 })
             }
             tabBarOptions={{
@@ -84,9 +86,20 @@ function HomeTabs() {
             }}
         >
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
-            <Tab.Screen name={'Cases'} component={Cases} />
-            <Tab.Screen name={'Causes'} component={Causes} />
-            
+            <Tab.Screen name={'Donation'} component={Donation} />
+            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'Causes'} component={Causes} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'Cases'} component={Cases} />
+
         </Tab.Navigator>
     );
 }
@@ -95,24 +108,24 @@ const TasksNavigator = () => {
 
     return (
         <TasksStackNavigator.Navigator>
-           
-           {/* <TasksStackNavigator.Screen
+
+            {/* <TasksStackNavigator.Screen
                 name="Test"
                 component={TestScreen}
                 options={{ headerShown: false }}
 
             /> */}
 
-{/* <TasksStackNavigator.Screen
+            {/* <TasksStackNavigator.Screen
                     name="PersonalInformation"
                     component={PersonalInformation}
                     options={{ headerShown: false }}
                 /> */}
-<TasksStackNavigator.Screen
-                    name="HomeTabs"
-                    component={HomeTabs}
-                    options={{ headerShown: false }}
-                />
+            {/* <TasksStackNavigator.Screen
+                name="HomeTabs"
+                component={HomeTabs}
+                options={{ headerShown: false }}
+            /> */}
 
             <TasksStackNavigator.Screen
                 name="Splash"
@@ -151,7 +164,7 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
-              <TasksStackNavigator.Screen
+            <TasksStackNavigator.Screen
                 name="SignupGoal"
                 component={SignupGoal}
                 options={{ headerShown: false }}
@@ -160,20 +173,24 @@ const TasksNavigator = () => {
             <TasksStackNavigator.Screen
                 name="SignupPreferences"
                 component={SignupPreferences}
-                options={{headerShown:false}}
+                options={{ headerShown: false }}
             />
             <TasksStackNavigator.Screen
                 name="SignupFrequency"
                 component={SignupFrequency}
-                options={{headerShown:false}}
+                options={{ headerShown: false }}
             />
-             
-
             {/* <TasksStackNavigator.Screen
+                name="Causes"
+                component={Causes}
+                options={{headerShown:false}}
+            /> */}
+
+            <TasksStackNavigator.Screen
                     name="HomeTabs"
                     component={HomeTabs}
                     options={{ headerShown: false }}
-                /> */}
+                />
         </TasksStackNavigator.Navigator>
 
     );
