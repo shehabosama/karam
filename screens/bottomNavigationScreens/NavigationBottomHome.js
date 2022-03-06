@@ -74,7 +74,7 @@ export const NavigationBottomHome = ({ route, navigation }) => {
                         color: '#23596A',
                         fontWeight: 'bold',
                     }}>Providers</Text>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Cases')} >
+                    <TouchableOpacity onPress={()=>navigation.navigate('ProviderScreen')} >
                     <Text style={styles.HintText}>View All</Text>
                         </TouchableOpacity>
                 </View>

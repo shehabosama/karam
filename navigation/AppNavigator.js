@@ -28,6 +28,9 @@ import Cases from '../screens/bottomNavigationScreens/Cases'
 import PersonalInformation from '../screens/PersonalInformation';
 import ProfileScreen from '../screens/ProfileScreen';
 import Donation from '../screens/bottomNavigationScreens/DonationScreen';
+import CaseUpdate from '../screens/bottomNavigationScreens/CaseUpdate';
+import AboutCase from '../screens/bottomNavigationScreens/AboutCaseScreen';
+import ProvidersScreen from '../screens/bottomNavigationScreens/ProvidersScreen';
 
 
 
@@ -100,6 +103,21 @@ function HomeTabs() {
                 }}
                 name={'Cases'} component={Cases} />
 
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'CaseUpdate'} component={CaseUpdate} />
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'AboutCase'} component={AboutCase} />
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'ProviderScreen'} component={ProvidersScreen} />
         </Tab.Navigator>
     );
 }
@@ -121,11 +139,11 @@ const TasksNavigator = () => {
                     component={PersonalInformation}
                     options={{ headerShown: false }}
                 /> */}
-            {/* <TasksStackNavigator.Screen
+            <TasksStackNavigator.Screen
                 name="HomeTabs"
                 component={HomeTabs}
                 options={{ headerShown: false }}
-            /> */}
+            />
 
             <TasksStackNavigator.Screen
                 name="Splash"
@@ -185,12 +203,12 @@ const TasksNavigator = () => {
                 component={Causes}
                 options={{headerShown:false}}
             /> */}
-
+{/* 
             <TasksStackNavigator.Screen
-                    name="HomeTabs"
-                    component={HomeTabs}
-                    options={{ headerShown: false }}
-                />
+                name="HomeTabs"
+                component={HomeTabs}
+                options={{ headerShown: false }}
+            /> */}
         </TasksStackNavigator.Navigator>
 
     );

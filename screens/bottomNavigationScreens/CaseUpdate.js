@@ -5,7 +5,7 @@ import { Colors } from "../../constants";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export const AboutCase = ({ route, navigation }) => {
+export const CaseUpdate = ({ route, navigation }) => {
 
 
 
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AboutCase;
+export default CaseUpdate;
