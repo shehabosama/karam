@@ -74,7 +74,11 @@ export const ProvidersScreen = ({ route, navigation }) => {
 
 
                     </View>
-                    <CasesCard style={styles.cusomBord} round />
+                    <TouchableOpacity
+                                onPress={() => navigation.navigate('AboutCase')}>
+                                     <CasesCard style={styles.cusomBord} round />
+                                    </TouchableOpacity>
+                   
                 </View>
 
             </ScrollView>

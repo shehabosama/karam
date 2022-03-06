@@ -5,7 +5,9 @@ export const Colors ={
     quaternary:'#aaa',
     danger:'#DC143C',
     placeHolder:'#848484',
-    importanText:'#bc8363'
+    importanText:'#bc8363',
+    blackText:'#000',
+    whiteText:'#fff'
 };
 export const STORAGE_KEYS = {
     auth : 'auth_key',
