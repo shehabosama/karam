@@ -198,13 +198,9 @@ const TasksNavigator = () => {
                 component={SignupFrequency}
                 options={{ headerShown: false }}
             />
+         
+
             {/* <TasksStackNavigator.Screen
-                name="Causes"
-                component={Causes}
-                options={{headerShown:false}}
-            /> */}
-{/* 
-            <TasksStackNavigator.Screen
                 name="HomeTabs"
                 component={HomeTabs}
                 options={{ headerShown: false }}
