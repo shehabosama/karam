@@ -9,15 +9,16 @@ import CasesCardInfo from "../../component/CasesCardInfo";
 
 export const AboutCase = ({ route, navigation }) => {
 
-    const [activeCaseTab, setActiveCases] = useState(true);
-    const [subscribeCaseTab, setSubscribeCaseTab] = useState(false);
-    const [prevCaseTab, setPrevCaseTab] = useState(false);
+    const [aboutCaseTab, setAboutCases] = useState(true);
+    const [updatesCaseTab, setUpdatesCaseTab] = useState(false);
+
 
 
 
 
     return (
         <View style={styles.container}>
+
             <TouchableOpacity
                 onPress={() => navigation.goBack()}>
                 <Image
@@ -32,96 +33,168 @@ export const AboutCase = ({ route, navigation }) => {
 
 
                 <View style={{ flex: 1, }}>
+
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity
                             onPress={() => {
-                                setActiveCases(true);
-                                setSubscribeCaseTab(false);
-                                setPrevCaseTab(false)
+                                setAboutCases(true);
+                                setUpdatesCaseTab(false);
+
                             }}>
-                            <Text style={activeCaseTab ? styles.activeTab : styles.nonActiveTab}>ABOUT</Text>
+                            <Text style={aboutCaseTab ? styles.activeTab : styles.nonActiveTab}>ABOUT</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => {
-                                setActiveCases(false);
-                                setSubscribeCaseTab(true);
-                                setPrevCaseTab(false)
+                                setAboutCases(false);
+                                setUpdatesCaseTab(true);
+
                             }}>
-                            <Text style={subscribeCaseTab ? styles.activeTab : styles.nonActiveTab}>UPDATES </Text>
+                            <Text style={updatesCaseTab ? styles.activeTab : styles.nonActiveTab}>UPDATES </Text>
                         </TouchableOpacity>
                     </View>
 
-                    <CasesCardInfo />
+                    {aboutCaseTab ? <View style={{ flex: 1 }}>
+                        <CasesCardInfo />
 
-                    <View style={{ flexDirection: 'row' }}>
-                        <Icon name="home-outline" size={20} style={{ marginTop: 10 }} />
-                        <Text style={styles.NormalBoldText}>Gameyet Lagnet Zakah Al Hussainiya</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Icon name="home-outline" size={20} style={{ marginTop: 10 }} />
+                            <Text style={styles.NormalBoldText}>Gameyet Lagnet Zakah Al Hussainiya</Text>
 
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Icon name="location" size={20} style={{ marginTop: 3 }} />
-                        <Text style={styles.NormalText}>Fayoum , Egypt</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Icon name="location" size={20} style={{ marginTop: 3 }} />
+                            <Text style={styles.NormalText}>Fayoum , Egypt</Text>
 
-                    </View>
+                        </View>
 
 
-                    <View style={{ marginTop: 10, borderRadius: 10, backgroundColor: '#E5E5E5', flexDirection: 'row', marginHorizontal: 30 }}>
-                        <View style={{ backgroundColor: '#335D5B', padding: 5, borderRadius: 10 }}>
+                        <View style={{ marginTop: 10, borderRadius: 10, backgroundColor: '#E5E5E5', flexDirection: 'row', marginHorizontal: 30 }}>
+                            <View style={{ backgroundColor: '#335D5B', padding: 5, borderRadius: 10 }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                    alignSelf: 'flex-end',
+                                    color: Colors.whiteText,
+                                    marginHorizontal: 5,
+                                    marginVertical: 0,
+                                    fontWeight: 'bold',
+                                    paddingHorizontal: 10
+                                }}>58,580 EGP</Text>
+                                <Text style={styles.SmallText}>Collected</Text>
+                            </View>
+
+                            <Text style={{ flex: 4 }}></Text>
+                            <View style={{ padding: 5 }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                    alignSelf: 'flex-end',
+                                    color: Colors.blackText,
+                                    marginHorizontal: 5,
+                                    marginVertical: 0,
+                                    fontWeight: 'bold'
+                                }}>58,580 EGP</Text>
+                                <Text style={{
+                                    fontSize: 10,
+                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                    alignSelf: 'flex-end',
+                                    color: Colors.blackText,
+                                    marginHorizontal: 5,
+                                    marginVertical: 0,
+                                    fontWeight: 'bold'
+                                }}>Collected</Text>
+                            </View>
+                            <Text style={{ flex: 1 }}></Text>
+                        </View>
+
+
+                        <Text style={{ marginHorizontal: 30, marginTop: 20 }}>
+                            <Text style={{ fontWeight: "bold", color: Colors.primary }}>House #3456</Text>
+                            <Text> belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                            </Text>
+                        </Text>
+                        <Text style={{ marginHorizontal: 30, marginVertical: 10 }}>
+                            <Text style={{ fontWeight: "bold", color: Colors.primary }}>Cost: </Text>
+                            <Text>water installment pipe (12 meters in length): 650 LE
+                                Water meter: 2625 LE
+                                Total needed: 3275 LE
+                                Expected implementation date: 2 weeks from receiving donation.
+                            </Text>
+                        </Text>
+
+                    </View> :
+
+
+
+
+
+                        <View style={{ flex: 1 }}>
+
+                                <View style={{flexDirection:'row' , marginHorizontal:5 }}>
+                                <Icon name="ios-checkmark-circle" color={Colors.primary}  size={20} style={{ marginTop: 5, marginEnd: 0 }} />
+                                    <Text style={{borderBottomColor:Colors.placeHolder ,borderBottomWidth:1 , flex:1 , marginBottom:20}}></Text>
+                                    <Icon name="ios-checkmark-circle" color={Colors.primary}  size={20} style={{ marginTop: 5, marginEnd: 0 }} />
+                                    <Text style={{borderBottomColor:Colors.placeHolder ,borderBottomWidth:1 , flex:1 , marginBottom:20}}></Text>
+                                    <Icon name="ios-checkmark-circle-outline" color={Colors.placeHolder} size={20} style={{ marginTop: 5, marginEnd: 0 }} />
+                                    </View>
+                                    <View style={{flexDirection:'row' , marginHorizontal:5 }}>
+                                    <Text style={{  marginBottom:20}}>Collected</Text>
+                                    <Text style={{ marginBottom:20 ,marginStart:100, marginEnd:70}}>Started</Text>
+                                    <Text style={{ marginBottom:20,marginStart:20}}>Completed</Text>
+                                    </View>
+
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'SF-Pro-Rounded-Regular',
-                                alignSelf: 'flex-end',
-                                color: Colors.whiteText,
+                                alignSelf: 'flex-start',
+                                color: Colors.blackText,
                                 marginHorizontal: 5,
-                                marginVertical: 0,
-                                fontWeight: 'bold',
-                                paddingHorizontal: 10
-                            }}>58,580 EGP</Text>
-                            <Text style={styles.SmallText}>Collected</Text>
-                        </View>
+                                marginVertical: 5,
+                                fontWeight: 'bold'
+                            }}>Project Images</Text>
 
-                        <Text style={{ flex: 4 }}></Text>
-                        <View style={{ padding: 5 }}>
+                            <Image source={require('../../assets/maketCardPhoto.png')} style={{}} />
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'SF-Pro-Rounded-Regular',
-                                alignSelf: 'flex-end',
+                                alignSelf: 'flex-start',
                                 color: Colors.blackText,
                                 marginHorizontal: 5,
-                                marginVertical: 0,
+                                marginVertical: 10,
                                 fontWeight: 'bold'
-                            }}>58,580 EGP</Text>
-                            <Text style={{
-                                fontSize: 10,
-                                fontFamily: 'SF-Pro-Rounded-Regular',
-                                alignSelf: 'flex-end',
-                                color: Colors.blackText,
-                                marginHorizontal: 5,
-                                marginVertical: 0,
-                                fontWeight: 'bold'
-                            }}>Collected</Text>
+                            }}>Supporting Documents</Text>
+                            <View style={{ flexDirection: 'row' }}>
+
+                                <Text style={{
+                                    flex: 1,
+                                    fontSize: 15,
+                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                    alignSelf: 'flex-start',
+                                    color: Colors.blackText,
+                                    marginHorizontal: 5,
+                                    marginVertical: 5,
+                                   
+                                }}>Water Pipes Receipt.jpg</Text>
+                                <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
+
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{
+                                    flex: 1,
+                                    fontSize: 15,
+                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                    alignSelf: 'flex-start',
+                                    color: Colors.blackText,
+                                    marginHorizontal: 5,
+                                    marginVertical: 5,
+                                   
+                                }}>Daily labor.pdf</Text>
+                                <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
+
+                            </View>
                         </View>
-                        <Text style={{ flex: 1 }}></Text>
-                    </View>
+                    }
 
-
-                    <Text style={{marginHorizontal:30}}>
-                        <Text style={{ fontWeight: "bold", color:Colors.primary }}>House #3456</Text>
-                        <Text> belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                        </Text>
-
-
-                        
-
-                    </Text>
-                    <Text style={{marginHorizontal:30 , marginVertical:10}}>
-                    <Text style={{ fontWeight: "bold" , color:Colors.primary }}>Cost: </Text>
-                        <Text>water installment pipe (12 meters in length): 650 LE
-                            Water meter: 2625 LE
-                            Total needed: 3275 LE
-                            Expected implementation date: 2 weeks from receiving donation.
-                        </Text>
-                    </Text>
                 </View>
 
 
@@ -136,8 +209,6 @@ const styles = StyleSheet.create({
         height: Dimensions.height,
         marginHorizontal: 18,
         marginTop: 20
-
-
 
     },
     verifyFiledContainer: {
