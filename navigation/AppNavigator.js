@@ -231,12 +231,6 @@ const TasksNavigator = () => {
 //             />
 
 
-//              <TasksStackNavigator.Screen
-//                 name="Rigster"
-//                 component={TaskScreen}
-//                 options={{ ...defaultStyles, title: 'Update task' }}
-//             />
-
 {/* <TasksStackNavigator.Screen
         name="List"
         component={ListScreen}
