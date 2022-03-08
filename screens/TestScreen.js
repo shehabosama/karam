@@ -4,12 +4,9 @@ import { Button, Text, ToastAndroid, View } from "react-native";
 import { setData  , getData,deleteData ,getCitiesData} from "../store/actions/AuthActions";
 
 const TestScreen =  ()=>{
-
     const dispatch = useDispatch();
     const person  = useSelector(state=> state.data);
     const CitiesData = useSelector(state=>state.auth)
-   
-    
 
     // dispatch(setData( ()=>{
     //     ToastAndroid.show(`List created!` , ToastAndroid.LONG);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
-import gloable from "../styles/gloable";
 import { showMessage } from "../utils/HelperFunctions";
 
 export const SignupGoal = ({ route, navigation }) => {
@@ -50,7 +49,6 @@ export const SignupGoal = ({ route, navigation }) => {
             </ScrollView>
 
             <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => submiHandler()} />
-
 
         </View>
     );

@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
-
 import Icon from 'react-native-vector-icons/Ionicons';
 import gloable from "../styles/gloable";
 import { showMessage } from "../utils/HelperFunctions";

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
 import ObjectiveCard from "../component/ObjectiveCard";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";

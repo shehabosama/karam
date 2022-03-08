@@ -3,16 +3,15 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import CheckBox from '@react-native-community/checkbox';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
-import { Colors } from "../constants";
 import { showMessage } from "../utils/HelperFunctions";
 
 export const SignupProfileDetails = ({ route, navigation }) => {
-
     const [fullName, setFullName] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [nationality, setNationality] = useState('');
     const [isSelected, setSelection] = useState(false);
     let isNumber = !isNaN(+mobileNumber);
+
     const submitHandler = () => {
         if (fullName.trim() == '') {
             showMessage('Full Name is required!');
@@ -24,7 +23,7 @@ export const SignupProfileDetails = ({ route, navigation }) => {
             showMessage('You have to Agree Terms and Conditions');
         } else if (mobileNumber.length < 11) {
             showMessage('No phone number less than eleven numbers');
-        }else if(!isNumber){
+        } else if (!isNumber) {
             showMessage('Please write only numbers in phone number');
         } else {
             navigation.navigate('SignupVerifyAccount',
@@ -56,7 +55,7 @@ export const SignupProfileDetails = ({ route, navigation }) => {
                 <Text style={styles.Lowertext}>Full Name</Text>
                 <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => setFullName(fullName)} />
                 <Text style={styles.Lowertext}>Mobile</Text>
-                <CutomeTextInput  type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => setMobileNumber(mobileNumber)} />
+                <CutomeTextInput type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => setMobileNumber(mobileNumber)} />
                 <Text style={styles.Lowertext}>Nationality</Text>
                 <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => setNationality(nationality)} />
                 <View style={styles.checkboxContainer}>
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
     checkbox: {
         alignSelf: "center",
     },
-   
+
 });
 
 export default SignupProfileDetails;

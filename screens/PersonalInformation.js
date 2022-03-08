@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
 import CutomeTextInput from "../component/CustomeInput";
-import CutomeButton from "../component/CustomeButton";
-import { Colors } from "../constants";
 import { showMessage } from "../utils/HelperFunctions";
 
 export const PersonalInformation = ({ route, navigation }) => {

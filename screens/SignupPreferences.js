@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import CutomeButton from "../component/CustomeButton";
-import { Colors } from "../constants";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export const SignupPreferences = ({ route, navigation }) => {
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#23596A',
     },
-  
+
     btn: {
         marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 20,
     },
- 
+
 });
 
 export default SignupPreferences;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput,Image, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
@@ -21,67 +21,45 @@ const CasesCard = ({ placeholder, text, onTextInputChange, ref, round, focus, ic
                 source={require('../assets/maketCardPhoto.png')}
                 //source={{ uri: 'www.imageislocatedhere.com }} -------- if it is link
                 style={Customstyles.bgContainer}
-                imageStyle={{ borderRadius: 10}}
-            >
-                
-                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10  }}>
+                imageStyle={{ borderRadius: 10 }}>
+
+                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
-                    <Image style={{alignSelf:'center'}} source={require('../assets/waterVector.png')}/>
+                    <Image style={{ alignSelf: 'center' }} source={require('../assets/waterVector.png')} />
                     <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>2,858 EGP</Text>
-                    
                 </View>
-               
+
             </ImageBackground>
-            <View style={{flexDirection:'row', }}>
-            <Text style={{flex:1, color: '#000', marginTop: 5 , fontWeight:'bold' }}>Water to Aswan</Text>
-            <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5 ,fontWeight:'bold'}}>85%</Text>
+            <View style={{ flexDirection: 'row', }}>
+                <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>Water to Aswan</Text>
+                <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
             </View>
-            
-            {/* <View style={btnStyle} >
-        
-    
-        </View> */}
 
         </View>
     );
 };
 const Customstyles = StyleSheet.create({
     container: {
-        width:100,
-        height:120,
+        width: 100,
+        height: 120,
         alignItems: 'center',
         justifyContent: 'flex-start',
-
-
-
-    },
-    text: {
-        fontSize: 18,
-        fontFamily: 'Poppins-Light',
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-
-    danger: {
-        backgroundColor: Colors.danger,
     },
     round: {
         height: 149,
-        width:155,
+        width: 155,
         borderRadius: 10,
-        flex:1,
+        flex: 1,
         borderColor: '#23596A',
-        marginTop:10,
-      
+        marginTop: 10,
     },
     bgContainer: {
-        height:149,
-        
-       // backgroundColor: 'rgba(10, 10, 10, 0.4)',
+        height: 149,
+        // backgroundColor: 'rgba(10, 10, 10, 0.4)',
         justifyContent: 'center',
-        borderRadius:50,
-        flexDirection:'row',
+        borderRadius: 50,
+        flexDirection: 'row',
     },
 });
 

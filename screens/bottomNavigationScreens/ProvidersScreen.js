@@ -8,21 +8,16 @@ export const ProvidersScreen = ({ route, navigation }) => {
     const [activeCaseTab, setActiveCases] = useState(true);
     const [subscribeCaseTab, setSubscribeCaseTab] = useState(false);
     const [prevCaseTab, setPrevCaseTab] = useState(false);
-
-
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
                 <View style={{ flexDirection: 'row' }}>
                     <CardView
                         style={{ flex: 1, flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 20 }}
                         cardElevation={6}
                         cardMaxElevation={6}
-                        cornerRadius={20}
-
-                    >
-                        <View style={{ flex: 1, flexDirection: 'column' , marginStart:10}}>
+                        cornerRadius={20} >
+                        <View style={{ flex: 1, flexDirection: 'column', marginStart: 10 }}>
                             <TouchableOpacity
                                 onPress={() => navigation.goBack()}>
                                 <Image
@@ -35,15 +30,12 @@ export const ProvidersScreen = ({ route, navigation }) => {
                             <Text style={styles.Lowertext}>Registration :415-208-907 </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'column',marginEnd: 30 }}>
-                            <Image source={require('../../assets/providerImage.png')} style={{ marginTop: 50,  }} />
+                        <View style={{ flexDirection: 'column', marginEnd: 30 }}>
+                            <Image source={require('../../assets/providerImage.png')} style={{ marginTop: 50, }} />
                             <Text style={styles.smalBoldText}>Info +</Text>
                         </View>
-
                     </CardView>
-
                 </View>
-
 
                 <View style={{ flex: 1, marginHorizontal: 30, }}>
                     <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder }}>
@@ -72,20 +64,15 @@ export const ProvidersScreen = ({ route, navigation }) => {
                             <Text style={prevCaseTab ? styles.activeTab : styles.nonActiveTab}>Previous Cases </Text>
                         </TouchableOpacity>
 
-
                     </View>
                     <TouchableOpacity
-                                onPress={() => navigation.navigate('AboutCase')}>
-                                     <CasesCard style={styles.cusomBord} round />
-                                    </TouchableOpacity>
-                   
+                        onPress={() => navigation.navigate('AboutCase')}>
+                        <CasesCard style={styles.cusomBord} round />
+                    </TouchableOpacity>
+
                 </View>
 
             </ScrollView>
-
-
-
-
         </View>
     );
 };
@@ -101,27 +88,6 @@ const styles = StyleSheet.create({
         height: 18,
         alignSelf: "flex-start",
     },
-    editImage: {
-
-        marginTop: 20,
-        width: 25,
-        height: 28,
-        alignSelf: "flex-start",
-        marginEnd: 10,
-        marginTop: 50,
-        position: 'absolute',
-        end: 0,
-    },
-    input: {
-        borderBottomColor: Colors.primary,
-        textAlign: 'center',
-        borderStyle: 'solid',
-        fontSize: 50,
-        borderBottomWidth: 1.0,
-        paddingBottom: 15,
-        fontWeight: 'bold',
-        flex: 1
-    },
     Uppertext: {
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
@@ -129,7 +95,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#23596a',
         marginTop: 15,
-
     },
     Lowertext: {
         width: 275,
@@ -140,13 +105,7 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         marginTop: 10,
     },
-    HintText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: '#23596A',
-        textAlign: 'center',
-    },
+
     smalBoldText: {
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
@@ -164,7 +123,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
-
     },
     nonActiveTab: {
         fontSize: 17,
@@ -174,18 +132,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
-
-    },
-    btn: {
-        marginVertical: 50,
-        backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        paddingVertical: 15,
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 10,
-
     },
     cusomBord: {
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -195,20 +141,6 @@ const styles = StyleSheet.create({
         shadowRadius: 100,
         elevation: 10,
         flexDirection: 'row'
-    },
-    HorizontalContainer: {
-
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 10
-    },
-    socialImage: {
-        width: 59,
-        height: 83,
-        marginHorizontal: 20
-    },
-    icon: {
-        marginTop: 10,
     },
 });
 

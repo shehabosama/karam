@@ -32,11 +32,6 @@ const CutomeVerifyInput = ({ placeholder, text, onTextInputChange, ref, round, f
                 </View>
             </ImageBackground>
 
-            {/* <View style={btnStyle} >
-        
-    
-        </View> */}
-
         </View>
     );
 };
@@ -74,8 +69,8 @@ const Customstyles = StyleSheet.create({
         backgroundColor: 'rgba(10, 10, 10, 0.4)',
         alignItems: 'stretch',
         justifyContent: 'center',
-        borderRadius:10,
-        flexDirection:'row'
+        borderRadius: 10,
+        flexDirection: 'row'
     },
 });
 

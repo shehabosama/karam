@@ -5,13 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 
 const CauseCard = ({ onPress, text, round, icon, iconColor, danger, style }) => {
-    let btnStyle = { ...styles.container, ...style };
-    if (round) {
-        btnStyle = { ...btnStyle, ...styles.round }
-    }
-    if (danger) {
-        btnStyle = { ...btnStyle, ...styles.danger }
-    }
+   
 
     return (
         <View style={{ marginTop: 10, }}>
@@ -19,9 +13,7 @@ const CauseCard = ({ onPress, text, round, icon, iconColor, danger, style }) => 
                 style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:10 }}
                 cardElevation={6}
                 cardMaxElevation={6}
-                cornerRadius={10}
-                
-            >
+                cornerRadius={10}>
                 <Image
                     source={require("../assets/GreenwaterVector.png")}
                     style={{ height: 44, width: 35, margin: 10 }}
@@ -43,30 +35,6 @@ const CauseCard = ({ onPress, text, round, icon, iconColor, danger, style }) => 
         </View>
     );
 };
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 15,
-        flexDirection: 'row',
 
-    },
-    text: {
-        fontSize: 18,
-        fontFamily: 'Poppins-Light',
-        color: '#fff',
-        fontWeight: 'bold'
-    },
-    icon: {
-        margin: 5,
-    },
-    danger: {
-        backgroundColor: Colors.danger,
-    },
-    round: {
-        borderRadius: 15,
-    },
-});
 
 export default CauseCard;

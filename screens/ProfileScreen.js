@@ -1,79 +1,79 @@
 import React from "react";
-import {View, Text , Image , StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { Colors } from "../constants";
 import Icon from 'react-native-vector-icons/Ionicons';
-export const ProfileScreen =()=>{
-return(
-    <View style={styles.container}>
- <Image
-                    source={require("../assets/maketCardPhoto.png")}
-                    style={{ height: 81, width: 83, marginTop: 20 , alignSelf:'center' ,borderRadius:50 }}
-                   
-                />
-                <Text style={styles.smalBoldText}>Account</Text>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Personal Informaiton</Text>
+export const ProfileScreen = () => {
+    return (
+        <View style={styles.container}>
+            <Image
+                source={require("../assets/maketCardPhoto.png")}
+                style={{ height: 81, width: 83, marginTop: 20, alignSelf: 'center', borderRadius: 50 }}
+
+            />
+            <Text style={styles.smalBoldText}>Account</Text>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Personal Informaiton</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Personal Informaiton</Text>
+            </View>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Personal Informaiton</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Preferred Causes</Text>
+            </View>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Preferred Causes</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Notification Settings</Text>
+            </View>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Notification Settings</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
+            </View>
 
 
 
-                <Text style={styles.smalBoldText}>Support</Text>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Personal Informaiton</Text>
+            <Text style={styles.smalBoldText}>Support</Text>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Personal Informaiton</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Personal Informaiton</Text>
+            </View>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Personal Informaiton</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
-                <View style={styles.HorizontalContainer}>
-                <Text style={{ fontSize:15,flex:1,marginHorizontal:5 , marginVertical:10  , alignSelf:'flex-start'}}>Personal Information</Text>
+            </View>
+            <View style={styles.HorizontalContainer}>
+                <Text style={{ fontSize: 15, flex: 1, marginHorizontal: 5, marginVertical: 10, alignSelf: 'flex-start' }}>Personal Information</Text>
                 <Image
                     source={require("../assets/next.png")}
-                    style={{ height: 20, width: 10 ,marginHorizontal:5 , marginVertical:10 , alignSelf:'center' ,borderRadius:50 }}
-                   
+                    style={{ height: 20, width: 10, marginHorizontal: 5, marginVertical: 10, alignSelf: 'center', borderRadius: 50 }}
+
                 />
-                </View>
-               
-    </View>
-);
+            </View>
+
+        </View>
+    );
 };
 const styles = StyleSheet.create({
     container: {
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#23596A',
         textAlign: 'center',
-        marginTop:5
+        marginTop: 5
     },
     smalBoldText: {
         fontSize: 17,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         color: '#23596A',
         fontWeight: 'bold',
-       
+
     },
     btn: {
         marginVertical: 50,
@@ -166,17 +166,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 10,
-        borderBottomColor:Colors.placeHolder,
-        borderBottomWidth:0.3,
-        
+        borderBottomColor: Colors.placeHolder,
+        borderBottomWidth: 0.3,
+
     },
     socialImage: {
         width: 59,
         height: 83,
         marginHorizontal: 20
     },
-    icon:{
-        margin:5,
+    icon: {
+        margin: 5,
     },
 });
 
