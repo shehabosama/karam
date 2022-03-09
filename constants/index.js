@@ -1,5 +1,5 @@
 
-export const LOGIN_URL = 'http://169.254.122.172/16/karam/public/api/auth/login?email=admin@admin.com&password=password';
+export const LOGIN_URL = 'http://192.168.1.11/karam/public/api/auth/login';
 
 export const Colors ={
     primary:'#23596a',
