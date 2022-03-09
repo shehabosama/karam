@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { STORAGE_KEYS } from "../../constants";
+import { STORAGE_KEYS , LOGIN_URL } from "../../constants";
 import {SET_DATA } from "../types";
 
 const API_URL = 'https://mocki.io/v1/48419bdb-1d76-45a1-89cb-3ac3fcc7f6ca';
@@ -8,13 +8,21 @@ export const getCitiesData = ()=>{
         return async dispatch=>{
             const result = await fetch(API_URL , {
                 method:'GET',
-                headers:{
-                    'Content-Type':'application/json',
-                },
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+           
+                  },
+                  body: JSON.stringify({
+                    email: 'admin@admin.com',
+                    password: 'password',
+                 })
             });
 
             const json = await result.json();
+            
             if(json){
+                console.log(json);
                 dispatch({
                     type:SET_DATA,
                     payload:json
@@ -28,19 +36,39 @@ export const getCitiesData = ()=>{
     }
 }
 
-export const setData = (onSuccess=()=>{} , onError=()=>{})=>{
-    return async dispatch=>{try{
-        await AsyncStorage.setItem('person', JSON.stringify({age: 36 }));
-        await AsyncStorage.mergeItem('person', JSON.stringify({name: 'Chris'}));
-        await AsyncStorage.mergeItem('person', JSON.stringify({nationality: 'satestlam'}));
-        dispatch({
-            type:SET_DATA,
-            payload : 'test',
-        }); 
-        onSuccess();
-        
-    }catch(err){console.log(err); onError();}
-}
+
+export const login=()=>{
+
+    try{
+        return async dispatch=>{
+            const result = await fetch(LOGIN_URL , {
+                method:'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+           
+                  },
+                  body: JSON.stringify({
+                    email: 'admin@admin.com',
+                    password: 'password',
+                 })
+            });
+
+            const json = await result.json();
+            
+            if(json){
+                console.log(json);
+                dispatch({
+                    type:SET_DATA,
+                    payload:json
+                });
+            }else{
+                console.log('Unable to fetch!');
+            }
+        }
+    }catch(err){
+        console.log(err);
+    }
 };
 
 export const deleteData=()=>{

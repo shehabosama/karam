@@ -21,7 +21,6 @@ import NavigationBottomHome from "../screens/bottomNavigationScreens/NavigationB
 import Causes from "../screens/bottomNavigationScreens/Causes";
 // import Cases from "./bottomNavigationScreens/cases";
 import Cases from '../screens/bottomNavigationScreens/Cases'
-import PersonalInformation from '../screens/PersonalInformation';
 import ProfileScreen from '../screens/ProfileScreen';
 import Donation from '../screens/bottomNavigationScreens/DonationScreen';
 import AboutCase from '../screens/bottomNavigationScreens/AboutCaseScreen';
@@ -115,12 +114,12 @@ const TasksNavigator = () => {
     return (
         <TasksStackNavigator.Navigator>
 
-            {/* <TasksStackNavigator.Screen
+            <TasksStackNavigator.Screen
                 name="Test"
                 component={TestScreen}
                 options={{ headerShown: false }}
 
-            /> */}
+            />
 
             {/* <TasksStackNavigator.Screen
                     name="PersonalInformation"
