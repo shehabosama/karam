@@ -114,12 +114,12 @@ const TasksNavigator = () => {
     return (
         <TasksStackNavigator.Navigator>
 
-            <TasksStackNavigator.Screen
+            {/* <TasksStackNavigator.Screen
                 name="Test"
                 component={TestScreen}
                 options={{ headerShown: false }}
 
-            />
+            /> */}
 
             {/* <TasksStackNavigator.Screen
                     name="PersonalInformation"

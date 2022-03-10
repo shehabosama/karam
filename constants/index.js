@@ -1,5 +1,5 @@
 
-export const LOGIN_URL = 'http://192.168.1.11/karam/public/api/auth/login';
+export const LOGIN_URL = 'http://192.168.1.7/karam/public/api/auth/login';
 
 export const Colors ={
     primary:'#23596a',

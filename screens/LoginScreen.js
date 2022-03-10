@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, Keyboard, ScrollView, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Keyboard, ScrollView, Alert,ToastAndroid } from 'react-native';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import { validate , showMessage } from "../utils/HelperFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import { PerformLogin } from "../store/actions/AuthActions";
 
 
 
 export const Login = ({ navigation }) => {
-
+    const dispatch = useDispatch();
+    const loginResponse = useSelector(state=>state.auth);
     const [email, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
@@ -20,10 +23,20 @@ export const Login = ({ navigation }) => {
         } else if (password.length < 8) {
             showMessage('Password must be more than 8 character or number');
         } else {
+            dispatch(PerformLogin({EMAIL:email , PASSWORD:password}, ()=>{
+                console.log('i am here ' , loginResponse);
+               // ToastAndroid.show(`List "${name}" created!` , ToastAndroid.LONG);
+                //Keyboard.dismiss();
+                //navigation.navigate('Home'); 
+                
+            } , 
+            ()=>{ToastAndroid.show('Somthing went wrong , please try again!' , ToastAndroid.LONG)}
+            )); 
             
         }
     };
     
+   
 
     return (
         <View style={styles.container}>

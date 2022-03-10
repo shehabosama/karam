@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch ,useSelector } from "react-redux";
 import { Button, Text, ToastAndroid, View } from "react-native";
-import { setData  , getData,deleteData ,getCitiesData , login} from "../store/actions/AuthActions";
+import { setData  , getData,deleteData ,getCitiesData , PerformLogin} from "../store/actions/AuthActions";
 
 const TestScreen =  ()=>{
     const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const TestScreen =  ()=>{
     };
 
     const submitLogin =()=>{
-        dispatch(login());
+        dispatch(PerformLogin({EMAIL:'admin@admin.com' , PASSWORD:'password'}));
     };
     return(
         <View>

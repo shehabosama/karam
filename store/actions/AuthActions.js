@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { STORAGE_KEYS, LOGIN_URL } from "../../constants";
-import { SET_DATA } from "../types";
+import { SET_DATA ,LOGIN_SUCCESS, LOGIN_FAIL } from "../types";
+import { login } from "../../api/AuthApi";
 
 const API_URL = 'https://mocki.io/v1/48419bdb-1d76-45a1-89cb-3ac3fcc7f6ca';
 export const getCitiesData = () => {
@@ -37,7 +38,9 @@ export const getCitiesData = () => {
 }
 
 
-export const login = () => {
+export const PerformLogin = ({EMAIL,PASSWORD}, onSuccess=()=>{} , onError=()=>{}) => {
+
+    console.log(EMAIL , PASSWORD);
 
     try {
         return async dispatch => {
@@ -50,53 +53,45 @@ export const login = () => {
                     'Content-Type': 'application/json'
                 },
                  body: JSON.stringify({
-                           email:'admin@admin.com',
-                    password:'password'
+                           email:EMAIL,
+                    password:PASSWORD
                  })
-                 //{
-                //     email:'admin@admin.com',
-                //     password:'password'
-                // } ,//
-
             });
       
+            console.log(result.status);
              const json = await result.json();
-           console.log('tessssssssssst ', json);
-            // if (json) {
-            //     console.log(json);
-            //     dispatch({
-            //         type: SET_DATA,
-            //         payload: json
-            //     });
-            // } else {
-            //     console.log('Unable to fetch!');
-            // }
+             if (json && result.status == 200) {
+              //  console.log(json);
+                dispatch({
+                  type: LOGIN_SUCCESS,
+                  payload: json
+                });
+                onSuccess();
+              } else {
+                
+                onError();
+              }
         }
     } catch (err) {
         console.log(err);
+        onError();
     }
 };
 
+export const setData = (onSuccess=()=>{} , onError=()=>{})=>{
+    return async dispatch=>{try{
+        await AsyncStorage.setItem('person', JSON.stringify({age: 36 }));
+        await AsyncStorage.mergeItem('person', JSON.stringify({name: 'Chris'}));
+        await AsyncStorage.mergeItem('person', JSON.stringify({nationality: 'satestlam'}));
+        dispatch({
+            type:SET_DATA,
+            payload : 'test',
+        }); 
+        onSuccess();
 
-export const action = () => {
-    return fetch(url)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (json) {
-            return {
-                city: json.name,
-                temperature: kelvinToF(json.main.temp),
-                description: _.capitalize(json.weather[0].description)
-            }
-        })
-        .catch(function (error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-            // ADD THIS THROW error
-            throw error;
-        });
+    }catch(err){console.log(err); onError();}
 }
-
+};
 
 export const deleteData = () => {
     return async dispatch => {

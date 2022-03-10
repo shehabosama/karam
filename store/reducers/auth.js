@@ -7,7 +7,7 @@ const initialState = async () => {
   };
   const AuthReducer = (state = initialState(), action) => {
     switch (action.type) {
-      case SET_DATA:
+      case LOGIN_SUCCESS:
         return {...state, currentUser: action.payload};
       case LOGIN_FAIL:
         return {
