@@ -11,7 +11,7 @@ export const signIn = (values, navigation) => async dispatch => {
     const user = await authRepo.login(values);
     //await notificationRepo.subscribe(user);
     dispatch({type: LOGIN_SUCCESS, payload: user});
-    navigation.navigate('HomeTabs');
+   // navigation.navigate('HomeTabs');
     //navigation.navigate('Auth');
   } catch (error) {
     console.log('TCL: error', error);
@@ -33,12 +33,14 @@ export const cleanError = () => async dispatch => {
  // dispatch({type: LOGIN_FAIL, payload: ''});
 };
 
-export const logout = async token => async (dispatch, getState) => {
-  // try {
-  //   notificationRepo.unSubscribe(token);
-  //   const done = await authRepo.logout();
-  //   dispatch({type: LOGOUT});
-  // } catch (error) {
-  //   console.log('AuthLogoutError', error);
-  // }
+export const logout =  ()  => async dispatch => {
+  
+  try {
+  //  notificationRepo.unSubscribe(token);
+    const done = await authRepo.logout();
+    console.log('test' , done);
+    dispatch({type: LOGOUT});
+  } catch (error) {
+    console.log('AuthLogoutError', error);
+  }
 };

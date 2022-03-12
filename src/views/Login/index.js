@@ -26,6 +26,11 @@ class LoginScreen extends Component {
 
     componentDidMount() {
         this.checkUser();
+        if (this.props.currentUser !== null){
+            this.setState({loading:false})
+        }else if(this.props.error !== null){
+            this.setState({loading:false})
+        }
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         // console.log(
@@ -35,17 +40,22 @@ class LoginScreen extends Component {
         //   snapshot,
         // );
         this.checkUser();
+      
     }
     componentWillUnmount() {
         this.props.cleanError();
+      
     }
     checkUser = async () => {
         // if (this.props.currentUser) {
         //     this.props.navigation.navigate('HomeTabs');
         // }
         console.log(this.props.currentUser);
+        console.log(this.props.error);
     };
-
+    renderError = () => {
+        return <Text style={styles.renderError}>{this.props.error}</Text>;
+      };
     submitHandler = () => {
         if (this.state.email.trim() == '') {
             showMessage('email is required');
@@ -58,7 +68,7 @@ class LoginScreen extends Component {
                 this.props.signIn({ email: this.state.email, password: this.state.password }, this.props.navigation);
                 setTimeout(() => {
                     this.setState({ loading: false })
-                }, 500);
+                }, 1000);
             })
             //  this.props.navigation.navigate('Second_screen');
         }
@@ -68,8 +78,8 @@ class LoginScreen extends Component {
         return (
 
             <View style={styles.container}>
-                {this.state.loading ? <ActivityIndicator color={Colors.primary} size={20} />
-                    : <View style={styles.container}>
+                
+                <View style={styles.container}>
                         <TouchableOpacity
                             onPress={() => navigation.goBack()}>
                             <Image
@@ -85,7 +95,8 @@ class LoginScreen extends Component {
                             <CutomeTextInput placeholder="youremail@mail.com" secure={false} onTextInputChange={(email) => this.setState({ email: email })} round />
                             <Text style={styles.Lowertext}>Password</Text>
                             <CutomeTextInput placeholder="Enter password" secure={true} onTextInputChange={(text) => this.setState({ password: text })} round />
-                            <CutomeButton style={styles.btn} text="Log in" onPress={this.submitHandler} round />
+                            {(this.props.error == null)? <></>: this.renderError()}
+                            {this.state.loading ? <ActivityIndicator style={{marginVertical: 50,}} color={Colors.primary} size={30} />: <CutomeButton style={styles.btn} text="Log in" onPress={this.submitHandler} round />}
                             <Text style={styles.HintText}>Or Continue with Social Account</Text>
 
                             <View style={styles.HorizontalContainer}>
@@ -112,7 +123,7 @@ class LoginScreen extends Component {
                             </View>
                         </ScrollView>
                     </View>
-                }
+                
 
 
             </View>
@@ -186,6 +197,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flex: 1,
     },
+    renderError: {
+        
+        color: '#344059',
+      },
 });
 
 const mapStateToProps = state => ({

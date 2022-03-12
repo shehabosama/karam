@@ -17,13 +17,13 @@ import CutomeDonationMeter from '../../component/CustomeDonationMeterBord';
 import CasesCard from '../../../component/CasesCard';
 import { connect } from 'react-redux';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import { logout } from '../../actions/AuthActions';
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = { loading: false };
 
-        console.log('tessssssssssssssssssssssssssssssssst');
     }
 
 
@@ -81,7 +81,10 @@ class HomeScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <TouchableOpacity onPress={() => {this.props.logout()}} >
                     <Text style={styles.Uppertext}>Hello, Salma!</Text>
+                </TouchableOpacity>
+                    
                     <CutomeDonationMeter style={styles.cusomBord} text="Set Goal" round />
                     <View style={{ flexDirection: 'row' }}>
 
@@ -195,7 +198,7 @@ const mapStateToProps = state => ({
     error: state.auth.error,
 });
 const mapDispatchToProps = dispatch => ({
-    // signIn: bindActionCreators(getData, dispatch),
+     logout: bindActionCreators(logout, dispatch),
     // cleanError: bindActionCreators(cleanError, dispatch),
 });
 

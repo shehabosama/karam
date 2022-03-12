@@ -7,7 +7,14 @@ import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import {autoLogin} from '../../actions/AuthActions';
 import {bindActionCreators} from 'redux';
 import CutomeButton from '../../component/CustomeButton';
+
 class SplashScreen extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      loading:true , 
+    }
+  }
   componentDidMount() {
     this.checkUser();
   }
@@ -16,6 +23,7 @@ class SplashScreen extends Component {
       currentUser = await AsyncStorageProvider.getItem('currentUser');
       if (currentUser) {
         this.props.autoLogin(JSON.parse(currentUser));
+        this.setState({loading:false})
         // this.props.  navigation.reset({
         //   index: 0,
         //   routes: [
@@ -26,18 +34,20 @@ class SplashScreen extends Component {
         //   ],
         // })
         this.props.navigation.navigate('HomeTabs');
-      } else {
-        this.props.navigation.navigate('Login');
-      }
+      } 
     } catch (error) {
-      this.props.navigation.navigate('Login');
+    //  this.props.navigation.navigate('Login');
+    this.setState({loading:false})
+
     }
   
   };
 
-  render() {
-    return (
-      <View style={styles.parentContainer}>
+  renderAndicator(){
+    return(<></>);
+  }
+  renderCompnent(){
+    return(<View style={styles.parentContainer}>
 
       <ImageBackground
         source={require('../../../assets/splash_image.png')}
@@ -55,10 +65,16 @@ class SplashScreen extends Component {
             this.props.navigation.navigate('Login');
           }} />
         </View>
-
+  
       </ImageBackground>
-    </View>
+    </View>);
+  }
+  render() {
+   
+    return (
+      this.state.loading? this.renderAndicator():this.renderCompnent()
     );
+  
   }
 }
 

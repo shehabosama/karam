@@ -28,6 +28,7 @@ export const login = async ({
       console.log('i am here ,,,,,',json);
     }else{ 
       console.log('TCL: login -> error jsone', json); 
+      throw errors.INVALID_USER;
     }
     return json;
   } catch (error) {

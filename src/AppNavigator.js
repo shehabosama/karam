@@ -116,7 +116,7 @@ function HomeTabs() {
 }
 
 const TasksNavigator = () => {
-    var check = false;
+    const[checker , setChecker] = useState(false);
    const checkUser = async () => {
    
         try {
@@ -124,17 +124,18 @@ const TasksNavigator = () => {
           const currentUser = await AsyncStorageProvider.getItem('currentUser');
           if (currentUser) {
           
-          check =  false;
+          setChecker(true);
           } 
         } catch (error) {
          console.log(error);
-         check = false;
+         setChecker(false);
         }
 
       };
+     
       checkUser();
     return (
-        <TasksStackNavigator.Navigator initialRouteName={'Spalsh'}>
+        <TasksStackNavigator.Navigator >
 
             {/* <TasksStackNavigator.Screen
                 name="Test"
@@ -161,12 +162,20 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
             /> */}
  
-     <TasksStackNavigator.Screen
+ {checker ?<TasksStackNavigator.Screen
+                name="HomeTabsInitial"
+                component={HomeTabs}
+                options={{ headerShown: false }}
+            />
+  : 
+   <TasksStackNavigator.Screen
                 name="Splash"
                 component={SplashScreen}
                 options={{ headerShown: false }}
 
             />
+  }
+    
 
             <TasksStackNavigator.Screen
                 name="Login"
@@ -175,7 +184,7 @@ const TasksNavigator = () => {
 
             />
 
-<TasksStackNavigator.Screen
+<TasksStackNavigator.Screen 
                 name="HomeTabs"
                 component={HomeTabs}
                 options={{ headerShown: false }}
