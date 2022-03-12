@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch ,useSelector } from "react-redux";
 import { Button, Text, ToastAndroid, View } from "react-native";
-import { setData  , getData,deleteData ,getCitiesData , PerformLogin} from "../store/actions/AuthActions";
+import { saveUserToken  , getData,deleteData ,getCitiesData , PerformLogin} from "../store/actions/AuthActions";
 
 const TestScreen =  ()=>{
     const dispatch = useDispatch();
@@ -20,6 +20,9 @@ const TestScreen =  ()=>{
     const submgetDataHandler =()=>{
         dispatch(getData());
     };
+    const submgetsetDataHandler =()=>{
+        dispatch(saveUserToken());
+    };
     const deleteDataHandler=()=>{
         dispatch(deleteData());
     }
@@ -31,7 +34,7 @@ const TestScreen =  ()=>{
     
    const submiHandler =()=>{
       
-        dispatch(setData( ()=>{
+        dispatch(saveUserToken( ()=>{
             ToastAndroid.show('List created!' , ToastAndroid.LONG);
           //  Keyboard.dismiss();
          

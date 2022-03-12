@@ -1,19 +1,48 @@
-import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, Keyboard, ScrollView, Alert,ToastAndroid } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity, Keyboard , ScrollView, ActivityIndicator,ToastAndroid } from 'react-native';
 import CutomeTextInput from "../component/CustomeInput";
 import CutomeButton from "../component/CustomeButton";
 import { Colors } from "../constants";
 import { validate , showMessage } from "../utils/HelperFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { PerformLogin } from "../store/actions/AuthActions";
+import { PerformLogin, saveUserToken } from "../store/actions/AuthActions";
+import gloable from "../styles/gloable";
 
 
 
 export const Login = ({ navigation }) => {
+   
+    const {currentUser} = useSelector(state=>state.auth);
+    const [loading , setLoding] = useState(false);
     const dispatch = useDispatch();
-    const loginResponse = useSelector(state=>state.auth);
     const [email, setUserName] = useState('');
     const [password, setPassword] = useState('');
+
+
+    useEffect(
+        () => {
+           
+            if(currentUser){
+             //   console.log('test----------->',currentUser);
+               setLoding(true);
+             //  ToastAndroid.show(`${currentUser.access_token}` , ToastAndroid.LONG)
+               dispatch(saveUserToken(currentUser.access_token , ()=>{
+                ToastAndroid.show(`token saved` , ToastAndroid.LONG);
+                navigation.navigate('HomeTabs');
+                 //Keyboard.dismiss();
+                 //navigation.navigate('Home'); 
+                 
+             } , 
+             ()=>{ToastAndroid.show('Somthing went wrong , please try again!' , ToastAndroid.LONG)}
+             )); 
+            }
+        }
+    );
+  
+    if(loading)
+    {
+        return <ActivityIndicator color={Colors.primary} size="large" style={gloable.loader}/>
+    }
 
     const submitHandler = () => {
         if (email.trim() == '') {
@@ -24,7 +53,7 @@ export const Login = ({ navigation }) => {
             showMessage('Password must be more than 8 character or number');
         } else {
             dispatch(PerformLogin({EMAIL:email , PASSWORD:password}, ()=>{
-                console.log('i am here ' , loginResponse);
+             
                // ToastAndroid.show(`List "${name}" created!` , ToastAndroid.LONG);
                 //Keyboard.dismiss();
                 //navigation.navigate('Home'); 
@@ -35,8 +64,6 @@ export const Login = ({ navigation }) => {
             
         }
     };
-    
-   
 
     return (
         <View style={styles.container}>

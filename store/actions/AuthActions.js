@@ -58,10 +58,11 @@ export const PerformLogin = ({EMAIL,PASSWORD}, onSuccess=()=>{} , onError=()=>{}
                  })
             });
       
-            console.log(result.status);
+           // console.log(result.status);
              const json = await result.json();
              if (json && result.status == 200) {
-              //  console.log(json);
+              //  console.log('i am here ,,,,,',json);
+
                 dispatch({
                   type: LOGIN_SUCCESS,
                   payload: json
@@ -78,14 +79,16 @@ export const PerformLogin = ({EMAIL,PASSWORD}, onSuccess=()=>{} , onError=()=>{}
     }
 };
 
-export const setData = (onSuccess=()=>{} , onError=()=>{})=>{
-    return async dispatch=>{try{
-        await AsyncStorage.setItem('person', JSON.stringify({age: 36 }));
-        await AsyncStorage.mergeItem('person', JSON.stringify({name: 'Chris'}));
-        await AsyncStorage.mergeItem('person', JSON.stringify({nationality: 'satestlam'}));
+export const saveUserToken = (token , onSuccess=()=>{} , onError=()=>{})=>{
+    return async dispatch=>{
+        try{
+        await AsyncStorage.setItem(STORAGE_KEYS.tokenKey, JSON.stringify({token : token }));
+        // await AsyncStorage.mergeItem('person', JSON.stringify({name: 'Chris'}));
+        // await AsyncStorage.mergeItem('person', JSON.stringify({nationality: 'satestlam'}));
+       console.log('hellllllo' , token);
         dispatch({
             type:SET_DATA,
-            payload : 'test',
+            payload : 'Success' ,
         }); 
         onSuccess();
 
@@ -109,17 +112,21 @@ export const deleteData = () => {
 export const getData = () => {
     return async dispatch => {
         try {
+            let person = await AsyncStorage.getItem(STORAGE_KEYS.tokenKey);
 
-        } catch (err) { } let person = await AsyncStorage.getItem('person');
+            const personJson = person ? JSON.parse(person) : {};
+            console.log("---------------------------------");
+           //c console.log(personJson);
+            dispatch(
+                {
+                    type: SET_DATA,
+                    payload: personJson,
+                }
+            );
 
-        const personJson = person ? JSON.parse(person) : {};
-        console.log("---------------------------------");
-        console.log(personJson);
-        dispatch(
-            {
-                type: SET_DATA,
-                payload: personJson,
-            }
-        );
+        } catch (err) { 
+            console.log('Error');
+        } 
+        
     }
 };
