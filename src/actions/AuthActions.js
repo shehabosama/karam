@@ -5,22 +5,42 @@
 
 export const signIn = (values, navigation) => async dispatch => {
    console.log('TCL: values', values);
-
+   var user ='';
   try {
     //  robinella52@gmail.com
-    const user = await authRepo.login(values);
+     user = await authRepo.login(values);
     //await notificationRepo.subscribe(user);
     dispatch({type: LOGIN_SUCCESS, payload: user});
-   // navigation.navigate('HomeTabs');
+    navigation.navigate('HomeTabs');
     //navigation.navigate('Auth');
   } catch (error) {
     console.log('TCL: error', error);
     dispatch({
       type: LOGIN_FAIL,
-      payload: 'Error in Email or UserName',
+      payload: error,
     });
   }
 };
+export const signUp = (values, navigation) => async dispatch => {
+  console.log('TCL: values', values);
+
+ try {
+   //  robinella52@gmail.com
+   const user = await authRepo.signUp(values);
+   //await notificationRepo.subscribe(user);
+   dispatch({type: LOGIN_SUCCESS, payload: user});
+  // navigation.navigate('HomeTabs');
+   //navigation.navigate('Auth');
+ } catch (error) {
+   console.log('TCL: error', error);
+   dispatch({
+     type: LOGIN_FAIL,
+     payload: 'Error in Email or UserName',
+   });
+ }
+};
+
+
 export const autoLogin = user => async dispatch => {
   // try {
   //   await notificationRepo.subscribe(user);
@@ -30,7 +50,7 @@ export const autoLogin = user => async dispatch => {
   // }
 };
 export const cleanError = () => async dispatch => {
- // dispatch({type: LOGIN_FAIL, payload: ''});
+  dispatch({type: LOGIN_FAIL, payload: ''});
 };
 
 export const logout =  ()  => async dispatch => {

@@ -1,36 +1,19 @@
-import React  , {useEffect, useState} from 'react';
-import { NavigationContainer  } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, StyleSheet, Alert, ToastAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-//import { Colors } from '../constants';
-//import Splash from '../screens/SplashScreen';
-// import LoginScreen from '../screens/LoginScreen';
-// import Signup from '../screens/SignupScreen';
-// import SignupProfileDetails from '../screens/SignupProfileDetailsScreen';
-// import SignupVerifyAccount from '../screens/SignupVerifyAccountScreen';
-// import SignupObjectives from '../screens/SignupObjectiveScreen';
-// import SignupPreferences from '../screens/SignupPreferences';
-// import SignupGoal from '../screens/SignupGoal';
-// import SignupFrequency from '../screens/SignupFrequency';
-// import TestScreen from '../screens/TestScreen';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import NavigationBottomHome from "./views/BottomNavigationHome";
-//import Causes from "../screens/bottomNavigationScreens/Causes";
-
-// import Cases from '../screens/bottomNavigationScreens/Cases'
-// import ProfileScreen from '../screens/ProfileScreen';
-// import Donation from '../screens/bottomNavigationScreens/DonationScreen';
-// import AboutCase from '../screens/bottomNavigationScreens/AboutCaseScreen';
-// import ProvidersScreen from '../screens/bottomNavigationScreens/ProvidersScreen';
 import LoginScreen from './views/Login';
-import HomeScreen from './views/BottomNavigationHome';
 import SplashScreen from './views/Splash';
+import SignUp from './views/SignUp';
+import SignupProfileDetails from './views/SignupProfileDetails';
 
 
 import * as AsyncStorageProvider from './cache/AsyncStorageProvider'
+import SignupVerifyAccountScreen from './views/SignupVerifyAccountScreen';
+import SignupObjectives from './views/SignupObjectives';
 
 const TasksStackNavigator = createStackNavigator();
 
@@ -116,26 +99,26 @@ function HomeTabs() {
 }
 
 const TasksNavigator = () => {
-    const[checker , setChecker] = useState(false);
-   const checkUser = async () => {
-   
+    const [checker, setChecker] = useState(false);
+    const checkUser = async () => {
+
         try {
-          
-          const currentUser = await AsyncStorageProvider.getItem('currentUser');
-          if (currentUser) {
-          
-          setChecker(true);
-          } 
+
+            const currentUser = await AsyncStorageProvider.getItem('currentUser');
+            if (currentUser) {
+
+                setChecker(true);
+            }
         } catch (error) {
-         console.log(error);
-         setChecker(false);
+            console.log(error);
+            setChecker(false);
         }
 
-      };
-     
-      checkUser();
+    };
+
+    checkUser();
     return (
-        <TasksStackNavigator.Navigator >
+        <TasksStackNavigator.Navigator initialRouteName='SignupVerifyAccount'>
 
             {/* <TasksStackNavigator.Screen
                 name="Test"
@@ -156,26 +139,21 @@ const TasksNavigator = () => {
             /> */}
 
 
-      {/* <TasksStackNavigator.Screen
-                name="HomeTabs"
-                component={HomeTabs}
-                options={{ headerShown: false }}
-            /> */}
- 
- {checker ?<TasksStackNavigator.Screen
+
+            {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}
                 options={{ headerShown: false }}
             />
-  : 
-   <TasksStackNavigator.Screen
-                name="Splash"
-                component={SplashScreen}
-                options={{ headerShown: false }}
+                :
+                <TasksStackNavigator.Screen
+                    name="Splash"
+                    component={SplashScreen}
+                    options={{ headerShown: false }}
 
-            />
-  }
-    
+                />
+            }
+
 
             <TasksStackNavigator.Screen
                 name="Login"
@@ -184,17 +162,16 @@ const TasksNavigator = () => {
 
             />
 
-<TasksStackNavigator.Screen 
+            <TasksStackNavigator.Screen
                 name="HomeTabs"
                 component={HomeTabs}
                 options={{ headerShown: false }}
             />
 
-            {/* <TasksStackNavigator.Screen
+            <TasksStackNavigator.Screen
                 name="Signup"
-                component={Signup}
+                component={SignUp}
                 options={{ headerShown: false }}
-
             />
             <TasksStackNavigator.Screen
                 name="SignupProfileDetails"
@@ -202,9 +179,10 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
+
             <TasksStackNavigator.Screen
                 name="SignupVerifyAccount"
-                component={SignupVerifyAccount}
+                component={SignupVerifyAccountScreen}
                 options={{ headerShown: false }}
 
             />
@@ -214,6 +192,10 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
+            {/* 
+           
+           
+          
             <TasksStackNavigator.Screen
                 name="SignupGoal"
                 component={SignupGoal}
@@ -234,7 +216,7 @@ const TasksNavigator = () => {
          */}
 
 
-           
+
         </TasksStackNavigator.Navigator>
 
     );

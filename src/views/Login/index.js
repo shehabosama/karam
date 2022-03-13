@@ -20,7 +20,7 @@ import { showMessage, validate } from '../../utils/HelperFunctions';
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading: false, email: '', password: '' };
+        this.state = { loading: false, email: '', password: ''  , error:false };
 
     }
 
@@ -31,6 +31,7 @@ class LoginScreen extends Component {
         }else if(this.props.error !== null){
             this.setState({loading:false})
         }
+      
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         // console.log(
@@ -40,22 +41,28 @@ class LoginScreen extends Component {
         //   snapshot,
         // );
         this.checkUser();
+
+        
       
     }
     componentWillUnmount() {
         this.props.cleanError();
-      
+        
     }
     checkUser = async () => {
         // if (this.props.currentUser) {
         //     this.props.navigation.navigate('HomeTabs');
         // }
-        console.log(this.props.currentUser);
-        console.log(this.props.error);
+       // console.log(this.props.currentUser);
+     
+        
     };
     renderError = () => {
+       // this.setState({error: this.props.error});
+   
         return <Text style={styles.renderError}>{this.props.error}</Text>;
       };
+
     submitHandler = () => {
         if (this.state.email.trim() == '') {
             showMessage('email is required');
@@ -64,13 +71,15 @@ class LoginScreen extends Component {
         } else if (this.state.password.length < 8) {
             showMessage('Password must be more than 8 character or number');
         } else {
+           
+            this.setState({error:false});
             this.setState({ loading: true }, () => {
                 this.props.signIn({ email: this.state.email, password: this.state.password }, this.props.navigation);
                 setTimeout(() => {
                     this.setState({ loading: false })
                 }, 1000);
             })
-            //  this.props.navigation.navigate('Second_screen');
+          
         }
     }
 
@@ -81,11 +90,11 @@ class LoginScreen extends Component {
                 
                 <View style={styles.container}>
                         <TouchableOpacity
-                            onPress={() => navigation.goBack()}>
+                            onPress={() => this.props.navigation.goBack()}>
                             <Image
                                 source={require('../../../assets/backButton.png')}
                                 style={styles.image}
-                                onPress={() => navigation.goBack()}
+                                onPress={() => this.props.navigation.goBack()}
                             />
                         </TouchableOpacity>
                         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -96,7 +105,10 @@ class LoginScreen extends Component {
                             <Text style={styles.Lowertext}>Password</Text>
                             <CutomeTextInput placeholder="Enter password" secure={true} onTextInputChange={(text) => this.setState({ password: text })} round />
                             {(this.props.error == null)? <></>: this.renderError()}
-                            {this.state.loading ? <ActivityIndicator style={{marginVertical: 50,}} color={Colors.primary} size={30} />: <CutomeButton style={styles.btn} text="Log in" onPress={this.submitHandler} round />}
+
+                            {this.state.loading ? <ActivityIndicator style={{marginVertical: 50,}} color={Colors.primary} size={30} />:
+                             <CutomeButton style={styles.btn} text="Log in" onPress={this.submitHandler} round />}
+
                             <Text style={styles.HintText}>Or Continue with Social Account</Text>
 
                             <View style={styles.HorizontalContainer}>
@@ -119,7 +131,7 @@ class LoginScreen extends Component {
                             </View>
                             <View style={styles.HorizontalContainer}>
                                 <Text style={styles.HintText}>Don't have an account?</Text>
-                                <Text style={styles.ImportanText} onPress={() => navigation.navigate('Signup')}> Create Now</Text>
+                                <Text style={styles.ImportanText} onPress={() => this.props.navigation.navigate('Signup')}> Create Now</Text>
                             </View>
                         </ScrollView>
                     </View>
@@ -199,13 +211,13 @@ const styles = StyleSheet.create({
     },
     renderError: {
         
-        color: '#344059',
+        color: Colors.danger,
       },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = state =>({
     currentUser: state.auth.currentUser,
-    error: state.auth.error,
+    error:state.auth.error,
 });
 const mapDispatchToProps = dispatch => ({
     signIn: bindActionCreators(signIn, dispatch),

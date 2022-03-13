@@ -6,7 +6,7 @@ import gloableStyles from '../styles/gloable'
 import CheckBox from '@react-native-community/checkbox';
 
 const CutomeTextInput = ({ placeholder, isSelected, setSelection, round, icon, iconColor, danger, style }) => {
-
+    console.log(placeholder , isSelected);
     let btnStyle = { ...styles.container, ...style };
 
     if (danger) {

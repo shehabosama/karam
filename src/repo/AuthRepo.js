@@ -17,6 +17,25 @@ export const login = async ({email, password}) => {
   return user;
 };
 
+export const signUp = async ({email, password , fullName , mobileNumber , nationality }) => {
+  console.log('TCL: signUp -> {email, password}', {email, password , fullName , mobileNumber , nationality});
+  let OS = Platform.OS === 'ios' ? 'IOS' : 'ANDROID';
+
+  let AllDAta = {
+    REQ_PARAMS: {
+      USER_ID: email,
+      PASSWORD: password,
+      FULL_NAME: fullName,
+      MOBILE_NUMBER:mobileNumber,
+      NATIONALITY:nationality,
+    },
+  };
+  const user = await authApi.signUp(AllDAta);
+  console.log('TCL: signUp -> user', user);
+  await AsyncStorageProvider.setItem('currentUser', JSON.stringify(user));
+  return user;
+};
+
 export const logout = async () => {
   let done = await AsyncStorageProvider.removeItem('currentUser');
   return done;

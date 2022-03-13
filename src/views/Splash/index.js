@@ -33,7 +33,7 @@ class SplashScreen extends Component {
         //     },
         //   ],
         // })
-        this.props.navigation.navigate('HomeTabs');
+       // this.props.navigation.navigate('HomeTabs');
       } 
     } catch (error) {
     //  this.props.navigation.navigate('Login');
