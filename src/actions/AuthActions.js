@@ -5,6 +5,7 @@
 
 export const signIn = (values, navigation) => async dispatch => {
    console.log('TCL: values', values);
+
    var user ='';
   try {
     //  robinella52@gmail.com

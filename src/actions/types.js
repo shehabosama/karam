@@ -4,3 +4,5 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FB_FAIL = 'LOGIN_FB_FAIL';
 export const LOGIN_RESET_ERROR = 'LOGIN_RESET_ERROR';
 export const LOGOUT = 'LOGOUT';
+export const GET_DATA = 'GET_DATA';
+export const GET_DATA_FAIL = 'GET_DATA_FAIL';

@@ -1,6 +1,7 @@
 import * as types from '../actions/types';
 
 const initialState = async () => {
+
   return {
     currentUser: null,
     error: null,
