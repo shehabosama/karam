@@ -23,8 +23,8 @@ import ObjectiveCard from '../../component/ObjectiveCard';
 import { showMessage } from '../../utils/HelperFunctions';
 import { getObjectivesData } from '../../actions/DataActions';
 
-
-class SignupObjectives extends Component {
+import PreferenceCard from '../../component/PrefrencesCard';
+class SignupPreferences extends Component {
 
     constructor(props) {
         super(props);
@@ -86,67 +86,45 @@ class SignupObjectives extends Component {
         }
     };
 
-    render() {
-
-        
-        return (
-            (this.state.data[0].content != null) || (this.state.data === null) ? <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}>
-                    <Image
-                        source={require("../../../assets/backButton.png")}
-                        style={styles.image}
-                        onPress={() => navigation.goBack()}
-                    />
-                </TouchableOpacity>
-
-
-                <Text style={styles.Uppertext}>Select Objectives</Text>
-                <Text style={styles.Lowertext}>Select as many, or as few, as you’d like</Text>
-
-                <FlatList
-                    data={this.state.data}
-                    renderItem={({ item }) => {
-                        return (
-                            <TouchableOpacity onPress={() => {
-                                ToastAndroid.show(item.content, ToastAndroid.LONG);
-                            }}>
-                                <ObjectiveCard style={styles.ObjectiveCard} placeholder={item.content} round
-                                 isSelected={this.isChecked(item.id)}
-                                    setSelection={(value) => { this.toggleChecked(item.id)}} />
-                            </TouchableOpacity>
-
-                        );
-                    }}
-                    keyExtractor={item => item.id}
-                    refreshing={this.state.refresh}
-                    ListEmptyComponent={this.ListEmptyComponent}
-                    onRefresh={this.onRefresh}
+    render(){
+        return(
+            <View style={styles.container}>
+            <TouchableOpacity
+                onPress={() => this.props.navigation.goBack()}>
+                <Image
+                    source={require("../../../assets/backButton.png")}
+                    style={styles.image}
+            
                 />
+            </TouchableOpacity>
+
+            <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle={{ flexGrow: 1 }}>
+                <Text style={styles.Uppertext}>Donation Preference</Text>
+                <Text style={styles.Lowertext}>Select all of causes you want</Text>
+                <View style={{ flexDirection: 'row', marginTop: 50 }}>
+                    <View style={{ flex: 1, paddingLeft: 20 }}>
+
+                    <PreferenceCard style={styles.cusomBord} prefreenceTitle="test"  round />
+
+                       
+                    </View>
+
+                </View>
+            </ScrollView>
+            <CutomeButton style={styles.btn} text="Continue" round onPress={() =>{}}
+            //  this.props.navigation.navigate('SignupGoal',
+
+            //     userPrefrences
+
+            // )}
+            
+            />
 
 
-
-
-                <CutomeButton style={styles.btn} text="Continue" round
-                  onPress={() =>
-
-                this.props.navigation.navigate('SignupPreferences',
-                {
-                    
-                    userObjecive: this.state.ids
-                })
-                }
-                />
-
-
-            </View>
-                : <ActivityIndicator style={{ flex: 1 }} size={40} />
+        </View>   
         );
     }
 }
-
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -158,6 +136,11 @@ const styles = StyleSheet.create({
         width: 25,
         height: 18,
         alignSelf: "flex-start",
+
+    },
+    selectionImage: {
+        alignSelf: "center",
+        marginVertical: 5,
 
     },
     Uppertext: {
@@ -184,12 +167,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#23596A',
     },
-    ImportanText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.importanText,
-    },
+
     btn: {
         marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -201,33 +179,11 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    HorizontalContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-
-    },
-    socialImage: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        flex: 1,
-    },
     checkboxContainer: {
         flexDirection: "row",
         marginBottom: 20,
     },
-    checkbox: {
-        alignSelf: "center",
-    },
-    label: {
-        margin: 8,
-    },
-    ObjectiveCard: {
-        marginTop: 10,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: Colors.primary
-    }
+
 });
 
 const mapStateToProps = state => ({
@@ -242,4 +198,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(SignupObjectives);
+)(SignupPreferences);
