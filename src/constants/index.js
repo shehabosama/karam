@@ -1,8 +1,8 @@
 
 export const LOGIN_URL = 'http://192.168.1.9/karam/public/api/auth/login';
 export const SIGNUP_URL = 'http://192.168.1.9/karam/public/api/auth/signup';
-export const Get_DATA_URL = 'http://192.168.1.9/karam/public/api/objectives';
-
+export const Get_OBJECTIVE_DATA_URL = 'http://192.168.1.9/karam/public/api/objectives';
+export const Get_PREFRENCES_DATA_URL = 'http://192.168.1.9/karam/public/api/preferences';
 export const Colors ={
     primary:'#23596a',
     secondary:'#E5E6F8',

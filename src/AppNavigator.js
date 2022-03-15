@@ -118,7 +118,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator initialRouteName='SignupVerifyAccount'>
+        <TasksStackNavigator.Navigator initialRouteName='SignupPreferences'>
 
             {/* <TasksStackNavigator.Screen
                 name="Test"

@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native'
 import CardView from 'react-native-cardview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
-
-const PreferenceCard = ({ onPress, prefreenceTitle , round, icon, iconColor, danger, style }) => {
+import CheckBox from '@react-native-community/checkbox';
+const PreferenceCard = ({ onPress, prefreenceTitle ,setSelection, round, icon, isSelected, danger, style }) => {
    
 
     return (
@@ -27,7 +27,12 @@ const PreferenceCard = ({ onPress, prefreenceTitle , round, icon, iconColor, dan
                 <View style={{ flexDirection: 'column', marginTop:10 , marginHorizontal:5 }}
                 >
                     <Text style={{fontSize:25 , fontWeight:'bold'  , alignSelf:'center'}}>20</Text>
-                    <Text style={{color:Colors.placeHolder}}>Casee</Text>
+                    <CheckBox
+                        value={isSelected}
+                        onValueChange={setSelection}
+                        style={styles.checkbox}
+                    />
+                    
                     
                 </View>
             </CardView>
@@ -36,5 +41,15 @@ const PreferenceCard = ({ onPress, prefreenceTitle , round, icon, iconColor, dan
     );
 };
 
+
+const styles = StyleSheet.create({
+    checkbox: {
+        alignSelf: "flex-end",
+    },
+    label: {
+        margin: 5,
+        flex: 1
+    },
+});
 
 export default PreferenceCard;

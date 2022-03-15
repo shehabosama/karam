@@ -28,7 +28,7 @@ class SignupObjectives extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { loading: false, isSelected: false, data: [{ "content": null, "id": null, "order": null }] ,ids: []};
+        this.state = { loading: false, isSelected: false, data: [{ "content": null, "id": null, "order": null }], ids: [] };
 
 
     }
@@ -50,7 +50,7 @@ class SignupObjectives extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         this.checkUser();
-        console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',this.state.ids, this.state.data);
+        console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.data);
 
     }
     componentWillUnmount() {
@@ -88,7 +88,7 @@ class SignupObjectives extends Component {
 
     render() {
 
-        
+
         return (
             (this.state.data[0].content != null) || (this.state.data === null) ? <View style={styles.container}>
                 <TouchableOpacity
@@ -99,8 +99,6 @@ class SignupObjectives extends Component {
                         onPress={() => navigation.goBack()}
                     />
                 </TouchableOpacity>
-
-
                 <Text style={styles.Uppertext}>Select Objectives</Text>
                 <Text style={styles.Lowertext}>Select as many, or as few, as you’d like</Text>
 
@@ -112,10 +110,9 @@ class SignupObjectives extends Component {
                                 ToastAndroid.show(item.content, ToastAndroid.LONG);
                             }}>
                                 <ObjectiveCard style={styles.ObjectiveCard} placeholder={item.content} round
-                                 isSelected={this.isChecked(item.id)}
-                                    setSelection={(value) => { this.toggleChecked(item.id)}} />
+                                    isSelected={this.isChecked(item.id)}
+                                    setSelection={(value) => { this.toggleChecked(item.id) }} />
                             </TouchableOpacity>
-
                         );
                     }}
                     keyExtractor={item => item.id}
@@ -123,19 +120,15 @@ class SignupObjectives extends Component {
                     ListEmptyComponent={this.ListEmptyComponent}
                     onRefresh={this.onRefresh}
                 />
-
-
-
-
                 <CutomeButton style={styles.btn} text="Continue" round
-                  onPress={() =>
+                    onPress={() =>
 
-                this.props.navigation.navigate('SignupPreferences',
-                {
-                    
-                    userObjecive: this.state.ids
-                })
-                }
+                        this.props.navigation.navigate('SignupPreferences',
+                            {
+
+                                userObjecive: this.state.ids
+                            })
+                    }
                 />
 
 

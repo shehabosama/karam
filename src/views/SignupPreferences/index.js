@@ -21,20 +21,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CutomeButton from '../../component/CustomeButton';
 import ObjectiveCard from '../../component/ObjectiveCard';
 import { showMessage } from '../../utils/HelperFunctions';
-import { getObjectivesData } from '../../actions/DataActions';
+import { getObjectivesData, getPrefrencesData } from '../../actions/DataActions';
 
 import PreferenceCard from '../../component/PrefrencesCard';
 class SignupPreferences extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { loading: false, isSelected: false, data: [{ "content": null, "id": null, "order": null }] ,ids: []};
+        this.state = { loading: false, isSelected: false, data: [{ "id": null, "order": null,"title":null ,  "image": null }], ids: [] };
 
 
     }
 
     async componentDidMount() {
-        await this.props.getObjectivesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWM2MjQxOS0yNjMyLTQ3NDQtODRjNC1mNzA2OTM1Y2UyNTEiLCJqdGkiOiI2OGI4OTJiYWRkNDVlZGU0YzE5MGZmMDBjNTE0ZWZkMDFiMmJjZTNlOWE0N2UwOGQyOTNkNTBmMzEyYWRhYzczMzc0YWFkZmNiMmZjYjJlMSIsImlhdCI6MTY0NzEyODE2Ny45ODIxNjEsIm5iZiI6MTY0NzEyODE2Ny45ODIxNjQsImV4cCI6MTY3ODY2NDE2Ny45NzQzNDksInN1YiI6IjgiLCJzY29wZXMiOltdfQ.O1VHWZaZBe-A-J8_-svH2OKay87WGsLMYogWqUzYkx1JebIHHQKCqvV12QXqQfO8mgWY0NKwPuUekMMKHRFA4BMi_Q8Yj0QFDGmgJQyWf7manGvmGX3ZXyhG_ys63tXBHnOiRWeZWFhFnSTTvm5h2IduCJ8OpVK6ohdUE8OcvrAarYgeX-4O1-lfEGLzAp49SCbBTocsuySpwCMXW30Drp5om6OER9F9vwJKrc0Sg5uE_7r5I9ATX9cLWbw3OVGiExLF_oCFPf8jmZSIEHZ3WsDt1Ss1mABhUjVGId1dIWA55I4k775FNgI53aZhZwhdq3w4SF0w1HNEkmQlZOYNAolMipQGtm6X6apAp_V7D0vYPrg-Jogbm4fMdHK3ZyVs3Yr17_4YSFRPvG0ryjA5gNtppKKrwiy5nn3oxwb0gg1FQWYbFU8-6k87pl3o3ir4AZwgGYDy0wmauaiA1jimbEMNSt0YlYkPZAxWzYFKEBnFEFDvKUh1QMiGjCVzr1KWZiH23rR297QmfrrhD9mnXA5G41ZlcS5pBCyK_97V0VSIHuJMdHcBGKgIWYH2r8PiLT-pGYC3OM_E7ywxW3VM7C8et-PqeitlaJiPyI2r2Q0eeiIiRLxYe0qOiohUl_uuipZpofnURZ-fiaaM7uDJrS3VUk6WdEMsFf-gYtSm0_w');
+        await this.props.getPrefrencesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWM2MjQxOS0yNjMyLTQ3NDQtODRjNC1mNzA2OTM1Y2UyNTEiLCJqdGkiOiI2OGI4OTJiYWRkNDVlZGU0YzE5MGZmMDBjNTE0ZWZkMDFiMmJjZTNlOWE0N2UwOGQyOTNkNTBmMzEyYWRhYzczMzc0YWFkZmNiMmZjYjJlMSIsImlhdCI6MTY0NzEyODE2Ny45ODIxNjEsIm5iZiI6MTY0NzEyODE2Ny45ODIxNjQsImV4cCI6MTY3ODY2NDE2Ny45NzQzNDksInN1YiI6IjgiLCJzY29wZXMiOltdfQ.O1VHWZaZBe-A-J8_-svH2OKay87WGsLMYogWqUzYkx1JebIHHQKCqvV12QXqQfO8mgWY0NKwPuUekMMKHRFA4BMi_Q8Yj0QFDGmgJQyWf7manGvmGX3ZXyhG_ys63tXBHnOiRWeZWFhFnSTTvm5h2IduCJ8OpVK6ohdUE8OcvrAarYgeX-4O1-lfEGLzAp49SCbBTocsuySpwCMXW30Drp5om6OER9F9vwJKrc0Sg5uE_7r5I9ATX9cLWbw3OVGiExLF_oCFPf8jmZSIEHZ3WsDt1Ss1mABhUjVGId1dIWA55I4k775FNgI53aZhZwhdq3w4SF0w1HNEkmQlZOYNAolMipQGtm6X6apAp_V7D0vYPrg-Jogbm4fMdHK3ZyVs3Yr17_4YSFRPvG0ryjA5gNtppKKrwiy5nn3oxwb0gg1FQWYbFU8-6k87pl3o3ir4AZwgGYDy0wmauaiA1jimbEMNSt0YlYkPZAxWzYFKEBnFEFDvKUh1QMiGjCVzr1KWZiH23rR297QmfrrhD9mnXA5G41ZlcS5pBCyK_97V0VSIHuJMdHcBGKgIWYH2r8PiLT-pGYC3OM_E7ywxW3VM7C8et-PqeitlaJiPyI2r2Q0eeiIiRLxYe0qOiohUl_uuipZpofnURZ-fiaaM7uDJrS3VUk6WdEMsFf-gYtSm0_w');
 
         this.setState({ data: this.props.data })
         this.checkUser();
@@ -50,7 +50,7 @@ class SignupPreferences extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         this.checkUser();
-        console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',this.state.ids, this.state.data);
+        console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.data);
 
     }
     componentWillUnmount() {
@@ -86,42 +86,62 @@ class SignupPreferences extends Component {
         }
     };
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.container}>
-            <TouchableOpacity
-                onPress={() => this.props.navigation.goBack()}>
-                <Image
-                    source={require("../../../assets/backButton.png")}
-                    style={styles.image}
-            
-                />
-            </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => this.props.navigation.goBack()}>
+                    <Image
+                        source={require("../../../assets/backButton.png")}
+                        style={styles.image}
 
-            <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle={{ flexGrow: 1 }}>
-                <Text style={styles.Uppertext}>Donation Preference</Text>
-                <Text style={styles.Lowertext}>Select all of causes you want</Text>
-                <View style={{ flexDirection: 'row', marginTop: 50 }}>
-                    <View style={{ flex: 1, paddingLeft: 20 }}>
+                    />
+                </TouchableOpacity>
 
-                    <PreferenceCard style={styles.cusomBord} prefreenceTitle="test"  round />
+              
+                    <Text style={styles.Uppertext}>Donation Preference</Text>
+                    <Text style={styles.Lowertext}>Select all of causes you want</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 50 , flex :1 }}>
+                        <View style={{ flex: 1, paddingLeft: 20 }}>
 
-                       
+
+
+
+                            <FlatList
+                                data={this.state.data}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <TouchableOpacity onPress={() => {
+                                            ToastAndroid.show(item.content, ToastAndroid.LONG);
+                                        }}>
+
+                                            <PreferenceCard style={styles.cusomBord} prefreenceTitle={item.title} round 
+                                             isSelected={this.isChecked(item.id)}
+                                             setSelection={(value) => { this.toggleChecked(item.id) }}/>
+                                        </TouchableOpacity>
+                                    );
+                                }}
+                                keyExtractor={item => item.id}
+                                refreshing={this.state.refresh}
+                                ListEmptyComponent={this.ListEmptyComponent}
+                                onRefresh={this.onRefresh}
+                            />
+
+                        </View>
+
                     </View>
+               
+                <CutomeButton style={styles.btn} text="Continue" round onPress={() => { }}
+                //  this.props.navigation.navigate('SignupGoal',
 
-                </View>
-            </ScrollView>
-            <CutomeButton style={styles.btn} text="Continue" round onPress={() =>{}}
-            //  this.props.navigation.navigate('SignupGoal',
+                //     userPrefrences
 
-            //     userPrefrences
+                // )}
 
-            // )}
-            
-            />
+                />
 
 
-        </View>   
+            </View>
         );
     }
 }
@@ -191,7 +211,7 @@ const mapStateToProps = state => ({
     error: state.dataReducer.error,
 });
 const mapDispatchToProps = dispatch => ({
-    getObjectivesData: bindActionCreators(getObjectivesData, dispatch),
+    getPrefrencesData: bindActionCreators(getPrefrencesData, dispatch),
     // cleanError: bindActionCreators(cleanError, dispatch),
 });
 

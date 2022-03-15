@@ -6,3 +6,9 @@ export const getObjectivesData = async (token)=>{
     console.log('TCL: objectives -> data', data);
     return data;
   };
+
+  export const getPrefrencesData = async (token)=>{
+    const data = await dataApi.getPrefrencesData(token);
+    console.log('TCL: objectives -> data', data);
+    return data;
+  };
