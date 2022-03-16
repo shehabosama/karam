@@ -15,6 +15,7 @@ import * as AsyncStorageProvider from './cache/AsyncStorageProvider'
 import SignupVerifyAccountScreen from './views/SignupVerifyAccountScreen';
 import SignupObjectives from './views/SignupObjectives';
 import SignupPreferences from './views/SignupPreferences';
+import SignupGoal from './views/SignupGoal';
 const TasksStackNavigator = createStackNavigator();
 
 // const defaultStyles = {
@@ -118,7 +119,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator initialRouteName='SignupPreferences'>
+        <TasksStackNavigator.Navigator initialRouteName='SignupObjectives'>
 
             {/* <TasksStackNavigator.Screen
                 name="Test"
@@ -198,16 +199,17 @@ const TasksNavigator = () => {
                 component={SignupPreferences}
                 options={{ headerShown: false }}
             />
-            {/* 
-           
-           
-          
-            <TasksStackNavigator.Screen
+             <TasksStackNavigator.Screen
                 name="SignupGoal"
                 component={SignupGoal}
                 options={{ headerShown: false }}
 
             />
+            {/* 
+           
+           
+          
+           
        
             <TasksStackNavigator.Screen
                 name="SignupFrequency"

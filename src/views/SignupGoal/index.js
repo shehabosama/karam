@@ -24,7 +24,7 @@ import { showMessage } from '../../utils/HelperFunctions';
 import { getObjectivesData, getPrefrencesData } from '../../actions/DataActions';
 
 import PreferenceCard from '../../component/PrefrencesCard';
-class SignupPreferences extends Component {
+class SignupGoal extends Component {
 
     constructor(props) {
         super(props);
@@ -66,97 +66,83 @@ class SignupPreferences extends Component {
 
 
     };
-    isChecked = (itemId) => {
-        const isThere = this.state.ids.includes(itemId);
-        return isThere;
-    };
-    toggleChecked = (itemId) => {
-        const ids = [...this.state.ids, itemId];
 
-        if (this.isChecked(itemId)) {
-            this.setState({
-                ...this.state,
-                ids: this.state.ids.filter((id) => id !== itemId),
-            });
-        } else {
-            this.setState({
-                ...this.state,
-                ids,
-            });
-        }
-    };
-
-    render() {
-        return (
-            (this.state.data[0].id != null) || (this.state.data === null) ? <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={() => this.props.navigation.goBack()}>
-                    <Image
-                        source={require("../../../assets/backButton.png")}
-                        style={styles.image}
-
-                    />
-                </TouchableOpacity>       
-                    <Text style={styles.Uppertext}>Donation Preference</Text>
-                    <Text style={styles.Lowertext}>Select all of causes you want</Text>
-                    <View style={{ flexDirection: 'row', marginTop: 20 , flex :1 }}>
-                        <View style={{  flex: 1}}>
-                            <FlatList
-                                data={this.state.data}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <TouchableOpacity onPress={() => {
-                                            ToastAndroid.show(item.title, ToastAndroid.LONG);
-                                        }}>
-
-                                            <PreferenceCard style={styles.cusomBord} prefreenceTitle={item.title} round 
-                                             isSelected={this.isChecked(item.id)}
-                                             setSelection={(value) => { this.toggleChecked(item.id) }}/>
-                                        </TouchableOpacity>
-                                    );
-                                }}
-                                keyExtractor={item => item.id}
-                                refreshing={this.state.refresh}
-                                ListEmptyComponent={this.ListEmptyComponent}
-                                onRefresh={this.onRefresh}
-                            />
-                        </View>
-                    </View>
-                <CutomeButton style={styles.btn} text="Continue" round onPress={() => { 
-                     this.props.navigation.navigate('SignupGoal',
-                     {
-                         userPrefrences:this.state.ids,
-                         userObjective:this.state.objectiveIdes
-                    }
-                 )
-                }}
-                
-
+    render(){
+        return(
+            <View style={styles.container}>
+            <TouchableOpacity
+                onPress={() => navigation.goBack()}>
+                <Image
+                    source={require("../../../assets/backButton.png")}
+                    style={styles.image}
+                    onPress={() => navigation.goBack()}
                 />
+            </TouchableOpacity>
 
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <Text style={styles.Uppertext}>Set Donation Goal</Text>
+                <Text style={styles.Lowertext}>We’re going to help you reach your goal</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <TextInput style={styles.input}
+                        placeholder="8,000" keyboardType="numeric" value={donationGoal} placeholderTextColor={Colors.placeHolder} onChangeText={(donationGoal) => setDonationGoal(donationGoal)} />
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}>
+                        <Image source={require("../../../assets/edit.png")} style={styles.editImage} />
+                    </TouchableOpacity>
+                </View>
+                <Text style={styles.HintText}>Studies shows that committing to donating money ahead of time, can increase the amount you give by 32%</Text>
+            </ScrollView>
 
-            </View>: <ActivityIndicator style={{ flex: 1 }} size={40} />
+            <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => submiHandler()} />
+
+        </View>
         );
     }
 }
+
+
+const mapStateToProps = state => ({
+    data: state.dataReducer.data,
+    error: state.dataReducer.error,
+});
+const mapDispatchToProps = dispatch => ({
+   // getPrefrencesData: bindActionCreators(getPrefrencesData, dispatch),
+    // cleanError: bindActionCreators(cleanError, dispatch),
+});
+
+
+
 const styles = StyleSheet.create({
     container: {
-       
         flex: 1,
         marginHorizontal: 15,
     },
     image: {
-
         marginTop: 20,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
-
     },
-    selectionImage: {
-        alignSelf: "center",
-        marginVertical: 5,
+    editImage: {
 
+        marginTop: 20,
+        width: 25,
+        height: 28,
+        alignSelf: "flex-start",
+        marginEnd: 10,
+        marginTop: 50,
+        position: 'absolute',
+        end: 0,
+    },
+    input: {
+        borderBottomColor: Colors.primary,
+        textAlign: 'center',
+        borderStyle: 'solid',
+        fontSize: 50,
+        borderBottomWidth: 1.0,
+        paddingBottom: 15,
+        fontWeight: 'bold',
+        flex: 1
     },
     Uppertext: {
         fontSize: 34,
@@ -181,6 +167,7 @@ const styles = StyleSheet.create({
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'center',
         color: '#23596A',
+        textAlign: 'center',
     },
 
     btn: {
@@ -194,23 +181,12 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-    },
 
 });
 
-const mapStateToProps = state => ({
-    data: state.dataReducer.data,
-    error: state.dataReducer.error,
-});
-const mapDispatchToProps = dispatch => ({
-    getPrefrencesData: bindActionCreators(getPrefrencesData, dispatch),
-    // cleanError: bindActionCreators(cleanError, dispatch),
-});
+
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(SignupPreferences);
+)(SignupGoal);

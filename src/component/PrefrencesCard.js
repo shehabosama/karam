@@ -10,7 +10,7 @@ const PreferenceCard = ({ onPress, prefreenceTitle ,setSelection, round, icon, i
     return (
         <View style={{ marginTop: 10, }}>
             <CardView
-                style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:10 }}
+                style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:1 }}
                 cardElevation={6}
                 cardMaxElevation={6}
                 cornerRadius={10}>

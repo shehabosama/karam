@@ -90,7 +90,7 @@ class SignupObjectives extends Component {
 
 
         return (
-            (this.state.data[0].content != null) || (this.state.data === null) ? <View style={styles.container}>
+            (this.state.data != null) ? <View style={styles.container}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}>
                     <Image
