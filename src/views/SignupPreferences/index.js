@@ -206,7 +206,7 @@ const mapStateToProps = state => ({
     error: state.dataReducer.error,
 });
 const mapDispatchToProps = dispatch => ({
-    getPrefrencesData: bindActionCreators(getPrefrencesData, dispatch),
+  //  getPrefrencesData: bindActionCreators(getPrefrencesData, dispatch),
     // cleanError: bindActionCreators(cleanError, dispatch),
 });
 
