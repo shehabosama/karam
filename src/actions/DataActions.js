@@ -21,6 +21,7 @@ export const getObjectivesData = (token)=>async dispatch => {
 };
 
 
+
 export const getPrefrencesData = (token)=>async dispatch => {
   console.log('TCL: values', token);
 
@@ -31,6 +32,25 @@ export const getPrefrencesData = (token)=>async dispatch => {
    
     dispatch({type: GET_DATA, payload: data});
    // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+    console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+}
+export const updateObjectAndPref = (values, navigation)=>async dispatch=>{
+  console.log('TCL: values', values);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.updateObjectAndPref(values);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+    navigation.navigate('SignupFrequency');
     //navigation.navigate('Auth');
   } catch (error) {
     console.log('TCL: error', error);

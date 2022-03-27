@@ -16,6 +16,7 @@ import SignupVerifyAccountScreen from './views/SignupVerifyAccountScreen';
 import SignupObjectives from './views/SignupObjectives';
 import SignupPreferences from './views/SignupPreferences';
 import SignupGoal from './views/SignupGoal';
+import SignupFrequency from './views/SignupFrequency';
 const TasksStackNavigator = createStackNavigator();
 
 // const defaultStyles = {
@@ -140,7 +141,6 @@ const TasksNavigator = () => {
             /> */}
 
 
-
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}
@@ -155,14 +155,12 @@ const TasksNavigator = () => {
                 />
             }
 
-
             <TasksStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}
                 options={{ headerShown: false }}
 
             />
-
             <TasksStackNavigator.Screen
                 name="HomeTabs"
                 component={HomeTabs}
@@ -204,22 +202,12 @@ const TasksNavigator = () => {
                 component={SignupGoal}
                 options={{ headerShown: false }}
 
-            />
-            {/* 
-           
-           
-          
-           
-       
-            <TasksStackNavigator.Screen
+            /> 
+              <TasksStackNavigator.Screen
                 name="SignupFrequency"
                 component={SignupFrequency}
                 options={{ headerShown: false }}
             />
-          
-         */}
-
-
 
         </TasksStackNavigator.Navigator>
 
