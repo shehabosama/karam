@@ -49,10 +49,7 @@ class SignupObjectives extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-
         this.checkUser();
-        console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.data);
-
     }
     componentWillUnmount() {
         //  this.props.cleanError();

@@ -18,14 +18,14 @@ const CasesCardInfo = ({ placeholder, text, onTextInputChange, ref, round, focus
     return (
         <View activeOpacity={0.2} style={round ? Customstyles.round : {}} underlayColor="transparent">
             <ImageBackground
-                source={require('../assets/maketCardPhoto.png')}
+                source={require('../../assets/maketCardPhoto.png')}
                 //source={{ uri: 'www.imageislocatedhere.com }} -------- if it is link
                 style={Customstyles.bgContainer}
                 imageStyle={{ borderRadius: 10 }}>
 
                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
-                    <Image style={{ alignSelf: 'center' }} source={require('../assets/waterVector.png')} />
+                    <Image style={{ alignSelf: 'center' }} source={require('../../assets/waterVector.png')} />
                     <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>2,858 EGP</Text>
 

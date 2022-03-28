@@ -17,6 +17,14 @@ import SignupObjectives from './views/SignupObjectives';
 import SignupPreferences from './views/SignupPreferences';
 import SignupGoal from './views/SignupGoal';
 import SignupFrequency from './views/SignupFrequency';
+import Cases from './views/Cases';
+import Causes from './views/Causes';
+import DonationScreen from './views/DonationScreen';
+import ProfileScreen from './views/ProfileScreen';
+import AboutCase from './views/AboutCase';
+import PersonalInformation from './views/PersonalInformation';
+import ProviderScreen from './views/ProviderScreen';
+import Providers from './views/Providers';
 const TasksStackNavigator = createStackNavigator();
 
 // const defaultStyles = {
@@ -72,14 +80,6 @@ function HomeTabs() {
             }}
         >
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
-            {/* <Tab.Screen name={'Donation'} component={Donation} />
-            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
-            <Tab.Screen
-                options={{
-                    tabBarButton: props => null,
-                }}
-                name={'Causes'} component={Causes} />
-
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -90,12 +90,26 @@ function HomeTabs() {
                 options={{
                     tabBarButton: props => null,
                 }}
-                name={'AboutCase'} component={AboutCase} />
+                name={'Causes'} component={Causes} />
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
                 }}
-                name={'ProviderScreen'} component={ProvidersScreen} /> */}
+                name={'Providers'} component={Providers} />
+            <Tab.Screen name={'Donation'} component={DonationScreen} />
+            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'AboutCase'} component={AboutCase} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'ProviderScreen'} component={ProviderScreen} />
+
         </Tab.Navigator>
     );
 }
@@ -120,7 +134,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator initialRouteName='SignupObjectives'>
+        <TasksStackNavigator.Navigator initialRouteName='HomeTabs'>
 
             {/* <TasksStackNavigator.Screen
                 name="Test"
@@ -129,11 +143,7 @@ const TasksNavigator = () => {
 
             /> */}
 
-            {/* <TasksStackNavigator.Screen
-                    name="PersonalInformation"
-                    component={PersonalInformation}
-                    options={{ headerShown: false }}
-                /> */}
+
             {/* <TasksStackNavigator.Screen
                 name="HomeTabs"
                 component={HomeTabs}
@@ -197,18 +207,22 @@ const TasksNavigator = () => {
                 component={SignupPreferences}
                 options={{ headerShown: false }}
             />
-             <TasksStackNavigator.Screen
+            <TasksStackNavigator.Screen
                 name="SignupGoal"
                 component={SignupGoal}
                 options={{ headerShown: false }}
 
-            /> 
-              <TasksStackNavigator.Screen
+            />
+            <TasksStackNavigator.Screen
                 name="SignupFrequency"
                 component={SignupFrequency}
                 options={{ headerShown: false }}
             />
-
+            <TasksStackNavigator.Screen
+                name="PersonalInformation"
+                component={PersonalInformation}
+                options={{ headerShown: false }}
+            />
         </TasksStackNavigator.Navigator>
 
     );

@@ -55,7 +55,7 @@ class SignupPreferences extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         this.checkUser();
-        console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.objectiveIdes, this.state.data);
+      //  console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.objectiveIdes, this.state.data);
 
     }
     componentWillUnmount() {

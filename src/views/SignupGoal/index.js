@@ -54,7 +54,6 @@ class SignupGoal extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         this.checkUser();
-        console.log('->>>>>>>>>>>fff>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.userPrefrences, this.state.userObjective);
 
     }
     componentWillUnmount() {

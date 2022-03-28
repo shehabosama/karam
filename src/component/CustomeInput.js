@@ -20,7 +20,10 @@ const CutomeTextInput = ({ placeholder, onTextInputChange, text, type, round, se
                 {icon && <Icon name={icon} size={24} color={iconColor} style={styles.icon} />}
 
                 <TextInput secureTextEntry={secure ? true : false} keyboardType={type} style={gloableStyles.input} value={text} onChangeText={onTextInputChange}
-                    placeholder={placeholder} placeholderTextColor={Colors.placeHolder} />
+                    placeholder={placeholder}
+                    placeholderTextColor={Colors.placeHolder}
+
+                />
 
             </View>
         </View>

@@ -4,24 +4,24 @@ import CardView from 'react-native-cardview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 
-const CauseCard = ({ onPress, text, round, icon, iconColor, danger, style }) => {
+const CauseCard = ({ onPress, name, imageUrl, description, id }) => {
    
 
     return (
-        <View style={{ marginTop: 10, }}>
+        <View style={{ marginTop: 5, }}>
             <CardView
                 style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:10 }}
                 cardElevation={6}
                 cardMaxElevation={6}
                 cornerRadius={10}>
                 <Image
-                    source={require("../assets/GreenwaterVector.png")}
+                    source={{uri: `http://192.168.1.7/karam/public/storage/${imageUrl}` }}
                     style={{ height: 44, width: 35, margin: 10 }}
                 />
                 <View style={{ flexDirection: 'column', flex: 1 , marginTop:10 }}
                 >
-                    <Text style={{fontSize:17 , fontWeight:'bold' , marginVertical:5}}>Water</Text>
-                    <Text style={{color:Colors.placeHolder}}>Providing water for the underserved</Text>
+                    <Text style={{fontSize:17 , fontWeight:'bold' , marginVertical:5}}>{name}</Text>
+                    <Text style={{color:Colors.placeHolder}}>{description}</Text>
                     
                 </View>
                 <View style={{ flexDirection: 'column', marginTop:10 , marginHorizontal:5 }}

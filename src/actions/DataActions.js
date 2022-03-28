@@ -1,7 +1,7 @@
 import { GET_DATA, GET_DATA_FAIL } from "./types";
 import * as dataRepo from '../repo/DataRepo';
 export const getObjectivesData = (token)=>async dispatch => {
-    console.log('TCL: values', token);
+   // console.log('TCL: values', token);
 
     try {
       //  robinella52@gmail.com
@@ -12,7 +12,7 @@ export const getObjectivesData = (token)=>async dispatch => {
      // navigation.navigate('HomeTabs');
       //navigation.navigate('Auth');
     } catch (error) {
-      console.log('TCL: error', error);
+     // console.log('TCL: error', error);
       dispatch({
         type: GET_DATA_FAIL,
         payload: 'something went wrong',
@@ -20,10 +20,85 @@ export const getObjectivesData = (token)=>async dispatch => {
     }
 };
 
+export const getProvidersData =(token)=>async dispatch =>{
+ // console.log('TCL: values', token);
 
+ try {
+  //  robinella52@gmail.com
+  const data = await dataRepo.getProvidersData(token);
+  //await notificationRepo.subscribe(user);
+ 
+  dispatch({type: GET_DATA, payload: data});
+ // navigation.navigate('HomeTabs');
+  //navigation.navigate('Auth');
+} catch (error) {
+//  console.log('TCL: error', error);
+  dispatch({
+    type: GET_DATA_FAIL,
+    payload: 'something went wrong',
+  });
+}
+};
+export const getCaseData = (token , id)=>async dispatch=>{
+   console.log('TCL: values', token);
 
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getCaseData(token,id);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+   // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+  //  console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+}
+export const getCasesData = (token)=>async dispatch =>{
+  // console.log('TCL: values', token);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getCasesData(token);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+   // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+  //  console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+};
+
+export const getCausesData = (token)=>async dispatch =>{
+  // console.log('TCL: values', token);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getCausesData(token);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+   // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+  //  console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+};
 export const getPrefrencesData = (token)=>async dispatch => {
-  console.log('TCL: values', token);
+ // console.log('TCL: values', token);
 
   try {
     //  robinella52@gmail.com
@@ -34,7 +109,7 @@ export const getPrefrencesData = (token)=>async dispatch => {
    // navigation.navigate('HomeTabs');
     //navigation.navigate('Auth');
   } catch (error) {
-    console.log('TCL: error', error);
+  //  console.log('TCL: error', error);
     dispatch({
       type: GET_DATA_FAIL,
       payload: 'something went wrong',
@@ -42,7 +117,7 @@ export const getPrefrencesData = (token)=>async dispatch => {
   }
 }
 export const updateObjectAndPref = (values, navigation)=>async dispatch=>{
-  console.log('TCL: values', values);
+ // console.log('TCL: values', values);
 
   try {
     //  robinella52@gmail.com
@@ -53,7 +128,26 @@ export const updateObjectAndPref = (values, navigation)=>async dispatch=>{
     navigation.navigate('SignupFrequency');
     //navigation.navigate('Auth');
   } catch (error) {
-    console.log('TCL: error', error);
+   // console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+}
+export const getHomeScreenData=(token)=> async dispatch=>{
+ // console.log('TCL: values', token);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getHomeScreenData(token);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+    navigation.navigate('SignupFrequency');
+    //navigation.navigate('Auth');
+  } catch (error) {
+   // console.log('TCL: error', error);
     dispatch({
       type: GET_DATA_FAIL,
       payload: 'something went wrong',

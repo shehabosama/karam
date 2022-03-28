@@ -21,7 +21,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CutomeButton from '../../component/CustomeButton';
 import ObjectiveCard from '../../component/ObjectiveCard';
 import { showMessage } from '../../utils/HelperFunctions';
-import {  updateObjectAndPref } from '../../actions/DataActions';
 import SwitchSelector from 'react-native-switch-selector';
 import PreferenceCard from '../../component/PrefrencesCard';
 class SignupFrequency extends Component {
@@ -37,8 +36,6 @@ class SignupFrequency extends Component {
     
 
     async componentDidMount() {
-      
-
         this.checkUser();
         if (this.props.currentUser !== null) {
             this.setState({ loading: false })
@@ -52,7 +49,6 @@ class SignupFrequency extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         this.checkUser();
-        console.log('->>>>>>>>>>>fff>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.userPrefrences, this.state.userObjective);
 
     }
     componentWillUnmount() {
@@ -65,23 +61,19 @@ class SignupFrequency extends Component {
         //     this.props.navigation.navigate('HomeTabs');
         // }
         // console.log(this.props.currentUser);
-
-
     };
 
-   
         submiHandler = () => {
             let isNumber = !isNaN(+this.state.subscribeAmount);
             if (!isNumber) {
                 showMessage('Please write only numbers');
             } else {
-                navigation.navigate('HomeTabs')
+                this.props.navigation.navigate('HomeTabs')
             }
         };    
 
     render() {
       
-
         const options = [
             { label: 'Weekly', value: '1' },
             { label: 'Monthly', value: '1.5' },
@@ -123,7 +115,7 @@ class SignupFrequency extends Component {
                 <CutomeButton style={styles.btnManualDonation} text="Manual Donation" round onPress={() => this.props.navigation.navigate('HomeTabs')} />
                 <Text style={styles.HintText}>Make donations case by case and keep track of your target achievement. You’ll get access to all the cases on the platform and updates.</Text>
             </ScrollView>
-            <CutomeButton style={styles.customeButton} text="Confirm" round onPress={() => submiHandler()} />
+            <CutomeButton style={styles.customeButton} text="Confirm" round onPress={() => this.submiHandler()} />
 
 
         </View>

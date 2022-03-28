@@ -6,7 +6,7 @@ const DonationCard = ({ placeholder, text, onTextInputChange, ref, round, focus,
     return (
         <View activeOpacity={0.2} style={round ? Customstyles.round : {}} underlayColor="transparent">
             <Image
-                source={require('../assets/maketCardPhoto.png')}
+                source={require('../../assets/maketCardPhoto.png')}
                 //source={{ uri: 'www.imageislocatedhere.com }} -------- if it is link
                 style={Customstyles.bgContainer}
             />

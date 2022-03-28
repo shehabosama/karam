@@ -3,7 +3,7 @@ import * as types from '../actions/types';
 const initialState = async () => {
   return {
     data: [],
-    error: 'null',
+    error: null,
   };
 };
 const DataReducer = (state = initialState(), action) => {

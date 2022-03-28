@@ -24,13 +24,7 @@ import { showMessage } from '../../utils/HelperFunctions';
 
 class SignupVerifyAccount extends Component {
 
-    // const inputRef2 = useRef();
-    // const inputRef3 = useRef();
-    // const inputRef4 = useRef();
-    // const [input1, setInput1] = useState('');
-    // const [input2, setInput2] = useState('');
-    // const [input3, setInput3] = useState('');
-    // const [input4, setInput4] = useState('');
+
     constructor(props) {
         super(props);
         this.state = { loading: false, input1:'' , input2:'' , input3: '' , input4:'' };
