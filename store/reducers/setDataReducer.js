@@ -1,11 +1,9 @@
 import {SET_DATA } from '../types';
-const initialState = async () => {
-    return {
+const initialState = {
       data: null,
       error: null,
-    };
   };
-  const setDataReducer = (state = initialState(), action) => {
+  const setDataReducer = (state = initialState, action) => {
     switch (action.type) {
      
         case SET_DATA:

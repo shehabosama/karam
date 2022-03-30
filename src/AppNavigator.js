@@ -1,44 +1,42 @@
-import React  , {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, StyleSheet, Alert, ToastAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { Colors } from '../constants';
-import Splash from '../screens/SplashScreen';
-import LoginScreen from '../screens/LoginScreen';
-import Signup from '../screens/SignupScreen';
-import SignupProfileDetails from '../screens/SignupProfileDetailsScreen';
-import SignupVerifyAccount from '../screens/SignupVerifyAccountScreen';
-import SignupObjectives from '../screens/SignupObjectiveScreen';
-import SignupPreferences from '../screens/SignupPreferences';
-import SignupGoal from '../screens/SignupGoal';
-import SignupFrequency from '../screens/SignupFrequency';
-import TestScreen from '../screens/TestScreen';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import NavigationBottomHome from "../screens/bottomNavigationScreens/NavigationBottomHome";
-import Causes from "../screens/bottomNavigationScreens/Causes";
-// import Cases from "./bottomNavigationScreens/cases";
-import Cases from '../screens/bottomNavigationScreens/Cases'
-import ProfileScreen from '../screens/ProfileScreen';
-import Donation from '../screens/bottomNavigationScreens/DonationScreen';
-import AboutCase from '../screens/bottomNavigationScreens/AboutCaseScreen';
-import ProvidersScreen from '../screens/bottomNavigationScreens/ProvidersScreen';
-import { useDispatch, useSelector } from "react-redux";
-import { getData } from '../store/actions/AuthActions';
+import NavigationBottomHome from "./views/BottomNavigationHome";
+import LoginScreen from './views/Login';
+import SplashScreen from './views/Splash';
+import SignUp from './views/SignUp';
+import SignupProfileDetails from './views/SignupProfileDetails';
 
+
+import * as AsyncStorageProvider from './cache/AsyncStorageProvider'
+import SignupVerifyAccountScreen from './views/SignupVerifyAccountScreen';
+import SignupObjectives from './views/SignupObjectives';
+import SignupPreferences from './views/SignupPreferences';
+import SignupGoal from './views/SignupGoal';
+import SignupFrequency from './views/SignupFrequency';
+import Cases from './views/Cases';
+import Causes from './views/Causes';
+import DonationScreen from './views/DonationScreen';
+import ProfileScreen from './views/ProfileScreen';
+import AboutCase from './views/AboutCase';
+import PersonalInformation from './views/PersonalInformation';
+import ProviderScreen from './views/ProviderScreen';
+import Providers from './views/Providers';
+import Test from './views/Test';
 const TasksStackNavigator = createStackNavigator();
 
-const defaultStyles = {
-    headerStyle: {
-        backgroundColor: Colors.primary,
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-        fontFamily: 'Poppins-Regular',
-    },
-};
+// const defaultStyles = {
+//     headerStyle: {
+//         backgroundColor: Colors.primary,
+//     },
+//     headerTintColor: '#fff',
+//     headerTitleStyle: {
+//         fontFamily: 'Poppins-Regular',
+//     },
+// };
 
 // const styles = StyleSheet.create({
 //     headerRightSpace:{
@@ -83,14 +81,6 @@ function HomeTabs() {
             }}
         >
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
-            <Tab.Screen name={'Donation'} component={Donation} />
-            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
-            <Tab.Screen
-                options={{
-                    tabBarButton: props => null,
-                }}
-                name={'Causes'} component={Causes} />
-
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -101,31 +91,51 @@ function HomeTabs() {
                 options={{
                     tabBarButton: props => null,
                 }}
-                name={'AboutCase'} component={AboutCase} />
+                name={'Causes'} component={Causes} />
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
                 }}
-                name={'ProviderScreen'} component={ProvidersScreen} />
+                name={'Providers'} component={Providers} />
+            <Tab.Screen name={'Donation'} component={DonationScreen} />
+            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'AboutCase'} component={AboutCase} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                }}
+                name={'ProviderScreen'} component={ProviderScreen} />
+
         </Tab.Navigator>
     );
 }
 
 const TasksNavigator = () => {
-    //const dispatch = useDispatch();
+    const [checker, setChecker] = useState(false);
+    const checkUser = async () => {
 
-    const {data} = useSelector(state=>state.data);
-    //const [data , setData]= useState({})
-    const dispatch = useDispatch();
-    useEffect(()=>{
-        dispatch(getData());
-        
-    },[dispatch]);
-    
-    console.log('Data from navigator',data);
-    
+        try {
+
+            const currentUser = await AsyncStorageProvider.getItem('currentUser');
+            if (currentUser) {
+
+                setChecker(true);
+            }
+        } catch (error) {
+            console.log(error);
+            setChecker(false);
+        }
+
+    };
+
+    checkUser();
     return (
-        <TasksStackNavigator.Navigator>
+        <TasksStackNavigator.Navigator initialRouteName='HomeTabs'>
 
             {/* <TasksStackNavigator.Screen
                 name="Test"
@@ -134,34 +144,34 @@ const TasksNavigator = () => {
 
             /> */}
 
-            {/* <TasksStackNavigator.Screen
-                    name="PersonalInformation"
-                    component={PersonalInformation}
-                    options={{ headerShown: false }}
-                /> */}
+
             {/* <TasksStackNavigator.Screen
                 name="HomeTabs"
                 component={HomeTabs}
                 options={{ headerShown: false }}
             /> */}
-{
-    false? 
-    <>
-      <TasksStackNavigator.Screen
-                name="HomeTabs"
+
+
+            {checker ? <TasksStackNavigator.Screen
+                name="HomeTabsInitial"
                 component={HomeTabs}
                 options={{ headerShown: false }}
             />
-    </>
-    :
-    <>
-     <TasksStackNavigator.Screen
-                name="Splash"
-                component={Splash}
+                :
+                <TasksStackNavigator.Screen
+                    name="Splash"
+                    component={SplashScreen}
+                    options={{ headerShown: false }}
+
+                />
+            }
+
+<TasksStackNavigator.Screen
+                name="Test"
+                component={Test}
                 options={{ headerShown: false }}
 
             />
-
             <TasksStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}
@@ -169,10 +179,15 @@ const TasksNavigator = () => {
 
             />
             <TasksStackNavigator.Screen
-                name="Signup"
-                component={Signup}
+                name="HomeTabs"
+                component={HomeTabs}
                 options={{ headerShown: false }}
+            />
 
+            <TasksStackNavigator.Screen
+                name="Signup"
+                component={SignUp}
+                options={{ headerShown: false }}
             />
             <TasksStackNavigator.Screen
                 name="SignupProfileDetails"
@@ -180,9 +195,10 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
+
             <TasksStackNavigator.Screen
                 name="SignupVerifyAccount"
-                component={SignupVerifyAccount}
+                component={SignupVerifyAccountScreen}
                 options={{ headerShown: false }}
 
             />
@@ -192,6 +208,12 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
+
+            <TasksStackNavigator.Screen
+                name="SignupPreferences"
+                component={SignupPreferences}
+                options={{ headerShown: false }}
+            />
             <TasksStackNavigator.Screen
                 name="SignupGoal"
                 component={SignupGoal}
@@ -199,26 +221,15 @@ const TasksNavigator = () => {
 
             />
             <TasksStackNavigator.Screen
-                name="SignupPreferences"
-                component={SignupPreferences}
-                options={{ headerShown: false }}
-            />
-            <TasksStackNavigator.Screen
                 name="SignupFrequency"
                 component={SignupFrequency}
                 options={{ headerShown: false }}
             />
-        
-    </>
-}
-    
-               
-          
-              
-         
-
-
-           
+            <TasksStackNavigator.Screen
+                name="PersonalInformation"
+                component={PersonalInformation}
+                options={{ headerShown: false }}
+            />
         </TasksStackNavigator.Navigator>
 
     );

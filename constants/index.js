@@ -1,5 +1,5 @@
 
-export const LOGIN_URL = 'http://192.168.1.7/karam/public/api/auth/login';
+export const LOGIN_URL = 'http://192.168.1.6/karam/public/api/auth/login';
 
 export const Colors ={
     primary:'#23596a',
@@ -14,5 +14,5 @@ export const Colors ={
 };
 export const STORAGE_KEYS = {
     auth : 'auth_key',
-    tokenKey : 'myapp_tasks',
+    tokenKey : 'token_Key',
 }

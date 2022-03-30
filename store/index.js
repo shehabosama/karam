@@ -8,6 +8,6 @@ const rootReducer = combineReducers({
      auth : AuthReducer,
      data :setDataReducer
 });
-
+ 
 const store = createStore(rootReducer , applyMiddleware(thunk));
 export default store;

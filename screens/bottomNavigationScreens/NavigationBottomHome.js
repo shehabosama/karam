@@ -1,9 +1,43 @@
-import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState  } from "react";
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity ,BackHandler,Alert , AppState}  from 'react-native';
 import CutomeDonationMeter from "../../component/CustomeDonationMeterBord";
 import { Colors } from "../../constants";
 import CasesCard from "../../component/CasesCard";
+import { useFocusEffect } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../../store/actions/AuthActions";
 export const NavigationBottomHome = ({ route, navigation }) => {
+    const {data} = useSelector(state=>state.data);
+    //const [data , setData]= useState({})
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getData());
+        
+    },[dispatch]);
+    
+    console.log('Data from Home Tabs',data);
+  
+useFocusEffect(
+React.useCallback(() => {
+  const onBackPress = () => {
+    Alert.alert("Hold on!", "Are you sure you want to Exit?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      { text: "YES", onPress: () => BackHandler.exitApp() }
+    ]);
+    return true;
+  };
+
+  BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+  return () =>
+    BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+
+}, []));
+
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

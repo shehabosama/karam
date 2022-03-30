@@ -25,7 +25,7 @@ const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => 
 
                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
-                    <Image style={{ alignSelf: 'center' }} source={require('../assets/waterVector.png')} />
+                    <Image style={{ alignSelf: 'center' }} source={require('../../assets/waterVector.png')} />
                     <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{remainingText} EGP</Text>
                 </View>
@@ -43,29 +43,23 @@ const Customstyles = StyleSheet.create({
     container: {
         width: 100,
         height: 120,
-        alignItems: 'center',
-
-     
-       borderWidth:4
         
     },
     round: {
         height: 149,
         width: 155,
         borderRadius: 10,
-        alignItems:"center",
+        alignSelf:"center",
         borderColor: '#23596A',
-        marginVertical: 10,
-     
-        marginHorizontal:10
+        
     },
     bgContainer: {
         height: 149,
         // backgroundColor: 'rgba(10, 10, 10, 0.4)',
-        justifyContent: 'center',
-        borderRadius: 50,
-        flexDirection: 'row',
-       
+      //  justifyContent: 'center',
+       // borderRadius: 50,
+        
+        
     },
 });
 

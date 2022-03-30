@@ -1,11 +1,11 @@
-import { LOGIN_SUCCESS,LOGIN_FAIL,LOGIN_RESET_ERROR,LOGOUT, SET_DATA } from '../types';
-const initialState = async () => {
-    return {
+import { LOGIN_SUCCESS,LOGIN_FAIL,LOGIN_RESET_ERROR,LOGOUT } from '../types';
+const initialState ={
       currentUser: null,
       error: null,
-    };
+   
   };
-  const AuthReducer = (state = initialState(), action) => {
+  const AuthReducer = (state = initialState, action) => {
+  //  console.log('typeee ---------- >'+action.type , 'dataaaaaaaaa -----------------> test',{ currentUser: action.payload});
     switch (action.type) {
       case LOGIN_SUCCESS:
         return {...state, currentUser: action.payload};
@@ -26,4 +26,13 @@ const initialState = async () => {
         return state;
     }
   };
+
+
+
+
+
+
+
+
+
   export default AuthReducer;
