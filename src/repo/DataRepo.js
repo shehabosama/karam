@@ -17,13 +17,13 @@ export const getObjectivesData = async (token)=>{
     //  console.log('TCL: objectives -> data', data);
       return data;
   };
-  export const getCasesData = async (token) =>{
-    const data = await dataApi.getCasesData(token);
+  export const getCasesData = async (token , pageNumber) =>{
+    const data = await dataApi.getCasesData(token , pageNumber);
     //  console.log('TCL: objectives -> data', data);
       return data;
   };
-  export const getCausesData = async (token) =>{
-    const data = await dataApi.getCausesData(token);
+  export const getCausesData = async (token, pageNumber) =>{
+    const data = await dataApi.getCausesData(token, pageNumber);
     //  console.log('TCL: objectives -> data', data);
       return data;
   };
@@ -48,7 +48,7 @@ export const getObjectivesData = async (token)=>{
     return data;
   }
   export const getHomeScreenData = async(token)=>{
-    console.log('TCL: getHomeScreenData -> token', token);
+    console.log('TCL: getHomeScreenData -> token',"" );
     const data = await dataApi.getHomeScreenData(token);
     console.log('TCL: getHomeScreenData -> data', data);
     return data;

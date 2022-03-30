@@ -161,7 +161,7 @@ try {
 }
 }
 
-export const getCasesData = async (token) => {
+export const getCasesData = async (token , pageNumber) => {
     console.log('TCL: token', token);
 
   try {
@@ -189,11 +189,11 @@ export const getCasesData = async (token) => {
     throw error.message;
   }
 }
-export const getCausesData = async (token) => {
+export const getCausesData = async (token, pageNumber) => {
   //  console.log('TCL: token', token);
 
   try {
-    const result = await fetch(GET_CAUSES_DATA, {
+    const result = await fetch(`${GET_CAUSES_DATA}?page=${pageNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token,

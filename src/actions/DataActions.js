@@ -58,12 +58,12 @@ export const getCaseData = (token , id)=>async dispatch=>{
     });
   }
 }
-export const getCasesData = (token)=>async dispatch =>{
+export const getCasesData = (token , pageNumber)=>async dispatch =>{
   // console.log('TCL: values', token);
 
   try {
     //  robinella52@gmail.com
-    const data = await dataRepo.getCasesData(token);
+    const data = await dataRepo.getCasesData(token , pageNumber);
     //await notificationRepo.subscribe(user);
    
     dispatch({type: GET_DATA, payload: data});
@@ -78,15 +78,16 @@ export const getCasesData = (token)=>async dispatch =>{
   }
 };
 
-export const getCausesData = (token)=>async dispatch =>{
-  // console.log('TCL: values', token);
+export const getCausesData = (token, pageNumber,onSuccess=()=>{},onError=()=>{})=>async dispatch =>{
+   console.log('TCL: values',  " i am inside the get Causes Data");
 
   try {
     //  robinella52@gmail.com
-    const data = await dataRepo.getCausesData(token);
+    const data = await dataRepo.getCausesData(token, pageNumber);
     //await notificationRepo.subscribe(user);
    
     dispatch({type: GET_DATA, payload: data});
+    onSuccess();
    // navigation.navigate('HomeTabs');
     //navigation.navigate('Auth');
   } catch (error) {
@@ -95,6 +96,7 @@ export const getCausesData = (token)=>async dispatch =>{
       type: GET_DATA_FAIL,
       payload: 'something went wrong',
     });
+    onError();
   }
 };
 export const getPrefrencesData = (token)=>async dispatch => {

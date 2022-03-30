@@ -6,7 +6,9 @@ import {
     ScrollView,
     TouchableOpacity,
     StyleSheet,
-    Image, Dimensions
+    Image, Dimensions,
+    FlatList,
+    ToastAndroid
 } from 'react-native';
 import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
@@ -35,7 +37,7 @@ class AboutCase extends Component {
         await this.props.getCaseData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ', this.props.route.params.id);
         if (this.props.data !== null) {
             this.setState({ data: this.props.data, loading: false })
-            console.log("dataaaaaaaaaaaa", this.props.route.params.id, JSON.stringify(this.state.data, null, 4));
+           // console.log("dataaaaaaaaaaaa", this.props.route.params.id, JSON.stringify(this.state.data, null, 4));
         } else {
             this.setState({ error: this.props.error })
         }
@@ -83,7 +85,7 @@ class AboutCase extends Component {
     render() {
 
         return (
-            (this.state.data !== null) ? <View style={styles.container}>
+            (this.state.data !== null && this.state.loading === false) ? <View style={styles.container}>
 
                 <TouchableOpacity
                     onPress={() => this.props.navigation.goBack()}>
@@ -121,6 +123,8 @@ class AboutCase extends Component {
                             </TouchableOpacity>
 
                         </View>
+
+
 
                         {this.state.aboutCaseTab ? <View style={{ flex: 1 }}>
                             <CasesCardInfo />
@@ -180,13 +184,14 @@ class AboutCase extends Component {
                             </View>
 
 
-                  
+                          
 
                             {/* <HTMLView
                                 value={this.state.data.description}
                                // stylesheet={styles}
                             /> */}
 
+                            <Text>{this.state.data.description}</Text>
                             {/* <Text style={{ marginHorizontal: 30, marginTop: 20 }}>
                                 <Text style={{ fontWeight: "bold", color: Colors.primary }}>
                                     House #3456
@@ -208,11 +213,21 @@ class AboutCase extends Component {
                             <View style={{ flex: 1 }}>
 
                                 <View style={{ flexDirection: 'row', marginHorizontal: 5 }}>
-                                    <Icon name="ios-checkmark-circle" color={Colors.primary} size={20} style={{ marginTop: 5, marginEnd: 0 }} />
+                                    <Icon name={
+                                        (this.state.data.status === 1) ||
+                                            (this.state.data.status === 2)||
+                                            (this.state.data.status === 3) ?
+                                            "ios-checkmark-circle" :
+                                            "ios-checkmark-circle-outline"}
+
+                                        color={Colors.primary} size={20}
+                                        style={{ marginTop: 5, marginEnd: 0 }}
+                                    />
+
                                     <Text style={{ borderBottomColor: Colors.placeHolder, borderBottomWidth: 1, flex: 1, marginBottom: 20 }}></Text>
-                                    <Icon name="ios-checkmark-circle" color={Colors.primary} size={20} style={{ marginTop: 5, marginEnd: 0 }} />
+                                    <Icon name={(this.state.data.status === 2) ||(this.state.data.status === 3) ? "ios-checkmark-circle" : "ios-checkmark-circle-outline"} color={Colors.primary} size={20} style={{ marginTop: 5, marginEnd: 0 }} />
                                     <Text style={{ borderBottomColor: Colors.placeHolder, borderBottomWidth: 1, flex: 1, marginBottom: 20 }}></Text>
-                                    <Icon name="ios-checkmark-circle-outline" color={Colors.placeHolder} size={20} style={{ marginTop: 5, marginEnd: 0 }} />
+                                    <Icon name={(this.state.data.status === 3) ? "ios-checkmark-circle" : "ios-checkmark-circle-outline"} color={Colors.primary} size={20} style={{ marginTop: 5, marginEnd: 0 }} />
                                 </View>
                                 <View style={{ flexDirection: 'row', marginHorizontal: 5 }}>
                                     <Text style={{ marginBottom: 20 }}>Collected</Text>
@@ -230,7 +245,36 @@ class AboutCase extends Component {
                                     fontWeight: 'bold'
                                 }}>Project Images</Text>
 
-                                <Image source={require('../../../assets/maketCardPhoto.png')} style={{}} />
+                                
+
+
+
+
+{/* 
+                                <FlatList
+                            horizontal
+                            data={this.state.data.images}
+                            renderItem={({ item }) => {
+                                return (
+                                    <TouchableOpacity onPress={() => {
+                                        ToastAndroid.show(item, ToastAndroid.LONG);
+                                    }}>
+                                        <View >
+                                        <Image source={require('../../../assets/maketCardPhoto.png')} style={{}} />
+                                            
+                                        </View>
+                                    </TouchableOpacity>
+                                );
+                            }}
+                            
+                          //  keyExtractor={}
+                            refreshing={this.state.refresh}
+                            ListEmptyComponent={this.ListEmptyComponent}
+                            onRefresh={this.onRefresh}
+                        /> */}
+
+
+
                                 <Text style={{
                                     fontSize: 15,
                                     fontFamily: 'SF-Pro-Rounded-Regular',

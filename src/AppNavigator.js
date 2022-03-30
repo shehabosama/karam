@@ -25,6 +25,7 @@ import AboutCase from './views/AboutCase';
 import PersonalInformation from './views/PersonalInformation';
 import ProviderScreen from './views/ProviderScreen';
 import Providers from './views/Providers';
+import Test from './views/Test';
 const TasksStackNavigator = createStackNavigator();
 
 // const defaultStyles = {
@@ -165,6 +166,12 @@ const TasksNavigator = () => {
                 />
             }
 
+<TasksStackNavigator.Screen
+                name="Test"
+                component={Test}
+                options={{ headerShown: false }}
+
+            />
             <TasksStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}

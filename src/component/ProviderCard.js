@@ -6,7 +6,7 @@ import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 import { Colors } from '../constants';
 import gloableStyles from '../styles/gloable'
 const ProviderCard = ({   imageUrl,  round, danger, style }) => {
-    console.log("imageUrl");
+   
     let btnStyle = { ...Customstyles.container, ...style };
     if (round) {
         btnStyle = { ...btnStyle, ...Customstyles.round }
