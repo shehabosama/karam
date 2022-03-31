@@ -26,7 +26,7 @@ import ProviderCard from '../../component/ProviderCard';
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading: true, data: null, error: null };
+        this.state = { loading: true, data: null, error: '' , cases:[] , causes:[] , providers:[] };
 
     }
 
@@ -36,9 +36,14 @@ class HomeScreen extends Component {
 
         await this.props.getHomeScreenData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ');
         if (this.props.data !== null) {
-            this.setState({ data: this.props.data, loading: false })
+            this.setState({ data: this.props.data ,
+                causes:this.props.data.causes ,
+                cases:this.props.data.cases,
+                providers:this.props.data.providers,
+                 loading: false })
            // console.log("dataaaaaaaaaaaa", this.props.data.causes);
         } else {
+            console.log("dataaaaaaaaaaaa", this.props.error);
             this.setState({ error: this.props.error })
         }
     }
@@ -112,7 +117,7 @@ class HomeScreen extends Component {
                     <View style={styles.HorizontalContainer}>
                         <FlatList
                             horizontal
-                            data={this.state.data.causes}
+                            data={this.state.causes}
                             renderItem={({ item }) => {
                                 return (
                                     <TouchableOpacity onPress={() => {
@@ -126,7 +131,7 @@ class HomeScreen extends Component {
                                                 cornerRadius={10}>
                                                 <Image
                                                     // source={require("../../../assets/GreenwaterVector.png")}
-                                                    source={{ uri: `http://192.168.1.6/karam/public/storage/${item.image}` }}
+                                                    source={{ uri: `http://192.168.1.7/karam/public/storage/${item.image}` }}
                                                     style={{
                                                         width: 29,
                                                         height: 33, margin: 10, alignSelf: "center"
@@ -182,7 +187,7 @@ class HomeScreen extends Component {
                     numColumns={3}
                     initialNumToRender={6}
                            
-                            data={this.state.data.providers}
+                            data={this.state.providers}
                             renderItem={({ item }) => {
                                 return (
                                     <TouchableOpacity onPress={() => {
@@ -209,13 +214,24 @@ class HomeScreen extends Component {
 
             );
         }
+       
+
+       
+        // if(typeof this.state.data.cases[0] !== 'undefined'
+        //   && this.state.data.hasOwnProperty('cases')
+        //   && this.state.data.cases.length > 0){
+        //     //personId = tjanster.acf.person[0].ID;
+        // }else{
+        //     return;
+        // }
+        
         return (
-            (!this.state.loading) ? <View style={styles.container}>
+            (!this.state.loading) || (this.state.data!==null) ? <View style={styles.container}>
 
                 <FlatList
                     numColumns={2}
                     initialNumToRender={4}
-                    data={this.state.data.cases}
+                    data={this.state.cases}
                     renderItem={({ item }) => {
                         return (
                             <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }} >
@@ -239,7 +255,16 @@ class HomeScreen extends Component {
                     ListFooterComponent={getFoterView}
                 />
 
-            </View> : <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+            </View> 
+            :(this.props.error === ''||!this.props.error)?<View>
+                <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+            </View>
+            :<View>
+                <Text>{this.props.error}</Text>
+            </View>
+            
+                
+           
 
         )
 
@@ -275,6 +300,7 @@ const styles = StyleSheet.create({
         shadowRadius: 100,
         elevation: 10,
         flexDirection: 'row',
+       
 
 
     },
