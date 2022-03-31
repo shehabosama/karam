@@ -5,17 +5,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 
 const CauseCard = ({ onPress, name, imageUrl, description, id }) => {
-   
+ 
 
     return (
-        <View style={{ marginTop: 5, }}>
+        <View style={{ marginTop: 0, }}>
             <CardView
                 style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:10 }}
                 cardElevation={6}
                 cardMaxElevation={6}
                 cornerRadius={10}>
                 <Image
-                    source={{uri: `http://192.168.1.7/karam/public/storage/${imageUrl}` }}
+                    source={{uri: `${imageUrl}` }}
                     style={{ height: 44, width: 35, margin: 10 }}
                 />
                 <View style={{ flexDirection: 'column', flex: 1 , marginTop:10 }}

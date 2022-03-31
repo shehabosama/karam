@@ -24,7 +24,7 @@ export const getObjectivesData = async (token)=>{
   };
   export const getCausesData = async (token, pageNumber) =>{
     const data = await dataApi.getCausesData(token, pageNumber);
-    //  console.log('TCL: objectives -> data', data);
+      console.log('TCL: objectives -> data', data);
       return data;
   };
   export const getPrefrencesData = async (token)=>{

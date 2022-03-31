@@ -149,7 +149,7 @@ export const getHomeScreenData=(token)=> async dispatch=>{
     navigation.navigate('SignupFrequency');
     //navigation.navigate('Auth');
   } catch (error) {
-   // console.log('TCL: error', error);
+    console.log('TCL: error', error);
     dispatch({
       type: GET_DATA_FAIL,
       payload: 'something went wrong',

@@ -51,7 +51,7 @@ const Customstyles = StyleSheet.create({
         borderRadius: 10,
         alignSelf:"center",
         borderColor: '#23596A',
-        
+        marginVertical:20,
     },
     bgContainer: {
         height: 149,

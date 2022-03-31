@@ -21,6 +21,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CardView from 'react-native-cardview'
 import CauseCard from '../../component/CauseCard';
+
 import ObjectiveCard from '../../component/ObjectiveCard';
 import { showMessage } from '../../utils/HelperFunctions';
 import { getCausesData, getObjectivesData, getPrefrencesData, updateObjectAndPref } from '../../actions/DataActions';
@@ -35,26 +36,58 @@ const Causes = () => {
     const [isListEnd, setIsListEnd] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
     const dispatch = useDispatch();
-    const DATA  = useSelector((state) => state.dataReducer.data);
-    useEffect(() => getData(), []);
+  //  const DATA = useSelector((state) => state.dataReducer.data);
 
+ 
+    useEffect(() => {
+        
+            getData();
+        
+    }, []);
+
+    //  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
     const getData = () => {
+    //     console.log(offset);
+    //     if (!loading && !isListEnd) {
+    //         console.log('getDataaaaaaaaaaa');
+    //         setLoading(true);
+            
 
-        // dispatch(getCausesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',offset , ()=>{
-        //     ToastAndroid.show(`done` , ToastAndroid.LONG);
-        //     setOffset(offset + 1); 
-        //     setDataSource([...dataSource, ...DATA]);
-        //                 setLoading(false);
-        // } , 
-        // ()=>{ToastAndroid.show('Somthing went wrong , please try again!' , ToastAndroid.LONG)}
-        // ));
+    //         dispatch(getCausesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',
+    //             offset, async () => {
+    //                 ToastAndroid.show(`${DATA.data}done`, ToastAndroid.LONG);
+    //                 await delay(10000);
+    //                 console.log(DATA);
+    //                // setData(DATA)
+    //                 if (DATA.data.length > 0) {
+    //                     console.log("i get Dataaaaaaaaaaaaaaaaaaaa ,", DATA);
+    //                     setOffset(offset + 1);
+    //                     //After the response increasing the offset for the next API call.
+                        
+    //                         setDataSource([...dataSource, ...DATA.data]);
+    //                         setLoading(false);
+                        
+
+    //                 } else {
+    //                     console.log("i am coudn't get it ");
+    //                     setIsListEnd(true);
+    //                     setLoading(false);
+    //                 }
+    //             },
+    //             () => { ToastAndroid.show('Somthing went wrong , please try again!', ToastAndroid.LONG) }
+    //         ));
+
+    //     }
+
+    //     setIsFetching(false);
+
 
 
         console.log(offset);
         if (!loading && !isListEnd) {
             console.log('getData');
             setLoading(true);
-            
+
             //Service to get the data from the server to render
             fetch(`${GET_CAUSES_DATA}?page=${offset}`,
                 {
@@ -75,7 +108,7 @@ const Causes = () => {
                         //After the response increasing the offset for the next API call.
                         setDataSource([...dataSource, ...responseJson.data]);
                         setLoading(false);
-                        
+
                     } else {
                         setIsListEnd(true);
                         setLoading(false);
@@ -90,7 +123,7 @@ const Causes = () => {
     const onRefresh = () => {
         setIsFetching(true);
         getData();
-      };
+    };
     const renderFooter = () => {
         return (
             //Footer View with Loader
@@ -154,9 +187,9 @@ const Causes = () => {
                 }}
                 bounces={false}
                 keyExtractor={item => item.id}
-               // refreshing={this.state.refresh}
-               // ListEmptyComponent={this.ListEmptyComponent}
-              //  onRefresh={this.onRefresh}
+                // refreshing={this.state.refresh}
+                // ListEmptyComponent={this.ListEmptyComponent}
+                //  onRefresh={this.onRefresh}
                 ListHeaderComponent={getHeaderView}
                 ListFooterComponent={renderFooter}
                 onEndReached={getData}
