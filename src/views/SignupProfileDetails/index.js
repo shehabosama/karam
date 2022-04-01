@@ -84,20 +84,23 @@ class SignupProfileDetails extends Component {
         } else if (!isNumber) {
             showMessage('Please write only numbers in phone number');
         } else {
-            // this.setState({error:false});
-            // this.setState({ loading: true }, () => {
-            //     this.props.signUp({ email: this.state.email,
-            //          password: this.state.password ,
-            //          fullName : this.state.fullName,
-            //          mobileNumber:this.state.mobileNumber ,
-            //          nationality: this.state.nationality,
+           // this.setState({error:false});
+            this.setState({ loading: true }, () => {
+                this.props.signUp({ email: this.state.email,
+                     password: this.state.password ,
+                     fullName : this.state.fullName,
+                     mobileNumber:this.state.mobileNumber ,
+                     nationality: this.state.nationality,
 
-            //          }, this.props.navigation);
-            //     setTimeout(() => {
-            //         this.setState({ loading: false })
-            //     }, 1000);
-            // })
-                this.props.navigation.navigate('SignupVerifyAccount');
+                     }, this.props.navigation);
+                setTimeout(() => {
+                    this.setState({ loading: false })
+                }, 1000);
+            })
+
+
+            
+             //   this.props.navigation.navigate('SignupVerifyAccount');
         }
     };
 
@@ -132,7 +135,8 @@ class SignupProfileDetails extends Component {
                         <Text style={styles.HintText}>Agree to Terms and Conditions</Text>
                     </View>
                     <Text style={styles.HintText}>Once you Click on verify email , you will receive an email to activate your account</Text>
-                    <CutomeButton style={styles.btn} text="Continue" round onPress={this.submitHandler} />
+                    {this.state.loading ? <ActivityIndicator style={{marginVertical: 50,}} color={Colors.primary} size={30} />:
+                    <CutomeButton style={styles.btn} text="Continue" round onPress={this.submitHandler} />}
 
                 </ScrollView>
             </View>

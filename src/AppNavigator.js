@@ -26,7 +26,7 @@ import PersonalInformation from './views/PersonalInformation';
 import ProviderScreen from './views/ProviderScreen';
 import Providers from './views/Providers';
 import Test from './views/Test';
-import TestClassComponent from './views/TestClassComponent';
+
 const TasksStackNavigator = createStackNavigator();
 
 // const defaultStyles = {
@@ -103,12 +103,14 @@ function HomeTabs() {
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
+                    unmountOnBlur: true,
                 }}
                 name={'AboutCase'} component={AboutCase} />
 
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
+                    unmountOnBlur: true,
                 }}
                 name={'ProviderScreen'} component={ProviderScreen} />
 
@@ -136,22 +138,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator initialRouteName='TestClassComponent'>
-
-            {/* <TasksStackNavigator.Screen
-                name="Test"
-                component={TestScreen}
-                options={{ headerShown: false }}
-
-            /> */}
-
-
-            {/* <TasksStackNavigator.Screen
-                name="HomeTabs"
-                component={HomeTabs}
-                options={{ headerShown: false }}
-            /> */}
-
+        <TasksStackNavigator.Navigator >
 
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
@@ -173,12 +160,7 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
-            <TasksStackNavigator.Screen
-                name="TestClassComponent"
-                component={TestClassComponent}
-                options={{ headerShown: false }}
-
-            />
+           
             <TasksStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}

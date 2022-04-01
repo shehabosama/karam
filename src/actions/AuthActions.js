@@ -30,7 +30,7 @@ export const signUp = (values, navigation) => async dispatch => {
    const user = await authRepo.signUp(values);
    //await notificationRepo.subscribe(user);
    dispatch({type: LOGIN_SUCCESS, payload: user});
-  // navigation.navigate('HomeTabs');
+   navigation.navigate('SignupVerifyAccount');
    //navigation.navigate('Auth');
  } catch (error) {
    console.log('TCL: error', error);

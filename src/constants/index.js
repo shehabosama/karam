@@ -9,6 +9,7 @@ export const GET_CASES_DATA = `${BASE_URL}cases`;
 export const GET_CAUSES_DATA = `${BASE_URL}causes`;
 export const GET_PROVIDERS_DATA = `${BASE_URL}providers`;
 export const GET_CASE_DATA = `${BASE_URL}case`;
+export const GET_PROVIDER_DATA = `${BASE_URL}provider`;
 export const Colors ={
     primary:'#23596a',
     secondary:'#E5E6F8',

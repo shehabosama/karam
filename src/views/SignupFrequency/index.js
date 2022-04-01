@@ -68,7 +68,7 @@ class SignupFrequency extends Component {
             if (!isNumber) {
                 showMessage('Please write only numbers');
             } else {
-                this.props.navigation.navigate('HomeTabs')
+                this.props.navigation.navigate('Login')
             }
         };    
 

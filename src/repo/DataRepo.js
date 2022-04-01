@@ -7,13 +7,22 @@ export const getObjectivesData = async (token)=>{
     return data;
   };
   
-  export const getProvidersData = async (token) =>{
-    const data = await dataApi.getProvidersData(token);
+  export const getProvidersData = async (token , pageNumber) =>{
+   
+
+    const data = await dataApi.getProvidersData(token , pageNumber);
     //  console.log('TCL: objectives -> data', data);
       return data;
   };
   export const getCaseData = async (token ,id) =>{
+    console.log('TCL: values', " i am in repo");
     const data = await dataApi.getCaseData(token,id);
+    //  console.log('TCL: objectives -> data', data);
+      return data;
+  };
+  getProviderData
+  export const getProviderData = async (token , pageNumber) =>{
+    const data = await dataApi.getProviderData(token , pageNumber);
     //  console.log('TCL: objectives -> data', data);
       return data;
   };
@@ -50,6 +59,6 @@ export const getObjectivesData = async (token)=>{
   export const getHomeScreenData = async(token)=>{
     console.log('TCL: getHomeScreenData -> token',"" );
     const data = await dataApi.getHomeScreenData(token);
-    console.log('TCL: getHomeScreenData -> data', data);
+    //console.log('TCL: getHomeScreenData -> data', data);
     return data;
   }

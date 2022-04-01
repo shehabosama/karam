@@ -74,11 +74,11 @@ class SignupVerifyAccount extends Component {
         return(
             <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => navigation.goBack()}>
+                onPress={() =>this.props.navigation.goBack()}>
                 <Image
                     source={require("../../../assets/backButton.png")}
                     style={styles.image}
-                    onPress={() => navigation.goBack()} />
+                   />
             </TouchableOpacity>
 
             <ScrollView contentContainerStyle={styles.container}>

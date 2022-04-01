@@ -192,7 +192,8 @@ class HomeScreen extends Component {
                                 return (
                                     <TouchableOpacity onPress={() => {
                                         ToastAndroid.show(item.image, ToastAndroid.LONG);
-                                        this.props.navigation.navigate('ProviderScreen');
+                                     
+                                        this.props.navigation.navigate('ProviderScreen' , {id:item.id});
                                     }}>
                                         <View >
                                             
@@ -256,7 +257,7 @@ class HomeScreen extends Component {
                 />
 
             </View> 
-            :(this.props.error === ''||!this.props.error)?<View>
+            :(this.props.error === ''||!this.props.error)?<View style={{flex:1}}>
                 <ActivityIndicator animating style={{ flex: 1 }} size={40} />
             </View>
             :<View>

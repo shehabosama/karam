@@ -6,7 +6,8 @@ import {
   GET_CASES_DATA,
   GET_CAUSES_DATA,
   GET_PROVIDERS_DATA,
-  GET_CASE_DATA
+  GET_CASE_DATA,
+  GET_PROVIDER_DATA
 } from '../constants';
 import * as errors from '../utils/Errors';
 
@@ -102,11 +103,12 @@ export const getHomeScreenData = async (token) => {
   }
 };
 
-export const getProvidersData = async (token) => {
-  console.log('TCL: token', token);
+export const getProvidersData = async (token , pageNumber) => {
+ // console.log('TCL: token', token);
+ 
 
 try {
-  const result = await fetch(GET_PROVIDERS_DATA, {
+  const result = await fetch(`${GET_PROVIDERS_DATA}?page=${pageNumber}`, {
     method: 'GET',
     headers: {
       'Authorization': 'Bearer ' + token,
@@ -118,7 +120,7 @@ try {
 
   const json = await result.json();
   if (json && result.status == 200) {
-      console.log('stutus :' , result.status, json);
+     // console.log('stutus :' , result.status, json);
   } else {
       console.log('TCL: signUp -> error jsone', json);
     throw json;
@@ -133,7 +135,8 @@ try {
 
 
 export const getCaseData = async (token,id) => {
-  console.log('TCL: token', token , id);
+//  console.log('TCL: token', token , id);
+console.log('TCL: values', " i am in action","with id " , id);
 
 try {
   const result = await fetch(`${GET_CASE_DATA}?id=${id}`, {
@@ -148,7 +151,7 @@ try {
 
   const json = await result.json();
   if (json && result.status == 200) {
-      console.log('stutus :' , result.status, json);
+    //  console.log('stutus :' , result.status, json);
   } else {
       console.log('TCL: signUp -> error jsone', json);
     throw json;
@@ -161,6 +164,35 @@ try {
 }
 }
 
+export const getProviderData = async (token,id) => {
+  //  console.log('TCL: token', token , id);
+  console.log('TCL: values', " i am in action","with id " , id);
+  
+  try {
+    const result = await fetch(`${GET_PROVIDER_DATA}?id=${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+  
+    });
+  
+    const json = await result.json();
+    if (json && result.status == 200) {
+        console.log('stutus :' , result.status, json);
+    } else {
+        console.log('TCL: signUp -> error jsone', json);
+      throw json;
+    }
+    return json;
+  } catch (error) {
+     console.log('TCL: signUp -> error', error);
+     console.log('TCL: signUp -> error.response', error.response);
+    throw error.message;
+  }
+  }
 export const getCasesData = async (token , pageNumber) => {
     console.log('TCL: token', token);
 
@@ -177,7 +209,7 @@ export const getCasesData = async (token , pageNumber) => {
 
     const json = await result.json();
     if (json && result.status == 200) {
-        console.log('stutus :' , result.status, json);
+       // console.log('stutus :' , result.status, json);
     } else {
         console.log('TCL: signUp -> error jsone', json);
       throw json;

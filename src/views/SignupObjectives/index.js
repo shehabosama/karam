@@ -90,11 +90,11 @@ class SignupObjectives extends Component {
         return (
             (this.state.data != null) ? <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={() => navigation.goBack()}>
+                    onPress={() => this.props.navigation.goBack()}>
                     <Image
                         source={require("../../../assets/backButton.png")}
                         style={styles.image}
-                        onPress={() => navigation.goBack()}
+                       
                     />
                 </TouchableOpacity>
                 <Text style={styles.Uppertext}>Select Objectives</Text>
