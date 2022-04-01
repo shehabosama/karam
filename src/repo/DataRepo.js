@@ -14,9 +14,34 @@ export const getObjectivesData = async (token)=>{
     //  console.log('TCL: objectives -> data', data);
       return data;
   };
+  getCauseData
   export const getCaseData = async (token ,id) =>{
     console.log('TCL: values', " i am in repo");
     const data = await dataApi.getCaseData(token,id);
+    //  console.log('TCL: objectives -> data', data);
+      return data;
+  };
+  export const getCauseData = async (token ,id) =>{
+    console.log('TCL: values', " i am in repo");
+    const data = await dataApi.getCauseData(token,id);
+    //  console.log('TCL: objectives -> data', data);
+      return data;
+  };
+  export const getCasesByName = async (token ,name) =>{
+    console.log('TCL: values', " i am in repo");
+    const data = await dataApi.getCasesByName(token,name);
+    //  console.log('TCL: objectives -> data', data);
+      return data;
+  };
+  export const getCausesByName = async (token ,name) =>{
+    console.log('TCL: values', " i am in repo");
+    const data = await dataApi.getCausesByName(token,name);
+    //  console.log('TCL: objectives -> data', data);
+      return data;
+  };
+  export const getProvidersByName = async (token ,name) =>{
+    console.log('TCL: values', " i am in repo");
+    const data = await dataApi.getProvidersByName(token,name);
     //  console.log('TCL: objectives -> data', data);
       return data;
   };

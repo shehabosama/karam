@@ -59,6 +59,7 @@ export const getProviderData = (token , id)=>async dispatch=>{
    });
  }
 }
+
 export const getCaseData = (token , id)=>async dispatch=>{
    console.log('TCL: values', " i am in action");
 
@@ -78,6 +79,27 @@ export const getCaseData = (token , id)=>async dispatch=>{
       payload: 'something went wrong',
     });
   }
+}
+
+export const getCauseData = (token , id)=>async dispatch=>{
+  console.log('TCL: values', " i am in action");
+
+
+ try {
+   //  robinella52@gmail.com
+   const data = await dataRepo.getCauseData(token,id);
+   //await notificationRepo.subscribe(user);
+  
+   dispatch({type: GET_DATA, payload: data});
+  // navigation.navigate('HomeTabs');
+   //navigation.navigate('Auth');
+ } catch (error) {
+ //  console.log('TCL: error', error);
+   dispatch({
+     type: GET_DATA_FAIL,
+     payload: 'something went wrong',
+   });
+ }
 }
 export const getCasesData = (token , pageNumber)=>async dispatch =>{
   // console.log('TCL: values', token);
@@ -99,6 +121,63 @@ export const getCasesData = (token , pageNumber)=>async dispatch =>{
   }
 };
 
+export const getCasesByName = (token , name)=>async dispatch =>{
+  // console.log('TCL: values', token);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getCasesByName(token , name);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+   // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+  //  console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+};
+export const getCausesByName = (token , name)=>async dispatch =>{
+  // console.log('TCL: values', token);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getCausesByName(token , name);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+   // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+  //  console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+};
+export const getProvidersByName = (token , name)=>async dispatch =>{
+  // console.log('TCL: values', token);
+
+  try {
+    //  robinella52@gmail.com
+    const data = await dataRepo.getProvidersByName(token , name);
+    //await notificationRepo.subscribe(user);
+   
+    dispatch({type: GET_DATA, payload: data});
+   // navigation.navigate('HomeTabs');
+    //navigation.navigate('Auth');
+  } catch (error) {
+  //  console.log('TCL: error', error);
+    dispatch({
+      type: GET_DATA_FAIL,
+      payload: 'something went wrong',
+    });
+  }
+};
 export const getCausesData = (token, pageNumber,onSuccess=()=>{},onError=()=>{})=>async dispatch =>{
    console.log('TCL: values',  " i am inside the get Causes Data");
 

@@ -7,7 +7,10 @@ import {
   GET_CAUSES_DATA,
   GET_PROVIDERS_DATA,
   GET_CASE_DATA,
-  GET_PROVIDER_DATA
+  GET_PROVIDER_DATA,
+  GET_CASES_BY_NAME,
+  GET_CAUSES_BY_NAME,
+  GET_PROVIDERS_BY_NAME
 } from '../constants';
 import * as errors from '../utils/Errors';
 
@@ -164,6 +167,128 @@ try {
 }
 }
 
+export const getCauseData = async (token,id) => {
+  //  console.log('TCL: token', token , id);
+  console.log('TCL: values', " i am in action","with id " , id);
+  
+  try {
+    const result = await fetch(`${GET_CASE_DATA}?id=${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+  
+    });
+  
+    const json = await result.json();
+    if (json && result.status == 200) {
+      //  console.log('stutus :' , result.status, json);
+    } else {
+        console.log('TCL: signUp -> error jsone', json);
+      throw json;
+    }
+    return json;
+  } catch (error) {
+     console.log('TCL: signUp -> error', error);
+     console.log('TCL: signUp -> error.response', error.response);
+    throw error.message;
+  }
+  }
+  
+
+export const getCausesByName = async (token,name) => {
+  //  console.log('TCL: token', token , id);
+  console.log('TCL: values', " i am in action","with id " , name);
+  
+  try {
+    const result = await fetch(`${GET_CAUSES_BY_NAME}?name=${name}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+  
+    });
+  
+    const json = await result.json();
+    if (json && result.status == 200) {
+      //  console.log('stutus :' , result.status, json);
+    } else {
+        console.log('TCL: signUp -> error jsone', json);
+      throw json;
+    }
+    return json;
+  } catch (error) {
+     console.log('TCL: signUp -> error', error);
+     console.log('TCL: signUp -> error.response', error.response);
+    throw error.message;
+  }
+  }
+
+  export const getCasesByName = async (token,name) => {
+    //  console.log('TCL: token', token , id);
+    console.log('TCL: values', " i am in action","with id " , name);
+    
+    try {
+      const result = await fetch(`${GET_CASES_BY_NAME}?name=${name}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+    
+      });
+    
+      const json = await result.json();
+      if (json && result.status == 200) {
+        //  console.log('stutus :' , result.status, json);
+      } else {
+          console.log('TCL: signUp -> error jsone', json);
+        throw json;
+      }
+      return json;
+    } catch (error) {
+       console.log('TCL: signUp -> error', error);
+       console.log('TCL: signUp -> error.response', error.response);
+      throw error.message;
+    }
+    }
+  
+    export const getProvidersByName = async (token,name) => {
+      //  console.log('TCL: token', token , id);
+      console.log('TCL: values', " i am in action","with id " , name);
+      
+      try {
+        const result = await fetch(`${GET_PROVIDERS_BY_NAME}?name=${name}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + token,
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+      
+        });
+      
+        const json = await result.json();
+        if (json && result.status == 200) {
+          //  console.log('stutus :' , result.status, json);
+        } else {
+            console.log('TCL: signUp -> error jsone', json);
+          throw json;
+        }
+        return json;
+      } catch (error) {
+         console.log('TCL: signUp -> error', error);
+         console.log('TCL: signUp -> error.response', error.response);
+        throw error.message;
+      }
+      }
+    
+      
 export const getProviderData = async (token,id) => {
   //  console.log('TCL: token', token , id);
   console.log('TCL: values', " i am in action","with id " , id);

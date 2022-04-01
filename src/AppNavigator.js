@@ -26,6 +26,7 @@ import PersonalInformation from './views/PersonalInformation';
 import ProviderScreen from './views/ProviderScreen';
 import Providers from './views/Providers';
 import Test from './views/Test';
+import searchCases from './views/SearchCases';
 
 const TasksStackNavigator = createStackNavigator();
 
@@ -113,6 +114,14 @@ function HomeTabs() {
                     unmountOnBlur: true,
                 }}
                 name={'ProviderScreen'} component={ProviderScreen} />
+
+<Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+                  
+                }}
+                name={'searchCases'} component={searchCases} />
+
 
         </Tab.Navigator>
     );

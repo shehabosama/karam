@@ -277,7 +277,11 @@ class Causes extends React.Component {
                     // borderBottomColor:Colors.placeHolder,
                   }
                 } />
-                <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('searchCases')}>
+                   <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+                </TouchableOpacity>
+               
               </CardView>
             </View>
             {!this.state.initial &&
