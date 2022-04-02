@@ -21,7 +21,6 @@ export const getObjectivesData = (token)=>async dispatch => {
 };
 
 export const getProvidersData =(token , pageNumber)=>async dispatch =>{
- 
 
  try {
   //  robinella52@gmail.com
@@ -238,16 +237,9 @@ export const updateObjectAndPref = (values, navigation)=>async dispatch=>{
   }
 }
 export const getHomeScreenData=(token)=> async dispatch=>{
- // console.log('TCL: values', token);
-
   try {
-    //  robinella52@gmail.com
     const data = await dataRepo.getHomeScreenData(token);
-    //await notificationRepo.subscribe(user);
-   
     dispatch({type: GET_DATA, payload: data});
-    navigation.navigate('SignupFrequency');
-    //navigation.navigate('Auth');
   } catch (error) {
     console.log('TCL: error', error);
     dispatch({

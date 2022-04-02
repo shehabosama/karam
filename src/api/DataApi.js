@@ -79,8 +79,6 @@ export const updateObjectAndPref = async (
   }
 };
 export const getHomeScreenData = async (token) => {
-  //console.log('TCL: token', token);
-
   try {
     const result = await fetch(GET_HOME_DATA, {
       method: 'GET',
@@ -89,20 +87,15 @@ export const getHomeScreenData = async (token) => {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-
     });
-
     const json = await result.json();
     if (json && result.status == 200) {
-    //  console.log('stutus :', result.status, json);
     } else {
       console.log('TCL: signUp -> error jsone', json);
       throw json;
     }
     return json;
   } catch (error) {
-    //console.log('TCL: signUp -> error', error);
-   // console.log('TCL: signUp -> error.response', error.response);
     throw error.message;
   }
 };

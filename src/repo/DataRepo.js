@@ -82,8 +82,6 @@ export const getObjectivesData = async (token)=>{
     return data;
   }
   export const getHomeScreenData = async(token)=>{
-    console.log('TCL: getHomeScreenData -> token',"" );
     const data = await dataApi.getHomeScreenData(token);
-    //console.log('TCL: getHomeScreenData -> data', data);
     return data;
   }

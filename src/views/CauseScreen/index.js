@@ -215,7 +215,6 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     Lowertext: {
-        
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'flex-start',

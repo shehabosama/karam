@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import NavigationBottomHome from "./views/BottomNavigationHome";
 import LoginScreen from './views/Login';
 import SplashScreen from './views/Splash';
 import SignUp from './views/SignUp';
 import SignupProfileDetails from './views/SignupProfileDetails';
-
-
 import * as AsyncStorageProvider from './cache/AsyncStorageProvider'
 import SignupVerifyAccountScreen from './views/SignupVerifyAccountScreen';
 import SignupObjectives from './views/SignupObjectives';
@@ -31,18 +28,14 @@ import SearchProviders from './views/SearchProviders';
 import SearchCases from './views/SearchCases';
 import SearchCauses from './views/SearchCauses';
 import CauseScreen from './views/CauseScreen';
-
 const TasksStackNavigator = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
 function HomeTabs() {
     return (
         <Tab.Navigator
             screenOptions={
                 ({ route }) => ({
-
                     tabBarIcon: ({ focused, size, color }) => {
-
                         let iconName;
                         if (route.name === 'Home') {
                             iconName = 'home-outline';
@@ -103,14 +96,13 @@ function HomeTabs() {
                     unmountOnBlur: true,
                 }}
                 name={'CauseScreen'} component={CauseScreen} />
+                
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
                     unmountOnBlur: true,
                 }}
                 name={'ProviderScreen'} component={ProviderScreen} />
-
-
 
             <Tab.Screen
                 options={{
@@ -150,7 +142,7 @@ const TasksNavigator = () => {
                 setChecker(true);
             }
         } catch (error) {
-            console.log(error);
+            //  console.log(error);
             setChecker(false);
         }
 
@@ -158,8 +150,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator initialRouteName='HomeTabs'>
-
+        <TasksStackNavigator.Navigator >
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}
@@ -173,14 +164,12 @@ const TasksNavigator = () => {
 
                 />
             }
-
             <TasksStackNavigator.Screen
                 name="Test"
                 component={Test}
                 options={{ headerShown: false }}
 
             />
-
             <TasksStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}
@@ -192,7 +181,6 @@ const TasksNavigator = () => {
                 component={HomeTabs}
                 options={{ headerShown: false }}
             />
-
             <TasksStackNavigator.Screen
                 name="Signup"
                 component={SignUp}
@@ -204,20 +192,16 @@ const TasksNavigator = () => {
                 options={{ headerShown: false }}
 
             />
-
             <TasksStackNavigator.Screen
                 name="SignupVerifyAccount"
                 component={SignupVerifyAccountScreen}
                 options={{ headerShown: false }}
-
             />
             <TasksStackNavigator.Screen
                 name="SignupObjectives"
                 component={SignupObjectives}
                 options={{ headerShown: false }}
-
             />
-
             <TasksStackNavigator.Screen
                 name="SignupPreferences"
                 component={SignupPreferences}
@@ -227,7 +211,6 @@ const TasksNavigator = () => {
                 name="SignupGoal"
                 component={SignupGoal}
                 options={{ headerShown: false }}
-
             />
             <TasksStackNavigator.Screen
                 name="SignupFrequency"
@@ -244,66 +227,7 @@ const TasksNavigator = () => {
     );
 
 };
-// const TasksNavigator = () => {
 
-//     const dispatch = useDispatch();
-
-//     const {tasks} = useSelector(state=>state.task);
-
-//     const deleteListClickHandler=(id , navigation)=>{
-//         const listHasTasks = tasks.find(t=> t.listId == id);
-//         if(listHasTasks){
-//             return Alert.alert('Cannot delete' , 'List cannot be deleted because it is not empty , First delete tasks then delete list')
-//         }
-//         Alert.alert('Delete List' , 'Are you sure you want to delete this list ?' , 
-//         [
-//             {text: 'Cancle'},
-//             {text: 'Delete' , onPress:()=>deleteListHandler(id , navigation)}
-//         ]);
-//     };
-
-//     const deleteListHandler=(id , navigation)=>{
-//         dispatch(deleteList(id,()=>{
-//             navigation.goBack();
-//             ToastAndroid.show('List Successfully deleted!' , ToastAndroid.LONG);
-//         }));
-//     };
-//     return (
-//         <TasksStackNavigator.Navigator>
-//             <TasksStackNavigator.Screen
-//                 name="Splash"
-//                 component={HomeScreen}
-//                 options={{ ...defaultStyles, title: 'Your lists', headerTitleAlign: 'center' }}
-//             />
-
-
-{/* <TasksStackNavigator.Screen
-        name="List"
-        component={ListScreen}
-        options={({ route, navigation }) => ({ 
-          ...defaultStyles,
-          title: route.params.name,
-          headerRight: () => (
-            <View style={styles.headerRightSpace}>
-              <Icon
-                name="md-trash"
-                color="#fff"
-                size={30}
-                onPress={() => deleteListClickHandler(route.params.id, navigation)}
-              />
-            </View>
-          ),
-        })}
-      /> */}
-
-{/* <TasksStackNavigator.Screen
-                name="Verficatation"
-                component={AddTaskScreen}
-                options={{ ...defaultStyles, title: 'Add new task' }}
-            />
-        </TasksStackNavigator.Navigator>
-    ); }*/
-};
 const AppNavigator = () => {
     return (
         <NavigationContainer>
