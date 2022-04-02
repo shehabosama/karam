@@ -76,6 +76,7 @@ class ProfileScreen extends Component {
                 style={{ height: 81, width: 83, marginTop: 20, alignSelf: 'center', borderRadius: 50 }}
 
             />
+            <Text style={styles.Uppertext}>Hey Salma!</Text>
                 </TouchableOpacity>
            
             <Text style={styles.smalBoldText}>Account</Text>
@@ -184,9 +185,10 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
         fontWeight: 'bold',
-        alignSelf: 'flex-start',
+        
         color: '#23596a',
         marginTop: 15,
+        textAlign:'center'
 
     },
     Lowertext: {

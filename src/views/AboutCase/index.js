@@ -193,23 +193,23 @@ class AboutCase extends Component {
                                // stylesheet={styles}
                             /> */}
 
-                            <Text>{this.state.data.description}</Text>
-                            {/* <Text style={{ marginHorizontal: 30, marginTop: 20 }}>
+                            {/* <Text>{this.state.data.description}</Text> */}
+                            <Text style={{ marginHorizontal: 30, marginTop: 20 }}>
                                 <Text style={{ fontWeight: "bold", color: Colors.primary }}>
                                     House #3456
                                 </Text>
                                 <Text>
                                     belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
                                 </Text>
-                            </Text> */}
-                            {/* <Text style={{ marginHorizontal: 30, marginVertical: 10 }}>
+                            </Text>
+                            <Text style={{ marginHorizontal: 30, marginVertical: 10 }}>
                                 <Text style={{ fontWeight: "bold", color: Colors.primary }}>Cost: </Text>
                                 <Text>water installment pipe (12 meters in length): 650 LE
                                     Water meter: 2625 LE
                                     Total needed: 3275 LE
                                     Expected implementation date: 2 weeks from receiving donation.
                                 </Text>
-                            </Text> */}
+                            </Text>
 
                         </View> :
                             <View style={{ flex: 1 }}>
@@ -252,17 +252,17 @@ class AboutCase extends Component {
 
 
 
-{/* 
+
                                 <FlatList
                             horizontal
                             data={this.state.data.images}
                             renderItem={({ item }) => {
                                 return (
                                     <TouchableOpacity onPress={() => {
-                                        ToastAndroid.show(item, ToastAndroid.LONG);
+                                       // ToastAndroid.show(item, ToastAndroid.LONG);
                                     }}>
                                         <View >
-                                        <Image source={require('../../../assets/maketCardPhoto.png')} style={{}} />
+                                        <Image source={require('../../../assets/maketCardPhoto.png')} style={{marginHorizontal:5}} />
                                             
                                         </View>
                                     </TouchableOpacity>
@@ -273,7 +273,7 @@ class AboutCase extends Component {
                             refreshing={this.state.refresh}
                             ListEmptyComponent={this.ListEmptyComponent}
                             onRefresh={this.onRefresh}
-                        /> */}
+                        />
 
 
 

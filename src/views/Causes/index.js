@@ -87,7 +87,7 @@ class Causes extends React.Component {
             cardMaxElevation={6}
             cornerRadius={50}
           >
-            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('Login') }} />
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
             <TextInput placeholder="Search cases , causes & providers" style={
               {
                 flex: 1,
@@ -160,36 +160,38 @@ class Causes extends React.Component {
 
       // </View>
 
+<TouchableOpacity onPress={()=> this.props.navigation.navigate('CauseScreen' , {id:item.id})}>
+<View style={styles.a15658e81ce8911ea854bcb969437c385}>
 
 
-      <View style={styles.a15658e81ce8911ea854bcb969437c385}>
+<CardView
+  style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
+  cardElevation={6}
+  cardMaxElevation={6}
+  cornerRadius={10}>
+  <Image
+    source={{ uri: `${item.avatarImage}` }}
+    style={{ height: 44, width: 35, margin: 10 }}
+  />
+  <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
+  >
+    <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
+    <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
+
+  </View>
+  <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
+  >
+    <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>20</Text>
+    <Text style={{ color: Colors.placeHolder }}>Casee</Text>
+
+  </View>
+</CardView>
 
 
-        <CardView
-          style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
-          cardElevation={6}
-          cardMaxElevation={6}
-          cornerRadius={10}>
-          <Image
-            source={{ uri: `${item.avatarImage}` }}
-            style={{ height: 44, width: 35, margin: 10 }}
-          />
-          <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
-          >
-            <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
-            <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
+</View>
+</TouchableOpacity>
 
-          </View>
-          <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
-          >
-            <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>20</Text>
-            <Text style={{ color: Colors.placeHolder }}>Casee</Text>
-
-          </View>
-        </CardView>
-
-
-      </View>
+     
     );
   };
 
@@ -270,7 +272,7 @@ class Causes extends React.Component {
                 cardMaxElevation={6}
                 cornerRadius={50}
               >
-                <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('Login') }} />
+                <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
                 <TextInput placeholder="Search cases , causes & providers" style={
                   {
                     flex: 1,

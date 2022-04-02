@@ -10,7 +10,8 @@ import {
   GET_PROVIDER_DATA,
   GET_CASES_BY_NAME,
   GET_CAUSES_BY_NAME,
-  GET_PROVIDERS_BY_NAME
+  GET_PROVIDERS_BY_NAME,
+  GET_CAUSE_DATA
 } from '../constants';
 import * as errors from '../utils/Errors';
 
@@ -172,7 +173,7 @@ export const getCauseData = async (token,id) => {
   console.log('TCL: values', " i am in action","with id " , id);
   
   try {
-    const result = await fetch(`${GET_CASE_DATA}?id=${id}`, {
+    const result = await fetch(`${GET_CAUSE_DATA}?id=${id}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token,
@@ -275,7 +276,7 @@ export const getCausesByName = async (token,name) => {
       
         const json = await result.json();
         if (json && result.status == 200) {
-          //  console.log('stutus :' , result.status, json);
+           // console.log('stutus :' , result.status, json);
         } else {
             console.log('TCL: signUp -> error jsone', json);
           throw json;

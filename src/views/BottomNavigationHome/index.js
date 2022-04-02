@@ -121,7 +121,7 @@ class HomeScreen extends Component {
                             renderItem={({ item }) => {
                                 return (
                                     <TouchableOpacity onPress={() => {
-                                        ToastAndroid.show(item.name, ToastAndroid.LONG);
+                                        this.props.navigation.navigate('CauseScreen' , {id:item.id});
                                     }}>
                                         <View >
                                             <CardView

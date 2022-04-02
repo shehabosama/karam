@@ -162,33 +162,35 @@ class Providers extends React.Component {
 
 
 
-      <View style={styles.a15658e81ce8911ea854bcb969437c385}>
+<View style={styles.a15658e81ce8911ea854bcb969437c385}>
 
 
-        <CardView
-          style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
-          cardElevation={6}
-          cardMaxElevation={6}
-          cornerRadius={10}>
-          <Image
-            source={{ uri: `${item.avatarImage}` }}
-            style={{ height: 44, width: 35, margin: 10 }}
-          />
-          <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
-          >
-            <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
-            <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
+<CardView
+  style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
+  cardElevation={6}
+  cardMaxElevation={6}
+  cornerRadius={10}
+  >
+  <Image
+    source={{ uri: `${item.avatarImage}` }}
+    style={{ height: 44, width: 35, margin: 10 }}
+  />
+  <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
+  >
+    <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
+    <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
 
-          </View>
-          <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
-          >
-           
+  </View>
+  <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
+  >
+   
 
-          </View>
-        </CardView>
+  </View>
+</CardView>
 
 
-      </View>
+</View>
+     
     );
   };
 
@@ -253,7 +255,8 @@ class Providers extends React.Component {
                 cardMaxElevation={6}
                 cornerRadius={50}
               >
-                <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('Login') }} />
+                <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} 
+                onPress={() => { this.props.navigation.navigate('SearchProviders') }} />
                 <TextInput placeholder="Search cases , causes & providers" style={
                   {
                     flex: 1,

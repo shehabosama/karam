@@ -27,25 +27,12 @@ import ProviderScreen from './views/ProviderScreen';
 import Providers from './views/Providers';
 import Test from './views/Test';
 import searchCases from './views/SearchCases';
+import SearchProviders from './views/SearchProviders';
+import SearchCases from './views/SearchCases';
+import SearchCauses from './views/SearchCauses';
+import CauseScreen from './views/CauseScreen';
 
 const TasksStackNavigator = createStackNavigator();
-
-// const defaultStyles = {
-//     headerStyle: {
-//         backgroundColor: Colors.primary,
-//     },
-//     headerTintColor: '#fff',
-//     headerTitleStyle: {
-//         fontFamily: 'Poppins-Regular',
-//     },
-// };
-
-// const styles = StyleSheet.create({
-//     headerRightSpace:{
-//         marginRight:5,
-//     },
-// });
-
 const Tab = createBottomTabNavigator();
 
 function HomeTabs() {
@@ -83,6 +70,9 @@ function HomeTabs() {
             }}
         >
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
+            <Tab.Screen name={'Donation'} component={DonationScreen} />
+            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
+
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -99,8 +89,7 @@ function HomeTabs() {
                     tabBarButton: props => null,
                 }}
                 name={'Providers'} component={Providers} />
-            <Tab.Screen name={'Donation'} component={DonationScreen} />
-            <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
+
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -113,14 +102,36 @@ function HomeTabs() {
                     tabBarButton: props => null,
                     unmountOnBlur: true,
                 }}
-                name={'ProviderScreen'} component={ProviderScreen} />
-
-<Tab.Screen
+                name={'CauseScreen'} component={CauseScreen} />
+            <Tab.Screen
                 options={{
                     tabBarButton: props => null,
-                  
+                    unmountOnBlur: true,
                 }}
-                name={'searchCases'} component={searchCases} />
+                name={'ProviderScreen'} component={ProviderScreen} />
+
+
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'SearchProviders'} component={SearchProviders} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'SearchCases'} component={SearchCases} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'SearchCauses'} component={SearchCauses} />
 
 
         </Tab.Navigator>
@@ -147,7 +158,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator >
+        <TasksStackNavigator.Navigator initialRouteName='HomeTabs'>
 
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
@@ -163,13 +174,13 @@ const TasksNavigator = () => {
                 />
             }
 
-<TasksStackNavigator.Screen
+            <TasksStackNavigator.Screen
                 name="Test"
                 component={Test}
                 options={{ headerShown: false }}
 
             />
-           
+
             <TasksStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}
