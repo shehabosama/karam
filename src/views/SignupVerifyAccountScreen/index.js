@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -17,14 +17,9 @@ import { bindActionCreators } from 'redux';
 import gloable from '../../styles/gloable';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import CutomeButton from '../../component/CustomeButton';
 import { showMessage } from '../../utils/HelperFunctions';
-
-
 class SignupVerifyAccount extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = { loading: false, input1:'' , input2:'' , input3: '' , input4:'' };
@@ -32,32 +27,17 @@ class SignupVerifyAccount extends Component {
         this.inputRef2 = React.createRef()
         this.inputRef3 = React.createRef()
         this.inputRef4 = React.createRef()
-        
     }
-
     componentDidMount() {
-        this.checkUser();
-        if (this.props.currentUser !== null){
-            this.setState({loading:false})
-        }else if(this.props.error !== null){
-            this.setState({loading:false})
-        }
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.checkUser();
+     
     }
     componentWillUnmount() {
       //  this.props.cleanError();
         
     }
-    checkUser = async () => {
-        // if (this.props.currentUser) {
-        //     this.props.navigation.navigate('HomeTabs');
-        // }
-       // console.log(this.props.currentUser);
-     
-        
-    };
+  
 
 
      submitHandler = () => {
