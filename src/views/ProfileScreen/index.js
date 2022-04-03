@@ -11,13 +11,9 @@ import {
 } from 'react-native';
 import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
-
 import { connect } from 'react-redux';
 import { cleanError, signIn } from '../../actions/AuthActions';
-import CutomeButton from '../../component/CustomeButton';
-import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 class ProfileScreen extends Component {
     constructor(props) {
         super(props);

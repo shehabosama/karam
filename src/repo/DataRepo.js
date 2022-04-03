@@ -53,7 +53,6 @@ export const getObjectivesData = async (token)=>{
   };
   export const getCasesData = async (token , pageNumber) =>{
     const data = await dataApi.getCasesData(token , pageNumber);
-    //  console.log('TCL: objectives -> data', data);
       return data;
   };
   export const getCausesData = async (token, pageNumber) =>{
@@ -63,11 +62,9 @@ export const getObjectivesData = async (token)=>{
   };
   export const getPrefrencesData = async (token)=>{
     const data = await dataApi.getPrefrencesData(token);
-  //  console.log('TCL: objectives -> data', data);
     return data;
   };
   export const updateObjectAndPref = async ({objecIds , prefIds ,goal, token})=>{
-    
     let AllDAta = {
       REQ_PARAMS: {
         OBJECITVES_IDS: objecIds,
@@ -76,9 +73,7 @@ export const getObjectivesData = async (token)=>{
         GOAL:goal
       },
     };
-    //console.log('TCL: objectives -> AllDAta', AllDAta);
     const data = await dataApi.updateObjectAndPref(AllDAta);
-  //  console.log('TCL: objectives -> data', data);
     return data;
   }
   export const getHomeScreenData = async(token)=>{

@@ -21,6 +21,7 @@ import DonationCard from '../../component/DonationCard';
 import { showMessage, validate } from '../../utils/HelperFunctions';
 import CasesCard from '../../component/CasesCard';
 import { getProviderData } from '../../actions/DataActions';
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 class ProviderScreen extends Component {
     constructor(props) {
         super(props);

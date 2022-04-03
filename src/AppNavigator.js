@@ -80,6 +80,7 @@ function HomeTabs() {
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
+                    unmountOnBlur: true,
                 }}
                 name={'Providers'} component={Providers} />
 

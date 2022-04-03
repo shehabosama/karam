@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
-
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import { connect } from 'react-redux';
 import { cleanError, signIn } from '../../actions/AuthActions';
 import CutomeButton from '../../component/CustomeButton';

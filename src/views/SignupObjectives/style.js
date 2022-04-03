@@ -1,3 +1,4 @@
+
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../constants';
 const styles = StyleSheet.create({
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'center',
-        color: Colors.placeHolder,
+        color: '#23596A',
     },
     ImportanText: {
         fontSize: 17,
@@ -65,5 +66,21 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flex: 1,
     },
+    checkboxContainer: {
+        flexDirection: "row",
+        marginBottom: 20,
+    },
+    checkbox: {
+        alignSelf: "center",
+    },
+    label: {
+        margin: 8,
+    },
+    ObjectiveCard: {
+        marginTop: 10,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colors.primary
+    }
 });
 export default styles;

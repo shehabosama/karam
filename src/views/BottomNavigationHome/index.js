@@ -8,7 +8,6 @@ import {
     Image,
     BackHandler,
     Alert,
-    ToastAndroid
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import CutomeDonationMeter from '../../component/CustomeDonationMeterBord';
@@ -187,7 +186,7 @@ class HomeScreen extends Component {
                 renderItem={({ item }) => {
                     return (
                         <TouchableOpacity onPress={() => {
-                            ToastAndroid.show(item.image, ToastAndroid.LONG);
+                          
 
                             this.props.navigation.navigate('ProviderScreen', { id: item.id });
                         }}>
@@ -241,7 +240,7 @@ class HomeScreen extends Component {
                         return (
                             <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }} >
                                 <TouchableOpacity style={{ flex: 1 }} onPress={() => {
-                                    ToastAndroid.show(item.name, ToastAndroid.LONG);
+                                   
                                     this.props.navigation.navigate('AboutCase', { id: item.id });
                                 }}>
                                     <CasesCard style={styles.cusomBord} round remainingText={item.remaining} imageUrl={item.image} name={item.name} />

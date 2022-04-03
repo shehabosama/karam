@@ -1,7 +1,8 @@
 import {StyleSheet} from 'react-native';
-import { Colors } from '../../constants';
+
 const styles = StyleSheet.create({
     container: {
+
         flex: 1,
         marginHorizontal: 15,
     },
@@ -11,6 +12,11 @@ const styles = StyleSheet.create({
         width: 25,
         height: 18,
         alignSelf: "flex-start",
+
+    },
+    selectionImage: {
+        alignSelf: "center",
+        marginVertical: 5,
 
     },
     Uppertext: {
@@ -35,14 +41,9 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'center',
-        color: Colors.placeHolder,
+        color: '#23596A',
     },
-    ImportanText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.importanText,
-    },
+
     btn: {
         marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -54,16 +55,10 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    HorizontalContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+    checkboxContainer: {
+        flexDirection: "row",
+        marginBottom: 20,
+    },
 
-    },
-    socialImage: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        flex: 1,
-    },
 });
 export default styles;

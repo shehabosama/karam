@@ -1,16 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image} from 'react-native';
 import CardView from 'react-native-cardview';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
 import CheckBox from '@react-native-community/checkbox';
 const PreferenceCard = ({ onPress, prefreenceTitle ,setSelection, round, icon, isSelected, danger, style }) => {
-   
-
     return (
         <View style={{ marginTop: 10, }}>
             <CardView
-                style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:1 }}
+                style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:5 , alignItems:"center" }}
                 cardElevation={6}
                 cardMaxElevation={6}
                 cornerRadius={10}>
@@ -26,21 +23,16 @@ const PreferenceCard = ({ onPress, prefreenceTitle ,setSelection, round, icon, i
                 </View>
                 <View style={{ flexDirection: 'column', marginTop:10 , marginHorizontal:5 }}
                 >
-                    <Text style={{fontSize:25 , fontWeight:'bold'  , alignSelf:'center'}}>20</Text>
                     <CheckBox
                         value={isSelected}
                         onValueChange={setSelection}
                         style={styles.checkbox}
                     />
-                    
-                    
                 </View>
             </CardView>
-
         </View>
     );
 };
-
 
 const styles = StyleSheet.create({
     checkbox: {

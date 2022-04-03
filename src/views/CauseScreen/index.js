@@ -15,12 +15,9 @@ import CardView from 'react-native-cardview'
 
 import { connect } from 'react-redux';
 import { cleanError, } from '../../actions/AuthActions';
-import CutomeButton from '../../component/CustomeButton';
-import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
 import CasesCard from '../../component/CasesCard';
 import { getCauseData, getProviderData } from '../../actions/DataActions';
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 class CauseScreen extends Component {
     constructor(props) {
         super(props);

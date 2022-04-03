@@ -30,7 +30,7 @@ export const signUp = async ({email, password , fullName , mobileNumber , nation
   };
   const user = await authApi.signUp(AllDAta);
   console.log('TCL: signUp -> user', user);
- // await AsyncStorageProvider.setItem('currentUser', JSON.stringify(user));
+  await AsyncStorageProvider.setItem('currentUser', JSON.stringify(user));
   return user;
 };
 

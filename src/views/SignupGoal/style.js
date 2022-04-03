@@ -6,12 +6,31 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
     },
     image: {
-
         marginTop: 20,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
+    },
+    editImage: {
 
+        marginTop: 20,
+        width: 25,
+        height: 28,
+        alignSelf: "flex-start",
+        marginEnd: 10,
+        marginTop: 50,
+        position: 'absolute',
+        end: 0,
+    },
+    input: {
+        borderBottomColor: Colors.primary,
+        textAlign: 'center',
+        borderStyle: 'solid',
+        fontSize: 50,
+        borderBottomWidth: 1.0,
+        paddingBottom: 15,
+        fontWeight: 'bold',
+        flex: 1
     },
     Uppertext: {
         fontSize: 34,
@@ -35,14 +54,10 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'center',
-        color: Colors.placeHolder,
+        color: '#23596A',
+        textAlign: 'center',
     },
-    ImportanText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.importanText,
-    },
+
     btn: {
         marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -54,16 +69,10 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    HorizontalContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+    renderError: {
 
-    },
-    socialImage: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        flex: 1,
+        color: Colors.danger,
     },
 });
+
 export default styles;

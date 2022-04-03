@@ -24,7 +24,7 @@ import { showMessage } from '../../utils/HelperFunctions';
 import { getCasesByName, getObjectivesData, getProvidersByName } from '../../actions/DataActions';
 import CardView from 'react-native-cardview';
 import CasesCard from '../../component/CasesCard';
-
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 
 class SearchCases extends Component {
     constructor(props) {
@@ -39,37 +39,39 @@ class SearchCases extends Component {
     }
 
     async componentDidMount() {
-        await this.props.getCasesByName('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ' ,
-        '');
+        currentUser = await AsyncStorageProvider.getItem('currentUser');
+        if (currentUser) {
+            const json = JSON.parse(currentUser);
+            this._getCasesByName(json.access_token ,'');
+        }
+
+
+    }
+    _getCasesByName = async(token , text)=>{
+        await this.props.getCasesByName(token,text);
         if(this.props.data !==null){
             this.setState({loading:false, data: this.props.data }) 
         }else{
             this.setState({ error: this.props.error }) 
         }
-
-    }
-
+    };
     async fetchData(text){
-        await this.props.getCasesByName('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ' ,
-        text);
+        currentUser = await AsyncStorageProvider.getItem('currentUser');
+        if (currentUser) {
+            const json = JSON.parse(currentUser);
+            await this.props.getCasesByName(json.access_token,text);
         if(this.props.data !==null){
             this.setState({loading:false, data: this.props.data }) 
         }else{
             this.setState({ error: this.props.error }) 
         }
-        
+        }    
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-      
-    }
-    componentWillUnmount() {
-        //  this.props.cleanError();
-
-    }
+    componentDidUpdate(prevProps, prevState, snapshot) {}
+    componentWillUnmount() { }
 
     renderItem = ({ item, index }) => {
         return (
-    
             <View style={{ flex: 1, margin: 2 }} >
             <TouchableOpacity style={{ flex: 1, margin: 5 }} onPress={() => {
                 ToastAndroid.show(item.name, ToastAndroid.LONG);
@@ -80,10 +82,7 @@ class SearchCases extends Component {
                     remainingText={item.remaining}
                     imageUrl={item.image}
                     name={item.name} />
-
             </TouchableOpacity>
-
-
         </View>
         );
       };
@@ -122,9 +121,6 @@ class SearchCases extends Component {
                         }}
                         value={this.state.searchInput}
                         />
-
-
-
                         <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
                     </CardView>
                 </View>
@@ -137,12 +133,8 @@ class SearchCases extends Component {
         );
     };
     render() {
-
-
         return (
-
             // <Text style={styles.Uppertext}>Select Objectives</Text>
-    
           <View style={styles.container}>
                 <TouchableOpacity
                     onPress={() => this.props.navigation.goBack()}>

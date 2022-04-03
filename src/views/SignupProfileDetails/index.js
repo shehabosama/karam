@@ -11,7 +11,7 @@ import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
 import CheckBox from '@react-native-community/checkbox';
 import { connect } from 'react-redux';
-import { cleanError, signIn, signUp } from '../../actions/AuthActions';
+import { cleanError, signUp } from '../../actions/AuthActions';
 import CutomeButton from '../../component/CustomeButton';
 import CutomeTextInput from '../../component/CustomeInput';
 import { showMessage } from '../../utils/HelperFunctions';
