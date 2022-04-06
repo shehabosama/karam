@@ -7,7 +7,7 @@ export const setItem = async (key, data) => {
     let insertedData = await getItem(key);
     return insertedData;
   } catch (e) {
-    console.log('TCL: setItem -> error', e);
+  //  console.log('TCL: setItem -> error', e);
     throw e;
   }
 };
@@ -30,7 +30,7 @@ export const getItem = async key => {
       throw 'noData';
     }
   } catch (e) {
-    console.log('TCL: getItem -> error', e);
+   // console.log('TCL: getItem -> error', e);
     throw e;
   }
 };

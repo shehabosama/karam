@@ -4,7 +4,7 @@ const initialState = async () => {
 
   return {
     currentUser: null,
-    error: null,
+    error: '',
   };
 };
 const AuthReducer = (state = initialState(), action) => {

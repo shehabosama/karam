@@ -2,9 +2,8 @@ import * as authApi from '../api/AuthApi';
 import * as AsyncStorageProvider from '../cache/AsyncStorageProvider';
 import {Platform} from 'react-native';
 export const login = async ({email, password}) => {
-  console.log('TCL: login -> {email, password}', {email, password});
+ 
   let OS = Platform.OS === 'ios' ? 'IOS' : 'ANDROID';
-
   let AllDAta = {
     REQ_PARAMS: {
       USER_ID: email,
@@ -12,7 +11,6 @@ export const login = async ({email, password}) => {
     },
   };
   const user = await authApi.login(AllDAta);
-  console.log('TCL: login -> user', user);
   await AsyncStorageProvider.setItem('currentUser', JSON.stringify(user));
   return user;
 };

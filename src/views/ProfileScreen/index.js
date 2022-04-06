@@ -11,13 +11,9 @@ import {
 } from 'react-native';
 import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
-
 import { connect } from 'react-redux';
 import { cleanError, signIn } from '../../actions/AuthActions';
-import CutomeButton from '../../component/CustomeButton';
-import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 class ProfileScreen extends Component {
     constructor(props) {
         super(props);
@@ -76,6 +72,7 @@ class ProfileScreen extends Component {
                 style={{ height: 81, width: 83, marginTop: 20, alignSelf: 'center', borderRadius: 50 }}
 
             />
+            <Text style={styles.Uppertext}>Hey Salma!</Text>
                 </TouchableOpacity>
            
             <Text style={styles.smalBoldText}>Account</Text>
@@ -184,9 +181,10 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
         fontWeight: 'bold',
-        alignSelf: 'flex-start',
+        
         color: '#23596a',
         marginTop: 15,
+        textAlign:'center'
 
     },
     Lowertext: {

@@ -1,462 +1,254 @@
-import React, { Component, useEffect, useState } from 'react';
+import React from 'react';
 import {
-    View,
-    Text,
-    ActivityIndicator,
-    ImageBackground,
-    ScrollView,
-    TouchableOpacity,
-    StyleSheet,
-    Image,
-    Dimensions,
-    ToastAndroid,
-    FlatList,
-    TextInput,
-    SafeAreaView
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  SafeAreaView,
+  ActivityIndicator,
+  Image,
+  ToastAndroid,
+  TextInput
 } from 'react-native';
-import { Colors, GET_CAUSES_DATA } from '../../constants';
-import { bindActionCreators } from 'redux';
-import gloable from '../../styles/gloable';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
-import CardView from 'react-native-cardview'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import CauseCard from '../../component/CauseCard';
-
-import ObjectiveCard from '../../component/ObjectiveCard';
-import { showMessage } from '../../utils/HelperFunctions';
-import { getCausesData, getObjectivesData, getPrefrencesData, updateObjectAndPref } from '../../actions/DataActions';
-import store from '../../store';
-import PreferenceCard from '../../component/PrefrencesCard';
-import { GET_DATA } from '../../actions/types';
-
-const Causes = () => {
-    const [loading, setLoading] = useState(false);
-    const [dataSource, setDataSource] = useState([]);
-    const [offset, setOffset] = useState(1);
-    const [isListEnd, setIsListEnd] = useState(false);
-    const [isFetching, setIsFetching] = useState(false);
-    const dispatch = useDispatch();
-  //  const DATA = useSelector((state) => state.dataReducer.data);
-
- 
-    useEffect(() => {
-        
-            getData();
-        
-    }, []);
-
-    //  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-    const getData = () => {
-    //     console.log(offset);
-    //     if (!loading && !isListEnd) {
-    //         console.log('getDataaaaaaaaaaa');
-    //         setLoading(true);
-            
-
-    //         dispatch(getCausesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',
-    //             offset, async () => {
-    //                 ToastAndroid.show(`${DATA.data}done`, ToastAndroid.LONG);
-    //                 await delay(10000);
-    //                 console.log(DATA);
-    //                // setData(DATA)
-    //                 if (DATA.data.length > 0) {
-    //                     console.log("i get Dataaaaaaaaaaaaaaaaaaaa ,", DATA);
-    //                     setOffset(offset + 1);
-    //                     //After the response increasing the offset for the next API call.
-                        
-    //                         setDataSource([...dataSource, ...DATA.data]);
-    //                         setLoading(false);
-                        
-
-    //                 } else {
-    //                     console.log("i am coudn't get it ");
-    //                     setIsListEnd(true);
-    //                     setLoading(false);
-    //                 }
-    //             },
-    //             () => { ToastAndroid.show('Somthing went wrong , please try again!', ToastAndroid.LONG) }
-    //         ));
-
-    //     }
-
-    //     setIsFetching(false);
-
-
-
-        console.log(offset);
-        if (!loading && !isListEnd) {
-            console.log('getData');
-            setLoading(true);
-
-            //Service to get the data from the server to render
-            fetch(`${GET_CAUSES_DATA}?page=${offset}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',
-                    }
-                })
-                //Sending the currect offset with get request
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    //Successful response from the API Call
-                    console.log(responseJson);
-                    if (responseJson.data.length > 0) {
-                        setOffset(offset + 1);
-                        //After the response increasing the offset for the next API call.
-                        setDataSource([...dataSource, ...responseJson.data]);
-                        setLoading(false);
-
-                    } else {
-                        setIsListEnd(true);
-                        setLoading(false);
-                    }
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-        setIsFetching(false);
-    };
-    const onRefresh = () => {
-        setIsFetching(true);
-        getData();
-    };
-    const renderFooter = () => {
-        return (
-            //Footer View with Loader
-            <View style={styles.footer}>
-                {loading ? (
-                    <ActivityIndicator color="black" style={{ margin: 15 }} />
-                ) : null}
-            </View>
-        );
+import { Colors } from '../../constants';
+import { bindActionCreators } from 'redux';
+import { connect, } from 'react-redux';
+import { GET_CAUSES_DATA } from '../../constants';
+import { getCausesData } from '../../actions/DataActions';
+import CardView from 'react-native-cardview';
+import Icon from 'react-native-vector-icons/Ionicons';
+import styles from './style';
+import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+class Causes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      causes: [],
+      isFetching: false,
+      loading: false,
+      initial: true,
     };
 
-    const getHeaderView = () => {
-        return (
-            <>
-                <Text style={styles.Uppertext}>Causes</Text>
-                <View style={{ flexDirection: 'row' }}>
-                    <CardView
-                        style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
-                        cardElevation={6}
-                        cardMaxElevation={6}
-                        cornerRadius={50}
-                    >
-                        <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('Login') }} />
-                        <TextInput placeholder="Search cases , causes & providers" style={
-                            {
-                                flex: 1,
-                                // borderBottomColor:Colors.placeHolder,
-                            }
-                        } />
-                        <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
-                    </CardView>
-                </View>
-            </>
+    this.onEndReachedCalledDuringMomentum = false;
+    this.endReached = false;
+    this.page = 1;
+  }
 
-        );
+  componentDidMount() {
+    this._getCauses(false);
+  }
+
+  componentWillUnmount() { }
+
+  //Flatlist
+  async onRefresh() {
+    this.onEndReachedCalledDuringMomentum = false;
+    this.endReached = false;
+    this.page = 1;
+    this.setState({ isFetching: true });
+    await this._getCauses();
+    this.setState({ isFetching: false });
+  }
+
+  onScrollHandler = async () => {
+    if (this.endReached) {
+      return;
     }
+    if (this.onEndReachedCalledDuringMomentum) {
+      return;
+    }
+    this.onEndReachedCalledDuringMomentum = true;
+    this.page = this.page + 1;
+    this.setState({ loading: true });
+    await this._getCauses(false);
+    this.setState({ loading: false });
+  };
 
+  onMomentumScrollBegin = () => {
+    this.onEndReachedCalledDuringMomentum = false;
+  };
+  getHeaderView = () => {
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <FlatList style={{ flex: 1, margin: 1 }}
+      <>
+        <Text style={styles.Uppertext}>Causes</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <CardView
+            style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
+            cardElevation={6}
+            cardMaxElevation={6}
+            cornerRadius={50}
+          >
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
+            <TextInput placeholder="Search cases , causes & providers" style={
+              {
+                flex: 1,
+                // borderBottomColor:Colors.placeHolder,
+              }
+            } />
+            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+          </CardView>
+        </View>
+      </>
 
-                data={dataSource}
-                renderItem={({ item }) => {
-                    return (
-                        <View style={{ flex: 1, margin: 2 }} >
-                            <TouchableOpacity style={{ flex: 1, margin: 5 }} onPress={() => {
-                                ToastAndroid.show(item.name, ToastAndroid.LONG);
-                            }}>
-                                <CauseCard
-
-                                    name={item.name}
-                                    imageUrl={item.image}
-                                    description={item.description} />
-
-                            </TouchableOpacity>
-
-
-                        </View>
-
-                    );
-                }}
-                bounces={false}
-                keyExtractor={item => item.id}
-                // refreshing={this.state.refresh}
-                // ListEmptyComponent={this.ListEmptyComponent}
-                //  onRefresh={this.onRefresh}
-                ListHeaderComponent={getHeaderView}
-                ListFooterComponent={renderFooter}
-                onEndReached={getData}
-                onEndReachedThreshold={0.5}
-                onRefresh={onRefresh}
-                refreshing={isFetching}
-                progressViewOffset={100}
-            />
-        </SafeAreaView>
     );
+  }
 
-}
-// class Causes1 extends Component {
+  renderHeader = () => {
+    return (
+      <Text style={styles.renderHeader}></Text>
+    );
+  };
 
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             loading: false,
-//             isSelected: false,
-//             data: [],
-//             error: null,
-//             pageNumber: 1,
-//             offset: 1,
-//             isListEnd: false,
+  renderFooter = () => {
+    if (!this.state.loading) return null;
+    return (
+      <ActivityIndicator
+        color="#128811"
+        style={styles.activityIndicator}
+      />
+    );
+  };
 
-//         };
-//     }
+  renderItem = ({ item, index }) => {
+    return (
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('CauseScreen', { id: item.id })}>
+        <View style={styles.renderItem}>
+          <CardView
+            style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
+            cardElevation={6}
+            cardMaxElevation={6}
+            cornerRadius={10}>
+            <Image
+              source={{ uri: `${item.avatarImage}` }}
+              style={{ height: 44, width: 35, margin: 10 }}
+            />
+            <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}>
+              <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
+              <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
+            </View>
+            <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}>
+              <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>20</Text>
+              <Text style={{ color: Colors.placeHolder }}>Casee</Text>
+            </View>
+          </CardView>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
-//     async componentDidMount() {
-//         await this.props.getCausesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',
-//             this.state.pageNumber);
-
-//         if (this.props.data !== null) {
-//             this.setState({ data: { ...this.props.data }, pageNumber: 2 });
-//         } else {
-//             this.setState({ error: this.props.error });
-//         }
-//         this.checkUser();
-//         if (this.props.currentUser !== null) {
-//             // this.setState({ loading: false })
-//         } else if (this.props.error !== null) {
-//             //  this.setState({ loading: false })
-//         }
-
-
-
-//     }
-
-
-
-//     getData = () => {
-
-//         console.log(this.state.offset);
-//         if (!this.state.loading && !this.state.isListEnd) {
-//             console.log('getData');
-//             this.setState((prevState, props) => { return { loading: true } });
-//             //Service to get the data from the server to render
-//             fetch(`${GET_CAUSES_DATA}?page=${this.state.offset}`,
-//                 {
-//                     method: 'GET',
-//                     headers: {
-//                         Accept: 'application/json',
-//                         'Content-Type': 'application/json',
-//                         'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',
-//                     }
-//                 })
-//                 //Sending the currect offset with get request
-//                 .then((response) => response.json())
-//                 .then((responseJson) => {
-//                     //Successful response from the API Call
-//                     console.log(responseJson);
-//                     if (responseJson.data.length > 0) {
-//                         this.setState((prevState, props) => { return { offset: this.state.offset + 1 } });
-//                         //After the response increasing the offset for the next API call.
-//                         let compinData = { ...this.state.data, ...responseJson.data };
-//                         this.setState((prevState, props) => { return { data: compinData } });
-//                         this.setState((prevState, props) => { return { loading: false } });
-//                     } else {
-//                         this.setState((prevState, props) => { return { isListEnd: true } });
-//                         this.setState((prevState, props) => { return { loading: false } });
-//                     }
-//                 })
-//                 .catch((error) => {
-//                     console.error(error);
-//                 });
-//         }
-//     };
-
-
-//     renderFooter = () => {
-//         return (
-//             //Footer View with Loader
-//             <View style={styles.footer}>
-//                 {this.state.loading ? (
-//                     <ActivityIndicator color="black" style={{ margin: 15 }} />
-//                 ) : null}
-//             </View>
-//         );
-//     };
-
-
-
-//     async onEndReached() {
-
-//         await this.props.getCausesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ',
-//             this.state.pageNumber);
-
-//         if (this.props.data !== null) {
-//             this.setState({ data: this.props.data, pageNumber: this.state.pageNumber + 1 });
-//         } else {
-//             this.setState({ error: this.props.error });
-//         }
-//         console.log("tessssssssssssssssst", this.state.pageNumber);
-
-//     }
-//     test() {
-//         this.setState({ pageNumber: 1 })
-//         console.log("test", this.state.pageNumber);
-
-//     }
-
-//     componentDidUpdate(prevProps, prevState, snapshot) {
-
-//         this.checkUser();
-//         //  console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.objectiveIdes, this.state.data);
-
-//     }
-//     componentWillUnmount() {
-//         //  this.props.cleanError();
-
-//     }
-
-//     checkUser = async () => {
-//         // if (this.props.currentUser) {
-//         //     this.props.navigation.navigate('HomeTabs');
-//         // }
-//         // console.log(this.props.currentUser);
-
-
-//     };
-
-
-
-//     render() {
-//         const getHeaderView = () => {
-//             return (
-//                 <>
-//                     <Text style={styles.Uppertext}>Causes</Text>
-//                     <View style={{ flexDirection: 'row' }}>
-//                         <CardView
-//                             style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
-//                             cardElevation={6}
-//                             cardMaxElevation={6}
-//                             cornerRadius={50}
-//                         >
-//                             <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('Login') }} />
-//                             <TextInput placeholder="Search cases , causes & providers" style={
-//                                 {
-//                                     flex: 1,
-//                                     // borderBottomColor:Colors.placeHolder,
-//                                 }
-//                             } />
-//                             <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
-//                         </CardView>
-//                     </View>
-//                 </>
-
-//             );
-//         }
-//         return (
-//             (this.state.data != null) ? <View style={styles.container}>
-
-//                 <FlatList style={{ flex: 1, margin: 1 }}
-
-
-//                     data={this.props.data.data}
-//                     renderItem={({ item }) => {
-//                         return (
-//                             <View style={{ flex: 1, margin: 2 }} >
-//                                 <TouchableOpacity style={{ flex: 1, margin: 5 }} onPress={() => {
-//                                     ToastAndroid.show(item.name, ToastAndroid.LONG);
-//                                 }}>
-//                                     <CauseCard
-
-//                                         name={item.name}
-//                                         imageUrl={item.image}
-//                                         description={item.description} />
-
-//                                 </TouchableOpacity>
-
-
-//                             </View>
-
-//                         );
-//                     }}
-//                     bounces={false}
-//                     keyExtractor={item => item.id}
-//                     refreshing={this.state.refresh}
-//                     ListEmptyComponent={this.ListEmptyComponent}
-//                     onRefresh={this.onRefresh}
-//                     ListHeaderComponent={getHeaderView}
-//                     ListFooterComponent={this.renderFooter}
-//                     onEndReached={this.getData}
-//                     onEndReachedThreshold={0.5}
-
-
-//                 />
-
-
-
-
-//                 {/* <CauseCard style={styles.cusomBord} round /> */}
-
-//             </View> : <ActivityIndicator style={{ flex: 1 }} size={40} />
-//         );
-//     }
-// }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
-    },
-
-    input: {
-        borderBottomColor: Colors.primary,
-        textAlign: 'center',
-        borderStyle: 'solid',
-        fontSize: 50,
-        borderBottomWidth: 1.0,
-        paddingBottom: 15,
-        fontWeight: 'bold',
-        flex: 1
-    },
-    Uppertext: {
-        fontSize: 34,
-        fontFamily: 'SFProDisplay-Regular',
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        marginTop: 15,
-
-    },
-    cusomBord: {
-        backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 100,
-        elevation: 10,
-        flexDirection: 'row',
+  _getCausesApi = async () => {
+    //API is too fast, adding timeout to visualize loader
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
+    currentUser = await AsyncStorageProvider.getItem('currentUser');
+    if (currentUser) {
+      const json = JSON.parse(currentUser);
+      await this.props.getCausesData(json.access_token, this.page)
     }
-    ,
-    icon: {
-        marginTop: 10,
-    },
-});
+
+  };
+
+  _getCauses = async () => {
+    await this._getCausesApi();
+    if (this.props.data !== null && this.props.data) {
+      this.updateUI(this.props.data.data);
+    }
+  };
+  updateUI = (data) => {
+    let causes = data.map((v) => {
+      return {
+        id: v.id.toString(),
+        name: `${v.name}`,
+        description: v.description,
+        avatarImage: `http://192.168.1.7/karam/public/storage/${v.image}`,
+      };
+    });
+
+    if (this.page > 1 && causes.length < 1) {
+      this.endReached = true;
+    }
+
+    if (this.page > 1) {
+      causes = [...this.state.causes, ...causes];
+    }
+
+    if (this.page == 0) {
+      causes = [...causes];
+    }
+
+    this.setState({ causes: causes, initial: false });
+  };
+  SearchInputForm = () => {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <CardView
+          style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
+          cardElevation={6}
+          cardMaxElevation={6}
+          cornerRadius={50}
+        >
+          <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
+          <TextInput placeholder="Search cases , causes & providers" style={
+            {
+              flex: 1,
+              // borderBottomColor:Colors.placeHolder,
+            }
+          } />
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('searchCases')}>
+            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+          </TouchableOpacity>
+
+        </CardView>
+      </View>
+    );
+  };
+  render() {
+    return (
+      <View style={styles.container}>
+        <SafeAreaView style={styles.safeAreaViewContainer}>
+          <View style={styles.safeAreaViewSubContainer}>
+            {/* {this.state.initial && <LoadingPlaceholder />} */}
+            <Text style={styles.Uppertext}>Causes</Text>
+            <this.SearchInputForm />
+
+            {!this.state.initial &&
+              (!this.state.causes || this.state.causes.length < 1) && (
+                <Text>{'No Causes found.'}</Text>
+              )}
+              
+            {this.state.initial && <ActivityIndicator animating style={{ flex: 1 }} size={40} />}
+            {!this.state.initial &&
+              this.state.causes &&
+              this.state.causes.length > 0 && (
+                <FlatList
+                  data={this.state.causes}
+                  renderItem={this.renderItem}
+                  onRefresh={() => this.onRefresh(false)}
+                  refreshing={this.state.isFetching}
+                  onEndReached={this.onScrollHandler}
+                  onEndReachedThreshold={0.7}
+                  onMomentumScrollBegin={this.onMomentumScrollBegin}
+                  ListFooterComponent={this.renderFooter}
+                  ListHeaderComponent={this.renderHeader}
+                />
+              )}
+          </View>
+        </SafeAreaView>
+      </View>
+    );
+  }
+}
+
 const mapStateToProps = state => ({
-    data: state.dataReducer.data,
-    error: state.dataReducer.error,
+  data: state.dataReducer.data,
+  error: state.dataReducer.error,
 });
 const mapDispatchToProps = dispatch => ({
-    //  updateObjectAndPref: bindActionCreators(updateObjectAndPref, dispatch),
-    getCausesData: bindActionCreators(getCausesData, dispatch)
-    // cleanError: bindActionCreators(cleanError, dispatch),
+  getCausesData: bindActionCreators(getCausesData, dispatch)
 });
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Causes);
+  mapStateToProps,
+  mapDispatchToProps,
+)(Causes)

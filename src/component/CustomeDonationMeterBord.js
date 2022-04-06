@@ -60,7 +60,7 @@ const Customstyles = StyleSheet.create({
         borderWidth: 0.9,
         borderColor: '#23596A',
         backgroundColor: Colors.primary,
-        marginTop: 50,
+        marginTop: 30,
         height: 100,
         flexDirection: 'row'
 

@@ -4,11 +4,8 @@ import * as errors from '../utils/Errors';
 import { LOGIN_URL, SIGNUP_URL } from '../constants';
 
 export const login = async ({
-
   REQ_PARAMS: { USER_ID, PASSWORD, },
 }) => {
-  console.log('TCL: USER_ID', USER_ID);
-
   try {
     const result = await fetch(LOGIN_URL, {
       method: 'POST',
@@ -21,31 +18,20 @@ export const login = async ({
         password: PASSWORD
       })
     });
-
-    // console.log(result.status);
     const json = await result.json();
     if (json && result.status == 200) {
-      console.log('i am here ,,,,,', json);
     } else {
-      console.log('TCL: login -> error jsone', json);
       throw json;
     }
     return json;
   } catch (error) {
-    console.log('TCL: login -> error', error);
-    console.log('TCL: login -> error.response', error.response);
     throw error.message;
   }
 };
-
-
-
 export const signUp = async ({
-
   REQ_PARAMS: { USER_ID, PASSWORD, FULL_NAME, MOBILE_NUMBER, NATIONALITY },
 }) => {
   console.log('TCL: USER_ID', USER_ID, PASSWORD, FULL_NAME, MOBILE_NUMBER, NATIONALITY);
-
   try {
     const result = await fetch(SIGNUP_URL, {
       method: 'POST',
@@ -78,19 +64,12 @@ export const signUp = async ({
     throw error.message;
   }
 };
-
-
-
-
-
-
 const forgetPassword = async ({ REQ_NAME, REQ_PARAMS: { EMAIL, PHONE } }) => {
   try {
     const res = await axios.post(`${API_ENDPOINT_DLETA}`, {
       REQ_NAME,
       REQ_PARAMS: { EMAIL, PHONE },
     });
-
     return res;
   } catch (error) {
     console.log('TCL: login -> error', error);
