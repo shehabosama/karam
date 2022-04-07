@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, StyleSheet, TouchableHighlight } from 're
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
-import { Colors } from '../constants';
+import { Colors, IMAGES_URL } from '../constants';
 import gloableStyles from '../styles/gloable'
 const ProviderCard = ({   imageUrl,  round, danger, style }) => {
    
@@ -19,7 +19,7 @@ const ProviderCard = ({   imageUrl,  round, danger, style }) => {
     return (
         <View activeOpacity={0.2} style={round ? Customstyles.round : btnStyle} underlayColor="transparent">
           <Image
-                    source={{uri: `http://192.168.1.7/karam/public/storage/${imageUrl}` }}
+                    source={{uri: `${IMAGES_URL}${imageUrl}` }}
                     style={{ height: 110 , width:100, }}
                 />         
 

@@ -14,6 +14,7 @@ export const GET_CASES_BY_NAME = `${BASE_URL}cases-search/te`
 export const GET_CAUSES_BY_NAME = `${BASE_URL}causes-search/t`
 export const GET_PROVIDERS_BY_NAME = `${BASE_URL}providers-search/t`
 export const GET_CAUSE_DATA = `${BASE_URL}cause`;
+export const IMAGES_URL ='http://192.168.1.7/karam/public/storage/';
 export const Colors ={
     primary:'#23596a',
     secondary:'#E5E6F8',

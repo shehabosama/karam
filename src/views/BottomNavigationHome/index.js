@@ -19,6 +19,7 @@ import { getHomeScreenData } from '../../actions/DataActions';
 import CardView from 'react-native-cardview';
 import ProviderCard from '../../component/ProviderCard';
 import styles from './style';
+import { IMAGES_URL } from '../../constants';
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -157,7 +158,7 @@ class HomeScreen extends Component {
                                         cornerRadius={10}>
                                         <Image
                                             // source={require("../../../assets/GreenwaterVector.png")}
-                                            source={{ uri: `http://192.168.1.7/karam/public/storage/${item.image}` }}
+                                            source={{ uri: `${IMAGES_URL}${item.image}` }}
                                             style={{
                                                 width: 29,
                                                 height: 33, margin: 10, alignSelf: "center"

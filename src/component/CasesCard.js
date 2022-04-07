@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, StyleSheet, TouchableHighlight } from 're
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
-import { Colors } from '../constants';
+import { Colors, IMAGES_URL } from '../constants';
 import gloableStyles from '../styles/gloable'
 const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => {
     let btnStyle = { ...Customstyles.container, ...style };
@@ -19,7 +19,7 @@ const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => 
         <View activeOpacity={0.2} style={round ? Customstyles.round : btnStyle} underlayColor="transparent">
             <ImageBackground
               //  source={require('../assets/maketCardPhoto.png')}
-                source={{uri: `http://192.168.1.7/karam/public/storage/${imageUrl}` }}
+                source={{uri: `${IMAGES_URL}${imageUrl}` }}
                 style={Customstyles.bgContainer}
                 imageStyle={{ borderRadius: 10 }}>
 

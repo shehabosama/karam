@@ -12,7 +12,7 @@ import {
     ToastAndroid,
     FlatList
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import gloable from '../../styles/gloable';
 import { connect } from 'react-redux';
@@ -88,7 +88,7 @@ class SearchCauses extends Component {
               cardMaxElevation={6}
               cornerRadius={10}>
               <Image
-                source={{ uri: `http://192.168.1.7/karam/public/storage/${item.image}` }}
+                source={{ uri: `${IMAGES_URL}${item.image}` }}
                 style={{ height: 44, width: 35, margin: 10 }}
               />
               <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}

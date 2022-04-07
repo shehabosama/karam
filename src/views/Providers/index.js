@@ -8,7 +8,7 @@ import {
   Image,
   TextInput
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import { connect, } from 'react-redux';
 import { getProvidersData } from '../../actions/DataActions';
@@ -154,7 +154,7 @@ class Providers extends React.Component {
         id: v.id.toString(),
         name: `${v.name}`,
         description: v.description,
-        avatarImage: `http://192.168.1.7/karam/public/storage/${v.image}`,
+        avatarImage: `${IMAGES_URL}${v.image}`,
       };
     });
 

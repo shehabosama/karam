@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import CauseCard from '../../component/CauseCard';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import { connect, } from 'react-redux';
 import { GET_CAUSES_DATA } from '../../constants';
@@ -161,7 +161,7 @@ class Causes extends React.Component {
         id: v.id.toString(),
         name: `${v.name}`,
         description: v.description,
-        avatarImage: `http://192.168.1.7/karam/public/storage/${v.image}`,
+        avatarImage: `${IMAGES_URL}${v.image}`,
       };
     });
 

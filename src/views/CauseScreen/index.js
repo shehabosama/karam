@@ -9,7 +9,7 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import CardView from 'react-native-cardview'
 
@@ -97,7 +97,7 @@ class CauseScreen extends Component {
 
                             <View style={{ flexDirection: 'column', marginEnd: 20 }}>
                                 <Image source={
-                                    { uri: `http://192.168.1.7/karam/public/storage/${this.state.data.image}` }
+                                    { uri: `${IMAGES_URL}${this.state.data.image}` }
                                 } style={{ marginTop: 50, width: 40, height: 50 }} />
                                 <TouchableOpacity onPress={() => {
                                     this.setState({
