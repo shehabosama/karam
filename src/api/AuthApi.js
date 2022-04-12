@@ -1,7 +1,7 @@
 //import axios from 'axios';
 //import {API_ENDPOINT_GATEWAY, API_ENDPOINT_DLETA} from '../utils/Config';
 import * as errors from '../utils/Errors';
-import { LOGIN_URL, SIGNUP_URL } from '../constants';
+import { LOGIN_URL, SIGNUP_URL, UPDATE_USER_INFO_URL } from '../constants';
 
 export const login = async ({
   REQ_PARAMS: { USER_ID, PASSWORD, },
@@ -64,6 +64,45 @@ export const signUp = async ({
     throw error.message;
   }
 };
+
+
+export const updateUserInfo = async ({
+  REQ_PARAMS: {  PASSWORD, FULL_NAME, MOBILE_NUMBER, NATIONALITY },
+}) => {
+  console.log('TCL: USER_ID', PASSWORD, FULL_NAME, MOBILE_NUMBER, NATIONALITY);
+  try {
+    const result = await fetch(UPDATE_USER_INFO_URL, {
+      method: 'POST',
+      headers: {
+       // 'Authorization': 'Bearer ' + TOKEN,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+      
+        password: PASSWORD,
+        name: FULL_NAME,
+        mobile: MOBILE_NUMBER,
+        nationality: NATIONALITY
+
+      })
+    });
+
+    const json = await result.json();
+    if (json && result.status == 200) {
+      console.log('stutus :' , result.status, json);
+    } else {
+      console.log('TCL: signUp -> error jsone', json);
+      throw json;
+    }
+    return json;
+  } catch (error) {
+    console.log('TCL: signUp -> error', error);
+    console.log('TCL: signUp -> error.response', error.response);
+    throw error.message;
+  }
+};
+
 const forgetPassword = async ({ REQ_NAME, REQ_PARAMS: { EMAIL, PHONE } }) => {
   try {
     const res = await axios.post(`${API_ENDPOINT_DLETA}`, {

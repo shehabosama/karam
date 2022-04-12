@@ -5,7 +5,7 @@ import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
 import { Colors } from '../constants';
 import gloableStyles from '../styles/gloable'
-const CasesCardInfo = ({ placeholder, text, onTextInputChange, ref, round, focus, icon, iconColor, danger, style }) => {
+const CasesCardInfo = ({ imageUrl, text, onTextInputChange, ref, round, focus, icon, iconColor, danger, style }) => {
     let btnStyle = { ...Customstyles.container, ...style };
     if (round) {
         btnStyle = { ...btnStyle, ...Customstyles.round }
@@ -18,8 +18,8 @@ const CasesCardInfo = ({ placeholder, text, onTextInputChange, ref, round, focus
     return (
         <View activeOpacity={0.2} style={round ? Customstyles.round : {}} underlayColor="transparent">
             <ImageBackground
-                source={require('../../assets/maketCardPhoto.png')}
-                //source={{ uri: 'www.imageislocatedhere.com }} -------- if it is link
+                //source={require('../../assets/maketCardPhoto.png')}
+                source={{ uri: imageUrl }}
                 style={Customstyles.bgContainer}
                 imageStyle={{ borderRadius: 10 }}>
 

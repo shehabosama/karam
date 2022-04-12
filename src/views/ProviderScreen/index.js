@@ -7,7 +7,8 @@ import {
     ScrollView,
     TouchableOpacity,
     StyleSheet,
-    Image
+    Image,
+    FlatList
 } from 'react-native';
 import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
@@ -22,6 +23,7 @@ import { showMessage, validate } from '../../utils/HelperFunctions';
 import CasesCard from '../../component/CasesCard';
 import { getProviderData } from '../../actions/DataActions';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import { CTMapList } from '../../utils/CTMapList';
 class ProviderScreen extends Component {
     constructor(props) {
         super(props);
@@ -39,18 +41,30 @@ class ProviderScreen extends Component {
     }
 
     async componentDidMount() {
-        await this.props.getProviderData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ', this.props.route.params.id)
+
+        currentUser = await AsyncStorageProvider.getItem('currentUser');
+        if (currentUser) {
+            const json = JSON.parse(currentUser);
+            //this.setState({accoutnName:json.name})
+            this.getProviderData(json.access_token);
+            
+        }
+       
+
+
+    }
+
+    getProviderData = async (token) => {
+        await this.props.getProviderData(token, this.props.route.params.id)
         if (this.props.data !== null) {
             this.setState({ data: this.props.data, loading: false })
         } else {
             this.setState({ error: this.props.error })
         }
-
-
-    }
+    };
     componentDidUpdate(prevProps, prevState, snapshot) {
 
-       
+
 
     }
     componentWillUnmount() {
@@ -62,88 +76,135 @@ class ProviderScreen extends Component {
         return <Text style={styles.renderError}>{this.props.error}</Text>;
     };
 
+    HeadCardForm = () => {
+        return (
+            <View style={{ flexDirection: 'row' }}>
+                <CardView
+                    style={{ flex: 1, flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 20 }}
+                    cardElevation={6}
+                    cardMaxElevation={6}
+                    cornerRadius={20} >
+                    <View style={{ flex: 1, flexDirection: 'column', marginStart: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.goBack()}>
+                            <Image
+                                source={require("../../../assets/backButton.png")}
+                                style={styles.image}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.Uppertext}>{this.state.data.name}</Text>
+                        <Text style={styles.Lowertext}>Registration: {this.state.data.registration}</Text>
+                        {
+                            this.state.isExpended ? <Text style={styles.Lowertext}>Info:   belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.</Text> :
+                                <></>
+                        }
+                    </View>
 
+                    <View style={{ flexDirection: 'column', marginEnd: 30 }}>
+                        <Image source={
+                            { uri: `${IMAGES_URL}${this.state.data.image}` }
+                        } style={{ marginTop: 50, width: 100, height: 110 }} />
+                        <TouchableOpacity onPress={() => {
+                            this.setState({
 
+                                isExpended: this.state.isExpended ? false : true
+                            })
+                        }}>
+                            <Text style={styles.smalBoldText}>Info +</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                </CardView>
+            </View>
+        );
+    }
+
+    TabBarForm = () => {
+        return (
+            <View >
+                <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder }}>
+                    <TouchableOpacity
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: true, subscribeCaseTab: false, prevCaseTab: false })
+                        }}>
+                        <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>
+                            Active Cases</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: false, subscribeCaseTab: true, prevCaseTab: false })
+                        }}>
+                        <Text style={this.state.subscribeCaseTab ? styles.activeTab : styles.nonActiveTab}>
+                            Subscribed Cases</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: false, subscribeCaseTab: false, prevCaseTab: true })
+                        }}>
+                        <Text style={this.state.prevCaseTab ? styles.activeTab : styles.nonActiveTab}>
+                            Previous Cases </Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+        );
+    }
     render() {
 
         return (
             (this.state.data !== null && this.state.loading === false) ? <View style={styles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <CardView
-                            style={{ flex: 1, flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 20 }}
-                            cardElevation={6}
-                            cardMaxElevation={6}
-                            cornerRadius={20} >
-                            <View style={{ flex: 1, flexDirection: 'column', marginStart: 10 }}>
-                                <TouchableOpacity
-                                    onPress={() => this.props.navigation.goBack()}>
-                                    <Image
-                                        source={require("../../../assets/backButton.png")}
-                                        style={styles.image}
-                                    />
-                                </TouchableOpacity>
-                                <Text style={styles.Uppertext}>{this.state.data.name}</Text>
-                                <Text style={styles.Lowertext}>Registration: {this.state.data.registration}</Text>
-                                {
-                                    this.state.isExpended ? <Text style={styles.Lowertext}>Info:   belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.</Text> :
-                                        <></>
-                                }
-                            </View>
 
-                            <View style={{ flexDirection: 'column', marginEnd: 30 }}>
-                                <Image source={
-                                    { uri: `${IMAGES_URL}${this.state.data.image}` }
-                                } style={{ marginTop: 50, width: 100, height: 110 }} />
-                                <TouchableOpacity onPress={() => {
-                                    this.setState({
-
-                                        isExpended: this.state.isExpended ? false : true
-                                    })
-                                }}>
-                                    <Text style={styles.smalBoldText}>Info +</Text>
-                                </TouchableOpacity>
-
-                            </View>
-                        </CardView>
-                    </View>
-
+                    <this.HeadCardForm />
                     <View style={{ flex: 1, marginHorizontal: 30, }}>
-                        <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder }}>
-                            <TouchableOpacity
-                                onPress={() => {
+                        <this.TabBarForm />
+                        {this.state.activeCaseTab ? <View>
+                            <Text>ActiveCases</Text>
+                            {(!this.state.loading) || (this.state.data !== null) ?
+                                <View style={styles.container}>
+                                    {/* i do this custome list because the normal flatlist getting error with scroll view */}
+                                    <CTMapList
+                                        data={this.state.data.cases}
+                                        style={{ paddingHorizontal: 0, zIndex: -1 }}
+                                        numColumns={2}
+                                        keyExtractor={(item) => {String(item.id); }}
+                                        renderItem={(data) => {
+                                            return <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }} >
+                                                <TouchableOpacity style={{ flex: 1 }} onPress={() => {
 
-                                    this.setState({ activeCaseTab: true, subscribeCaseTab: false, prevCaseTab: false })
-                                }}>
-                                <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>Active Cases</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: false, subscribeCaseTab: true, prevCaseTab: false })
-                                }}>
-                                <Text style={this.state.subscribeCaseTab ? styles.activeTab : styles.nonActiveTab}>Subscribed </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: false, subscribeCaseTab: false, prevCaseTab: true })
-                                }}>
-                                <Text style={this.state.prevCaseTab ? styles.activeTab : styles.nonActiveTab}>Previous Cases </Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('AboutCase')}>
-                            {/* <CasesCard style={styles.cusomBord} round /> */}
-                        </TouchableOpacity>
+                                                    this.props.navigation.navigate('AboutCase', { id: data.item.id });
+                                                }}>
+                                                    <CasesCard style={styles.cusomBord} round
+                                                        remainingText={data.item.remaining}
+                                                        imageUrl={data.item.image}
+                                                        name={data.item.name} />
+                                                </TouchableOpacity>
+                                            </View>
+                                        }}
+                                    />
+                                </View>
+                                : (this.props.error === '' || !this.props.error) ? <View style={{ flex: 1 }}>
+                                    <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+                                </View>
+                                    : <View>
+                                        <Text>{this.props.error}</Text>
+                                    </View>}
+                        </View> :
+                            this.state.subscribeCaseTab ? <View>
+                                <Text>subscribeCaseTab</Text>
+                            </View> :
+                                this.state.prevCaseTab ? <View><Text>prevCaseTab</Text></View> :
+                                    <></>}
 
                     </View>
 

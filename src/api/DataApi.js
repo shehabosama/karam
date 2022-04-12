@@ -297,7 +297,7 @@ export const getCasesData = async (token , pageNumber) => {
     console.log('TCL: token', token);
 
   try {
-    const result = await fetch(GET_CASES_DATA, {
+    const result = await fetch(`${GET_CASES_DATA}?page=${pageNumber}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token,

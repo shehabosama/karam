@@ -30,7 +30,7 @@ class HomeScreen extends Component {
             cases: [],
             causes: [],
             providers: [],
-            accountName: '',
+            userName:'',
         };
 
     }
@@ -41,6 +41,7 @@ class HomeScreen extends Component {
             const json = JSON.parse(currentUser);
             //this.setState({accoutnName:json.name})
             this.getHomeScreenData(json.access_token);
+            this.setState({userName:json.user_name})
         }
     }
     getHomeScreenData = async (token) => {
@@ -87,7 +88,7 @@ class HomeScreen extends Component {
     HeaderTitleForm = () => {
         return (
             <TouchableOpacity onPress={() => { this.props.logout() }} >
-                <Text style={styles.Uppertext}>Hello, {this.state.accountName}</Text>
+                <Text style={styles.Uppertext}>Hello, {this.state.userName}</Text>
             </TouchableOpacity>
         );
     };

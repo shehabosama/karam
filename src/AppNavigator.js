@@ -23,7 +23,7 @@ import PersonalInformation from './views/PersonalInformation';
 import ProviderScreen from './views/ProviderScreen';
 import Providers from './views/Providers';
 import Test from './views/Test';
-import searchCases from './views/SearchCases';
+
 import SearchProviders from './views/SearchProviders';
 import SearchCases from './views/SearchCases';
 import SearchCauses from './views/SearchCauses';
@@ -151,7 +151,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator >
+        <TasksStackNavigator.Navigator  initialRouteName='PersonalInformation'>
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}

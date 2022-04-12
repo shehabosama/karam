@@ -16,6 +16,8 @@ export const signIn = (values, navigation , onSuccess = ()=>{} , onErorr=()=>{})
     onErorr();
   }
 };
+
+
 export const signUp = (values, navigation , onSuccess=()=>{} , onError=()=>{}) => async dispatch => {
  try {
    const user = await authRepo.signUp(values);
@@ -32,6 +34,20 @@ export const signUp = (values, navigation , onSuccess=()=>{} , onError=()=>{}) =
 };
 
 
+export const updateUserInfo = (values, navigation , onSuccess=()=>{} , onError=()=>{}) => async dispatch => {
+  try {
+    const user = await authRepo.updateUserInfo(values);
+    dispatch({type: LOGIN_SUCCESS, payload: user});
+     onSuccess();
+     navigation.navigate('SignupVerifyAccount');
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAIL,
+      payload: error,
+    });
+    onError();
+  }
+ };
 export const autoLogin = user => async dispatch => {
   // try {
   //   await notificationRepo.subscribe(user);

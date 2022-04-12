@@ -129,7 +129,7 @@ class Causes extends React.Component {
               <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
             </View>
             <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}>
-              <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>20</Text>
+              <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>{item.countOfCases}</Text>
               <Text style={{ color: Colors.placeHolder }}>Casee</Text>
             </View>
           </CardView>
@@ -162,6 +162,7 @@ class Causes extends React.Component {
         name: `${v.name}`,
         description: v.description,
         avatarImage: `${IMAGES_URL}${v.image}`,
+        countOfCases: v.cases_count
       };
     });
 

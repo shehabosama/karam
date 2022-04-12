@@ -5,7 +5,8 @@ import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
 import { Colors, IMAGES_URL } from '../constants';
 import gloableStyles from '../styles/gloable'
-const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => {
+const CasesCard = ({ iconImage, remainingText, imageUrl, name, round, danger, style }) => {
+  
     let btnStyle = { ...Customstyles.container, ...style };
     if (round) {
         btnStyle = { ...btnStyle, ...Customstyles.round }
@@ -15,17 +16,18 @@ const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => 
     }
 
 
+    
     return (
         <View activeOpacity={0.2} style={round ? Customstyles.round : btnStyle} underlayColor="transparent">
             <ImageBackground
               //  source={require('../assets/maketCardPhoto.png')}
-                source={{uri: `${IMAGES_URL}${imageUrl}` }}
+                source={{uri: `${IMAGES_URL+imageUrl}` }}
                 style={Customstyles.bgContainer}
                 imageStyle={{ borderRadius: 10 }}>
 
                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
-                    <Image style={{ alignSelf: 'center' }} source={require('../../assets/waterVector.png')} />
+                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${iconImage}` }} />
                     <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{remainingText} EGP</Text>
                 </View>

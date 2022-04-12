@@ -1,6 +1,7 @@
-let BASE_URL = 'http://192.168.1.7/karam/public/api/';
+let BASE_URL = 'http://192.168.1.2/karam/public/api/';
 export const LOGIN_URL = `${BASE_URL}auth/login`;
 export const SIGNUP_URL = `${BASE_URL}auth/signup`;
+export const UPDATE_USER_INFO_URL = `${BASE_URL}edit`;
 export const GET_OBJECTIVE_DATA_URL = `${BASE_URL}objectives`;
 export const GET_PREFRENCES_DATA_URL = `${BASE_URL}preferences`;
 export const UPDATE_OBJECT_AND_PREF = `${BASE_URL}update-user`;
@@ -14,7 +15,7 @@ export const GET_CASES_BY_NAME = `${BASE_URL}cases-search/te`
 export const GET_CAUSES_BY_NAME = `${BASE_URL}causes-search/t`
 export const GET_PROVIDERS_BY_NAME = `${BASE_URL}providers-search/t`
 export const GET_CAUSE_DATA = `${BASE_URL}cause`;
-export const IMAGES_URL ='http://192.168.1.7/karam/public/storage/';
+export const IMAGES_URL ='http://192.168.1.2/karam/public/storage/';
 export const Colors ={
     primary:'#23596a',
     secondary:'#E5E6F8',

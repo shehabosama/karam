@@ -9,7 +9,7 @@ import {
     Image, Dimensions,
     FlatList,
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
@@ -94,7 +94,7 @@ class AboutCase extends Component {
 
 
                         {this.state.aboutCaseTab ? <View style={{ flex: 1 }}>
-                            <CasesCardInfo />
+                            <CasesCardInfo imageUrl={IMAGES_URL+this.state.data.image}/>
 
                             <View style={{ flexDirection: 'row' }}>
                                 <Icon name="home-outline" size={20} style={{ marginTop: 10 }} />
@@ -207,12 +207,22 @@ class AboutCase extends Component {
                                     horizontal
                                     data={this.state.data.images}
                                     renderItem={({ item }) => {
+                                        
                                         return (
                                             <TouchableOpacity onPress={() => {
                                                 // ToastAndroid.show(item, ToastAndroid.LONG);
                                             }}>
                                                 <View >
-                                                    <Image source={require('../../../assets/maketCardPhoto.png')} style={{ marginHorizontal: 5 }} />
+                                                    <Image 
+                                                    // source={{
+                                                    //     uri:`${IMAGES_URL+item}`
+                                                    //     }} 
+                                                        source={{
+
+                                                            uri: `${IMAGES_URL+item}`,
+                                
+                                                        }}  
+                                                        style={{width:170,height:180, marginHorizontal: 5 }} />
 
                                                 </View>
                                             </TouchableOpacity>
