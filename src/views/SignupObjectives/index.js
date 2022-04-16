@@ -15,6 +15,7 @@ import ObjectiveCard from '../../component/ObjectiveCard';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import { getObjectivesData } from '../../actions/DataActions';
 import styles from './style';
+import gloable from '../../styles/gloable';
 class SignupObjectives extends Component {
     constructor(props) {
         super(props);
@@ -27,9 +28,9 @@ class SignupObjectives extends Component {
             //this.setState({accoutnName:json.name})
             this._getObjectivesData(json.access_token);
         }
-       
+
     }
-     _getObjectivesData = async(token)=>{
+    _getObjectivesData = async (token) => {
         await this.props.getObjectivesData(token);
         if (this.props.data !== undefined) {
             this.setState({ data: this.props.data })
@@ -38,9 +39,9 @@ class SignupObjectives extends Component {
         if (this.props.error !== '') {
             this.setState({ error: this.props.error })
             this.setState({ loading: false })
-            
+
         }
-     };
+    };
     componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
@@ -78,49 +79,53 @@ class SignupObjectives extends Component {
             </TouchableOpacity>
         );
     };
-    HeaderTitleForm = ()=>{
-        return(
+    HeaderTitleForm = () => {
+        return (
             <View>
                 <Text style={styles.Uppertext}>Select Objectives</Text>
                 <Text style={styles.Lowertext}>Select as many, or as few, as you’d like</Text>
             </View>
         );
     };
-    ObjectiveListForm = ()=>{
-        return(
+    ObjectiveListForm = () => {
+        return (
+
             <FlatList
-                    data={this.state.data}
-                    renderItem={({ item }) => {
-                        return (
-                            <TouchableOpacity onPress={() => {
-                                ToastAndroid.show(item.content, ToastAndroid.LONG);
-                            }}>
-                                <ObjectiveCard style={styles.ObjectiveCard} placeholder={item.content} round
-                                    isSelected={this.isChecked(item.id)}
-                                    setSelection={(value) => { this.toggleChecked(item.id) }} />
-                            </TouchableOpacity>
-                        );
-                    }}
-                    keyExtractor={item => item.id}
-                    refreshing={this.state.refresh}
-                    ListEmptyComponent={this.ListEmptyComponent}
-                    onRefresh={this.onRefresh}
-                />
+            style={{marginTop:10}}
+                data={this.state.data}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity onPress={() => {
+                            ToastAndroid.show(item.content, ToastAndroid.LONG);
+                        }}>
+                            <ObjectiveCard style={styles.ObjectiveCard} placeholder={item.content} round
+                                isSelected={this.isChecked(item.id)}
+                                setSelection={(value) => { this.toggleChecked(item.id) }} />
+                        </TouchableOpacity>
+                    );
+                }}
+                keyExtractor={item => item.id}
+                refreshing={this.state.refresh}
+                ListEmptyComponent={this.ListEmptyComponent}
+                onRefresh={this.onRefresh}
+            />
         );
     };
     render() {
         return (
-            (this.state.data !== null) ? <View style={styles.container}>
-                <this.BackButtonForm />
-                <this.HeaderTitleForm/>
-                <this.ObjectiveListForm/>
-                <CutomeButton style={styles.btn} text="Continue" round
-                    onPress={() =>
-                        this.props.navigation.navigate('SignupPreferences',
-                            {
-                                userObjecive: this.state.ids
-                            })}/>
-            </View>
+            (this.state.data !== null) ?
+                <View style={{ flex: 1, backgroundColor: '#fff' }}><View style={gloable.container}>
+                    <this.BackButtonForm />
+                    <this.HeaderTitleForm />
+                    <this.ObjectiveListForm />
+                    <CutomeButton style={styles.btn} text="Continue" round
+                        onPress={() =>
+                            this.props.navigation.navigate('SignupPreferences',
+                                {
+                                    userObjecive: this.state.ids
+                                })} />
+                </View></View>
+
                 : (this.state.error !== '') ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center", margin: 10, }}>
                     <Text style={{ textAlign: "center", fontWeight: 'bold' }}>{this.state.error}</Text>
                 </View> : <ActivityIndicator style={{ flex: 1 }} size={40} />

@@ -1,14 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
-
-        flex: 1,
-        marginHorizontal: 15,
-    },
+   
     image: {
 
-        marginTop: 20,
+        marginTop: 50,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
@@ -35,7 +31,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#23596a',
         textAlign: 'justify',
-        marginTop: 10,
+        
     },
     HintText: {
         fontSize: 17,

@@ -6,7 +6,8 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Image,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
@@ -16,6 +17,8 @@ import CardView from 'react-native-cardview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './style';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import gloable from '../../styles/gloable';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 class Providers extends React.Component {
   constructor(props) {
@@ -108,24 +111,28 @@ class Providers extends React.Component {
   renderItem = ({ item, index }) => {
     return (
       <View style={styles.renderItemContainer}>
-        <CardView
-          style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
-          cardElevation={6}
-          cardMaxElevation={6}
-          cornerRadius={10}
-        >
-          <Image
-            source={{ uri: `${item.avatarImage}` }}
-            style={{ height: 44, width: 35, margin: 10 }}
-          />
-          <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}>
-            <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
-            <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
-          </View>
-          <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
+        <Pressable onPress={() => { this.props.navigation.navigate('ProviderScreen', { id: item.id }); }}>
+          <CardView
+            // style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
+            // cardElevation={6}
+            // cardMaxElevation={6}
+            style={styles.ItemCard}
+            cornerRadius={10}
           >
-          </View>
-        </CardView>
+            <Image
+              source={{ uri: `${item.avatarImage}` }}
+              style={{ height: 44, width: 35, margin: 10 }}
+            />
+            <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}>
+              <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
+              {/* <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text> */}
+            </View>
+            <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
+            >
+            </View>
+          </CardView>
+        </Pressable>
+
       </View>
 
     );
@@ -175,28 +182,37 @@ class Providers extends React.Component {
 
   SearchInputForm = () => {
     return (
-      <View style={{ flexDirection: 'row' }}>
-        <CardView
-          style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
-          cardElevation={6}
-          cardMaxElevation={6}
-          cornerRadius={50}
-        >
-          <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}
-            onPress={() => { this.props.navigation.navigate('SearchProviders') }} />
-          <TextInput placeholder="Search cases , causes & providers" style={
-            {
-              flex: 1,
-              // borderBottomColor:Colors.placeHolder,
-            }
-          } />
-          <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
-        </CardView>
-      </View>
+      <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 10}} onPress={() => this.props.navigation.navigate('SearchProviders')}>
+          <CardView
+            style={{ flex: 1, flexDirection: 'row', paddingVertical: 5 }}
+            cardElevation={6}
+            cardMaxElevation={6}
+            cornerRadius={50}
+          >
+
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  />
+
+            <Text  style={
+              {
+                marginTop: 10,
+                flex: 1,
+                color: Colors.placeHolder
+                // borderBottomColor:Colors.placeHolder,
+              }
+            } >"Search cases , causes & providers"</Text>
+
+
+            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+
+
+          </CardView>
+        </TouchableOpacity>
+
     );
   };
   render() {
     return (
+      <View style={{backgroundColor:'#fff' , flex:1}}>
       <View style={styles.container}>
         <SafeAreaView style={styles.safeAreaViewContainer}>
           <View style={styles.safeAreaViewSupContainer}>
@@ -212,6 +228,7 @@ class Providers extends React.Component {
               this.state.providers &&
               this.state.providers.length > 0 && (
                 <FlatList
+                style={{marginTop:15}}
                   data={this.state.providers}
                   renderItem={this.renderItem}
                   onRefresh={() => this.onRefresh(false)}
@@ -225,6 +242,7 @@ class Providers extends React.Component {
               )}
           </View>
         </SafeAreaView>
+      </View>
       </View>
     );
   }

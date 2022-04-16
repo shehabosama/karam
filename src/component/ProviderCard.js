@@ -43,7 +43,7 @@ const Customstyles = StyleSheet.create({
         alignItems:"center",
         borderColor: '#23596A',
         marginVertical: 5,
-        marginHorizontal:10,
+        marginHorizontal:5,
       
       
     },

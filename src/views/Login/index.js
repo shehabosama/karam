@@ -15,6 +15,7 @@ import CutomeButton from '../../component/CustomeButton';
 import CutomeTextInput from '../../component/CustomeInput';
 import { showMessage, validate } from '../../utils/HelperFunctions';
 import styles from './style';
+import gloable from '../../styles/gloable';
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
@@ -54,13 +55,15 @@ class LoginScreen extends Component {
         } else {
             this.props.cleanError();
             this.setState({ error: false });
-            this.setState({ loading: true }, () => {this.props.signIn({ email: this.state.email, password: this.state.password }, this.props.navigation , ()=>{
-                this.setState({loading:false})
-            } , ()=>{
-                this.setState({loading:false})
-            })})
+            this.setState({ loading: true }, () => {
+                this.props.signIn({ email: this.state.email, password: this.state.password }, this.props.navigation, () => {
+                    this.setState({ loading: false })
+                }, () => {
+                    this.setState({ loading: false })
+                })
+            })
         }
-       
+
     }
 
     BackButton = () => {
@@ -76,9 +79,9 @@ class LoginScreen extends Component {
 
     EmailAndPasswordForm = () => {
         return <View>
-            <Text style={styles.Lowertext}>Email</Text>
+            <Text style={styles.fieldTitle}>Email</Text>
             <CutomeTextInput placeholder="youremail@mail.com" secure={false} onTextInputChange={(email) => this.setState({ email: email })} round />
-            <Text style={styles.Lowertext}>Password</Text>
+            <Text style={styles.fieldTitle}>Password</Text>
             <CutomeTextInput placeholder="Enter password" secure={true} onTextInputChange={(text) => this.setState({ password: text })} round />
         </View>
     }
@@ -112,24 +115,27 @@ class LoginScreen extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <this.BackButton />
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <this.HeaderTiltles />
-                    <this.EmailAndPasswordForm />
-                    {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
-                    {(this.state.loading) ? <ActivityIndicator
-                        style={{ marginVertical: 50, }}
-                        color={Colors.primary} size={30} /> :
-                        <CutomeButton style={styles.btn} text="Log in" onPress={this.submitHandler} round />}
-                    <Text style={styles.HintText}>Or Continue with Social Account</Text>
-                    <this.SocialMediaLoginForm />
-                    <View style={styles.HorizontalContainer}>
-                        <Text style={styles.HintText}>Don't have an account?</Text>
-                        <Text style={styles.ImportanText} onPress={() => this.props.navigation.navigate('Signup')}> Create Now</Text>
-                    </View>
-                </ScrollView>
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={gloable.container}>
+                    <this.BackButton />
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <this.HeaderTiltles />
+                        <this.EmailAndPasswordForm />
+                        {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
+                        {(this.state.loading) ? <ActivityIndicator
+                            style={{ marginVertical: 50, }}
+                            color={Colors.primary} size={30} /> :
+                            <CutomeButton style={styles.btn} text="Log in" onPress={this.submitHandler} round />}
+                        <Text style={styles.HintText}>Or Continue with Social Account</Text>
+                        <this.SocialMediaLoginForm />
+                        <View style={styles.HorizontalContainer}>
+                            <Text style={styles.HintText}>Don't have an account?</Text>
+                            <Text style={styles.ImportanText} onPress={() => this.props.navigation.navigate('Signup')}> Create Now</Text>
+                        </View>
+                    </ScrollView>
+                </View>
             </View>
+
         );
     }
 }

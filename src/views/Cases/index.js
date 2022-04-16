@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './style';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import CasesCard from '../../component/CasesCard';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 class Cases extends React.Component {
   constructor(props) {
     super(props);
@@ -81,8 +82,8 @@ class Cases extends React.Component {
             cardMaxElevation={6}
             cornerRadius={50}
           >
-            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} 
-            onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}
+              onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
             <TextInput placeholder="Search cases , causes & providers" style={
               {
                 flex: 1,
@@ -115,42 +116,22 @@ class Cases extends React.Component {
 
   renderItem = ({ item, index }) => {
     return (
-      // <TouchableOpacity onPress={() => this.props.navigation.navigate('CauseScreen', { id: item.id })}>
-      //   <View style={styles.renderItem}>
-      //     <CardView
-      //       style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
-      //       cardElevation={6}
-      //       cardMaxElevation={6}
-      //       cornerRadius={10}>
-      //       <Image
-      //         source={{ uri: `${item.avatarImage}` }}
-      //         style={{ height: 44, width: 35, margin: 10 }}
-      //       />
-      //       <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}>
-      //         <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
-      //         <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
-      //       </View>
-      //       <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}>
-      //         <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>20</Text>
-      //         <Text style={{ color: Colors.placeHolder }}>Casee</Text>
-      //       </View>
-      //     </CardView>
-      //   </View>
-      // </TouchableOpacity>
+    
+      <View style={{ marginHorizontal: 10 }}>
+        <Pressable onPress={() => {
 
-      <View style={{ flex: 1, margin: 2 }} >
-            <TouchableOpacity style={{ flex: 1, margin: 5 }} onPress={() => {
-                ToastAndroid.show(item.name, ToastAndroid.LONG);
-                this.props.navigation.navigate('AboutCase');
-            }}>
-                <CasesCard style={styles.cusomBord}
-                 iconImage={item.iconImage}
-                    round
-                    remainingText={item.remaining}
-                    imageUrl={item.avatarImage}
-                    name={item.name} />
-            </TouchableOpacity>
-        </View>
+          this.props.navigation.navigate('AboutCase', { id: item.id });
+        }}>
+          <CasesCard style={styles.cusomBord}
+            iconImage={item.iconImage}
+            round
+            remainingText={item.remaining}
+            imageUrl={item.avatarImage}
+            name={item.name} />
+        </Pressable>
+
+      </View>
+
     );
   };
 
@@ -178,8 +159,8 @@ class Cases extends React.Component {
         name: `${v.name}`,
         description: v.description,
         avatarImage: v.image,
-        remaining:v.remaining,
-        iconImage:`${IMAGES_URL}${v.cause.image}`
+        remaining: v.remaining,
+        iconImage: `${IMAGES_URL}${v.cause.image}`
       };
     });
 
@@ -199,31 +180,43 @@ class Cases extends React.Component {
   };
   SearchInputForm = () => {
     return (
-      <View style={{ flexDirection: 'row' }}>
-        <CardView
-          style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
-          cardElevation={6}
-          cardMaxElevation={6}
-          cornerRadius={50}
-        >
-          <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
-          <TextInput placeholder="Search cases , causes & providers" style={
-            {
-              flex: 1,
-              // borderBottomColor:Colors.placeHolder,
-            }
-          } />
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('searchCases')}>
+     
+        <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 10}} onPress={() => this.props.navigation.navigate('SearchCases')}>
+          <CardView
+            //style={{ flex: 1, flexDirection: 'row', paddingVertical: 5 }}
+            style={styles.card}
+           
+            cornerRadius={50}
+          >
+
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  />
+
+            <Text  style={
+              {
+                marginTop: 10,
+                flex: 1,
+                color: Colors.placeHolder
+                // borderBottomColor:Colors.placeHolder,
+              }
+            } >"Search cases , causes & providers"</Text>
+
+
             <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
-          </TouchableOpacity>
 
-        </CardView>
-      </View>
+
+          </CardView>
+        </TouchableOpacity>
+
+
+
     );
   };
   render() {
     return (
+      <View style={{flex:1, backgroundColor:'#fff'}}>
+
+      
       <View style={styles.container}>
         <SafeAreaView style={styles.safeAreaViewContainer}>
           <View style={styles.safeAreaViewSubContainer}>
@@ -235,13 +228,14 @@ class Cases extends React.Component {
               (!this.state.causes || this.state.causes.length < 1) && (
                 <Text>{'No Causes found.'}</Text>
               )}
-              
+
             {this.state.initial && <ActivityIndicator animating style={{ flex: 1 }} size={40} />}
             {!this.state.initial &&
               this.state.causes &&
               this.state.causes.length > 0 && (
                 <FlatList
-                numColumns={2}
+                  style={{ marginTop: 15 }}
+                  numColumns={2}
                   data={this.state.causes}
                   renderItem={this.renderItem}
                   onRefresh={() => this.onRefresh(false)}
@@ -255,6 +249,7 @@ class Cases extends React.Component {
               )}
           </View>
         </SafeAreaView>
+      </View>
       </View>
     );
   }

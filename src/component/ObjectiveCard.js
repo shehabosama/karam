@@ -40,14 +40,16 @@ const styles = StyleSheet.create({
     },
     checkboxContainer: {
         flexDirection: "row",
-        padding: 10
+        padding: 10,
+        paddingStart:20
     },
     checkbox: {
         alignSelf: "flex-end",
     },
     label: {
         margin: 5,
-        flex: 1
+        flex: 1,
+        color:Colors.placeHolder
     },
 });
 

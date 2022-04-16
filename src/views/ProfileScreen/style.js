@@ -1,14 +1,19 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../constants';
 const styles = StyleSheet.create({
-  
-    backIcon: {
+    container: {
+        flex: 1,
+        marginHorizontal: 20,
+        
+    },
+    image: {
         marginTop: 20,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
     },
-    editIcon: {
+    editImage: {
+
         marginTop: 20,
         width: 25,
         height: 28,
@@ -16,11 +21,9 @@ const styles = StyleSheet.create({
         marginEnd: 10,
         marginTop: 50,
         position: 'absolute',
-        end: 0
-
+        end: 0,
     },
-
-    textInput: {
+    input: {
         borderBottomColor: Colors.primary,
         textAlign: 'center',
         borderStyle: 'solid',
@@ -34,12 +37,14 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
         fontWeight: 'bold',
-        alignSelf: 'flex-start',
+
         color: '#23596a',
         marginTop: 15,
+        textAlign: 'center'
 
     },
     Lowertext: {
+        width: 275,
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'flex-start',
@@ -48,22 +53,33 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     HintText: {
-        fontSize: 15,
+        fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'center',
         color: '#23596A',
         textAlign: 'center',
+        marginTop: 5
     },
-    BoldHintText: {
-        fontSize: 15,
+    AccountText: {
+        fontSize: 20,
         fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.primary,
-        textAlign: 'center',
-        fontWeight: 'bold'
+        marginTop: 30,
+        marginBottom:10,
+        color: Colors.blackText,
+        fontWeight: 'bold',
+
     },
-    customeButton: {
-        marginVertical: 40,
+    Support: {
+        fontSize: 20,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        marginTop: 35,
+        marginBottom:10,
+        color: Colors.blackText,
+        fontWeight: 'bold',
+
+    },
+    btn: {
+        marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
         paddingVertical: 15,
         shadowColor: 'black',
@@ -73,16 +89,31 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    btnManualDonation: {
-        marginTop: 50,
+    cusomBord: {
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
         shadowColor: 'black',
         shadowOpacity: 0.26,
         shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
+        shadowRadius: 100,
         elevation: 10,
-        padding: 5
+        flexDirection: 'row'
     },
-});
+    HorizontalContainer: {
 
+        flexDirection: 'row',
+        justifyContent: 'center',
+      
+    },
+    socialImage: {
+        width: 59,
+        height: 83,
+        marginHorizontal: 20
+    },
+    icon: {
+        margin: 5,
+    },
+
+
+
+});
 export default styles;

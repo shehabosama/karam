@@ -1,5 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet } from 'react-native';
 import { Colors } from '../../constants';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -38,6 +39,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#23596A',
     },
+    ImportanText: {
+        fontSize: 17,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        alignSelf: 'center',
+        color: Colors.importanText,
+    },
     btn: {
         marginVertical: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -49,6 +56,17 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
+    HorizontalContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+
+    },
+    socialImage: {
+        width: 100,
+        height: 100,
+        alignSelf: 'center',
+        flex: 1,
+    },
     checkboxContainer: {
         flexDirection: "row",
         marginBottom: 20,
@@ -56,9 +74,18 @@ const styles = StyleSheet.create({
     checkbox: {
         alignSelf: "center",
     },
-    renderError: {
-
-        color: Colors.danger,
+    label: {
+        margin: 8,
     },
+    ObjectiveCard: {
+        marginTop: 10,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colors.primary
+    },
+    icon: {
+        marginTop: 10,
+      },
 });
+
 export default styles;

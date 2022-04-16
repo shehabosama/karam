@@ -48,15 +48,18 @@ const Customstyles = StyleSheet.create({
         
     },
     round: {
-        height: 149,
+        flex:1,
         width: 155,
         borderRadius: 10,
         alignSelf:"center",
         borderColor: '#23596A',
-        marginVertical:20,
+        marginVertical:5,
     },
     bgContainer: {
-        height: 149,
+        width:165,
+        height:170,
+        flex:1,
+       // height: 149,
         // backgroundColor: 'rgba(10, 10, 10, 0.4)',
       //  justifyContent: 'center',
        // borderRadius: 50,

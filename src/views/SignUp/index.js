@@ -18,6 +18,7 @@ import CutomeButton from '../../component/CustomeButton';
 import CutomeTextInput from '../../component/CustomeInput';
 import { showMessage, validate } from '../../utils/HelperFunctions';
 import styles from './style';
+import gloable from '../../styles/gloable';
 class SignUpScreen extends Component {
     constructor(props) {
         super(props);
@@ -76,9 +77,9 @@ class SignUpScreen extends Component {
     EmailAndPasswordFrom = () => {
         return (
             <View>
-                <Text style={styles.Lowertext}>Email</Text>
+                <Text style={styles.fieldTitle}>Email</Text>
                 <CutomeTextInput type="email-address" placeholder="youremail@mail.com" secure={false} onTextInputChange={(username) => this.setState({ email: username })} round />
-                <Text style={styles.Lowertext}>Password</Text>
+                <Text style={styles.fieldTitle}>Password</Text>
                 <CutomeTextInput placeholder="Enter password" secure={true} onTextInputChange={(password) => this.setState({ password: password })} round />
             </View>
         );
@@ -108,22 +109,24 @@ class SignUpScreen extends Component {
     };
     render() {
         return (
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={gloable.container}>
+                    <this.BackButton />
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <this.HeaderTitleForm />
+                        <this.EmailAndPasswordFrom />
+                        <CutomeButton style={styles.btn} text="Signup" onPress={this.submitHandler} round />
+                        <Text style={styles.HintText}>Or Continue with Social Account</Text>
+                        <this.SocialMediaLAuthForm />
+                        <View style={styles.HorizontalContainer}>
+                            <Text style={styles.HintText}>Already have an account?</Text>
+                            <Text style={styles.ImportanText} onPress={() => this.props.navigation.navigate('Login')}> Log in</Text>
+                        </View>
+                    </ScrollView>
 
-            <View style={styles.container}>
-                <this.BackButton />
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <this.HeaderTitleForm />
-                    <this.EmailAndPasswordFrom />
-                    <CutomeButton style={styles.btn} text="Signup" onPress={this.submitHandler} round />
-                    <Text style={styles.HintText}>Or Continue with Social Account</Text>
-                    <this.SocialMediaLAuthForm />
-                    <View style={styles.HorizontalContainer}>
-                        <Text style={styles.HintText}>Already have an account?</Text>
-                        <Text style={styles.ImportanText} onPress={() => this.props.navigation.navigate('Login')}> Log in</Text>
-                    </View>
-                </ScrollView>
-
+                </View>
             </View>
+
         );
     }
 
@@ -131,10 +134,10 @@ class SignUpScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-    
+
 });
 const mapDispatchToProps = dispatch => ({
-   
+
 });
 export default connect(
     mapStateToProps,

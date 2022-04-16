@@ -16,6 +16,7 @@ import CutomeButton from '../../component/CustomeButton';
 import CutomeTextInput from '../../component/CustomeInput';
 import { showMessage } from '../../utils/HelperFunctions';
 import styles from './style';
+import gloable from '../../styles/gloable';
 class SignupProfileDetails extends Component {
     constructor(props) {
         super(props);
@@ -99,11 +100,11 @@ class SignupProfileDetails extends Component {
     InputsFieldsForm = () => {
         return (
             <View>
-                <Text style={styles.Lowertext}>Full Name</Text>
+                <Text style={styles.fieldTitle}>Full Name</Text>
                 <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => this.setState({ fullName: fullName })} />
-                <Text style={styles.Lowertext}>Mobile</Text>
+                <Text style={styles.fieldTitle}>Mobile</Text>
                 <CutomeTextInput type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => this.setState({ mobileNumber: mobileNumber })} />
-                <Text style={styles.Lowertext}>Nationality</Text>
+                <Text style={styles.fieldTitle}>Nationality</Text>
                 <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => this.setState({ nationality: nationality })} />
             </View>
         );
@@ -123,24 +124,27 @@ class SignupProfileDetails extends Component {
             </View>
         );
     }
-     renderError = () => {
+    renderError = () => {
         return <Text style={styles.renderError}>{this.props.error}</Text>;
     };
 
     render() {
         return (
-            <View style={styles.container}>
-                <this.BackButton />
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <this.HeaderTitleForm />
-                    <this.InputsFieldsForm />
-                    {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
-                    <this.AgreementTermsFrom />
-                    {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
-                        <CutomeButton style={styles.btn} text="Continue" round onPress={this.submitHandler} />}
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={gloable.container}>
+                    <this.BackButton />
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <this.HeaderTitleForm />
+                        <this.InputsFieldsForm />
+                        {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
+                        <this.AgreementTermsFrom />
+                        {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
+                            <CutomeButton style={styles.btn} text="Continue" round onPress={this.submitHandler} />}
 
-                </ScrollView>
+                    </ScrollView>
+                </View>
             </View>
+
         );
     }
 }

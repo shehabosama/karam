@@ -15,6 +15,7 @@ import CutomeButton from '../../component/CustomeButton';
 import { cleanError, updateObjectAndPref } from '../../actions/DataActions';
 import styles from './style';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import gloable from '../../styles/gloable';
 class SignupGoal extends Component {
     constructor(props) {
         super(props);
@@ -90,7 +91,7 @@ class SignupGoal extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
+            <View style={gloable.container}>
                 <this.BackButtonForm />
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                     <this.HeaderTitleForm />

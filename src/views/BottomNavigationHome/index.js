@@ -8,6 +8,7 @@ import {
     Image,
     BackHandler,
     Alert,
+    StatusBar
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import CutomeDonationMeter from '../../component/CustomeDonationMeterBord';
@@ -19,7 +20,9 @@ import { getHomeScreenData } from '../../actions/DataActions';
 import CardView from 'react-native-cardview';
 import ProviderCard from '../../component/ProviderCard';
 import styles from './style';
-import { IMAGES_URL } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +33,7 @@ class HomeScreen extends Component {
             cases: [],
             causes: [],
             providers: [],
-            userName:'',
+            userName: '',
         };
 
     }
@@ -41,7 +44,7 @@ class HomeScreen extends Component {
             const json = JSON.parse(currentUser);
             //this.setState({accoutnName:json.name})
             this.getHomeScreenData(json.access_token);
-            this.setState({userName:json.user_name})
+            this.setState({ userName: json.user_name })
         }
     }
     getHomeScreenData = async (token) => {
@@ -86,56 +89,67 @@ class HomeScreen extends Component {
     }
 
     HeaderTitleForm = () => {
+        let tmpArray = this.state.userName.split(' '); //split the name to an array
+
+        const lastname = tmpArray.pop(); // pop the last element of the aray and store it in "lastname" variable
+        const firstname = tmpArray.join(' '); // join the array to make first and middlename and store it in "firstname" variale
+
         return (
-            <TouchableOpacity onPress={() => { this.props.logout() }} >
-                <Text style={styles.Uppertext}>Hello, {this.state.userName}</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity style={{ flex: 1 }} onPress={() => { this.props.logout() }} >
+                    <Text style={styles.Uppertext}>Hello, {firstname}!</Text>
+                </TouchableOpacity>
+                <Icon name='search' size={20} color={Colors.blackText} style={styles.icon} />
+                <Icon name='notifications-outline' size={20} color={Colors.primary} style={styles.icon} />
+            
+            </View>
+
         );
     };
     CausesHeaderForm = () => {
         return (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
                 <Text style={{
                     flex: 1, fontSize: 17,
                     fontFamily: 'SF-Pro-Rounded-Regular',
-                    marginTop: 10,
+                    marginTop: 7,
                     color: '#23596A',
                     fontWeight: 'bold',
                 }}>Causes</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Causes')} >
-                    <Text style={styles.HintText}>View All</Text>
+                    <Text style={styles.HintSmallText}>View All</Text>
                 </TouchableOpacity>
             </View>
         );
     };
     CasesHeaderForm = () => {
         return (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', marginHorizontal: 10,marginTop: 10, }}>
                 <Text style={{
                     flex: 1, fontSize: 17,
                     fontFamily: 'SF-Pro-Rounded-Regular',
-                    marginTop: 10,
+                    marginTop: 7,
                     color: '#23596A',
                     fontWeight: 'bold',
                 }}>Cases</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Cases')} >
-                    <Text style={styles.HintText}>View All</Text>
+                    <Text style={styles.HintSmallText}>View All</Text>
                 </TouchableOpacity>
             </View>
         );
     }
     ProvidersHeaderForm = () => {
         return (
-            <View style={{ flexDirection: 'row', marginTop: 30 }}>
+            <View style={{ flexDirection: 'row', marginTop: 10, marginHorizontal: 10 }}>
                 <Text style={{
                     flex: 1, fontSize: 17,
                     fontFamily: 'SF-Pro-Rounded-Regular',
-                    marginTop: 10,
+                    marginTop: 7,
                     color: '#23596A',
                     fontWeight: 'bold',
                 }}>Providers</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Providers')} >
-                    <Text style={styles.HintText}>View All</Text>
+                    <Text style={styles.HintSmallText}>View All</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -144,25 +158,33 @@ class HomeScreen extends Component {
         return (
             <View style={styles.HorizontalContainer}>
                 <FlatList
+
                     horizontal
                     data={this.state.causes}
                     renderItem={({ item }) => {
                         return (
-                            <TouchableOpacity onPress={() => {
-                                this.props.navigation.navigate('CauseScreen', { id: item.id });
-                            }}>
+                            <TouchableOpacity style={{
+                                marginEnd: 20, marginStart: 10
+                                // paddingHorizontal: 2, ...(item.id !== 1 || item.id !== item.id == 4
+                                //     ? { marginHorizontal: 16 } :
+                                //     { marginEnd: 15 })
+                            }}
+
+                                onPress={() => {
+                                    this.props.navigation.navigate('CauseScreen', { id: item.id });
+                                }}>
                                 <View >
                                     <CardView
-                                        style={styles.socialImage}
+                                        // style={styles.socialImage}
+                                        style={styles.card}
                                         cardElevation={6}
                                         cardMaxElevation={6}
                                         cornerRadius={10}>
                                         <Image
-                                            // source={require("../../../assets/GreenwaterVector.png")}
                                             source={{ uri: `${IMAGES_URL}${item.image}` }}
                                             style={{
-                                                width: 29,
-                                                height: 33, margin: 10, alignSelf: "center"
+                                                width: 20,
+                                                height: 25, marginHorizontal: 17 , marginVertical:10, alignSelf: "center"
                                             }}
                                         />
                                     </CardView>
@@ -175,6 +197,8 @@ class HomeScreen extends Component {
                     refreshing={this.state.refresh}
                     ListEmptyComponent={this.ListEmptyComponent}
                     onRefresh={this.onRefresh}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                 />
             </View>
         );
@@ -188,7 +212,7 @@ class HomeScreen extends Component {
                 renderItem={({ item }) => {
                     return (
                         <TouchableOpacity onPress={() => {
-                          
+
 
                             this.props.navigation.navigate('ProviderScreen', { id: item.id });
                         }}>
@@ -203,12 +227,14 @@ class HomeScreen extends Component {
                 refreshing={this.state.refresh}
                 ListEmptyComponent={this.ListEmptyComponent}
                 onRefresh={this.onRefresh}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
             />
         );
     };
 
 
-    
+
 
 
     render() {
@@ -226,39 +252,68 @@ class HomeScreen extends Component {
         const getFoterView = () => {
             return (
                 <>
-                    <this.ProvidersHeaderForm/>
+                    <this.ProvidersHeaderForm />
                     <this.ProvidersListForm />
                 </>
             );
         }
-        return (
-            (!this.state.loading) || (this.state.data !== null) ? 
-            <View style={styles.container}>
-                <FlatList
-                    numColumns={2}
-                    initialNumToRender={4}
-                    data={this.state.cases}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }} >
-                                <TouchableOpacity style={{ flex: 1 }} onPress={() => {
-                                   
-                                    this.props.navigation.navigate('AboutCase', { id: item.id });
-                                }}>
-                                    <CasesCard style={styles.cusomBord} round remainingText={item.remaining} imageUrl={item.image} name={item.name} />
-                                </TouchableOpacity>
-                            </View>
-                        );
-                    }}
-                    keyExtractor={item => item.id}
-                    refreshing={this.state.refresh}
-                    ListEmptyComponent={this.ListEmptyComponent}
-                    onRefresh={this.onRefresh}
-                    ListHeaderComponent={getHederView}
-                    ListFooterComponent={getFoterView}
-                />
+        const CustomStatusBar = (
+            {
+                backgroundColor,
+                barStyle = "dark-content",
+                //add more props StatusBar
+            }
+        ) => {
 
-            </View>
+            const insets = useSafeAreaInsets();
+
+            return (
+                <View style={{ height: insets.top, backgroundColor }}>
+                    <StatusBar
+                        animated={true}
+                        backgroundColor={backgroundColor}
+                        barStyle={barStyle} />
+                </View>
+            );
+        }
+
+        return (
+            (!this.state.loading) || (this.state.data !== null) ?
+                <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                    <CustomStatusBar backgroundColor="white" />
+                    <View style={styles.container}>
+                        <FlatList
+
+                            numColumns={2}
+                            initialNumToRender={4}
+                            data={this.state.cases}
+                            renderItem={({ item }) => {
+                                return (
+
+                                    <View style={{ marginHorizontal: 10 }}>
+                                        <TouchableOpacity style={{ flex: 1 }} onPress={() => {
+
+                                            this.props.navigation.navigate('AboutCase', { id: item.id });
+                                        }}>
+
+
+                                            <CasesCard style={styles.cusomBord} round remainingText={item.remaining} imageUrl={item.image} name={item.name} />
+                                        </TouchableOpacity>
+                                    </View>
+                                );
+                            }}
+                            keyExtractor={item => item.id}
+                            refreshing={this.state.refresh}
+                            ListEmptyComponent={this.ListEmptyComponent}
+                            onRefresh={this.onRefresh}
+                            ListHeaderComponent={getHederView}
+                            ListFooterComponent={getFoterView}
+                            showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
+                        />
+
+                    </View>
+                </View>
                 : (this.props.error === '' || !this.props.error) ? <View style={{ flex: 1 }}>
                     <ActivityIndicator animating style={{ flex: 1 }} size={40} />
                 </View>

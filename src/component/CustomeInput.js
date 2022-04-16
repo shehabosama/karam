@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: 10,
+        padding: 2,
         flexDirection: 'row',
     },
     icon: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.danger,
     },
     round: {
-        borderRadius: 15,
+        borderRadius: 18,
         borderWidth: 0.9,
         borderColor: Colors.primary
     },

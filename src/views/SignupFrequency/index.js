@@ -15,6 +15,7 @@ import CutomeButton from '../../component/CustomeButton';
 import { showMessage } from '../../utils/HelperFunctions';
 import SwitchSelector from 'react-native-switch-selector';
 import styles from './style';
+import gloable from '../../styles/gloable';
 class SignupFrequency extends Component {
 
     constructor(props) {
@@ -76,7 +77,7 @@ class SignupFrequency extends Component {
             { label: 'Yearly', value: '2' }
         ];
         return (
-            <View style={styles.container}>
+            <View style={gloable.container}>
                <this.BackButtonForm/>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                     <this.HeaderTitleForm/>

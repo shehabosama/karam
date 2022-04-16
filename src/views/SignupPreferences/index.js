@@ -15,6 +15,7 @@ import { getPrefrencesData, updateObjectAndPref } from '../../actions/DataAction
 import PreferenceCard from '../../component/PrefrencesCard';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import styles from './style';
+import gloable from '../../styles/gloable';
 class SignupPreferences extends Component {
     constructor(props) {
         super(props);
@@ -35,9 +36,9 @@ class SignupPreferences extends Component {
             this._getPrefrencesData(json.access_token);
         }
 
-      
+
     }
-    _getPrefrencesData = async(token)=>{
+    _getPrefrencesData = async (token) => {
         await this.props.getPrefrencesData(token);
         if (this.props.data !== undefined) {
             this.setState({ data: this.props.data })
@@ -92,34 +93,39 @@ class SignupPreferences extends Component {
     };
     ObjectListForm = () => {
         return (
-            <View style={{ flexDirection: 'row', marginTop: 20, flex: 1 }}>
-                <View style={{ flex: 1 }}>
-                    <FlatList
-                        data={this.state.data}
-                        renderItem={({ item }) => {
-                            return (
-                                <TouchableOpacity onPress={() => {
-                                    ToastAndroid.show(item.title, ToastAndroid.LONG);
-                                }}>
+          
+                <View style={{ flexDirection: 'row', marginTop: 20, flex: 1 }}>
+                    <View style={{ flex: 1 }}>
+                        <FlatList
+                            data={this.state.data}
+                            renderItem={({ item }) => {
+                                return (
+                                    <TouchableOpacity onPress={() => {
+                                        ToastAndroid.show(item.title, ToastAndroid.LONG);
+                                    }}>
 
-                                    <PreferenceCard style={styles.cusomBord} prefreenceTitle={item.title} round
-                                        isSelected={this.isChecked(item.id)}
-                                        setSelection={(value) => { this.toggleChecked(item.id) }} />
-                                </TouchableOpacity>
-                            );
-                        }}
-                        keyExtractor={item => item.id}
-                        refreshing={this.state.refresh}
-                        ListEmptyComponent={this.ListEmptyComponent}
-                        onRefresh={this.onRefresh}
-                    />
-                </View>
+                                        <PreferenceCard style={styles.cusomBord} prefreenceTitle={item.title} round
+                                            isSelected={this.isChecked(item.id)}
+                                            setSelection={(value) => { this.toggleChecked(item.id) }} />
+                                    </TouchableOpacity>
+                                );
+                            }}
+                            keyExtractor={item => item.id}
+                            refreshing={this.state.refresh}
+                            ListEmptyComponent={this.ListEmptyComponent}
+                            onRefresh={this.onRefresh}
+                        />
+                    </View>
+                
             </View>
+
         );
     };
     render() {
         return (
-            (this.state.data != null) ? <View style={styles.container}>
+            (this.state.data != null) ? 
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+               <View style={gloable.container}>
                 <this.BackButtonForm />
                 <this.HeaderTitleForm />
                 <this.ObjectListForm />
@@ -131,7 +137,9 @@ class SignupPreferences extends Component {
                         }
                     )
                 }} />
-            </View> : (this.state.error !== '') ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center", margin: 10, }}>
+            </View>  
+            </View>
+            : (this.state.error !== '') ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center", margin: 10, }}>
                 <Text style={{ textAlign: "center", fontWeight: 'bold' }}>{this.state.error}</Text>
             </View> : <ActivityIndicator style={{ flex: 1 }} size={40} />
         );

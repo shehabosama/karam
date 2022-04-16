@@ -13,17 +13,12 @@ import {
 import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import CardView from 'react-native-cardview'
-
 import { connect } from 'react-redux';
 import { cleanError, } from '../../actions/AuthActions';
-import CutomeButton from '../../component/CustomeButton';
-import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
-import CasesCard from '../../component/CasesCard';
 import { getProviderData } from '../../actions/DataActions';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import { CTMapList } from '../../utils/CTMapList';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 class ProviderScreen extends Component {
     constructor(props) {
         super(props);
@@ -107,10 +102,10 @@ class ProviderScreen extends Component {
                         }
                     </View>
 
-                    <View style={{ flexDirection: 'column', marginEnd: 30 }}>
+                    <View style={{ flexDirection: 'column'}}>
                         <Image source={
                             { uri: `${IMAGES_URL}${this.state.data.image}` }
-                        } style={{ marginTop: 50, width: 100, height: 110 }} />
+                        } style={{ marginTop: 40, width: 100, height: 110 }} />
                         <TouchableOpacity onPress={() => {
                             this.setState({
 
@@ -129,7 +124,7 @@ class ProviderScreen extends Component {
     TabBarForm = () => {
         return (
             <View >
-                <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder }}>
+                <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder ,marginHorizontal:10}}>
                     <TouchableOpacity
                         onPress={() => {
 
@@ -164,32 +159,45 @@ class ProviderScreen extends Component {
         return (
             (this.state.data !== null && this.state.loading === false) ? <View style={styles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
                     <this.HeadCardForm />
-                    <View style={{ flex: 1, marginHorizontal: 30, }}>
+                    <View style={{ flex: 1}}>
                         <this.TabBarForm />
                         {this.state.activeCaseTab ? <View>
-                            <Text>ActiveCases</Text>
+                           
                             {(!this.state.loading) || (this.state.data !== null) ?
-                                <View style={styles.container}>
+                                <View >
                                     {/* i do this custome list because the normal flatlist getting error with scroll view */}
                                     <CTMapList
                                         data={this.state.data.cases}
-                                        style={{ paddingHorizontal: 0, zIndex: -1 }}
+                                      
                                         numColumns={2}
                                         keyExtractor={(item) => {String(item.id); }}
                                         renderItem={(data) => {
-                                            return <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }} >
-                                                <TouchableOpacity style={{ flex: 1 }} onPress={() => {
-
-                                                    this.props.navigation.navigate('AboutCase', { id: data.item.id });
+                                            return  <View style={ styles.round } underlayColor="transparent">
+                                                    <Pressable onPress={()=>{
+                                                     this.props.navigation.navigate('AboutCase', { id: data.item.id });
                                                 }}>
-                                                    <CasesCard style={styles.cusomBord} round
-                                                        remainingText={data.item.remaining}
-                                                        imageUrl={data.item.image}
-                                                        name={data.item.name} />
-                                                </TouchableOpacity>
+                                                    <ImageBackground
+                                              //  source={require('../assets/maketCardPhoto.png')}
+                                                source={{uri: `${IMAGES_URL+data.item.image}` }}
+                                                style={styles.bgContainer}
+                                                imageStyle={{ borderRadius: 10 }}>
+                                
+                                                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${data.item.iconImage}` }} />
+                                                    <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{data.item.remaining} EGP</Text>
+                                                </View>
+                                
+                                            </ImageBackground>
+                                            <View style={{ flexDirection: 'row', }}>
+                                                <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{data.item.name}</Text>
+                                                <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
                                             </View>
+                                                </Pressable>
+                                        </View>
+                                         
                                         }}
                                     />
                                 </View>
@@ -223,7 +231,7 @@ class ProviderScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 0,
+        backgroundColor:'#fff'
     },
     image: {
         marginTop: 20,
@@ -232,12 +240,14 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
     },
     Uppertext: {
+        height:90,
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
         fontWeight: 'bold',
         alignSelf: 'flex-start',
         color: '#23596a',
         marginTop: 15,
+       
     },
     Lowertext: {
         width: 275,
@@ -252,14 +262,14 @@ const styles = StyleSheet.create({
     smalBoldText: {
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
-        marginTop: 10,
+        marginTop: 0,
         color: '#23596A',
         fontWeight: 'bold',
         textAlign: 'center',
         marginEnd: 10
     },
     activeTab: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         marginTop: 10,
         color: '#23596A',
@@ -268,7 +278,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
     },
     nonActiveTab: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         marginTop: 10,
         color: Colors.placeHolder,
@@ -284,6 +294,24 @@ const styles = StyleSheet.create({
         shadowRadius: 100,
         elevation: 10,
         flexDirection: 'row'
+    },
+    round: {
+        
+        borderRadius: 10,
+        alignSelf:"center",
+        borderColor: '#23596A',
+        marginVertical:5,
+    },
+    bgContainer: {
+        width:170,
+        height:170,
+        flex:1,
+       // height: 149,
+        // backgroundColor: 'rgba(10, 10, 10, 0.4)',
+      //  justifyContent: 'center',
+       // borderRadius: 50,
+        
+        
     },
 });
 

@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         marginTop: 20
     },
+    image: {
+        marginTop: 40,
+        width: 25,
+        height: 18,
+        alignSelf: "flex-start",
+    },
     verifyFiledContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -33,15 +39,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     Lowertext: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'flex-start',
         color: Colors.primary,
         textAlign: 'justify',
-        marginTop: 10,
+        marginTop: 0,
     },
     HintText: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         color: Colors.primary,
         marginHorizontal: 5,
@@ -65,7 +71,8 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        marginHorizontal: 25,
+       
+       
     },
     round: {
         borderRadius: 10,

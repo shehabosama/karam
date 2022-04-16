@@ -151,7 +151,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator  initialRouteName='PersonalInformation'>
+        <TasksStackNavigator.Navigator>
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}

@@ -6,14 +6,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         backgroundColor:'#fff'
     },
-    image: {
-
-        marginTop: 20,
-        width: 25,
-        height: 18,
-        alignSelf: "flex-start",
-
-    },
     Uppertext: {
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
@@ -24,41 +16,56 @@ const styles = StyleSheet.create({
 
     },
     Lowertext: {
-        width: 275,
-        fontSize: 17,
+        flex: 1, fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        textAlign: 'justify',
         marginTop: 10,
+        color: '#23596A',
+        fontWeight: 'bold',
     },
     HintText: {
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'center',
         color: '#23596A',
+        textAlign: 'center',
+        marginTop: 5
     },
-    btn: {
-        marginVertical: 50,
+
+    cusomBord: {
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        paddingVertical: 15,
         shadowColor: 'black',
         shadowOpacity: 0.26,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 10,
         elevation: 10,
-
+        flexDirection: 'row'
     },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
+    HorizontalContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 10
     },
-    checkbox: {
-        alignSelf: "center",
+    socialImage: {
+        width: 59,
+        height: 83,
+        marginHorizontal: 20
     },
-    renderError: {
-
-        color: Colors.danger,
+    activeTab: {
+        fontSize: 17,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        marginTop: 10,
+        color: '#23596A',
+        fontWeight: 'bold',
+        marginEnd: 15,
+    },
+    nonActiveTab: {
+        fontSize: 17,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        marginTop: 10,
+        color: Colors.placeHolder,
+        fontWeight: 'bold',
+        marginEnd: 15,
     },
 });
+
 export default styles;

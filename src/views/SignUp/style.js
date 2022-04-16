@@ -1,17 +1,23 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../constants';
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
-    },
+   
     image: {
 
-        marginTop: 20,
+        marginTop: 50,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
 
+    },
+    fieldTitle: {
+        width: 275,
+        fontSize: 14,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        alignSelf: 'flex-start',
+        color: '#23596a',
+        textAlign: 'justify',
+       marginTop:10
     },
     Uppertext: {
         fontSize: 34,
@@ -29,7 +35,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#23596a',
         textAlign: 'justify',
-        marginTop: 10,
+        
     },
     HintText: {
         fontSize: 17,

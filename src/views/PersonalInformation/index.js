@@ -3,21 +3,18 @@ import {
     View,
     Text,
     ActivityIndicator,
-    ImageBackground,
     ScrollView,
     TouchableOpacity,
-    StyleSheet,
     Image
 } from 'react-native';
 import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import { connect } from 'react-redux';
-import { cleanError, updateUserInfo} from '../../actions/AuthActions';
+import { cleanError, updateUserInfo } from '../../actions/AuthActions';
 import CutomeButton from '../../component/CustomeButton';
 import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
+import { showMessage } from '../../utils/HelperFunctions';
 import styles from './style';
 class PersonalInformation extends Component {
     constructor(props) {
@@ -25,7 +22,7 @@ class PersonalInformation extends Component {
         this.state = {
             loading: false,
             password: '',
-            confirmPassword:'',
+            confirmPassword: '',
             fullName: '',
             mobileNumber: '',
             nationality: '',
@@ -59,8 +56,8 @@ class PersonalInformation extends Component {
             showMessage('No phone number less than eleven numbers');
         } else if (!isNumber) {
             showMessage('Please write only numbers in phone number');
-        }else if(this.state.password !== this.state.confirmPassword){
-            showMessage('Make sure that you write same password in confirm field');   
+        } else if (this.state.password !== this.state.confirmPassword) {
+            showMessage('Make sure that you write same password in confirm field');
         } else {
             // this.setState({error:false});
             this.setState({ loading: true }, () => {
@@ -94,8 +91,8 @@ class PersonalInformation extends Component {
     HeaderTitleForm = () => {
         return (
             <View>
-                <Text style={styles.Uppertext}>Update Profile</Text>
-                
+                <Text style={styles.Uppertext}>Personal Info</Text>
+
             </View>
         );
     }
@@ -115,25 +112,28 @@ class PersonalInformation extends Component {
             </View>
         );
     }
-   
-     renderError = () => {
+
+    renderError = () => {
         return <Text style={styles.renderError}>{this.props.error}</Text>;
     };
 
     render() {
         return (
-            <View style={styles.container}>
-                <this.BackButton />
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <this.HeaderTitleForm />
-                    <this.InputsFieldsForm />
-                    {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
-                    
-                    {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
-                        <CutomeButton style={styles.btn} text="Update" round onPress={this.submitHandler} />}
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={styles.container}>
+                    <this.BackButton />
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <this.HeaderTitleForm />
+                        <this.InputsFieldsForm />
+                        {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
 
-                </ScrollView>
+                        {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
+                            <CutomeButton style={styles.btn} text="Update" round onPress={this.submitHandler} />}
+
+                    </ScrollView>
+                </View>
             </View>
+
         );
     }
 }
