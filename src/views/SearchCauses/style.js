@@ -85,7 +85,29 @@ const styles = StyleSheet.create({
         borderColor: Colors.primary
     },
     icon: {
-        marginTop: 10,
+        marginTop: 5,
+      },
+      card: {
+        marginVertical:4,
+        flex: 1, 
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        ...Platform.select({
+          android: {
+            elevation: 5,
+            flex: 1, flexDirection: 'row', borderWidth: 2 
+          },
+          ios: {
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 1,
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 1.41,
+            flex: 1, flexDirection: 'row', borderWidth: 2 
+          },
+        }),
       },
 });
 

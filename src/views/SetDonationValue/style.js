@@ -1,19 +1,15 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../constants';
 const styles = StyleSheet.create({
+  
     image: {
         marginTop: 50,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
     },
-    backIcon: {
-        marginTop: 20,
-        width: 25,
-        height: 18,
-        alignSelf: "flex-start",
-    },
-    editIcon: {
+    editImage: {
+
         marginTop: 20,
         width: 25,
         height: 28,
@@ -21,11 +17,9 @@ const styles = StyleSheet.create({
         marginEnd: 10,
         marginTop: 50,
         position: 'absolute',
-        end: 0
-
+        end: 0,
     },
-
-    textInput: {
+    input: {
         borderBottomColor: Colors.primary,
         textAlign: 'center',
         borderStyle: 'solid',
@@ -46,39 +40,24 @@ const styles = StyleSheet.create({
 
     },
     Lowertext: {
-        fontSize: 17,
+        width: 275,
+        fontSize: 16,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'flex-start',
         color: '#23596a',
         textAlign: 'justify',
-        
+       
     },
     HintText: {
         fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
+       
         color: '#23596A',
         textAlign: 'center',
     },
-    BoldHintText: {
-        fontSize: 15,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.primary,
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-    BoldOrText: {
-        fontSize: 15,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.primary,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        marginTop:10
-    },
-    customeButton: {
-        marginVertical: 40,
+
+    btn: {
+        marginBottom: 5,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
         paddingVertical: 15,
         shadowColor: 'black',
@@ -86,18 +65,11 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 10,
         elevation: 10,
-        
 
     },
-    btnManualDonation: {
-        marginTop: 30,
-        backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 10,
-        padding: 5
+    renderError: {
+
+        color: Colors.danger,
     },
 });
 

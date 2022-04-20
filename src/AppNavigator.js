@@ -28,6 +28,10 @@ import SearchProviders from './views/SearchProviders';
 import SearchCases from './views/SearchCases';
 import SearchCauses from './views/SearchCauses';
 import CauseScreen from './views/CauseScreen';
+import TestSlider from './views/TestSlider';
+import SliderScreen from './views/SliderScreen';
+import SeekBar from './views/TestSeekBar';
+import SetDonationValue from './views/SetDonationValue';
 const TasksStackNavigator = createStackNavigator();
 const Tab = createBottomTabNavigator();
 function HomeTabs() {
@@ -80,7 +84,7 @@ function HomeTabs() {
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
-                    unmountOnBlur: true,
+
                 }}
                 name={'Providers'} component={Providers} />
 
@@ -97,7 +101,7 @@ function HomeTabs() {
                     unmountOnBlur: true,
                 }}
                 name={'CauseScreen'} component={CauseScreen} />
-                
+
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -126,6 +130,13 @@ function HomeTabs() {
                 }}
                 name={'SearchCauses'} component={SearchCauses} />
 
+                 <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'SetDonationValue'} component={SetDonationValue} />
+
 
         </Tab.Navigator>
     );
@@ -151,7 +162,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator>
+        <TasksStackNavigator.Navigator >
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}
@@ -223,6 +234,19 @@ const TasksNavigator = () => {
                 component={PersonalInformation}
                 options={{ headerShown: false }}
             />
+            <TasksStackNavigator.Screen
+                name="SliderScreen"
+                component={SliderScreen}
+                options={{ headerShown: false }}
+
+            />
+
+            {/* <TasksStackNavigator.Screen
+                name="SeekerBar"
+                component={SeekBar}
+                options={{ headerShown: false }}
+
+            /> */}
         </TasksStackNavigator.Navigator>
 
     );

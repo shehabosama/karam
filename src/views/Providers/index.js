@@ -182,31 +182,33 @@ class Providers extends React.Component {
 
   SearchInputForm = () => {
     return (
+      
       <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 10}} onPress={() => this.props.navigation.navigate('SearchProviders')}>
-          <CardView
-            style={{ flex: 1, flexDirection: 'row', paddingVertical: 5 }}
-            cardElevation={6}
-            cardMaxElevation={6}
-            cornerRadius={50}
-          >
+      <CardView
+        //style={{ flex: 1, flexDirection: 'row', paddingVertical: 5 }}
+        style={styles.card}
+       
+        cornerRadius={50}
+      >
 
-            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  />
+        <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  />
 
-            <Text  style={
-              {
-                marginTop: 10,
-                flex: 1,
-                color: Colors.placeHolder
-                // borderBottomColor:Colors.placeHolder,
-              }
-            } >"Search cases , causes & providers"</Text>
-
-
-            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+        <Text  style={
+          {
+            marginTop: 10,
+            flex: 1,
+            color: Colors.placeHolder
+            // borderBottomColor:Colors.placeHolder,
+          }
+        } >"Search cases , causes & providers"</Text>
 
 
-          </CardView>
-        </TouchableOpacity>
+        <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+
+
+      </CardView>
+    </TouchableOpacity>
+
 
     );
   };

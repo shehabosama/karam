@@ -8,9 +8,9 @@ const PreferenceCard = ({ onPress, prefreenceTitle ,setSelection, round, icon, i
         <View style={{ marginTop: 10, }}>
             <CardView
                 //style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:5 , alignItems:"center" }}
-                style={styles.card}
-                cardElevation={2}
-                cardMaxElevation={2}
+                style={styles.ItemCard}
+                cardElevation={6}
+                cardMaxElevation={6}
                 cornerRadius={10}>
                 <Image
                     source={require("../../assets/GreenwaterVector.png")}
@@ -43,14 +43,16 @@ const styles = StyleSheet.create({
         margin: 5,
         flex: 1
     },
-    card: {
+    ItemCard: {
+        marginVertical:4,
+        paddingVertical:10,
         flex: 1, 
         flexDirection: 'row',
         backgroundColor: '#fff',
         ...Platform.select({
           android: {
-            elevation: 2,
-            flex: 1, flexDirection: 'row',  padding:5 , alignItems:"center"
+            elevation: 5,
+            flex: 1, flexDirection: 'row', borderWidth: 2 
           },
           ios: {
             shadowColor: '#000',
@@ -60,10 +62,11 @@ const styles = StyleSheet.create({
             },
             shadowOpacity: 0.2,
             shadowRadius: 1.41,
-            flex: 1, flexDirection: 'row', padding:5 , alignItems:"center"
+            flex: 1, flexDirection: 'row', borderWidth: 2 
           },
         }),
       },
+  
 });
 
 export default PreferenceCard;

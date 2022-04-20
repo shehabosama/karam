@@ -107,7 +107,7 @@ class SearchCauses extends Component {
                 <Text style={styles.Uppertext}>Causes</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <CardView
-                        style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
+                        style={styles.card}
                         cardElevation={6}
                         cardMaxElevation={6}
                         cornerRadius={50}>
@@ -121,6 +121,7 @@ class SearchCauses extends Component {
                         <TextInput placeholder="Search cases , causes & providers" style={
                         {
                             flex: 1,
+                            height:35
                             // borderBottomColor:Colors.placeHolder,
                         } }
                         onChangeText={(text) => {
@@ -157,6 +158,7 @@ class SearchCauses extends Component {
 
             // <Text style={styles.Uppertext}>Select Objectives</Text>
     
+            <View style={{flex:1 , backgroundColor:'#fff'}}>
           <View style={gloable.container}>
                 <TouchableOpacity
                     onPress={() => this.props.navigation.goBack()}>
@@ -178,6 +180,7 @@ class SearchCauses extends Component {
                 />: <ActivityIndicator style={{ flex: 1 }} size={40} />}
               
 
+            </View>
             </View>
                 
         );

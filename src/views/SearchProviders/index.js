@@ -69,27 +69,30 @@ class SearchProviders extends Component {
     renderItem = ({ item, index }) => {
         return (
 
-            <View style={{ marginVertical: 5 }}>
+            <View style={{ marginVertical: 5 }} >
                 <CardView
-                    style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
+                    style={{ flex: 1, flexDirection: 'row',  padding: 10 }}
                     cardElevation={6}
                     cardMaxElevation={6}
-                    cornerRadius={10}>
-                    <Image
-                        source={{ uri: `${IMAGES_URL}${item.image}` }}
-                        style={{ height: 44, width: 35, margin: 10 }}
-                    />
-                    <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
-                    >
-                        <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
-                        {/* <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text> */}
+                    cornerRadius={10} >
+                    <TouchableOpacity   style={{ flex: 1, flexDirection: 'row' }} onPress={() => { console.log("test"); }}>
+                        <Image
+                            source={{ uri: `${IMAGES_URL}${item.image}` }}
+                            style={{ height: 44, width: 35, margin: 10 }}
+                        />
+                        <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
+                        >
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
+                            {/* <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text> */}
 
-                    </View>
-                    <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
-                    >
+                        </View>
+                        <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}
+                        >
 
 
-                    </View>
+                        </View>
+                    </TouchableOpacity>
+
                 </CardView>
 
 
@@ -102,7 +105,7 @@ class SearchProviders extends Component {
                 <Text style={styles.Uppertext}>Providers</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <CardView
-                        style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
+                        style={styles.card}
                         cardElevation={6}
                         cardMaxElevation={6}
                         cornerRadius={50}>
@@ -110,12 +113,13 @@ class SearchProviders extends Component {
                             size={24}
                             color={Colors.placeHolder}
                             style={styles.icon}
-                            onPress={() => { navigation.navigate('Login') }} />
+                            />
 
 
                         <TextInput placeholder="Search cases , causes & providers" style={
                             {
                                 flex: 1,
+                                height:35
                                 // borderBottomColor:Colors.placeHolder,
                             }}
                             onChangeText={(text) => {
@@ -148,28 +152,31 @@ class SearchProviders extends Component {
 
             // <Text style={styles.Uppertext}>Select Objectives</Text>
 
-            <View style={gloable.container}>
-                <TouchableOpacity
-                    onPress={() => this.props.navigation.goBack()}>
-                    <Image
-                        source={require("../../../assets/backButton.png")}
-                        style={styles.image}
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={gloable.container}>
+                    <TouchableOpacity
+                        onPress={() => this.props.navigation.goBack()}>
+                        <Image
+                            source={require("../../../assets/backButton.png")}
+                            style={styles.image}
 
-                    />
-                </TouchableOpacity>
-                <this.getHederView />
+                        />
+                    </TouchableOpacity>
+                    <this.getHederView />
 
-                {(this.state.data != null && !this.state.loading) ? <FlatList
-                    data={this.state.data}
-                    renderItem={this.renderItem}
-                    keyExtractor={item => item.id}
-                    refreshing={this.state.refresh}
-                    ListEmptyComponent={this.ListEmptyComponent}
-                    onRefresh={this.onRefresh}
-                /> : <ActivityIndicator style={{ flex: 1 }} size={40} />}
+                    {(this.state.data != null && !this.state.loading) ? <FlatList
+                        data={this.state.data}
+                        renderItem={this.renderItem}
+                        keyExtractor={item => item.id}
+                        refreshing={this.state.refresh}
+                        ListEmptyComponent={this.ListEmptyComponent}
+                        onRefresh={this.onRefresh}
+                    /> : <ActivityIndicator style={{ flex: 1 }} size={40} />}
 
 
+                </View>
             </View>
+
 
         );
     }

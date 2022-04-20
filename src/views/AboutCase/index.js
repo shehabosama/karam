@@ -17,6 +17,8 @@ import { cleanError, signIn } from '../../actions/AuthActions';
 import CasesCardInfo from '../../component/CasesCardInfo';
 import { getCaseData } from '../../actions/DataActions';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import CustomeButton from '../../component/CustomeButton';
+import CardView from 'react-native-cardview';
 class AboutCase extends Component {
     constructor(props) {
         super(props);
@@ -25,7 +27,8 @@ class AboutCase extends Component {
             aboutCaseTab: true,
             updatesCaseTab: false,
             data: null,
-            error: null
+            error: null,
+            value: 0.5
         };
 
     }
@@ -54,7 +57,7 @@ class AboutCase extends Component {
     render() {
         return (
             (this.state.data !== null && this.state.loading === false) ?
-                <View style={{flex:1 , backgroundColor:'#fff'}}>
+                <View style={{ flex: 1, backgroundColor: '#fff' }}>
                     <View style={styles.container}>
 
                         <TouchableOpacity
@@ -70,24 +73,24 @@ class AboutCase extends Component {
 
                             <View style={{ flex: 1, }}>
 
-                                <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity
+                                <View style={{ flexDirection: 'row', }}>
+                                    <TouchableOpacity style={{ flex: 2 }}
                                         onPress={() => {
 
                                             this.setState({ aboutCaseTab: true, updatesCaseTab: false });
                                         }}>
                                         <Text style={this.state.aboutCaseTab ? styles.activeTab : styles.nonActiveTab}>
-                                            ABOUT
+                                            Info
                                         </Text>
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity
+                                    <TouchableOpacity style={{ flex: 2 }}
                                         onPress={() => {
 
                                             this.setState({ aboutCaseTab: false, updatesCaseTab: true });
                                         }}>
                                         <Text style={this.state.updatesCaseTab ? styles.activeTab : styles.nonActiveTab}>
-                                            UPDATES
+                                            Updates
                                         </Text>
                                     </TouchableOpacity>
 
@@ -113,61 +116,28 @@ class AboutCase extends Component {
 
                                     </View>
 
-                                    <View style={{ marginTop: 10, borderRadius: 10, backgroundColor: '#E5E5E5', flexDirection: 'row', marginHorizontal: 30 }}>
-                                        <View style={{ backgroundColor: '#335D5B', padding: 5, borderRadius: 10 }}>
-                                            <Text style={{
-                                                fontSize: 15,
-                                                fontFamily: 'SF-Pro-Rounded-Regular',
-                                                alignSelf: 'flex-end',
-                                                color: Colors.whiteText,
-                                                marginHorizontal: 5,
-                                                marginVertical: 0,
-                                                fontWeight: 'bold',
-                                                paddingHorizontal: 10
-                                            }}>58,580 EGP</Text>
-                                            <Text style={styles.SmallText}>Collected</Text>
-                                        </View>
+                                    <View >
 
-                                        <Text style={{ flex: 4 }}></Text>
-                                        <View style={{ padding: 5 }}>
-                                            <Text style={{
-                                                fontSize: 15,
-                                                fontFamily: 'SF-Pro-Rounded-Regular',
-                                                alignSelf: 'flex-end',
-                                                color: Colors.blackText,
-                                                marginHorizontal: 5,
-                                                marginVertical: 0,
-                                                fontWeight: 'bold'
-                                            }}>{this.state.data.remaining} EGP</Text>
-                                            <Text style={{
-                                                fontSize: 10,
-                                                fontFamily: 'SF-Pro-Rounded-Regular',
-                                                alignSelf: 'flex-end',
-                                                color: Colors.blackText,
-                                                marginHorizontal: 5,
-                                                marginVertical: 0,
-                                                fontWeight: 'bold'
-                                            }}>Remaining</Text>
+                                        <View style={{ marginTop: 10, borderRadius: 10, backgroundColor: '#E5E5E5', flexDirection: 'row', marginHorizontal: 30 }}>
+                                            <View style={{   backgroundColor: '#335D5B', padding: 5, borderRadius: 10, flex: 0.8  }}>
+
+                                            </View>
+                                           
                                         </View>
-                                        <Text style={{ flex: 1 }}></Text>
+                                        <View style={{flexDirection:'row' ,}}>
+                                             <Text style={{flex:1,alignSelf:"center" , marginStart:120 , fontWeight:"bold" , fontSize:20 , color:Colors.primary}}>
+                                                 53,581 EGP</Text>
+                                       <Text style={{alignSelf:"center" , fontWeight:"bold" , fontSize:15 , color:Colors.placeHolder,marginEnd:29}}>
+                                           53,581 EGP</Text>
+
+                                        </View>
+                                      
                                     </View>
+                                   
 
-                                    <Text style={{ marginHorizontal: 30, marginTop: 20 }}>
-                                        <Text style={{ fontWeight: "bold", color: Colors.primary }}>
-                                            House #3456
-                                        </Text>
-                                        <Text>
-                                            belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                        </Text>
-                                    </Text>
-                                    <Text style={{ marginHorizontal: 30, marginVertical: 10 }}>
-                                        <Text style={{ fontWeight: "bold", color: Colors.primary }}>Cost: </Text>
-                                        <Text>water installment pipe (12 meters in length): 650 LE
-                                            Water meter: 2625 LE
-                                            Total needed: 3275 LE
-                                            Expected implementation date: 2 weeks from receiving donation.
-                                        </Text>
-                                    </Text>
+                                    <CustomeButton round text="Donate now" style={{marginTop:15}} onPress={()=>{
+                                        this.props.navigation.navigate('SetDonationValue');
+                                    }} />
 
                                 </View> :
                                     <View style={{ flex: 1 }}>
@@ -247,7 +217,10 @@ class AboutCase extends Component {
                                             marginVertical: 10,
                                             fontWeight: 'bold'
                                         }}>Supporting Documents</Text>
-                                        <View style={{ flexDirection: 'row' }}>
+                                        <CardView style={styles.card}
+                                        cornerRadius={20}
+                                        >
+                                             <View style={{ flexDirection: 'row' }}>
 
                                             <Text style={{
                                                 flex: 1,
@@ -276,14 +249,16 @@ class AboutCase extends Component {
                                             <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
 
                                         </View>
+                                        </CardView>
+                                       
                                     </View>
                                 }
 
                             </View>
 
                         </ScrollView>
-                    </View> 
-                    </View> : <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+                    </View>
+                </View> : <ActivityIndicator animating style={{ flex: 1 }} size={40} />
 
         );
     }
@@ -342,7 +317,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: '#23596A',
         fontWeight: 'bold',
-        marginEnd: 15,
+        borderBottomColor:Colors.primary,
+        borderBottomWidth:2,
+        textAlign: 'center',
+
     },
     nonActiveTab: {
         fontSize: 17,
@@ -350,10 +328,36 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: Colors.placeHolder,
         fontWeight: 'bold',
+        textAlign: 'center',
 
-        marginEnd: 15,
+
 
     },
+    card: {
+        marginVertical:4,
+       
+        
+        backgroundColor: '#fff',
+        ...Platform.select({
+          android: {
+            elevation: 5,
+           borderWidth: 2 ,
+          
+          },
+          ios: {
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 1,
+              
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 1.41,
+            borderWidth: 2 ,
+           
+          },
+        }),
+      },
 });
 
 

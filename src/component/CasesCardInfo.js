@@ -26,8 +26,8 @@ const CasesCardInfo = ({ imageUrl, text, onTextInputChange, ref, round, focus, i
                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
                     <Image style={{ alignSelf: 'center' }} source={require('../../assets/waterVector.png')} />
-                    <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
-                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>2,858 EGP</Text>
+                    <Text style={{ color: '#fff', textAlign: 'center' , fontSize:20 , fontWeight:'bold'}}>Ramaining</Text>
+                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center',fontSize:30 , fontWeight:'800' }}>2,858 EGP</Text>
 
                 </View>
 

@@ -49,7 +49,7 @@ class SplashScreen extends Component {
           <Text style={styles.Lowertext} >Donate to cases, subscribe to
             causes and see your impact with live updates</Text>
           <CutomeButton style={styles.btn} text='Get Started' round onPress={() => {
-            this.props.navigation.navigate('Login');
+            this.props.navigation.navigate('SliderScreen');
           }} />
         </View>
   

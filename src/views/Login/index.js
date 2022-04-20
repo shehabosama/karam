@@ -22,7 +22,7 @@ class LoginScreen extends Component {
         this.state = { loading: false, email: '', password: '', error: '' };
     }
     componentDidMount() {
-        this.checkUser();
+      //  this.checkUser();
         if (this.props.currentUser !== null) {
             this.setState({ loading: false })
         } else if (this.props.error !== null || this.props.error !== '') {
@@ -31,7 +31,7 @@ class LoginScreen extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.checkUser();
+       // this.checkUser();
     }
     componentWillUnmount() {
         this.props.cleanError();
