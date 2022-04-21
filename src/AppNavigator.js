@@ -38,6 +38,8 @@ import ThankScreen from './views/ThankScreen';
 import WalletScreen from './views/WalletScreen';
 import SubscriptionScreen from './views/SubscriptionScreen';
 import SampleApp from './views/TestSeekBar';
+import MyCardsScreen from './views/MyCardsScreen';
+import NotificationScreen from './views/NotificationScreen';
 const TasksStackNavigator = createStackNavigator();
 const Tab = createBottomTabNavigator();
 function HomeTabs() {
@@ -75,13 +77,13 @@ function HomeTabs() {
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
             <Tab.Screen name={'WalletScreen'} component={WalletScreen} />
             <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
-           
+
 
             <Tab.Screen name={'Donations'} component={DonationScreen} options={{
                 tabBarButton: props => null,
 
             }} />
-            
+
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -170,13 +172,26 @@ function HomeTabs() {
                 }}
                 name={'ThankScreen'} component={ThankScreen} />
 
-<Tab.Screen
+            <Tab.Screen
                 options={{
                     tabBarButton: props => null,
 
                 }}
                 name={'SubscriptionScreen'} component={SubscriptionScreen} />
 
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'MyCardsScreen'} component={MyCardsScreen} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'NotificationScreen'} component={NotificationScreen} />
         </Tab.Navigator>
     );
 }

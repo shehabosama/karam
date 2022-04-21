@@ -100,7 +100,9 @@ class HomeScreen extends Component {
                     <Text style={styles.Uppertext}>Hello, {firstname}!</Text>
                 </TouchableOpacity>
                 <Icon name='search' size={20} color={Colors.blackText} style={styles.icon} />
-                <Icon name='notifications-outline' size={20} color={Colors.primary} style={styles.icon} />
+                <Icon name='notifications-outline' size={20} color={Colors.primary} style={styles.icon} onPress={()=>{
+                    this.props.navigation.navigate('NotificationScreen')
+                }} />
             
             </View>
 

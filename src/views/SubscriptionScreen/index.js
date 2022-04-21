@@ -82,8 +82,7 @@ class SubscriptionScreen extends Component {
     HeaderTitleForm = () => {
         return (
             <View>
-                <Text style={styles.Uppertext}>Payment Method</Text>
-                <Text style={styles.Lowertext}>Please select payment method to process your donation</Text>
+                <Text style={styles.Uppertext}>Subscription</Text>
             </View>
         );
     };
@@ -264,7 +263,7 @@ class SubscriptionScreen extends Component {
                         {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
                     </ScrollView>
                     {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
-                        <CutomeButton style={styles.btn} text="Save Preferences" round onPress={() => this.props.navigation.navigate('PaymentMethodFirstStage')} />}
+                        <CutomeButton style={styles.btn} text="Save Preferences" round onPress={() => this.props.navigation.navigate('MyCardsScreen')} />}
 
                 </View>
             </View>
