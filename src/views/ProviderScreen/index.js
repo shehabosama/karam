@@ -25,8 +25,8 @@ class ProviderScreen extends Component {
         this.state = {
             loading: false,
             activeCaseTab: true,
-            subscribeCaseTab: false,
-            prevCaseTab: false,
+            
+            completedCases: false,
             data: null,
             error: null,
             loading: true,
@@ -124,8 +124,8 @@ class ProviderScreen extends Component {
     TabBarForm = () => {
         return (
             <View >
-                <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder ,marginHorizontal:10}}>
-                    <TouchableOpacity
+                <View style={{ flexDirection: 'row', marginHorizontal:10}}>
+                    <TouchableOpacity style={{flex:1}}
                         onPress={() => {
 
                             this.setState({ activeCaseTab: true, subscribeCaseTab: false, prevCaseTab: false })
@@ -133,20 +133,13 @@ class ProviderScreen extends Component {
                         <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>
                             Active Cases</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-
-                            this.setState({ activeCaseTab: false, subscribeCaseTab: true, prevCaseTab: false })
-                        }}>
-                        <Text style={this.state.subscribeCaseTab ? styles.activeTab : styles.nonActiveTab}>
-                            Subscribed Cases</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
+                  
+                    <TouchableOpacity style={{flex:1}}
                         onPress={() => {
 
                             this.setState({ activeCaseTab: false, subscribeCaseTab: false, prevCaseTab: true })
                         }}>
-                        <Text style={this.state.prevCaseTab ? styles.activeTab : styles.nonActiveTab}>
+                        <Text style={this.state.completedCases ? styles.activeTab : styles.nonActiveTab}>
                             Previous Cases </Text>
                     </TouchableOpacity>
 
@@ -168,6 +161,7 @@ class ProviderScreen extends Component {
                                 <View >
                                     {/* i do this custome list because the normal flatlist getting error with scroll view */}
                                     <CTMapList
+                                    style={{marginTop:20}}
                                         data={this.state.data.cases}
                                       
                                         numColumns={2}
@@ -208,11 +202,8 @@ class ProviderScreen extends Component {
                                         <Text>{this.props.error}</Text>
                                     </View>}
                         </View> :
-                            this.state.subscribeCaseTab ? <View>
-                                <Text>subscribeCaseTab</Text>
-                            </View> :
-                                this.state.prevCaseTab ? <View><Text>prevCaseTab</Text></View> :
-                                    <></>}
+                                <Text>completedCases</Text>
+                          }
 
                     </View>
 
@@ -276,6 +267,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
+        borderBottomColor:Colors.primary,
+        borderBottomWidth:2
     },
     nonActiveTab: {
         fontSize: 15,
@@ -285,6 +278,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
+      
     },
     cusomBord: {
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
