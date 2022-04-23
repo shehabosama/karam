@@ -17,6 +17,8 @@ import CutomeTextInput from '../../component/CustomeInput';
 import { showMessage } from '../../utils/HelperFunctions';
 import styles from './style';
 import gloable from '../../styles/gloable';
+import ModalSelector from 'react-native-modal-selector';
+import { data } from '../../utils/countries';
 class SignupProfileDetails extends Component {
     constructor(props) {
         super(props);
@@ -27,11 +29,15 @@ class SignupProfileDetails extends Component {
             fullName: '',
             mobileNumber: '',
             nationality: '',
-            agreeTerms: false
+            agreeTerms: false,
+            nameError: '',
+            mobileError: '',
+            nationalityError: '',
+            aggrementError: ''
         };
     }
     componentDidMount() {
-
+        this.props.cleanError();
         if (this.props.currentUser !== null) {
             this.setState({ loading: false })
         } else if (this.props.error !== null) {
@@ -47,17 +53,22 @@ class SignupProfileDetails extends Component {
         this.props.cleanError();
         let isNumber = !isNaN(+this.state.mobileNumber);
         if (this.state.fullName.trim() == '') {
-            showMessage('Full Name is required!');
+
+            this.setState({ nameError: 'Full Name is required!' })
         } else if (this.state.mobileNumber.trim() == '') {
-            showMessage('Mobile number is required!');
+
+            this.setState({ mobileError: 'Mobile number is required!' })
         } else if (this.state.nationality.trim() == '') {
-            showMessage('Nationality is required!');
+
+            this.setState({ nationalityError: 'Nationality is required!' })
         } else if (!this.state.agreeTerms) {
-            showMessage('You have to Agree Terms and Conditions');
+
+            this.setState({ aggrementError: 'You have to Agree Terms and Conditions' })
         } else if (this.state.mobileNumber.length < 11) {
-            showMessage('No phone number less than eleven numbers');
+            this.setState({ mobileError: 'No phone number less than eleven numbers' })
         } else if (!isNumber) {
-            showMessage('Please write only numbers in phone number');
+
+            this.setState({ mobileError: 'Please write only numbers in phone number' })
         } else {
             // this.setState({error:false});
             this.setState({ loading: true }, () => {
@@ -101,11 +112,50 @@ class SignupProfileDetails extends Component {
         return (
             <View>
                 <Text style={styles.fieldTitle}>Full Name</Text>
-                <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => this.setState({ fullName: fullName })} />
+                <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => {
+                    this.setState({ nameError: '' })
+                    this.setState({ fullName: fullName })
+                }} />
+                {!!this.state.nameError && (
+                    <Text style={{ color: "red" }}>{this.state.nameError}</Text>
+                )}
                 <Text style={styles.fieldTitle}>Mobile</Text>
-                <CutomeTextInput type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => this.setState({ mobileNumber: mobileNumber })} />
+                <CutomeTextInput type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => {
+                    this.setState({ mobileError: '' })
+                    this.setState({ mobileNumber: mobileNumber })
+                }} />
+                {!!this.state.mobileError && (
+                    <Text style={{ color: "red" }}>{this.state.mobileError}</Text>
+                )}
                 <Text style={styles.fieldTitle}>Nationality</Text>
-                <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => this.setState({ nationality: nationality })} />
+
+                <ModalSelector
+                    data={data}
+                    initValue="Your nationality"
+                    supportedOrientations={['landscape']}
+                    accessible={true}
+                    scrollViewAccessibilityLabel={'Scrollable options'}
+                    cancelButtonAccessibilityLabel={'Cancel Button'}
+                    //  cancelText="close"
+                    onChange={(option) => {
+                        this.setState({ nationalityError: '' });
+                        this.setState({ nationality: option.label })
+                    }}>
+
+<CutomeTextInput  placeholder="Your nationality" round onTextInputChange={(nationality) => {
+                    this.setState({ nationalityError: '' })
+                    this.setState({ nationality: nationality })
+                }} text={this.state.nationality} />
+
+                </ModalSelector>
+
+                {/* <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => {
+                    this.setState({ nationalityError: '' })
+                    this.setState({ nationality: nationality })
+                }} /> */}
+                {!!this.state.nationalityError && (
+                    <Text style={{ color: "red" }}>{this.state.nationalityError}</Text>
+                )}
             </View>
         );
     }
@@ -115,11 +165,17 @@ class SignupProfileDetails extends Component {
                 <View style={styles.checkboxContainer}>
                     <CheckBox
                         value={this.state.agreeTerms}
-                        onValueChange={(value) => this.setState({ agreeTerms: value })}
+                        onValueChange={(value) => {
+                            this.setState({ aggrementError: '' });
+                            this.setState({ agreeTerms: value })
+                        }}
                         style={styles.checkbox}
                     />
                     <Text style={styles.HintText}>Agree to Terms and Conditions</Text>
                 </View>
+                {!!this.state.aggrementError && (
+                    <Text style={{ color: "red" }}>{this.state.aggrementError}</Text>
+                )}
                 <Text style={styles.HintText}>Once you Click on verify email , you will receive an email to activate your account</Text>
             </View>
         );

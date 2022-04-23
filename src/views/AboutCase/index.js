@@ -58,18 +58,43 @@ class AboutCase extends Component {
         return (
             (this.state.data !== null && this.state.loading === false) ?
                 <View style={{ flex: 1, backgroundColor: '#fff' }}>
-                    <View style={styles.container}>
-
+                    <CardView style={styles.card}
+                        cardElevation={6}
+                        cardMaxElevation={6}
+                        cornerRadius={20}  >
                         <TouchableOpacity
                             onPress={() => this.props.navigation.goBack()}>
                             <Image
                                 source={require("../../../assets/backButton.png")}
                                 style={styles.image}
                             />
+
                         </TouchableOpacity>
+
+                        <View style={{ flexDirection: 'row' }}
+                        >
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.Uppertext}>{this.state.data.name}</Text>
+                                <Text style={styles.Lowertext}># Water 2312</Text>
+                            </View>
+                            <View style={{marginEnd:20}}>
+                                <Image
+                                source={require("../../../assets/GreenwaterVector.png")}
+                                style={{ resizeMode: 'contain', marginTop: 20 }}
+                            />
+                             <Text style={{fontSize:15 , fontWeight:'800' , marginTop:5}}>Info +</Text>
+                            </View>
+
+                        </View>
+
+
+                    </CardView>
+                    <View style={styles.container}>
+
+
+
                         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                            <Text style={styles.Lowertext}># Water 2312</Text>
-                            <Text style={styles.Uppertext}>{this.state.data.name}</Text>
+
 
                             <View style={{ flex: 1, }}>
 
@@ -119,23 +144,23 @@ class AboutCase extends Component {
                                     <View >
 
                                         <View style={{ marginTop: 10, borderRadius: 10, backgroundColor: '#E5E5E5', flexDirection: 'row', marginHorizontal: 30 }}>
-                                            <View style={{   backgroundColor: '#335D5B', padding: 5, borderRadius: 10, flex: 0.8  }}>
+                                            <View style={{ backgroundColor: '#335D5B', padding: 5, borderRadius: 10, flex: 0.8 }}>
 
                                             </View>
-                                           
-                                        </View>
-                                        <View style={{flexDirection:'row' ,}}>
-                                             <Text style={{flex:1,alignSelf:"center" , marginStart:120 , fontWeight:"bold" , fontSize:20 , color:Colors.primary}}>
-                                                 53,581 EGP</Text>
-                                       <Text style={{alignSelf:"center" , fontWeight:"bold" , fontSize:15 , color:Colors.placeHolder,marginEnd:29}}>
-                                           53,581 EGP</Text>
 
                                         </View>
-                                      
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Text style={{ flex: 1, alignSelf: "center", marginStart: 120, fontWeight: "bold", fontSize: 20, color: Colors.primary }}>
+                                                53,581 EGP</Text>
+                                            <Text style={{ alignSelf: "center", fontWeight: "bold", fontSize: 15, color: Colors.placeHolder, marginEnd: 29 }}>
+                                                53,581 EGP</Text>
+
+                                        </View>
+
                                     </View>
-                                   
 
-                                    <CustomeButton round text="Donate now" style={{marginTop:15}} onPress={()=>{
+
+                                    <CustomeButton round text="Donate now" style={{ marginTop: 15 }} onPress={() => {
                                         this.props.navigation.navigate('SetDonationValue');
                                     }} />
 
@@ -218,39 +243,39 @@ class AboutCase extends Component {
                                             fontWeight: 'bold'
                                         }}>Supporting Documents</Text>
                                         <CardView style={styles.card}
-                                        cornerRadius={20}
+                                            cornerRadius={20}
                                         >
-                                             <View style={{ flexDirection: 'row' }}>
+                                            <View style={{ flexDirection: 'row' }}>
 
-                                            <Text style={{
-                                                flex: 1,
-                                                fontSize: 15,
-                                                fontFamily: 'SF-Pro-Rounded-Regular',
-                                                alignSelf: 'flex-start',
-                                                color: Colors.blackText,
-                                                marginHorizontal: 5,
-                                                marginVertical: 5,
+                                                <Text style={{
+                                                    flex: 1,
+                                                    fontSize: 15,
+                                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                                    alignSelf: 'flex-start',
+                                                    color: Colors.blackText,
+                                                    marginHorizontal: 5,
+                                                    marginVertical: 5,
 
-                                            }}>Water Pipes Receipt.jpg</Text>
-                                            <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
+                                                }}>Water Pipes Receipt.jpg</Text>
+                                                <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
 
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={{
-                                                flex: 1,
-                                                fontSize: 15,
-                                                fontFamily: 'SF-Pro-Rounded-Regular',
-                                                alignSelf: 'flex-start',
-                                                color: Colors.blackText,
-                                                marginHorizontal: 5,
-                                                marginVertical: 5,
+                                            </View>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Text style={{
+                                                    flex: 1,
+                                                    fontSize: 15,
+                                                    fontFamily: 'SF-Pro-Rounded-Regular',
+                                                    alignSelf: 'flex-start',
+                                                    color: Colors.blackText,
+                                                    marginHorizontal: 5,
+                                                    marginVertical: 5,
 
-                                            }}>Daily labor.pdf</Text>
-                                            <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
+                                                }}>Daily labor.pdf</Text>
+                                                <Icon name="ios-eye-outline" size={20} style={{ marginTop: 5, marginEnd: 20 }} />
 
-                                        </View>
+                                            </View>
                                         </CardView>
-                                       
+
                                     </View>
                                 }
 
@@ -269,7 +294,15 @@ const styles = StyleSheet.create({
         flex: 1,
 
         marginHorizontal: 20,
-        marginTop: 20
+        marginTop: 5
+    },
+    image: {
+
+        marginTop: 40,
+        width: 25,
+        height: 18,
+        alignSelf: "flex-start",
+
     },
     Uppertext: {
         fontSize: 34,
@@ -285,7 +318,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: Colors.primary,
         textAlign: 'justify',
-        marginTop: 10,
+        marginTop: 15,
     },
     NormalBoldText: {
         fontSize: 15,
@@ -317,8 +350,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         color: '#23596A',
         fontWeight: 'bold',
-        borderBottomColor:Colors.primary,
-        borderBottomWidth:2,
+        borderBottomColor: Colors.primary,
+        borderBottomWidth: 2,
         textAlign: 'center',
 
     },
@@ -334,30 +367,30 @@ const styles = StyleSheet.create({
 
     },
     card: {
-        marginVertical:4,
-       
-        
+        marginVertical: 4,
+        paddingHorizontal: 20,
+
         backgroundColor: '#fff',
         ...Platform.select({
-          android: {
-            elevation: 5,
-           borderWidth: 2 ,
-          
-          },
-          ios: {
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-              
+            android: {
+                elevation: 5,
+                borderWidth: 2,
+
             },
-            shadowOpacity: 0.2,
-            shadowRadius: 1.41,
-            borderWidth: 2 ,
-           
-          },
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: {
+                    width: 0,
+                    height: 1,
+
+                },
+                shadowOpacity: 0.2,
+                shadowRadius: 1.41,
+                borderWidth: 2,
+
+            },
         }),
-      },
+    },
 });
 
 

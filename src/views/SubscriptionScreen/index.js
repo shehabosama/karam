@@ -148,7 +148,7 @@ class SubscriptionScreen extends Component {
                                 style={styles.BankCardView}
                                 cornerRadius={15} >
                                 <View style={{ flexDirection: 'row', borderRadius: 20 }}>
-                                <Icon size={24} name="timer-outline" style={{ resizeMode: 'contain',  marginTop: 10,  marginHorizontal: 10 }} />
+                                <Icon size={24} name="timer-outline" style={{  marginTop: 10,  marginHorizontal: 10 }} />
 
                                     <ModalSelector
                                         data={data}
@@ -182,19 +182,19 @@ class SubscriptionScreen extends Component {
                         </View>
 
                         <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:5}}>
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 , paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"1"})
                            }}>
                            <Text style={{fontSize:25}}>1</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"2"})
                            }}>
                            <Text style={{fontSize:25}}>2</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"3"})
                            }}>
                            <Text style={{fontSize:25}}>3</Text>
@@ -202,19 +202,19 @@ class SubscriptionScreen extends Component {
                        </View>
                        
                        <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:5}}>
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"4"})
                            }}>
                            <Text style={{fontSize:25}}>4</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"5"})
                            }}>
                            <Text style={{fontSize:25}}>5</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"6"})
                            }}>
                            <Text style={{fontSize:25}}>6</Text>
@@ -222,38 +222,38 @@ class SubscriptionScreen extends Component {
                        </View>
 
                        <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:5}}>
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"7"})
                            }}>
                            <Text style={{fontSize:25}}>7</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"8"})
                            }}>
                            <Text style={{fontSize:25}}>8</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"9"})
                            }}>
                            <Text style={{fontSize:25}}>9</Text>
                            </TouchableOpacity>
                        </View>
                            <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:5}}>
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal.includes(".")?this.state.donationGoal: this.state.donationGoal+"."})
                            }}>
                            <Text style={{fontSize:25}}>  .</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal+"0"})
                            }}>
                            <Text style={{fontSize:25}}>0</Text>
                            </TouchableOpacity>
 
-                           <TouchableOpacity style={{marginHorizontal:35 ,}} onPress={()=>{
+                           <TouchableOpacity style={{marginHorizontal:35 ,paddingHorizontal:8}} onPress={()=>{
                                this.setState({donationGoal:this.state.donationGoal.slice(0, -1)})
                            }}>
                            <Image style={{marginTop:10}} source={require('../../../assets/textRemover.png')}/>

@@ -123,7 +123,7 @@ class ProfileScreen extends Component {
 
             <View style={{ backgroundColor: '#fff', flex: 1 }}>
                 <View style={styles.container}>
-                    <Icon name="settings-outline" size={24} color={Colors.primary} style={{marginTop:10}} onPress={() => { this.props.navigation.navigate('PersonalInformation') }}/>
+                    <Icon name="settings-outline" size={24} color={Colors.primary} style={{marginTop:40}} onPress={() => { this.props.navigation.navigate('PersonalInformation') }}/>
 
                     <TouchableOpacity onPress={() => this.selectFile()}>
                         <Image

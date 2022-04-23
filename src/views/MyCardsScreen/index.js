@@ -19,7 +19,6 @@ import gloable from '../../styles/gloable';
 import CasesCardInfo from '../../component/CasesCardInfo';
 import styles from './style';
 import CardView from 'react-native-cardview';
-import ModalSelector from 'react-native-modal-selector';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class MyCardsScreen extends Component {

@@ -19,7 +19,7 @@ import gloable from '../../styles/gloable';
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading: false, email: '', password: '', error: '' };
+        this.state = { loading: false, email: '', password: '', error: '' , emailError:'' , passwordError:'' };
     }
     componentDidMount() {
       //  this.checkUser();
@@ -47,11 +47,15 @@ class LoginScreen extends Component {
 
     submitHandler = () => {
         if (this.state.email.trim() == '') {
-            showMessage('email is required');
+       
+            this.setState({emailError:'Email is required'})
         } else if (!validate(this.state.email)) {
-            showMessage('Email incorrect try another email');
+            this.setState({emailError:'Email incorrect try another email'})
+          
         } else if (this.state.password.length < 8) {
-            showMessage('Password must be more than 8 character or number');
+            this.setState({passwordError:'Password must be more than 8 character or number'})
+
+            
         } else {
             this.props.cleanError();
             this.setState({ error: false });
@@ -80,9 +84,19 @@ class LoginScreen extends Component {
     EmailAndPasswordForm = () => {
         return <View>
             <Text style={styles.fieldTitle}>Email</Text>
-            <CutomeTextInput placeholder="youremail@mail.com" secure={false} onTextInputChange={(email) => this.setState({ email: email })} round />
+            <CutomeTextInput placeholder="youremail@mail.com" secure={false} onTextInputChange={(email) => {
+                 this.setState({emailError:''})
+                this.setState({ email: email });}} round />
+            {!!this.state.emailError && (
+          <Text style={{ color: "red" }}>{this.state.emailError}</Text>
+        )}
             <Text style={styles.fieldTitle}>Password</Text>
-            <CutomeTextInput placeholder="Enter password" secure={true} onTextInputChange={(text) => this.setState({ password: text })} round />
+            <CutomeTextInput placeholder="Enter password" secure={true} onTextInputChange={(text) => {
+                this.setState({passwordError:''});
+                this.setState({ password: text });}} round />
+            {!!this.state.passwordError && (
+          <Text style={{ color: "red" }}>{this.state.passwordError}</Text>
+        )}
         </View>
     }
     HeaderTiltles = () => {

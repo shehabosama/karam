@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     },
     image: {
 
-        marginTop: 20,
+        marginTop: 40,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
