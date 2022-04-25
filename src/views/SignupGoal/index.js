@@ -15,6 +15,8 @@ import CutomeButton from '../../component/CustomeButton';
 import { cleanError, updateObjectAndPref } from '../../actions/DataActions';
 import styles from './style';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import gloable from '../../styles/gloable';
+import { FlatList } from 'react-native-gesture-handler';
 class SignupGoal extends Component {
     constructor(props) {
         super(props);
@@ -44,7 +46,7 @@ class SignupGoal extends Component {
     _updateObjectAndPref = async (token) => {
         this.props.cleanError();
         this.setState({ loading: true });
-       await this.props.updateObjectAndPref({
+        await this.props.updateObjectAndPref({
             objecIds: this.state.userObjective, prefIds: this.state.userPrefrences, goal: this.state.donationGoal,
             token: token
         }
@@ -89,19 +91,103 @@ class SignupGoal extends Component {
         );
     }
     render() {
+       
         return (
-            <View style={styles.container}>
-                <this.BackButtonForm />
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <this.HeaderTitleForm />
-                    <this.InputFiled />
-                    {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
-                    <Text style={styles.HintText}>Studies shows that committing to donating money ahead of time, can increase the amount you give by 32%</Text>
-                </ScrollView>
-                {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
-                    <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => this.submiHandler()} />}
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={gloable.container}>
+                    <this.BackButtonForm />
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <this.HeaderTitleForm />
+                        <this.InputFiled />
+                        {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
+                        <Text style={styles.HintText}>Studies shows that committing to donating money ahead of time, can increase the amount you give by 32%</Text>
 
+                       <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:15}}>
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"1"})
+                           }}>
+                           <Text style={{fontSize:32}}>1</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"2"})
+                           }}>
+                           <Text style={{fontSize:32}}>2</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"3"})
+                           }}>
+                           <Text style={{fontSize:32}}>3</Text>
+                           </TouchableOpacity>
+                       </View>
+                       
+                       <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:15}}>
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"4"})
+                           }}>
+                           <Text style={{fontSize:32}}>4</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"5"})
+                           }}>
+                           <Text style={{fontSize:32}}>5</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"6"})
+                           }}>
+                           <Text style={{fontSize:32}}>6</Text>
+                           </TouchableOpacity>
+                       </View>
+
+                       <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:15}}>
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"7"})
+                           }}>
+                           <Text style={{fontSize:32}}>7</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"8"})
+                           }}>
+                           <Text style={{fontSize:32}}>8</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"9"})
+                           }}>
+                           <Text style={{fontSize:32}}>9</Text>
+                           </TouchableOpacity>
+                       </View>
+                           <View style={{flexDirection:'row' , justifyContent:"center" ,marginVertical:15}}>
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal.includes(".")?this.state.donationGoal: this.state.donationGoal+"."})
+                           }}>
+                           <Text style={{fontSize:32}}>.</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal+"0"})
+                           }}>
+                           <Text style={{fontSize:32}}>0</Text>
+                           </TouchableOpacity>
+
+                           <TouchableOpacity style={{marginHorizontal:50 ,paddingHorizontal:8}} onPress={()=>{
+                               this.setState({donationGoal:this.state.donationGoal.slice(0, -1)})
+                           }}>
+                           <Image style={{marginTop:15}} source={require('../../../assets/textRemover.png')}/>
+                           </TouchableOpacity>
+                       </View>
+                       
+                    </ScrollView>
+                    {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
+                        <CutomeButton style={styles.btn} text="Set Goal" round onPress={() => this.submiHandler()} />}
+
+                </View>
             </View>
+
         );
     }
 }

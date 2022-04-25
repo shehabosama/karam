@@ -1,15 +1,15 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
     ActivityIndicator,
     FlatList,
-    ScrollView,
+    ImageBackground,
     TouchableOpacity,
     StyleSheet,
     Image
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import CardView from 'react-native-cardview'
 
@@ -18,6 +18,7 @@ import { cleanError, } from '../../actions/AuthActions';
 import CasesCard from '../../component/CasesCard';
 import { getCauseData, getProviderData } from '../../actions/DataActions';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 class CauseScreen extends Component {
     constructor(props) {
         super(props);
@@ -35,16 +36,25 @@ class CauseScreen extends Component {
     }
 
     async componentDidMount() {
-        await this.props.getCauseData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ', this.props.route.params.id)
+
+        currentUser = await AsyncStorageProvider.getItem('currentUser');
+        if (currentUser) {
+            const json = JSON.parse(currentUser);
+            //this.setState({accoutnName:json.name})
+            this.getCausesData(json.access_token);
+            
+        }
+
+    }
+    getCausesData =async(token)=>{
+        await this.props.getCauseData(token, this.props.route.params.id)
         if (this.props.data !== null) {
            // console.log("dtat teststst : " , this.props.data);
             this.setState({ data: this.props.data, loading: false })
         } else {
             this.setState({ error: this.props.error })
         }
-
-
-    }
+    };
     componentDidUpdate(prevProps, prevState, snapshot) {
 
 
@@ -97,7 +107,7 @@ class CauseScreen extends Component {
 
                             <View style={{ flexDirection: 'column', marginEnd: 20 }}>
                                 <Image source={
-                                    { uri: `http://192.168.1.7/karam/public/storage/${this.state.data.image}` }
+                                    { uri: `${IMAGES_URL}${this.state.data.image}` }
                                 } style={{ marginTop: 50, width: 40, height: 50 }} />
                                 <TouchableOpacity onPress={() => {
                                     this.setState({
@@ -112,8 +122,8 @@ class CauseScreen extends Component {
                         </CardView>
                     </View>
 
-                    <View style={{ flex: 1, marginHorizontal: 30, }}>
-                        <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder }}>
+                    <View style={{ flex: 1, marginHorizontal: 10, }}>
+                        <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder , marginHorizontal:10 }}>
                             <TouchableOpacity
                                 onPress={() => {
 
@@ -147,17 +157,30 @@ class CauseScreen extends Component {
                                 data={this.state.data.cases}
                                 renderItem={({ item }) => {
                                     return (
-                                        <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }} >
-                                            <TouchableOpacity style={{ flex: 1 }} onPress={() => {
-                                               // ToastAndroid.show(item.name, ToastAndroid.LONG);
-                                                this.props.navigation.navigate('AboutCase', { id: item.id });
-                                            }}>
-
-                                                <CasesCard style={styles.cusomBord} round remainingText={item.remaining} imageUrl={item.image} name={item.name} />
-
-                                            </TouchableOpacity>
+                                        <View style={ styles.round } underlayColor="transparent">
+                                                    <Pressable onPress={()=>{
+                                                     this.props.navigation.navigate('AboutCase', { id: item.id });
+                                                }}>
+                                                    <ImageBackground
+                                              //  source={require('../assets/maketCardPhoto.png')}
+                                                source={{uri: `${IMAGES_URL+item.image}` }}
+                                                style={styles.bgContainer}
+                                                imageStyle={{ borderRadius: 10 }}>
+                                
+                                                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${item.iconImage}` }} />
+                                                    <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{item.remaining} EGP</Text>
+                                                </View>
+                                
+                                            </ImageBackground>
+                                            <View style={{ flexDirection: 'row', }}>
+                                                <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{item.name}</Text>
+                                                <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+                                            </View>
+                                                </Pressable>
                                         </View>
-
                                     );
                                 }}
                                 keyExtractor={item => item.id}
@@ -193,9 +216,10 @@ class CauseScreen extends Component {
 
 
 const styles = StyleSheet.create({
+  
     container: {
         flex: 1,
-        marginHorizontal: 0,
+        backgroundColor:'#fff'
     },
     image: {
        
@@ -255,6 +279,25 @@ const styles = StyleSheet.create({
         shadowRadius: 100,
         elevation: 10,
         flexDirection: 'row'
+    },
+    round: {
+        
+        borderRadius: 10,
+        alignSelf:"center",
+        borderColor: '#23596A',
+        marginVertical:5,
+        marginHorizontal:10
+    },
+    bgContainer: {
+        width:170,
+        height:170,
+        flex:1,
+       // height: 149,
+        // backgroundColor: 'rgba(10, 10, 10, 0.4)',
+      //  justifyContent: 'center',
+       // borderRadius: 50,
+        
+        
     },
 });
 

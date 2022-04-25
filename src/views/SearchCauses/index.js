@@ -1,31 +1,23 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
     ActivityIndicator,
-    ImageBackground,
-    ScrollView,
     TouchableOpacity,
-    StyleSheet,
     Image,
     TextInput,
-    ToastAndroid,
     FlatList
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import gloable from '../../styles/gloable';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-import CutomeButton from '../../component/CustomeButton';
-import ObjectiveCard from '../../component/ObjectiveCard';
-import { showMessage } from '../../utils/HelperFunctions';
 import { getCausesByName } from '../../actions/DataActions';
 import CardView from 'react-native-cardview';
-import CasesCard from '../../component/CasesCard';
-
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import styles from './style';
+
 class SearchCauses extends Component {
     constructor(props) {
         super(props);
@@ -88,7 +80,7 @@ class SearchCauses extends Component {
               cardMaxElevation={6}
               cornerRadius={10}>
               <Image
-                source={{ uri: `http://192.168.1.7/karam/public/storage/${item.image}` }}
+                source={{ uri: `${IMAGES_URL}${item.image}` }}
                 style={{ height: 44, width: 35, margin: 10 }}
               />
               <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}
@@ -115,7 +107,7 @@ class SearchCauses extends Component {
                 <Text style={styles.Uppertext}>Causes</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <CardView
-                        style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
+                        style={styles.card}
                         cardElevation={6}
                         cardMaxElevation={6}
                         cornerRadius={50}>
@@ -129,6 +121,7 @@ class SearchCauses extends Component {
                         <TextInput placeholder="Search cases , causes & providers" style={
                         {
                             flex: 1,
+                            height:35
                             // borderBottomColor:Colors.placeHolder,
                         } }
                         onChangeText={(text) => {
@@ -165,7 +158,8 @@ class SearchCauses extends Component {
 
             // <Text style={styles.Uppertext}>Select Objectives</Text>
     
-          <View style={styles.container}>
+            <View style={{flex:1 , backgroundColor:'#fff'}}>
+          <View style={gloable.container}>
                 <TouchableOpacity
                     onPress={() => this.props.navigation.goBack()}>
                     <Image
@@ -187,99 +181,11 @@ class SearchCauses extends Component {
               
 
             </View>
+            </View>
                 
         );
     }
 }
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
-    },
-    image: {
-
-        marginTop: 20,
-        width: 25,
-        height: 18,
-        alignSelf: "flex-start",
-
-    },
-    Uppertext: {
-        fontSize: 34,
-        fontFamily: 'SFProDisplay-Regular',
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        marginTop: 15,
-
-    },
-    Lowertext: {
-        width: 275,
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        textAlign: 'justify',
-        marginTop: 10,
-    },
-    HintText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: '#23596A',
-    },
-    ImportanText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: Colors.importanText,
-    },
-    btn: {
-        marginVertical: 50,
-        backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        paddingVertical: 15,
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 10,
-
-    },
-    HorizontalContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-
-    },
-    socialImage: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        flex: 1,
-    },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-    label: {
-        margin: 8,
-    },
-    ObjectiveCard: {
-        marginTop: 10,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: Colors.primary
-    },
-    icon: {
-        marginTop: 10,
-      },
-});
-
 const mapStateToProps = state => ({
     data: state.dataReducer.data,
     error: state.dataReducer.error,

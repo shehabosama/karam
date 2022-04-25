@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.danger,
     },
     round: {
-        borderRadius: 15,
+        borderRadius: 18,
     },
 });
 

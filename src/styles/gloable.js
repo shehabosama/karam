@@ -1,4 +1,6 @@
 import { Colors } from "../constants";
+import { Platform } from 'react-native';
+
 export default {
     loader:{
         marginTop:20,
@@ -23,10 +25,20 @@ export default {
         borderBottomColor:Colors.primary,
         textAlign:'flext-start',
         borderStyle:'solid',
-        fontSize:20,
+        fontSize:17,
         textAlign:'left',
+        paddingStart:10
         
     },
+    VerfiyInput:{
+      borderBottomColor:Colors.primary,
+      textAlign:'flext-start',
+      borderStyle:'solid',
+      fontSize:17,
+      textAlign:'left',
+      paddingStart:5
+      
+  },
     switchContainer:{
         flexDirection: 'row',
         justifyContent:'flex-start',
@@ -36,6 +48,11 @@ export default {
     switchText:{
         fontSize :18,
         fontFamily:'Poppins-Regular'
+    },
+    
+      container: {
+        flex: 1,
+        marginHorizontal: 22,
     },
 };
  

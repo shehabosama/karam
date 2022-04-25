@@ -3,100 +3,82 @@ import {
     View,
     Text,
     ActivityIndicator,
-    ImageBackground,
     ScrollView,
     TouchableOpacity,
-    StyleSheet,
     Image
 } from 'react-native';
 import { Colors } from '../../constants';
 import { bindActionCreators } from 'redux';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import { connect } from 'react-redux';
-import { cleanError, signIn } from '../../actions/AuthActions';
+import { cleanError, updateUserInfo } from '../../actions/AuthActions';
 import CutomeButton from '../../component/CustomeButton';
 import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
+import { showMessage } from '../../utils/HelperFunctions';
+import styles from './style';
 class PersonalInformation extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading: false ,fullName:'' ,mobileNumber:'',nationality:'',isSelected:''};
+        this.state = {
+            loading: false,
+            password: '',
+            confirmPassword: '',
+            fullName: '',
+            mobileNumber: '',
+            nationality: '',
+        };
     }
-
     componentDidMount() {
-        this.checkUser();
-        if (this.props.currentUser !== null){
-            this.setState({loading:false})
-        }else if(this.props.error !== null){
-            this.setState({loading:false})
+
+        if (this.props.currentUser !== null) {
+            this.setState({ loading: false })
+        } else if (this.props.error !== null) {
+            this.setState({ loading: false })
         }
-      
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(
-        //   'TCL: LoginScreen -> componentDidUpdate -> prevProps, prevState, snapshot',
-        //   prevProps,
-        //   prevState,
-        //   snapshot,
-        // );
-        this.checkUser();
-
-        
-      
     }
     componentWillUnmount() {
         this.props.cleanError();
-        
     }
-    checkUser = async () => {
-        // if (this.props.currentUser) {
-        //     this.props.navigation.navigate('HomeTabs');
-        // }
-       // console.log(this.props.currentUser);
-     
-        
+    submitHandler = () => {
+        this.props.cleanError();
+        let isNumber = !isNaN(+this.state.mobileNumber);
+        if (this.state.fullName.trim() == '') {
+            showMessage('Full Name is required!');
+        } else if (this.state.mobileNumber.trim() == '') {
+            showMessage('Mobile number is required!');
+        } else if (this.state.nationality.trim() == '') {
+            showMessage('Nationality is required!');
+        } else if (!this.state.agreeTerms) {
+            showMessage('You have to Agree Terms and Conditions');
+        } else if (this.state.mobileNumber.length < 11) {
+            showMessage('No phone number less than eleven numbers');
+        } else if (!isNumber) {
+            showMessage('Please write only numbers in phone number');
+        } else if (this.state.password !== this.state.confirmPassword) {
+            showMessage('Make sure that you write same password in confirm field');
+        } else {
+            // this.setState({error:false});
+            this.setState({ loading: true }, () => {
+                this.props.updateUserInfo({
+                    password: this.state.password,
+                    fullName: this.state.fullName,
+                    mobileNumber: this.state.mobileNumber,
+                    nationality: this.state.nationality,
+
+                }, this.props.navigation, () => {
+                    this.setState({ loading: false })
+                }, () => {
+                    this.setState({ loading: false })
+                });
+
+            })
+        }
     };
-    renderError = () => {
-       // this.setState({error: this.props.error});
-   
-        return <Text style={styles.renderError}>{this.props.error}</Text>;
-      };
 
-   
-     
-      
-       submitHandler = () => {
-        let isNumber = !isNaN(+mobileNumber);
-          if (fullName.trim() == '') {
-              showMessage('Full Name is required!');
-          } else if (mobileNumber.trim() == '') {
-              showMessage('Mobile number is required!');
-          } else if (nationality.trim() == '') {
-              showMessage('Nationality is required!');
-          } else if (!isSelected) {
-              showMessage('You have to Agree Terms and Conditions');
-          } else if (mobileNumber.length < 11) {
-              showMessage('No phone number less than eleven numbers');
-          }else if(!isNumber){
-              showMessage('Please write only numbers in phone number');
-          } else {
-              this.props.navigation.navigate('SignupVerifyAccount',
-                  {
-                      email: route.params.email,
-                      password: route.params.password,
-                      fullName: fullName,
-                      mobileNumber: mobileNumber,
-                      nationality: nationality,
-                      isSelected: isSelected
-                  });
-          }
-      };
-
-    render() {
- 
+    BackButton = () => {
         return (
-            <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => this.props.navigation.goBack()}>
                 <Image
@@ -104,24 +86,54 @@ class PersonalInformation extends Component {
                     style={styles.image}
                 />
             </TouchableOpacity>
+        );
+    };
+    HeaderTitleForm = () => {
+        return (
+            <View>
+                <Text style={styles.Uppertext}>Personal Info</Text>
 
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
-                <Text style={styles.Uppertext}>Personal Information</Text>
-           
+            </View>
+        );
+    }
+    InputsFieldsForm = () => {
+        return (
+            <View>
                 <Text style={styles.Lowertext}>Full Name</Text>
-                <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => this.setState({fullName:fullName})} />
+                <CutomeTextInput placeholder="Your name" round onTextInputChange={(fullName) => this.setState({ fullName: fullName })} />
                 <Text style={styles.Lowertext}>Mobile</Text>
-                <CutomeTextInput  type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => this.setState({mobileNumber:mobileNumber})} />
+                <CutomeTextInput type="numeric" placeholder="Your mobile number" round onTextInputChange={(mobileNumber) => this.setState({ mobileNumber: mobileNumber })} />
                 <Text style={styles.Lowertext}>Nationality</Text>
-                <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => this.setState({nationality:nationality})} />
-                <Text style={styles.Lowertext}>Email</Text>
-                <CutomeTextInput placeholder="yourEmail" round onTextInputChange={(nationality) => this.setState({nationality:nationality})} />
+                <CutomeTextInput placeholder="Your nationality" round onTextInputChange={(nationality) => this.setState({ nationality: nationality })} />
+                <Text style={styles.Lowertext}>Password</Text>
+                <CutomeTextInput placeholder="Password" round onTextInputChange={(password) => this.setState({ password: password })} />
+                <Text style={styles.Lowertext}>Confirm Password</Text>
+                <CutomeTextInput placeholder="Confirm Password" round onTextInputChange={(confirmPassword) => this.setState({ confirmPassword: confirmPassword })} />
+            </View>
+        );
+    }
 
-                {/* <CutomeButton style={styles.btn} text="Continue" round onPress={submitHandler} /> */}
+    renderError = () => {
+        return <Text style={styles.renderError}>{this.props.error}</Text>;
+    };
 
-            </ScrollView>
-        </View>
+    render() {
+        return (
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                <View style={styles.container}>
+                    <this.BackButton />
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <this.HeaderTitleForm />
+                        <this.InputsFieldsForm />
+                        {(this.props.error === null) || (this.props.error === '') ? <></> : this.renderError()}
+
+                        {this.state.loading ? <ActivityIndicator style={{ marginVertical: 50, }} color={Colors.primary} size={30} /> :
+                            <CutomeButton style={styles.btn} text="Update" round onPress={this.submitHandler} />}
+
+                    </ScrollView>
+                </View>
+            </View>
+
         );
     }
 }
@@ -129,70 +141,13 @@ class PersonalInformation extends Component {
 
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
-    },
-    image: {
 
-        marginTop: 20,
-        width: 25,
-        height: 18,
-        alignSelf: "flex-start",
-
-    },
-    Uppertext: {
-        fontSize: 34,
-        fontFamily: 'SFProDisplay-Regular',
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        marginTop: 15,
-
-    },
-    Lowertext: {
-        width: 275,
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        textAlign: 'justify',
-        marginTop: 10,
-    },
-    HintText: {
-        fontSize: 17,
-        fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
-        color: '#23596A',
-    },
-    btn: {
-        marginVertical: 50,
-        backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        paddingVertical: 15,
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 10,
-
-    },
-    checkboxContainer: {
-        flexDirection: "row",
-        marginBottom: 20,
-    },
-    checkbox: {
-        alignSelf: "center",
-    },
-   
-});
-
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
     currentUser: state.auth.currentUser,
-    error:state.auth.error,
+    error: state.auth.error,
 });
 const mapDispatchToProps = dispatch => ({
-    signIn: bindActionCreators(signIn, dispatch),
+    updateUserInfo: bindActionCreators(updateUserInfo, dispatch),
     cleanError: bindActionCreators(cleanError, dispatch),
 });
 export default connect(

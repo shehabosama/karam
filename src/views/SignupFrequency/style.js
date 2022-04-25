@@ -1,9 +1,11 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../constants';
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
+    image: {
+        marginTop: 50,
+        width: 25,
+        height: 18,
+        alignSelf: "flex-start",
     },
     backIcon: {
         marginTop: 20,
@@ -31,7 +33,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1.0,
         paddingBottom: 15,
         fontWeight: 'bold',
-        flex: 1
+        flex: 1,
+        color:Colors.primary
     },
     Uppertext: {
         fontSize: 34,
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#23596a',
         textAlign: 'justify',
-        marginTop: 10,
+        
     },
     HintText: {
         fontSize: 15,
@@ -65,6 +68,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold'
     },
+    BoldOrText: {
+        fontSize: 15,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        alignSelf: 'center',
+        color: Colors.primary,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop:10
+    },
     customeButton: {
         marginVertical: 40,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -74,10 +86,11 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 10,
         elevation: 10,
+        
 
     },
     btnManualDonation: {
-        marginTop: 50,
+        marginTop: 30,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
         shadowColor: 'black',
         shadowOpacity: 0.26,

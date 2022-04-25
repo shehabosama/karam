@@ -23,11 +23,23 @@ import PersonalInformation from './views/PersonalInformation';
 import ProviderScreen from './views/ProviderScreen';
 import Providers from './views/Providers';
 import Test from './views/Test';
-import searchCases from './views/SearchCases';
+
 import SearchProviders from './views/SearchProviders';
 import SearchCases from './views/SearchCases';
 import SearchCauses from './views/SearchCauses';
 import CauseScreen from './views/CauseScreen';
+import TestSlider from './views/TestSlider';
+import SliderScreen from './views/SliderScreen';
+import SeekBar from './views/TestSeekBar';
+import SetDonationValue from './views/SetDonationValue';
+import PaymentMethod from './views/PaymentMethod';
+import AddNewPaymentMethod from './views/AddNewPaymentMethod';
+import ThankScreen from './views/ThankScreen';
+import WalletScreen from './views/WalletScreen';
+import SubscriptionScreen from './views/SubscriptionScreen';
+import SampleApp from './views/TestSeekBar';
+import MyCardsScreen from './views/MyCardsScreen';
+import NotificationScreen from './views/NotificationScreen';
 const TasksStackNavigator = createStackNavigator();
 const Tab = createBottomTabNavigator();
 function HomeTabs() {
@@ -40,7 +52,7 @@ function HomeTabs() {
                         if (route.name === 'Home') {
                             iconName = 'home-outline';
                             size = focused ? 25 : 20;
-                        } else if (route.name === 'Donation') {
+                        } else if (route.name === 'WalletScreen') {
                             iconName = 'wallet-outline';
                             size = focused ? 25 : 20;
                         } else if (route.name === 'ProfileScreen') {
@@ -63,8 +75,14 @@ function HomeTabs() {
             }}
         >
             <Tab.Screen name={'Home'} component={NavigationBottomHome} />
-            <Tab.Screen name={'Donation'} component={DonationScreen} />
+            <Tab.Screen name={'WalletScreen'} component={WalletScreen} />
             <Tab.Screen name={'ProfileScreen'} component={ProfileScreen} />
+
+
+            <Tab.Screen name={'Donations'} component={DonationScreen} options={{
+                tabBarButton: props => null,
+
+            }} />
 
             <Tab.Screen
                 options={{
@@ -80,7 +98,7 @@ function HomeTabs() {
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
-                    unmountOnBlur: true,
+
                 }}
                 name={'Providers'} component={Providers} />
 
@@ -97,7 +115,7 @@ function HomeTabs() {
                     unmountOnBlur: true,
                 }}
                 name={'CauseScreen'} component={CauseScreen} />
-                
+
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
@@ -126,7 +144,54 @@ function HomeTabs() {
                 }}
                 name={'SearchCauses'} component={SearchCauses} />
 
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
 
+                }}
+                name={'SetDonationValue'} component={SetDonationValue} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'PaymentMethodFirstStage'} component={PaymentMethod} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'AddNewPaymentMethod'} component={AddNewPaymentMethod} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'ThankScreen'} component={ThankScreen} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'SubscriptionScreen'} component={SubscriptionScreen} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'MyCardsScreen'} component={MyCardsScreen} />
+
+            <Tab.Screen
+                options={{
+                    tabBarButton: props => null,
+
+                }}
+                name={'NotificationScreen'} component={NotificationScreen} />
         </Tab.Navigator>
     );
 }
@@ -222,6 +287,19 @@ const TasksNavigator = () => {
                 name="PersonalInformation"
                 component={PersonalInformation}
                 options={{ headerShown: false }}
+            />
+            <TasksStackNavigator.Screen
+                name="SliderScreen"
+                component={SliderScreen}
+                options={{ headerShown: false }}
+
+            />
+
+            <TasksStackNavigator.Screen
+                name="SampleApp"
+                component={SampleApp}
+                options={{ headerShown: false }}
+
             />
         </TasksStackNavigator.Navigator>
 

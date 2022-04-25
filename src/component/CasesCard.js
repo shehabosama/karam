@@ -3,9 +3,10 @@ import { View, Text, TextInput, Image, StyleSheet, TouchableHighlight } from 're
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
-import { Colors } from '../constants';
+import { Colors, IMAGES_URL } from '../constants';
 import gloableStyles from '../styles/gloable'
-const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => {
+const CasesCard = ({ iconImage, remainingText, imageUrl, name, round, danger, style }) => {
+  
     let btnStyle = { ...Customstyles.container, ...style };
     if (round) {
         btnStyle = { ...btnStyle, ...Customstyles.round }
@@ -15,17 +16,18 @@ const CasesCard = ({  remainingText, imageUrl, name, round, danger, style }) => 
     }
 
 
+    
     return (
         <View activeOpacity={0.2} style={round ? Customstyles.round : btnStyle} underlayColor="transparent">
             <ImageBackground
               //  source={require('../assets/maketCardPhoto.png')}
-                source={{uri: `http://192.168.1.7/karam/public/storage/${imageUrl}` }}
+                source={{uri: `${IMAGES_URL+imageUrl}` }}
                 style={Customstyles.bgContainer}
                 imageStyle={{ borderRadius: 10 }}>
 
                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
-                    <Image style={{ alignSelf: 'center' }} source={require('../../assets/waterVector.png')} />
+                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${iconImage}` }} />
                     <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{remainingText} EGP</Text>
                 </View>
@@ -46,15 +48,18 @@ const Customstyles = StyleSheet.create({
         
     },
     round: {
-        height: 149,
+        flex:1,
         width: 155,
         borderRadius: 10,
         alignSelf:"center",
         borderColor: '#23596A',
-        marginVertical:20,
+        marginVertical:5,
     },
     bgContainer: {
-        height: 149,
+        width:165,
+        height:170,
+        flex:1,
+       // height: 149,
         // backgroundColor: 'rgba(10, 10, 10, 0.4)',
       //  justifyContent: 'center',
        // borderRadius: 50,

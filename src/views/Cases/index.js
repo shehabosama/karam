@@ -1,243 +1,268 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import {
-    View,
-    Text,
-    ActivityIndicator,
-    ImageBackground,
-    ScrollView,
-    TouchableOpacity,
-    StyleSheet,
-    Image,
-    Dimensions,
-    ToastAndroid,
-    FlatList,
-    TextInput
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  SafeAreaView,
+  ActivityIndicator,
+  Image,
+  ToastAndroid,
+  TextInput
 } from 'react-native';
-import { Colors } from '../../constants';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import CauseCard from '../../component/CauseCard';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
-import gloable from '../../styles/gloable';
-import { connect } from 'react-redux';
+import { connect, } from 'react-redux';
+import { GET_CAUSES_DATA } from '../../constants';
+import { getCasesData, getCausesData } from '../../actions/DataActions';
+import CardView from 'react-native-cardview';
 import Icon from 'react-native-vector-icons/Ionicons';
-import CardView from 'react-native-cardview'
-import CasesCard from '../../component/CasesCard';
-import ObjectiveCard from '../../component/ObjectiveCard';
-import { showMessage } from '../../utils/HelperFunctions';
-import { getCasesData } from '../../actions/DataActions';
+import styles from './style';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
-class Cases extends Component {
+import CasesCard from '../../component/CasesCard';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+class Cases extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      causes: [],
+      isFetching: false,
+      loading: false,
+      initial: true,
+    };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            isSelected: false,
-            data: null,
-            error: null,
-            searchText: '',
-            pageNumber:1
-        };
+    this.onEndReachedCalledDuringMomentum = false;
+    this.endReached = false;
+    this.page = 1;
+  }
 
+  componentDidMount() {
+    this._getCauses(false);
+  }
 
+  componentWillUnmount() { }
+
+  //Flatlist
+  async onRefresh() {
+    this.onEndReachedCalledDuringMomentum = false;
+    this.endReached = false;
+    this.page = 1;
+    this.setState({ isFetching: true });
+    await this._getCauses();
+    this.setState({ isFetching: false });
+  }
+
+  onScrollHandler = async () => {
+    if (this.endReached) {
+      return;
     }
-   async onEndReached() {
-        await this.props.getCasesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ' , this.state.pageNumber);
+    if (this.onEndReachedCalledDuringMomentum) {
+      return;
     }
-    async componentDidMount() {
-        await this.props.getCasesData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ' , this.state.pageNumber);
-        if (this.props.data !== null) {
-            this.setState({ data: this.props.data , pageNumber:this.props.to })
-        //    console.log("this is the data from the servvvvvvvvvvvvvvvvvvvver ::::::::" ,  this.state.data);
-        }
-        this.checkUser();
-        if (this.props.currentUser !== null) {
-            this.setState({ loading: false })
-        } else if (this.props.error !== null) {
-            this.setState({ loading: false })
-        }
+    this.onEndReachedCalledDuringMomentum = true;
+    this.page = this.page + 1;
+    this.setState({ loading: true });
+    await this._getCauses(false);
+    this.setState({ loading: false });
+  };
 
+  onMomentumScrollBegin = () => {
+    this.onEndReachedCalledDuringMomentum = false;
+  };
+  getHeaderView = () => {
+    return (
+      <>
+        <Text style={styles.Uppertext}>Cases</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <CardView
+            style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
+            cardElevation={6}
+            cardMaxElevation={6}
+            cornerRadius={50}
+          >
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}
+              onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
+            <TextInput placeholder="Search cases , causes & providers" style={
+              {
+                flex: 1,
+                // borderBottomColor:Colors.placeHolder,
+              }
+            } />
+            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+          </CardView>
+        </View>
+      </>
 
+    );
+  }
 
+  renderHeader = () => {
+    return (
+      <Text style={styles.renderHeader}></Text>
+    );
+  };
+
+  renderFooter = () => {
+    if (!this.state.loading) return null;
+    return (
+      <ActivityIndicator
+        color="#128811"
+        style={styles.activityIndicator}
+      />
+    );
+  };
+
+  renderItem = ({ item, index }) => {
+    return (
+    
+      <View style={{ marginHorizontal: 10 }}>
+        <Pressable onPress={() => {
+
+          this.props.navigation.navigate('AboutCase', { id: item.id });
+        }}>
+          <CasesCard style={styles.cusomBord}
+            iconImage={item.iconImage}
+            round
+            remainingText={item.remaining}
+            imageUrl={item.avatarImage}
+            name={item.name} />
+        </Pressable>
+
+      </View>
+
+    );
+  };
+
+  _getCausesApi = async () => {
+    //API is too fast, adding timeout to visualize loader
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
+    currentUser = await AsyncStorageProvider.getItem('currentUser');
+    if (currentUser) {
+      const json = JSON.parse(currentUser);
+      await this.props.getCasesData(json.access_token, this.page)
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
+
+  };
+
+  _getCauses = async () => {
+    await this._getCausesApi();
+    if (this.props.data !== null && this.props.data) {
+      this.updateUI(this.props.data.data);
+    }
+  };
+  updateUI = (data) => {
+    let causes = data.map((v) => {
+      return {
+        id: v.id.toString(),
+        name: `${v.name}`,
+        description: v.description,
+        avatarImage: v.image,
+        remaining: v.remaining,
+        iconImage: `${IMAGES_URL}${v.cause.image}`
+      };
+    });
+
+    if (this.page > 1 && causes.length < 1) {
+      this.endReached = true;
+    }
+
+    if (this.page > 1) {
+      causes = [...this.state.causes, ...causes];
+    }
+
+    if (this.page == 0) {
+      causes = [...causes];
+    }
+
+    this.setState({ causes: causes, initial: false });
+  };
+  SearchInputForm = () => {
+    return (
 
      
-        //this.checkUser();
-        //  console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.ids, this.state.objectiveIdes, this.state.data);
+        <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 10}} onPress={() => this.props.navigation.navigate('SearchCases')}>
+          <CardView
+            //style={{ flex: 1, flexDirection: 'row', paddingVertical: 5 }}
+            style={styles.card}
+           
+            cornerRadius={50}
+          >
 
-    }
-    componentWillUnmount() {
-        //  this.props.cleanError();
+            <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon}  />
 
-    }
-
-    checkUser = async () => {
-        // if (this.props.currentUser) {
-        //     this.props.navigation.navigate('HomeTabs');
-        // }
-        // console.log(this.props.currentUser);
-
-
-    };
-
-  
-    
-    handleSearchInput(e){
-        let text = e.toLowerCase()
-        let fullList = this.state.data;
-        let filteredList = fullList.filter((item) => { // search from a full list, and not from a previous search results list
-          if(item.name.toLowerCase().match(text))
-            return item;
-        })
-        if (!text || text === '') {
-          this.setState({
-            data: this.props.data,
-           // noData: false
-          })
-        } else if (!filteredList.length) {
-         // set no data flag to true so as to render flatlist conditionally
-           this.setState({
-             noData: true
-           })
-        }
-        else if (Array.isArray(filteredList)) {
-          this.setState({
-           // noData: false,
-            data: filteredList
-          })
-        }
-      }
-
-      getHederView = () => {
-
-        
-        return (
-            <View>
-                <Text style={styles.Uppertext}>Cases</Text>
-                <View style={{ flexDirection: 'row' }}>
-                    <CardView
-                        style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
-                        cardElevation={6}
-                        cardMaxElevation={6}
-                        cornerRadius={50}>
-                        <Icon name='search'
-                            size={24}
-                            color={Colors.placeHolder}
-                            style={styles.icon}
-                            onPress={() => { navigation.navigate('Login') }} />
+            <Text  style={
+              {
+                marginTop: 10,
+                flex: 1,
+                color: Colors.placeHolder
+                // borderBottomColor:Colors.placeHolder,
+              }
+            } >"Search cases , causes & providers"</Text>
 
 
-                        <TextInput placeholder="Search cases , causes & providers" style={
-                        {
-                            flex: 1,
-                            // borderBottomColor:Colors.placeHolder,
-                        } }
-                         onChangeText={(text)=>this.handleSearchInput(text)}  />
+            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
+
+
+          </CardView>
+        </TouchableOpacity>
 
 
 
-                        <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
-                    </CardView>
-                </View>
-            </View>
-        );
-    };
+    );
+  };
+  render() {
+    return (
+      <View style={{flex:1, backgroundColor:'#fff'}}>
 
-    render() {
+      
+      <View style={styles.container}>
+        <SafeAreaView style={styles.safeAreaViewContainer}>
+          <View style={styles.safeAreaViewSubContainer}>
+            {/* {this.state.initial && <LoadingPlaceholder />} */}
+            <Text style={styles.Uppertext}>Cases</Text>
+            <this.SearchInputForm />
 
-        return (
-            (this.state.data !== null) ? <View style={styles.container}>
+            {!this.state.initial &&
+              (!this.state.causes || this.state.causes.length < 1) && (
+                <Text>{'No Causes found.'}</Text>
+              )}
 
-                <FlatList style={{ flex: 1, margin: 1 }}
-                    numColumns={2}
-
-                    data={this.state.data.data}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={{ flex: 1, margin: 2 }} >
-                                <TouchableOpacity style={{ flex: 1, margin: 5 }} onPress={() => {
-                                    ToastAndroid.show(item.name, ToastAndroid.LONG);
-                                    this.props.navigation.navigate('AboutCase');
-                                }}>
-                                    <CasesCard style={styles.cusomBord}
-                                        round
-                                        remainingText={item.remaining}
-                                        imageUrl={item.image}
-                                        name={item.name} />
-
-                                </TouchableOpacity>
-
-
-                            </View>
-
-                        );
-                    }}
-                    keyExtractor={item => item.id}
-                    refreshing={this.state.refresh}
-                    ListEmptyComponent={this.ListEmptyComponent}
-                    onEndReached={this.onEndReached}
-                    onEndReachedThreshold={0.3}
-                    onRefresh={this.onRefresh}
-                    ListHeaderComponent={this.getHederView()}
-                    ListFooterComponent={() => <><Text></Text></>}
+            {this.state.initial && <ActivityIndicator animating style={{ flex: 1 }} size={40} />}
+            {!this.state.initial &&
+              this.state.causes &&
+              this.state.causes.length > 0 && (
+                <FlatList
+                  style={{ marginTop: 15 }}
+                  numColumns={2}
+                  data={this.state.causes}
+                  renderItem={this.renderItem}
+                  onRefresh={() => this.onRefresh(false)}
+                  refreshing={this.state.isFetching}
+                  onEndReached={this.onScrollHandler}
+                  onEndReachedThreshold={0.7}
+                  onMomentumScrollBegin={this.onMomentumScrollBegin}
+                  ListFooterComponent={this.renderFooter}
+                  ListHeaderComponent={this.renderHeader}
                 />
-
-
-            </View> : <ActivityIndicator style={{ flex: 1 }} size={40} />
-        );
-    }
+              )}
+          </View>
+        </SafeAreaView>
+      </View>
+      </View>
+    );
+  }
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
 
-    },
-
-    input: {
-        borderBottomColor: Colors.primary,
-        textAlign: 'center',
-        borderStyle: 'solid',
-        fontSize: 50,
-        borderBottomWidth: 1.0,
-        paddingBottom: 15,
-        fontWeight: 'bold',
-        flex: 1
-    },
-    Uppertext: {
-        fontSize: 34,
-        fontFamily: 'SFProDisplay-Regular',
-        fontWeight: 'bold',
-        alignSelf: 'flex-start',
-        color: '#23596a',
-        marginTop: 15,
-
-    },
-    cusomBord: {
-        backgroundColor: 'rgba(35, 89, 106, 1.0)',
-        shadowColor: 'black',
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 100,
-        elevation: 10,
-        flexDirection: 'row',
-
-
-    },
-    icon: {
-        marginTop: 10,
-    },
-});
 const mapStateToProps = state => ({
-    data: state.dataReducer.data,
-    error: state.dataReducer.error,
+  data: state.dataReducer.data,
+  error: state.dataReducer.error,
 });
 const mapDispatchToProps = dispatch => ({
-    //  updateObjectAndPref: bindActionCreators(updateObjectAndPref, dispatch),
-    getCasesData: bindActionCreators(getCasesData, dispatch)
-    // cleanError: bindActionCreators(cleanError, dispatch),
+  getCasesData: bindActionCreators(getCasesData, dispatch)
 });
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Cases);
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cases)

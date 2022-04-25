@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import CauseCard from '../../component/CauseCard';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import { connect, } from 'react-redux';
 import { GET_CAUSES_DATA } from '../../constants';
@@ -21,6 +21,7 @@ import CardView from 'react-native-cardview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './style';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import gloable from '../../styles/gloable';
 class Causes extends React.Component {
   constructor(props) {
     super(props);
@@ -73,7 +74,7 @@ class Causes extends React.Component {
     return (
       <>
         <Text style={styles.Uppertext}>Causes</Text>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row' , }}>
           <CardView
             style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
             cardElevation={6}
@@ -110,27 +111,30 @@ class Causes extends React.Component {
       />
     );
   };
-
+   
   renderItem = ({ item, index }) => {
+    
     return (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('CauseScreen', { id: item.id })}>
+      <TouchableOpacity  onPress={() => this.props.navigation.navigate('CauseScreen', { id: item.id })}>
         <View style={styles.renderItem}>
           <CardView
-            style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
-            cardElevation={6}
-            cardMaxElevation={6}
-            cornerRadius={10}>
+            // style={{ flex: 1, flexDirection: 'row', borderWidth: 2, padding: 10 }}
+            // cardElevation={6}
+            // cardMaxElevation={6}
+            style={styles.ItemCard}
+            cornerRadius={15}>
             <Image
               source={{ uri: `${item.avatarImage}` }}
-              style={{ height: 44, width: 35, margin: 10 }}
+              style={{  width: 35 , margin: 10 , marginTop:20 , marginStart:20 }}
+              resizeMode="contain"
             />
-            <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 }}>
+            <View style={{ flexDirection: 'column', flex: 1, marginTop: 10 , marginStart:5 }}>
               <Text style={{ fontSize: 17, fontWeight: 'bold', marginVertical: 5 }}>{item.name}</Text>
-              <Text style={{ color: Colors.placeHolder }}>{item.description}{item.id}</Text>
+              <Text style={{ color: Colors.placeHolder  , fontSize:14}}>{item.description}</Text>
             </View>
-            <View style={{ flexDirection: 'column', marginTop: 10, marginHorizontal: 5 }}>
-              <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center' }}>20</Text>
-              <Text style={{ color: Colors.placeHolder }}>Casee</Text>
+            <View style={{ flexDirection: 'column', marginTop: 10, marginEnd: 20 ,  }}>
+              <Text style={{ fontSize: 25, fontWeight: 'bold', alignSelf: 'center',marginTop:10 }}>{item.countOfCases}</Text>
+              <Text style={{ color: Colors.blackText  , fontSize:13 }}>Cases</Text>
             </View>
           </CardView>
         </View>
@@ -161,7 +165,8 @@ class Causes extends React.Component {
         id: v.id.toString(),
         name: `${v.name}`,
         description: v.description,
-        avatarImage: `http://192.168.1.7/karam/public/storage/${v.image}`,
+        avatarImage: `${IMAGES_URL}${v.image}`,
+        countOfCases: v.cases_count
       };
     });
 
@@ -181,62 +186,63 @@ class Causes extends React.Component {
   };
   SearchInputForm = () => {
     return (
-      <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 10 }} onPress={() => this.props.navigation.navigate('SearchCauses')}>
         <CardView
-          style={{ flex: 1, flexDirection: 'row', borderWidth: 2 }}
-          cardElevation={6}
-          cardMaxElevation={6}
+          style={styles.card}
           cornerRadius={50}
         >
-          <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} onPress={() => { this.props.navigation.navigate('SearchCauses') }} />
-          <TextInput placeholder="Search cases , causes & providers" style={
+          <Icon name='search' size={24} color={Colors.placeHolder} style={styles.icon} />
+          <Text style={
             {
+              marginTop: 10,
               flex: 1,
+              color: Colors.placeHolder
               // borderBottomColor:Colors.placeHolder,
             }
-          } />
-
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('searchCases')}>
-            <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
-          </TouchableOpacity>
-
+          } >"Search cases , causes & providers"</Text>
+          <Icon name='menu' size={24} color={Colors.placeHolder} style={styles.icon} />
         </CardView>
-      </View>
+      </TouchableOpacity>
+
     );
   };
   render() {
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.safeAreaViewContainer}>
-          <View style={styles.safeAreaViewSubContainer}>
-            {/* {this.state.initial && <LoadingPlaceholder />} */}
-            <Text style={styles.Uppertext}>Causes</Text>
-            <this.SearchInputForm />
+      <View style={{ backgroundColor: '#fff', flex: 1 }}>
+        <View style={styles.container}>
+          <SafeAreaView style={styles.safeAreaViewContainer}>
+            <View style={styles.safeAreaViewSubContainer}>
+              {/* {this.state.initial && <LoadingPlaceholder />} */}
+              <Text style={styles.Uppertext}>Causes</Text>
+              <this.SearchInputForm />
 
-            {!this.state.initial &&
-              (!this.state.causes || this.state.causes.length < 1) && (
-                <Text>{'No Causes found.'}</Text>
-              )}
-              
-            {this.state.initial && <ActivityIndicator animating style={{ flex: 1 }} size={40} />}
-            {!this.state.initial &&
-              this.state.causes &&
-              this.state.causes.length > 0 && (
-                <FlatList
-                  data={this.state.causes}
-                  renderItem={this.renderItem}
-                  onRefresh={() => this.onRefresh(false)}
-                  refreshing={this.state.isFetching}
-                  onEndReached={this.onScrollHandler}
-                  onEndReachedThreshold={0.7}
-                  onMomentumScrollBegin={this.onMomentumScrollBegin}
-                  ListFooterComponent={this.renderFooter}
-                  ListHeaderComponent={this.renderHeader}
-                />
-              )}
-          </View>
-        </SafeAreaView>
+              {!this.state.initial &&
+                (!this.state.causes || this.state.causes.length < 1) && (
+                  <Text>{'No Causes found.'}</Text>
+                )}
+
+              {this.state.initial && <ActivityIndicator animating style={{ flex: 1 }} size={40} />}
+              {!this.state.initial &&
+                this.state.causes &&
+                this.state.causes.length > 0 && (
+                  <FlatList
+                  style={{marginTop:10}}
+                    data={this.state.causes}
+                    renderItem={this.renderItem}
+                    onRefresh={() => this.onRefresh(false)}
+                    refreshing={this.state.isFetching}
+                    onEndReached={this.onScrollHandler}
+                    onEndReachedThreshold={0.7}
+                    onMomentumScrollBegin={this.onMomentumScrollBegin}
+                    ListFooterComponent={this.renderFooter}
+                    ListHeaderComponent={this.renderHeader}
+                  />
+                )}
+            </View>
+          </SafeAreaView>
+        </View>
       </View>
+
     );
   }
 }

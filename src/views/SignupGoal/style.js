@@ -1,12 +1,9 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '../../constants';
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 15,
-    },
+  
     image: {
-        marginTop: 20,
+        marginTop: 50,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
@@ -30,7 +27,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1.0,
         paddingBottom: 15,
         fontWeight: 'bold',
-        flex: 1
+        flex: 1,
+        color:Colors.primary
     },
     Uppertext: {
         fontSize: 34,
@@ -43,23 +41,23 @@ const styles = StyleSheet.create({
     },
     Lowertext: {
         width: 275,
-        fontSize: 17,
+        fontSize: 16,
         fontFamily: 'SF-Pro-Rounded-Regular',
         alignSelf: 'flex-start',
         color: '#23596a',
         textAlign: 'justify',
-        marginTop: 10,
+       
     },
     HintText: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
-        alignSelf: 'center',
+       
         color: '#23596A',
         textAlign: 'center',
     },
 
     btn: {
-        marginVertical: 50,
+        marginBottom: 50,
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
         paddingVertical: 15,
         shadowColor: 'black',

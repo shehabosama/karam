@@ -20,14 +20,15 @@ const CutomeVerifyInput = ({ placeholder, text, onTextInputChange, ref, round, f
             <ImageBackground
                 source={require('../../assets/shadowImage.png')}
                 style={Customstyles.bgContainer}
+                imageStyle={{ borderRadius: 20 }}
             >
-                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
-                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}>Donation Meter</Text>
-                    <Text style={{ color: '#fff', fontWeight: 'bold', flex: 1, textAlign: 'left', fontSize: 20 }}>2,858 EGP</Text>
+                <View style={{ flex: 1, flexDirection: 'column', marginStart: 10 }}>
+                    <Text style={{ color: '#fff', textAlign: 'left', marginTop: 10 }}>Donation Meter</Text>
+                    <Text style={{ color: '#fff', fontWeight: 'bold', flex: 1, textAlign: 'left', fontSize: 20, marginTop: 10 }}>2,858 EGP</Text>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left' }}>Total Donatoins</Text>
                 </View>
-                <View style={{ flexDirection: 'column', marginHorizontal: 10 }}>
-                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}>Goal 8k</Text>
+                <View style={{ flexDirection: 'column', marginHorizontal: 10 , marginEnd:20 }}>
+                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 10 }}>Goal 8k</Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold', flex: 1, textAlign: 'left', fontSize: 20 }}>20 %</Text>
                     <Text style={{ color: '#fff', flex: 1, textAlign: 'left' }}>of Target</Text>
                 </View>
@@ -56,13 +57,14 @@ const Customstyles = StyleSheet.create({
         backgroundColor: Colors.danger,
     },
     round: {
-        borderRadius: 10,
+        borderRadius: 16,
         borderWidth: 0.9,
         borderColor: '#23596A',
         backgroundColor: Colors.primary,
-        marginTop: 30,
+        marginTop: 20,
         height: 100,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginHorizontal:5,
 
     },
     bgContainer: {
@@ -70,8 +72,9 @@ const Customstyles = StyleSheet.create({
         backgroundColor: 'rgba(10, 10, 10, 0.4)',
         alignItems: 'stretch',
         justifyContent: 'center',
-        borderRadius: 10,
-        flexDirection: 'row'
+        borderRadius: 20,
+        flexDirection: 'row',
+        paddingStart:5,
     },
 });
 

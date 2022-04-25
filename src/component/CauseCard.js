@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native'
 import CardView from 'react-native-cardview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../constants';
+import gloable from '../styles/gloable';
 
 const CauseCard = ({ onPress, name, imageUrl, description, id }) => {
  
@@ -10,7 +11,8 @@ const CauseCard = ({ onPress, name, imageUrl, description, id }) => {
     return (
         <View style={{ marginTop: 0, }}>
             <CardView
-                style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:10 }}
+                //style={{ flex: 1, flexDirection: 'row', borderWidth: 2 , padding:10 }}
+                style={gloable.card}
                 cardElevation={6}
                 cardMaxElevation={6}
                 cornerRadius={10}>

@@ -71,7 +71,7 @@ class SignupVerifyAccount extends Component {
                         <TextInput
                             autoFocus={true}
                             keyboardType={'numeric'}
-                            style={gloable.input}
+                            style={gloable.VerfiyInput}
                             maxLength={1}
                             // value={}
                             underlineColorAndroid='rgba(0,0,0,0)'
@@ -91,7 +91,7 @@ class SignupVerifyAccount extends Component {
                     <View >
                         <TextInput
                             keyboardType={'numeric'}
-                            style={gloable.input}
+                            style={gloable.VerfiyInput}
                             maxLength={1}
                             underlineColorAndroid='rgba(0,0,0,0)'
                             numberOfLines={1}
@@ -109,7 +109,7 @@ class SignupVerifyAccount extends Component {
                     <View >
                         <TextInput
                             keyboardType={'numeric'}
-                            style={gloable.input}
+                            style={gloable.VerfiyInput}
                             maxLength={1}
                             underlineColorAndroid='rgba(0,0,0,0)'
                             numberOfLines={1}
@@ -127,7 +127,7 @@ class SignupVerifyAccount extends Component {
                     <View >
                         <TextInput
                             keyboardType={'numeric'}
-                            style={gloable.input}
+                            style={gloable.VerfiyInput}
                             maxLength={1}
                             underlineColorAndroid='rgba(0,0,0,0)'
                             numberOfLines={1}
@@ -145,22 +145,25 @@ class SignupVerifyAccount extends Component {
     ResendForm = () => {
         return (
             <View style={styles.HorizontalContainer}>
-                <Icon name="reload" size={15} color={Colors.primary} style={{ marginTop: 19 }} />
+                <Icon name="reload" size={15} color={Colors.primary} style={{ marginTop: 17 }} />
                 <Text style={styles.HintText}>Resend Code</Text>
             </View>
         );
     }
     render() {
         return (
-            <View style={styles.container}>
-                <this.BackButton />
-                <ScrollView contentContainerStyle={styles.container}>
-                    <this.HeaderTitleForm />
-                    <this.InputForms />
-                    <this.ResendForm />
-                    <CutomeButton style={styles.btn} text="Verify" round onPress={() => { this.submitHandler() }} />
-                </ScrollView>
+            <View style={{flex:1 , backgroundColor:'#fff'}}>
+                <View style={styles.container}>
+                    <this.BackButton />
+                    <ScrollView contentContainerStyle={styles.container}>
+                        <this.HeaderTitleForm />
+                        <this.InputForms />
+                        <this.ResendForm />
+                        <CutomeButton style={styles.btn} text="Verify" round onPress={() => { this.submitHandler() }} />
+                    </ScrollView>
+                </View>
             </View>
+          
         );
     }
 }

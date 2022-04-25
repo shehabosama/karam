@@ -7,29 +7,26 @@ import {
     ScrollView,
     TouchableOpacity,
     StyleSheet,
-    Image
+    Image,
+    FlatList
 } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors, IMAGES_URL } from '../../constants';
 import { bindActionCreators } from 'redux';
 import CardView from 'react-native-cardview'
-
 import { connect } from 'react-redux';
 import { cleanError, } from '../../actions/AuthActions';
-import CutomeButton from '../../component/CustomeButton';
-import CutomeTextInput from '../../component/CustomeInput';
-import DonationCard from '../../component/DonationCard';
-import { showMessage, validate } from '../../utils/HelperFunctions';
-import CasesCard from '../../component/CasesCard';
 import { getProviderData } from '../../actions/DataActions';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
+import { CTMapList } from '../../utils/CTMapList';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 class ProviderScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
             activeCaseTab: true,
-            subscribeCaseTab: false,
-            prevCaseTab: false,
+            
+            completedCases: false,
             data: null,
             error: null,
             loading: true,
@@ -39,18 +36,30 @@ class ProviderScreen extends Component {
     }
 
     async componentDidMount() {
-        await this.props.getProviderData('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NWI1NzBiZS0zNmE3LTQ1YTEtYTMwMi01ZjIzMzA4N2ZjMjAiLCJqdGkiOiI2NzhlZWU4Yjc3NWVkYWEwY2MzNWEyMDhhODgyMjYzNTc5YjU2YmNjNmVlYTc2ZDExNzg3OWEwNDk5NTBmNmE4YmY4MTZjYjY4ZWJiNTk3OSIsImlhdCI6MTY0ODM3ODA5Mi4wMDEwMiwibmJmIjoxNjQ4Mzc4MDkyLjAwMTAzNywiZXhwIjoxNjc5OTE0MDkxLjg5NjU0OCwic3ViIjoiMSIsInNjb3BlcyI6W119.Ta85AZGH0luZlfztq7Z8a9XUgZJk9ITiRMGFijCWaZPTzhtwMVXXCQJpgcsZpamBw0iWCejkQLMCmy95BDfpUZZmBU0N_Lumc9a8w2rdtkQbiE4-yzOqFINjoPEIdfcwYrRFEYZjjP3-6Quyi_hY4g_v1A7_9Roe4ol0i04bYioLIdE7KZjgfW-FDY-rjrHHooFuO_uqMUZcgW9Oq98ugomQVUylamDQY_Icbhs45pcbmQfILKin5W__k5K7VLRCE5sU10p6TBZxCgch4w8LzgU2xQ5Ns0TgJTvSlmbqoqGi9WJzsH0NJXLdR6nCbsPpPeB3MCvKnOMs1mHCmyQnbxrqEzy4ZPYUyzLGxqKnh5wttQOENUyaJEeXXWwvzPQGjkeN7vUjMIa-JOR-RM_zBczuRjtonZX_5pGVxmh6jjxxUPV3vYVL5qKsgn1HX3MidPXbwZ6grpF2gkvZVlGMtml8ekBEGCejqYUKt1-4kAoSb-OEeU838Svx5-HxqsG0LjaPQ3ISOSfZWsrqGkewJ5FQdGRW3r3KjPVyCi_r1wjCo7U64PU03JGY74d_BS_h19jkiBgtqnRhPy6KFUTOEcDp6TiZPE0pRtryqVRZMVOC55L3yHOammdnAmwuDBzbsqsHZOvihJml0dITyVDtKZWkQZxMsvbLk30xCxmnhYQ', this.props.route.params.id)
+
+        currentUser = await AsyncStorageProvider.getItem('currentUser');
+        if (currentUser) {
+            const json = JSON.parse(currentUser);
+            //this.setState({accoutnName:json.name})
+            this.getProviderData(json.access_token);
+            
+        }
+       
+
+
+    }
+
+    getProviderData = async (token) => {
+        await this.props.getProviderData(token, this.props.route.params.id)
         if (this.props.data !== null) {
             this.setState({ data: this.props.data, loading: false })
         } else {
             this.setState({ error: this.props.error })
         }
-
-
-    }
+    };
     componentDidUpdate(prevProps, prevState, snapshot) {
 
-       
+
 
     }
     componentWillUnmount() {
@@ -62,88 +71,139 @@ class ProviderScreen extends Component {
         return <Text style={styles.renderError}>{this.props.error}</Text>;
     };
 
+    HeadCardForm = () => {
+        return (
+            <View style={{ flexDirection: 'row' }}>
+                <CardView
+                    style={{ flex: 1, flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 20 }}
+                    cardElevation={6}
+                    cardMaxElevation={6}
+                    cornerRadius={20} >
+                    <View style={{ flex: 1, flexDirection: 'column', marginStart: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.goBack()}>
+                            <Image
+                                source={require("../../../assets/backButton.png")}
+                                style={styles.image}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.Uppertext}>{this.state.data.name}</Text>
+                        <Text style={styles.Lowertext}>Registration: {this.state.data.registration}</Text>
+                        {
+                            this.state.isExpended ? <Text style={styles.Lowertext}>Info:   belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
+                                belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.</Text> :
+                                <></>
+                        }
+                    </View>
 
+                    <View style={{ flexDirection: 'column'}}>
+                        <Image source={
+                            { uri: `${IMAGES_URL}${this.state.data.image}` }
+                        } style={{ marginTop: 40, width: 100, height: 110 }} />
+                        <TouchableOpacity onPress={() => {
+                            this.setState({
 
+                                isExpended: this.state.isExpended ? false : true
+                            })
+                        }}>
+                            <Text style={styles.smalBoldText}>Info +</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                </CardView>
+            </View>
+        );
+    }
+
+    TabBarForm = () => {
+        return (
+            <View >
+                <View style={{ flexDirection: 'row', marginHorizontal:10}}>
+                    <TouchableOpacity style={{flex:1}}
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: true, subscribeCaseTab: false, prevCaseTab: false })
+                        }}>
+                        <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>
+                            Active Cases</Text>
+                    </TouchableOpacity>
+                  
+                    <TouchableOpacity style={{flex:1}}
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: false, subscribeCaseTab: false, prevCaseTab: true })
+                        }}>
+                        <Text style={this.state.completedCases ? styles.activeTab : styles.nonActiveTab}>
+                            Previous Cases </Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+        );
+    }
     render() {
 
         return (
             (this.state.data !== null && this.state.loading === false) ? <View style={styles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <CardView
-                            style={{ flex: 1, flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 20 }}
-                            cardElevation={6}
-                            cardMaxElevation={6}
-                            cornerRadius={20} >
-                            <View style={{ flex: 1, flexDirection: 'column', marginStart: 10 }}>
-                                <TouchableOpacity
-                                    onPress={() => this.props.navigation.goBack()}>
-                                    <Image
-                                        source={require("../../../assets/backButton.png")}
-                                        style={styles.image}
+                    <this.HeadCardForm />
+                    <View style={{ flex: 1}}>
+                        <this.TabBarForm />
+                        {this.state.activeCaseTab ? <View>
+                           
+                            {(!this.state.loading) || (this.state.data !== null) ?
+                                <View >
+                                    {/* i do this custome list because the normal flatlist getting error with scroll view */}
+                                    <CTMapList
+                                    style={{marginTop:20}}
+                                        data={this.state.data.cases}
+                                      
+                                        numColumns={2}
+                                        keyExtractor={(item) => {String(item.id); }}
+                                        renderItem={(data) => {
+                                            return  <View style={ styles.round } underlayColor="transparent">
+                                                    <Pressable onPress={()=>{
+                                                     this.props.navigation.navigate('AboutCase', { id: data.item.id });
+                                                }}>
+                                                    <ImageBackground
+                                              //  source={require('../assets/maketCardPhoto.png')}
+                                                source={{uri: `${IMAGES_URL+data.item.image}` }}
+                                                style={styles.bgContainer}
+                                                imageStyle={{ borderRadius: 10 }}>
+                                
+                                                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${data.item.iconImage}` }} />
+                                                    <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{data.item.remaining} EGP</Text>
+                                                </View>
+                                
+                                            </ImageBackground>
+                                            <View style={{ flexDirection: 'row', }}>
+                                                <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{data.item.name}</Text>
+                                                <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+                                            </View>
+                                                </Pressable>
+                                        </View>
+                                         
+                                        }}
                                     />
-                                </TouchableOpacity>
-                                <Text style={styles.Uppertext}>{this.state.data.name}</Text>
-                                <Text style={styles.Lowertext}>Registration: {this.state.data.registration}</Text>
-                                {
-                                    this.state.isExpended ? <Text style={styles.Lowertext}>Info:   belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.
-                                      belongs to “Asmaa mohamed” a mother of 4 orphans, the eldest is 8 years old. Asmaa does not have a stable income and sews clothes for a living. The house needs both a water installment and water meter.</Text> :
-                                        <></>
-                                }
-                            </View>
-
-                            <View style={{ flexDirection: 'column', marginEnd: 30 }}>
-                                <Image source={
-                                    { uri: `http://192.168.1.7/karam/public/storage/${this.state.data.image}` }
-                                } style={{ marginTop: 50, width: 100, height: 110 }} />
-                                <TouchableOpacity onPress={() => {
-                                    this.setState({
-
-                                        isExpended: this.state.isExpended ? false : true
-                                    })
-                                }}>
-                                    <Text style={styles.smalBoldText}>Info +</Text>
-                                </TouchableOpacity>
-
-                            </View>
-                        </CardView>
-                    </View>
-
-                    <View style={{ flex: 1, marginHorizontal: 30, }}>
-                        <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder }}>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: true, subscribeCaseTab: false, prevCaseTab: false })
-                                }}>
-                                <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>Active Cases</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: false, subscribeCaseTab: true, prevCaseTab: false })
-                                }}>
-                                <Text style={this.state.subscribeCaseTab ? styles.activeTab : styles.nonActiveTab}>Subscribed </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: false, subscribeCaseTab: false, prevCaseTab: true })
-                                }}>
-                                <Text style={this.state.prevCaseTab ? styles.activeTab : styles.nonActiveTab}>Previous Cases </Text>
-                            </TouchableOpacity>
-
-                        </View>
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('AboutCase')}>
-                            {/* <CasesCard style={styles.cusomBord} round /> */}
-                        </TouchableOpacity>
+                                </View>
+                                : (this.props.error === '' || !this.props.error) ? <View style={{ flex: 1 }}>
+                                    <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+                                </View>
+                                    : <View>
+                                        <Text>{this.props.error}</Text>
+                                    </View>}
+                        </View> :
+                                <Text>completedCases</Text>
+                          }
 
                     </View>
 
@@ -162,7 +222,7 @@ class ProviderScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 0,
+        backgroundColor:'#fff'
     },
     image: {
         marginTop: 20,
@@ -171,12 +231,14 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
     },
     Uppertext: {
+        height:90,
         fontSize: 34,
         fontFamily: 'SFProDisplay-Regular',
         fontWeight: 'bold',
         alignSelf: 'flex-start',
         color: '#23596a',
         marginTop: 15,
+       
     },
     Lowertext: {
         width: 275,
@@ -191,29 +253,32 @@ const styles = StyleSheet.create({
     smalBoldText: {
         fontSize: 17,
         fontFamily: 'SF-Pro-Rounded-Regular',
-        marginTop: 10,
+        marginTop: 0,
         color: '#23596A',
         fontWeight: 'bold',
         textAlign: 'center',
         marginEnd: 10
     },
     activeTab: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         marginTop: 10,
         color: '#23596A',
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
+        borderBottomColor:Colors.primary,
+        borderBottomWidth:2
     },
     nonActiveTab: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         marginTop: 10,
         color: Colors.placeHolder,
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
+      
     },
     cusomBord: {
         backgroundColor: 'rgba(35, 89, 106, 1.0)',
@@ -223,6 +288,24 @@ const styles = StyleSheet.create({
         shadowRadius: 100,
         elevation: 10,
         flexDirection: 'row'
+    },
+    round: {
+        
+        borderRadius: 10,
+        alignSelf:"center",
+        borderColor: '#23596A',
+        marginVertical:5,
+    },
+    bgContainer: {
+        width:170,
+        height:170,
+        flex:1,
+       // height: 149,
+        // backgroundColor: 'rgba(10, 10, 10, 0.4)',
+      //  justifyContent: 'center',
+       // borderRadius: 50,
+        
+        
     },
 });
 

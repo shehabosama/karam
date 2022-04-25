@@ -27,7 +27,8 @@ var styles = StyleSheet.create({
       fontFamily: 'SF-Pro-Rounded-Regular',
       alignSelf: 'center',
       color: '#fff',
-      marginTop: 20
+      marginTop: 20,
+      fontWeight:"800"
     },
     Lowertext: {
       width: 275,

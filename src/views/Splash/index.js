@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, ImageBackground , View , Text , Image} from 'react-native';
+import {StatusBar, ImageBackground , View , Text , Image} from 'react-native';
 import {connect} from 'react-redux';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import {autoLogin} from '../../actions/AuthActions';
@@ -35,7 +35,7 @@ class SplashScreen extends Component {
   }
   renderCompnent(){
     return(<View style={styles.parentContainer}>
-
+<StatusBar translucent backgroundColor="transparent" />
       <ImageBackground
         source={require('../../../assets/splash_image.png')}
         style={styles.bgContainer}
@@ -49,7 +49,7 @@ class SplashScreen extends Component {
           <Text style={styles.Lowertext} >Donate to cases, subscribe to
             causes and see your impact with live updates</Text>
           <CutomeButton style={styles.btn} text='Get Started' round onPress={() => {
-            this.props.navigation.navigate('Login');
+            this.props.navigation.navigate('SliderScreen');
           }} />
         </View>
   

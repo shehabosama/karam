@@ -2,12 +2,9 @@ import {StyleSheet} from 'react-native';
 import { Colors } from "../../constants";
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginHorizontal: 20,
-    },
+   
     image: {
-        marginTop: 20,
+        marginTop: 50,
         width: 25,
         height: 18,
         alignSelf: "flex-start",
@@ -20,6 +17,15 @@ const styles = StyleSheet.create({
         color: '#23596a',
         marginTop: 15,
     },
+    fieldTitle: {
+        width: 275,
+        fontSize: 14,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        alignSelf: 'flex-start',
+        color: '#23596a',
+        textAlign: 'justify',
+       marginTop:10
+    },
     Lowertext: {
         width: 275,
         fontSize: 17,
@@ -27,7 +33,28 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: '#23596a',
         textAlign: 'justify',
-        marginTop: 10,
+        
+       
+    },
+    LowertextEmail: {
+        width: 275,
+        fontSize: 17,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        alignSelf: 'flex-start',
+        color: '#23596a',
+        textAlign: 'justify',
+        marginTop:10
+       
+    }, 
+     LowertextPass: {
+        width: 275,
+        fontSize: 17,
+        fontFamily: 'SF-Pro-Rounded-Regular',
+        alignSelf: 'flex-start',
+        color: '#23596a',
+        textAlign: 'justify',
+        marginTop:5
+       
     },
     HintText: {
         fontSize: 17,
