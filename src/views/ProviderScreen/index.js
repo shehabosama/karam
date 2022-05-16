@@ -25,16 +25,17 @@ class ProviderScreen extends Component {
         this.state = {
             loading: false,
             activeCaseTab: true,
-            
             completedCases: false,
             data: null,
             error: null,
             loading: true,
             isExpended: false,
-            error: ''
+            error: '',
+            previousCases:[]
         };
     }
 
+    
     async componentDidMount() {
 
         currentUser = await AsyncStorageProvider.getItem('currentUser');
@@ -48,11 +49,32 @@ class ProviderScreen extends Component {
 
 
     }
+  
+ 
+
+
+     retrieveNameUsingPriceAndSlots() {
+        let tempArray = [];
+        for(var i = 0; i < this.state.data.cases.length; i++) { //Loop through the array
+            var item = this.state.data.cases[i];
+            if(item.status === 3 ) {
+                //If the item meets our condition, returns the name, and the code after this line wont be executed.
+                tempArray.push(
+                    item
+                );
+              
+            }
+        }
+    
+       this.setState({previousCases:tempArray})
+    }
+
 
     getProviderData = async (token) => {
         await this.props.getProviderData(token, this.props.route.params.id)
         if (this.props.data !== null) {
             this.setState({ data: this.props.data, loading: false })
+            this.retrieveNameUsingPriceAndSlots()
         } else {
             this.setState({ error: this.props.error })
         }
@@ -202,7 +224,53 @@ class ProviderScreen extends Component {
                                         <Text>{this.props.error}</Text>
                                     </View>}
                         </View> :
-                                <Text>completedCases</Text>
+                                <View>
+                           
+                                {(!this.state.loading) || (this.state.data !== null) ?
+                                    <View >
+                                        {/* i do this custome list because the normal flatlist getting error with scroll view */}
+                                        <CTMapList
+                                        style={{marginTop:20}}
+                                            data={this.state.previousCases}
+                                          
+                                            numColumns={2}
+                                            keyExtractor={(item) => {String(item.id); }}
+                                            renderItem={(data) => {
+                                                return  <View style={ styles.round } underlayColor="transparent">
+                                                        <Pressable onPress={()=>{
+                                                         this.props.navigation.navigate('AboutCase', { id: data.item.id });
+                                                    }}>
+                                                        <ImageBackground
+                                                  //  source={require('../assets/maketCardPhoto.png')}
+                                                    source={{uri: `${IMAGES_URL+data.item.image}` }}
+                                                    style={styles.bgContainer}
+                                                    imageStyle={{ borderRadius: 10 }}>
+                                    
+                                                    <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                                        <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                                        <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${data.item.iconImage}` }} />
+                                                        <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                                        <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{data.item.remaining} EGP</Text>
+                                                    </View>
+                                    
+                                                </ImageBackground>
+                                                <View style={{ flexDirection: 'row', }}>
+                                                    <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{data.item.name}</Text>
+                                                    <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+                                                </View>
+                                                    </Pressable>
+                                            </View>
+                                             
+                                            }}
+                                        />
+                                    </View>
+                                    : (this.props.error === '' || !this.props.error) ? <View style={{ flex: 1 }}>
+                                        <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+                                    </View>
+                                        : <View>
+                                            <Text>{this.props.error}</Text>
+                                        </View>}
+                            </View>
                           }
 
                     </View>

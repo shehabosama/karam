@@ -19,19 +19,20 @@ import CasesCard from '../../component/CasesCard';
 import { getCauseData, getProviderData } from '../../actions/DataActions';
 import * as AsyncStorageProvider from '../../cache/AsyncStorageProvider';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { CTMapList } from '../../utils/CTMapList';
 class CauseScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
             activeCaseTab: true,
-            subscribeCaseTab: false,
-            prevCaseTab: false,
+            completedCases: false,
             data: null,
             error: null,
             loading: true,
             isExpended: false,
-            error: ''
+            error: '',
+            previousCases:[]
         };
     }
 
@@ -46,23 +47,37 @@ class CauseScreen extends Component {
         }
 
     }
+    retrieveNameUsingPriceAndSlots() {
+        let tempArray = [];
+        for(var i = 0; i < this.state.data.cases.length; i++) { //Loop through the array
+            var item = this.state.data.cases[i];
+            if(item.status === 3 ) {
+                //If the item meets our condition, returns the name, and the code after this line wont be executed.
+                tempArray.push(
+                    item
+                );
+              
+            }
+        }
+    
+       this.setState({previousCases:tempArray})
+     
+    }
+
     getCausesData =async(token)=>{
         await this.props.getCauseData(token, this.props.route.params.id)
         if (this.props.data !== null) {
            // console.log("dtat teststst : " , this.props.data);
             this.setState({ data: this.props.data, loading: false })
+            this.retrieveNameUsingPriceAndSlots();
         } else {
             this.setState({ error: this.props.error })
         }
     };
     componentDidUpdate(prevProps, prevState, snapshot) {
-
-
-
     }
     componentWillUnmount() {
         this.props.cleanError();
-
     }
 
     renderError = () => {
@@ -70,6 +85,32 @@ class CauseScreen extends Component {
     };
 
 
+    TabBarForm = () => {
+        return (
+            <View >
+                <View style={{ flexDirection: 'row', marginHorizontal:10}}>
+                    <TouchableOpacity style={{flex:1}}
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: true, completedCases: false })
+                        }}>
+                        <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>
+                            Active Cases</Text>
+                    </TouchableOpacity>
+                  
+                    <TouchableOpacity style={{flex:1}}
+                        onPress={() => {
+
+                            this.setState({ activeCaseTab: false,  completedCases: true })
+                        }}>
+                        <Text style={this.state.completedCases ? styles.activeTab : styles.nonActiveTab}>
+                            Previous Cases </Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+        );
+    }
 
     render() {
 
@@ -123,35 +164,12 @@ class CauseScreen extends Component {
                     </View>
 
                     <View style={{ flex: 1, marginHorizontal: 10, }}>
-                        <View style={{ flexDirection: 'row', borderBottomWidth: 0.8, borderBottomColor: Colors.placeHolder , marginHorizontal:10 }}>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: true, subscribeCaseTab: false, prevCaseTab: false })
-                                }}>
-                                <Text style={this.state.activeCaseTab ? styles.activeTab : styles.nonActiveTab}>Active Cases</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: false, subscribeCaseTab: true, prevCaseTab: false })
-                                }}>
-                                <Text style={this.state.subscribeCaseTab ? styles.activeTab : styles.nonActiveTab}>Subscribed </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-
-                                    this.setState({ activeCaseTab: false, subscribeCaseTab: false, prevCaseTab: true })
-                                }}>
-                                <Text style={this.state.prevCaseTab ? styles.activeTab : styles.nonActiveTab}>Previous Cases </Text>
-                            </TouchableOpacity>
-
-                        </View>
-
-
+                       <this.TabBarForm/>
+                       {this.state.activeCaseTab ? <View style={{flex:1}}>
                         {(!this.state.loading) || (this.state.data!==null) ? <View style={styles.container}>
 
                             <FlatList
+                            style={{marginTop:10}}
                                 numColumns={2}
                                 initialNumToRender={4}
                                 data={this.state.data.cases}
@@ -200,6 +218,99 @@ class CauseScreen extends Component {
                         </View>}
 
 
+                        </View>:
+                        <View style={{flex:1}}>
+                        {(!this.state.loading) || (this.state.data !== null) ?
+                            <View style={{flex:1}}>
+                                {/* i do this custome list because the normal flatlist getting error with scroll view */}
+                               
+
+
+                                <FlatList
+                                style={{marginTop:10}}
+                                numColumns={2}
+                                initialNumToRender={4}
+                                data={this.state.previousCases}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <View style={ styles.round } underlayColor="transparent">
+                                                    <Pressable onPress={()=>{
+                                                     this.props.navigation.navigate('AboutCase', { id: item.id });
+                                                }}>
+                                                    <ImageBackground
+                                              //  source={require('../assets/maketCardPhoto.png')}
+                                                source={{uri: `${IMAGES_URL+item.image}` }}
+                                                style={styles.bgContainer}
+                                                imageStyle={{ borderRadius: 10 }}>
+                                
+                                                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${item.iconImage}` }} />
+                                                    <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{item.remaining} EGP</Text>
+                                                </View>
+                                
+                                            </ImageBackground>
+                                            <View style={{ flexDirection: 'row', }}>
+                                                <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{item.name}</Text>
+                                                <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+                                            </View>
+                                                </Pressable>
+                                        </View>
+                                    );
+                                }}
+                                keyExtractor={item => item.id}
+                                refreshing={this.state.refresh}
+                                ListEmptyComponent={this.ListEmptyComponent}
+                                onRefresh={this.onRefresh}
+                             //   ListHeaderComponent={getHederView}
+                             //   ListFooterComponent={getFoterView}
+                            />
+                               
+                               
+                                {/* <CTMapList
+                                style={{marginTop:20}}
+                                    data={this.state.previousCases}
+                                    
+                                    numColumns={2}
+                                    keyExtractor={(item) => {String(item.id); }}
+                                    renderItem={(data) => {
+                                        return  <View style={ styles.round } underlayColor="transparent">
+                                                <Pressable onPress={()=>{
+                                                 this.props.navigation.navigate('AboutCase', { id: data.item.id });
+                                            }}>
+                                                <ImageBackground
+                                          //  source={require('../assets/maketCardPhoto.png')}
+                                            source={{uri: `${IMAGES_URL+data.item.image}` }}
+                                            style={styles.bgContainer}
+                                            imageStyle={{ borderRadius: 10 }}>
+                            
+                                            <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                                <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                                <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${data.item.iconImage}` }} />
+                                                <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                                <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{data.item.remaining} EGP</Text>
+                                            </View>
+                            
+                                        </ImageBackground>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{data.item.name}</Text>
+                                            <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+                                        </View>
+                                            </Pressable>
+                                    </View>
+                                     
+                                    }}
+                                /> */}
+                            </View>
+                            : (this.props.error === '' || !this.props.error) ? <View style={{ flex: 1 }}>
+                                <ActivityIndicator animating style={{ flex: 1 }} size={40} />
+                            </View>
+                                : <View>
+                                    <Text>{this.props.error}</Text>
+                                </View>}
+                                </View>
+                        }
 
                     </View>
 
@@ -254,22 +365,25 @@ const styles = StyleSheet.create({
         marginEnd: 10
     },
     activeTab: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         marginTop: 10,
         color: '#23596A',
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
+        borderBottomColor:Colors.primary,
+        borderBottomWidth:2
     },
     nonActiveTab: {
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'SF-Pro-Rounded-Regular',
         marginTop: 10,
         color: Colors.placeHolder,
         fontWeight: 'bold',
         textAlign: 'center',
         marginHorizontal: 8,
+      
     },
     cusomBord: {
         backgroundColor: 'rgba(35, 89, 106, 1.0)',

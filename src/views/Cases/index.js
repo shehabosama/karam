@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Image,
-  ToastAndroid,
+  ImageBackground,
   TextInput
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -117,20 +117,44 @@ class Cases extends React.Component {
   renderItem = ({ item, index }) => {
     return (
     
-      <View style={{ marginHorizontal: 10 }}>
-        <Pressable onPress={() => {
+      <View style={ styles.round } underlayColor="transparent">
+      <Pressable onPress={()=>{
+       this.props.navigation.navigate('AboutCase', { id: item.id });
+  }}>
+      <ImageBackground
+//  source={require('../assets/maketCardPhoto.png')}
+  source={{uri: `${IMAGES_URL+item.avatarImage}` }}
+  style={styles.bgContainer}
+  imageStyle={{ borderRadius: 10 }}>
 
-          this.props.navigation.navigate('AboutCase', { id: item.id });
-        }}>
-          <CasesCard style={styles.cusomBord}
-            iconImage={item.iconImage}
-            round
-            remainingText={item.remaining}
-            imageUrl={item.avatarImage}
-            name={item.name} />
-        </Pressable>
+  <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+      <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+      <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${item.iconImage}` }} />
+      <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+      <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{item.remaining} EGP</Text>
+  </View>
 
-      </View>
+</ImageBackground>
+<View style={{ flexDirection: 'row', }}>
+  <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{item.name}</Text>
+  <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+</View>
+  </Pressable>
+</View>
+      // <View style={{ marginHorizontal: 10 }}>
+      //   <Pressable onPress={() => {
+
+      //     this.props.navigation.navigate('AboutCase', { id: item.id });
+      //   }}>
+      //     <CasesCard style={styles.cusomBord}
+      //       iconImage={item.iconImage}
+      //       round
+      //       remainingText={item.remaining}
+      //       imageUrl={item.avatarImage}
+      //       name={item.name} />
+      //   </Pressable>
+
+      // </View>
 
     );
   };

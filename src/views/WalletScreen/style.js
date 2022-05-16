@@ -3,7 +3,7 @@ import { Colors } from '../../constants';
 const styles = StyleSheet.create({
 
     image: {
-        marginTop: 50,
+        marginTop: 60,
         width: 25,
         height: 18,
         alignSelf: "flex-start",

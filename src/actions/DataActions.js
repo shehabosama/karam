@@ -33,7 +33,6 @@ export const getProvidersData =(token , pageNumber)=>async dispatch =>{
 }
 };
 export const getProviderData = (token , id)=>async dispatch=>{
-  console.log('TCL: values', " i am in action");
 
 
  try {

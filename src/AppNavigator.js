@@ -40,6 +40,7 @@ import SubscriptionScreen from './views/SubscriptionScreen';
 import SampleApp from './views/TestSeekBar';
 import MyCardsScreen from './views/MyCardsScreen';
 import NotificationScreen from './views/NotificationScreen';
+import TestBayTabs from './views/TestBayTabs';
 const TasksStackNavigator = createStackNavigator();
 const Tab = createBottomTabNavigator();
 function HomeTabs() {
@@ -147,7 +148,7 @@ function HomeTabs() {
             <Tab.Screen
                 options={{
                     tabBarButton: props => null,
-
+                    unmountOnBlur: true,
                 }}
                 name={'SetDonationValue'} component={SetDonationValue} />
 
@@ -216,7 +217,7 @@ const TasksNavigator = () => {
 
     checkUser();
     return (
-        <TasksStackNavigator.Navigator >
+        <TasksStackNavigator.Navigator initialRouteName=''>
             {checker ? <TasksStackNavigator.Screen
                 name="HomeTabsInitial"
                 component={HomeTabs}
@@ -298,6 +299,15 @@ const TasksNavigator = () => {
             <TasksStackNavigator.Screen
                 name="SampleApp"
                 component={SampleApp}
+                options={{ headerShown: false }}
+
+            />
+            
+
+            
+            <TasksStackNavigator.Screen
+                name="TestBayTabs"
+                component={TestBayTabs}
                 options={{ headerShown: false }}
 
             />

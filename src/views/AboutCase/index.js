@@ -30,7 +30,7 @@ class AboutCase extends Component {
             error: null,
             value: 0.5
         };
-
+        
     }
 
     async componentDidMount() {
@@ -43,6 +43,7 @@ class AboutCase extends Component {
     _getCaseData = async (token) => {
         await this.props.getCaseData(token, this.props.route.params.id);
         if (this.props.data !== null) {
+          
             this.setState({ data: this.props.data, loading: false })
         } else {
             this.setState({ error: this.props.error })
@@ -124,7 +125,7 @@ class AboutCase extends Component {
 
 
                                 {this.state.aboutCaseTab ? <View style={{ flex: 1 }}>
-                                    <CasesCardInfo imageUrl={IMAGES_URL + this.state.data.image} />
+                                    <CasesCardInfo text={this.state.data.remaining} imageUrl={IMAGES_URL + this.state.data.image} />
 
                                     <View style={{ flexDirection: 'row' }}>
                                         <Icon name="home-outline" size={20} style={{ marginTop: 10 }} />
@@ -161,7 +162,10 @@ class AboutCase extends Component {
 
 
                                     <CustomeButton round text="Donate now" style={{ marginTop: 15 }} onPress={() => {
-                                        this.props.navigation.navigate('SetDonationValue');
+                                        this.props.navigation.navigate('SetDonationValue' ,
+                                                            {
+                                                                caseData: this.state.data
+                                                            });
                                     }} />
 
                                 </View> :

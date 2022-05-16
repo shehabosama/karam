@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
   },
   introImageStyle: {
-      marginTop:100,
+      marginTop:40,
       alignSelf:'center',
       resizeMode: "contain"
   },

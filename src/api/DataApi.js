@@ -266,7 +266,7 @@ export const getCausesByName = async (token,name) => {
       
 export const getProviderData = async (token,id) => {
   //  console.log('TCL: token', token , id);
-  console.log('TCL: values', " i am in action","with id " , id);
+ 
   
   try {
     const result = await fetch(`${GET_PROVIDER_DATA}?id=${id}`, {
@@ -281,9 +281,9 @@ export const getProviderData = async (token,id) => {
   
     const json = await result.json();
     if (json && result.status == 200) {
-        console.log('stutus :' , result.status, json);
+     
     } else {
-        console.log('TCL: signUp -> error jsone', json);
+    
       throw json;
     }
     return json;

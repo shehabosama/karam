@@ -8,7 +8,7 @@ import {
     Image,
     BackHandler,
     Alert,
-    StatusBar
+    StatusBar,ImageBackground
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import CutomeDonationMeter from '../../component/CustomeDonationMeterBord';
@@ -23,6 +23,7 @@ import styles from './style';
 import { Colors, IMAGES_URL } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
@@ -291,17 +292,40 @@ class HomeScreen extends Component {
                             data={this.state.cases}
                             renderItem={({ item }) => {
                                 return (
+                                    <View style={ styles.round } underlayColor="transparent">
+                                    <Pressable onPress={()=>{
+                                     this.props.navigation.navigate('AboutCase', { id: item.id });
+                                }}>
+                                    <ImageBackground
+                              //  source={require('../assets/maketCardPhoto.png')}
+                                source={{uri: `${IMAGES_URL+item.image}` }}
+                                style={styles.bgContainer}
+                                imageStyle={{ borderRadius: 10 }}>
+                
+                                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10 }}>
+                                    <Text style={{ color: '#fff', flex: 1, textAlign: 'left', marginTop: 5 }}></Text>
+                                    <Image style={{width:50 , height:60 ,  alignSelf: 'center' }} source={{uri: `${item.image}` }} />
+                                    <Text style={{ color: '#fff', textAlign: 'center' }}>Ramaining</Text>
+                                    <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 18 }}>{item.remaining} EGP</Text>
+                                </View>
+                
+                            </ImageBackground>
+                            <View style={{ flexDirection: 'row', }}>
+                                <Text style={{ flex: 1, color: '#000', marginTop: 5, fontWeight: 'bold' }}>{item.name}</Text>
+                                <Text style={{ color: Colors.primary, textAlign: 'center', marginTop: 5, fontWeight: 'bold' }}>85%</Text>
+                            </View>
+                                </Pressable>
+                        </View>
 
-                                    <View style={{ marginHorizontal: 10 }}>
-                                        <TouchableOpacity style={{ flex: 1 }} onPress={() => {
+                                    // <View style={{ marginHorizontal: 10 }}>
+                                    //     < <Pressable style={{ flex: 1 }} onPress={() => {
 
-                                            this.props.navigation.navigate('AboutCase', { id: item.id });
-                                        }}>
+                                    //         this.props.navigation.navigate('AboutCase', { id: item.id });
+                                    //     }}>
 
-
-                                            <CasesCard style={styles.cusomBord} round remainingText={item.remaining} imageUrl={item.image} name={item.name} />
-                                        </TouchableOpacity>
-                                    </View>
+                                    //         <CasesCard style={styles.cusomBord} round remainingText={item.remaining} imageUrl={item.image} name={item.name} />
+                                    //     </ <Pressable>
+                                    // </View>
                                 );
                             }}
                             keyExtractor={item => item.id}
