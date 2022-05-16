@@ -35,8 +35,6 @@ class SignupPreferences extends Component {
             //this.setState({accoutnName:json.name})
             this._getPrefrencesData(json.access_token);
         }
-
-
     }
     _getPrefrencesData = async (token) => {
         await this.props.getPrefrencesData(token);
